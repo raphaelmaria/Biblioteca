@@ -1,0 +1,11 @@
+#!/bin/bash
+# Empresa: O2 Produções Artisticas e Cinematográficas Ltda.
+# Desenvolvedor: Raphael Alan de Oliveira Maria
+# CPF: 373.401.578-24
+# Cargo: Administrador de Redes
+# Versão 
+# Criado em xx/xx/xxxx
+# Ticket Origem:
+# Solicitante:
+# Descrição:
+# Código com comentários:

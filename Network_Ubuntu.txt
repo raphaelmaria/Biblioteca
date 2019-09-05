@@ -1,0 +1,42 @@
+#!/bash/sh
+
+## Customizando VM com Ubuntu para o FreeIPA
+## Criado por Raphael Maria
+## Em 25/06/2019
+
+## Documenteção do Inicio do processo
+
+hostname = "Insira o Hostname: "
+
+## Instalação de Requisitos
+sudo apt -y install ntfs-3g.x86_64  nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld 
+
+sudo hostnamectl set-hostname $hostname.o2pos.com.br
+
+
+
+
+echo "iface ens3 inet static
+      address 192.168.7.21
+      netmask 255.255.0.0
+      gateway 192.168.8.1
+      dns-servers: 
+      dns-nameservers 192.168.8.15 192.168.8.16" >> /etc/network/interfaces.d/ens3
+
+
+
+mv /etc/network/interfaces /etc/network/interfaces.original
+echo " #Criado por raphael Maria
+# Script v1
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug ens3
+iface ens3 inet dhcp

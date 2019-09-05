@@ -1,0 +1,32 @@
+# Script de Installação Debian/Ubuntu
+#Instalação Basica
+apt upgrade -y
+apt --fix-broken install
+apt install ansible vim wget dnf git network-manager nfs-common
+apt update -y && apt install gcc wget dkms git snapd vim ansible chrony -y
+apt install network-manager -y
+hostnamectl set-hostname camstorage.o2pos.com.br
+export PATH="$PATH:/sbin"
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Instalação do Zabbix
+dpkg -i http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.deb
+apt -y install zabbix-agent.x86_64
+service zabbix-agent stop
+sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=Zabbix server/Hostname=Pauta/' /etc/zabbix/zabbix_agentd.conf
+chkconfig zabbix on
+chkconfig zabbix-agent on
+mkdir /var/run/zabbix
+chown zabbix.zabbix /var/run/zabbix/
+zabbix_agentd -c /etc/zabbix/zabbix_agentd.conf
+service zabbix-agent start
+systemctl enable zabbix-agent
+#firewall-cmd --add-service=zabbix-agent
+#firewall-cmd --add-service=zabbix-agent  --permanent
+service zabbix-agent restart
+
+nmcli con show
+nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addresses 192.168.7.23 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli connection up "Wired connection 1"
+systemd-resolve --flush-caches

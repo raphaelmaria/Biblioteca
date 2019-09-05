@@ -1,0 +1,113 @@
+mkdir -p /mnt/[folder]
+chcon -Rt samba_share_t [diretorio]
+chmod -R 0770 [diretorio]
+chown -R [user]:[user] [diretorio]
+
+#### Script SAMBA FOR CENTOS 7 ####
+
+[global]
+#####################################
+####     Configuracao de REDE   #####
+#####################################
+
+    server role = standalone server
+    workgroup = [Grupo da sua maquina]]
+    netbios name = [Nome do servidor]
+    server string = Samba Files
+    os level = 100   
+    wins support = yes
+    hosts allow = [Ranger IP/Mascara]
+    bind interfaces only = yes
+    keepalive = 20
+    dns proxy = no
+    max connections = 10
+    max xmit = 65535
+
+
+    security = user
+    encrypt passwords = true
+    passdb backend = tdbsam
+
+    preserve case = yes
+    default case = lower
+    veto files = /.thumbs/.thumbs/.DS [Arquivos que não podem entrar no servidor, metodo geral]
+    read raw = yes
+    write raw = yes
+    oplocks = yes
+    getwd cache = yes
+    unix charset = UTF-8
+
+################################
+##### configuracao Lixeira #####
+################################
+    vfs objects = full_audit, recycle
+    recycle:versions = yes
+    recycle:repository = /mnt/dados/lixeira
+    recycle:keeptree = yes
+    recycle:exclude = *.mp3, *.iso, *.exe, *.mkv, *.mp4 
+    recycle:exclude_dir = tmp, cache
+
+##################################
+###### configuracao Auditoria ####
+##################################
+    full_audit:success = write, unlink, rename, rmdir, chmod, chown
+    full_audit:prefix = %u|%S
+    full_audit:failure = none
+    full_audit:facility = local5
+    full_audit:priority = notice
+
+##########################################
+###### configuracao Compartilhamentos ####
+##########################################
+    [lixeira]
+        path = /mnt/dados/lixeira
+        writable = yes
+        create mask = 0700
+        directory mask = 0700
+        browseable = yes
+
+#####################################
+#### Compartilhamento de Arquivos ###
+#####################################
+    [midia]
+        comment = Arquivos de Video Backup
+        path = /mnt/dados/raid0_media
+        browseable = yes
+        writable = yes
+        write list = raphael
+        create mask = 0775
+        directory mask = 0775
+        guest ok = yes
+        valid users = raphael nobody guest
+        veto files = *.iso
+
+    [suporte]
+        path = /mnt/dados/hd_suporte
+        comment = programas
+        browseable = yes
+        writable = yes
+        guest ok = yes
+        valid users = raphael guest nobody
+        write list = raphael
+        create mask = 0775
+        directory mask = 0775
+
+    [produtora]
+        path = /mnt/dados/hd_produtora
+        comment = produtora de video e outros trabalhos
+        browseable = yes
+        writable = yes
+        guest ok = yes
+        valid users = raphael guest nobody
+        write list = raphael
+        create mask = 0775
+        directory mask = 0775
+        veto files = *.iso
+
+    [setup]
+        path = /mnt/dados/hd_suporte/setup
+        comment = Instalacao OS
+        browseable = yes
+        writable = yes
+        guest ok = yes
+        read only = no

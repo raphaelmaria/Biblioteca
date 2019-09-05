@@ -1,0 +1,25 @@
+yum -y install qemu-kvm >> /var/log/applevm.log
+yum -y install git glib2-devel libfdt-devel pixman-devel zlib-devel >> /var/log/applevm.log
+yum -y install libaio-devel libcap-devel libiscsi-devel >> /var/log/applevm.log
+
+
+mkdir -p /applevm >> /var/log/applevm.log 
+chmod -R 775 /applevm >> /var/log/applevm.log
+cd /applevm | git clone https://github.com/PassthroughPOST/Hackintosh-KVM >> /var/log/applevm.log
+
+
+git clone git://git.qemu-project.org/qemu.git >> /var/log/applevm.log
+cd qemu >> /var/log/applevm.log 
+mkdir -p bin/debug/native >> /var/log/applevm.log
+cd bin/debug/native >> /var/log/applevm.log
+../../../configure --enable-debug >> /var/log/applevm.log
+make >> /var/log/applevm.log 
+cd ../../.. >> /var/log/applevm.log
+cd qemu >> /var/log/applevm.log
+./configure --target-list=x86_64-softmmu --enable-debug >> /var/log/applevm.log
+make -j4 >> /var/log/applevm.log
+
+
+
+
+yum -y install qemu uml-utilities libguestfs-tools virt-manager

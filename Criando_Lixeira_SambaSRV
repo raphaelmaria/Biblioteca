@@ -1,0 +1,3 @@
+vfs object = recycle
+recycle:repository = Lixeira
+recycle:keeptree = yes

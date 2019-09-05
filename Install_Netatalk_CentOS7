@@ -1,0 +1,77 @@
+# Install Time Machine service on CentOS 7
+# fonte: https://gist.github.com/darcyliu/f3db52d6d60ef4f4f4ef
+# http://netatalk.sourceforge.net/wiki/index.php/Netatalk_3.1.7_SRPM_for_Fedora_and_CentOS
+# http://confoundedtech.blogspot.com/2011/07/draft-draft-ubuntu-as-apple-time.html
+yum install -y rpm-build gcc make wget
+
+# install netatalk
+yum install -y avahi-devel cracklib-devel dbus-devel dbus-glib-devel libacl-devel libattr-devel libdb-devel libevent-devel libgcrypt-devel krb5-devel mysql-devel openldap-devel openssl-devel pam-devel quota-devel systemtap-sdt-devel tcp_wrappers-devel libtdb-devel tracker-devel
+
+yum install -y bison docbook-style-xsl flex dconf
+
+wget http://www003.upp.so-net.ne.jp/hat/files/netatalk-3.1.7-0.1.fc22.src.rpm
+
+rpm -ivh netatalk-3.1.7-0.1.fc22.src.rpm
+
+rpmbuild -bb ~/rpmbuild/SPECS/netatalk.spec
+
+rpm -ivh ~/rpmbuild/RPMS/x86_64/netatalk-3.1.7-0.1.el7.centos.x86_64.rpm
+
+# configuration
+cat >> /etc/avahi/services/afpd.service << EOF
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+<name replace-wildcards="yes">%h</name>
+<service>
+<type>_afpovertcp._tcp</type>
+<port>548</port>
+</service>
+<service>
+<type>_device-info._tcp</type>
+<port>0</port>
+<txt-record>model=Xserve</txt-record>
+</service>
+</service-group>
+EOF
+
+cat >> /etc/netatalk/afp.conf << EOF
+[Time Machine]
+path = /opt/timemachine
+valid users = tmbackup
+time machine = yes
+EOF
+
+cat >> /etc/netatalk/afpd.conf << EOF
+- -transall -uamlist uams_randnum.so,uams_dhx.so,uams_dhx2.so -nosavepassword -advertise_ssh
+EOF
+
+useradd tmbackup
+mkdir -p /opt/timemachine
+chown tmbackup:tmbackup /opt/timemachine
+
+cat >> /etc/netatalk/AppleVolumes.default << EOF
+/opt/timemachine TimeMachine allow:tmbackup options:usedots,upriv,tm dperm:0775 fperm:0660 cnidscheme:dbd volsizelimit:200000
+EOF
+
+cat >> /etc/nsswitch.conf << EOF
+hosts:	files mdns4_minimal dns mdns mdns4
+EOF
+
+firewall-cmd --zone=public --permanent --add-port=548/tcp
+firewall-cmd --zone=public --permanent --add-port=548/udp
+firewall-cmd --zone=public --permanent --add-port=5353/tcp
+firewall-cmd --zone=public --permanent --add-port=5353/udp
+firewall-cmd --zone=public --permanent --add-port=49152/tcp
+firewall-cmd --zone=public --permanent --add-port=49152/udp
+firewall-cmd --zone=public --permanent --add-port=52883/tcp
+firewall-cmd --zone=public --permanent --add-port=52883/udp
+firewall-cmd --reload
+
+systemctl enable avahi-daemon
+systemctl enable netatalk
+systemctl start avahi-daemon
+systemctl start netatalk
+
+# set password for tmbackup
+passwd tmbackup
