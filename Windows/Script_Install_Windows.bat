@@ -2,6 +2,8 @@
 :: Criado por raphael maria
 :: Versao 0.1
 
+reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f
+
 :: Conectando ao servidor
 net use I: \\192.168.8.7\Install kaira1206 /user:raphaelmaria /persistent:yes
 net use R: \\192.168.8.200\RRender o22009render /user:render /persistent:yes
@@ -33,3 +35,5 @@ msiexec /i "I:\Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0
 
 :: Instalação de Farms e Renders
 start /w R:\bin\win\rrWorkstation_installer.exe /start
+
+reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f
