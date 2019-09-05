@@ -21,8 +21,8 @@ start /i "I:\Windows\Softwares\Padrao 3D\__O2 Installers\\o2Pauta_setup.exe"
 
 :: Instalação de Programas
 :: msiexec /i "<programa.msi>" /qn /norestart
-msiexec /i "Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Render Node v16.0.msi" /qn /norestart
-msiexec /i "Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Studio v16.0.msi" /qn /norestart
+msiexec /i "I:\Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Render Node v16.0.msi" /qn /norestart
+msiexec /i "I:\Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Studio v16.0.msi" /qn /norestart
 
 :: Instalação de Plugins
 :: start /w "Windows\Softwares\Boris FX\Continuum\Continuum_2019_Adobe_12_0_0_Windows.exe" /start
