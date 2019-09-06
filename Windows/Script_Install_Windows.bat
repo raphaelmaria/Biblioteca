@@ -26,14 +26,14 @@ copy "I:\Windows\Padrao 3D\Houdini\houdini-17.0.352-win64-vc141.exe" C:\Suporte
 # start /w "<programa.exe" /start
 
 :: start /i "C:\Suporte\ /start
-start /w "C:\Suporte\AutoMounter_install.exe" /start
-start /w "C:\Suporte\o2Pauta_setup.exe" /start
-start /w "C:\Suporte\houdini-17.0.352-win64-vc141.exe" /start
-start /w "C:\Suporte\o2Pauta_setup.exe" /start
-start /w "C:\Suporte\AutoMounter_install.exe" /start
-start /w "C:\Suporte\NeatOFXSetup64.exe" /start
-start /w "C:\Suporte\DaVinci_Resolve_15.2.3_Windows.exe" /start
-start /w "C:\Suporte\Autodesk_Maya_2017_Update5_x64.exe" /start
+start /w C:\Suporte\AutoMounter_install.exe /start
+start /w C:\Suporte\o2Pauta_setup.exe /start
+start /w C:\Suporte\houdini-17.0.352-win64-vc141.exe /start
+start /w C:\Suporte\o2Pauta_setup.exe /start
+start /w C:\Suporte\AutoMounter_install.exe /start
+start /w C:\Suporte\NeatOFXSetup64.exe /start
+start /w C:\Suporte\DaVinci_Resolve_15.2.3_Windows.exe /start
+start /w C:\Suporte\Autodesk_Maya_2017_Update5_x64.exe /start
 
 
 :: Instalação de Programas
@@ -43,7 +43,7 @@ msiexec /i "C:\Suporte\Install Fusion Studio v16.0.msi" /qn /norestart
 
 :: Instalação de Plugins
 :: start /w "Windows\Softwares\Boris FX\Continuum\Continuum_2019_Adobe_12_0_0_Windows.exe" /start
-start /w "C:\Suporte\NeatOFXSetup64.exe" /start
+start /w C:\Suporte\NeatOFXSetup64.exe /start
 
 
 :: <Programa.exe> /s /norestart
