@@ -1,6 +1,9 @@
 :: Instalação em Windows Inicial
 :: Criado por raphael maria
-:: Versao 0.1
+:: Versao 0.3
+:: Instalação de Programas a serem rodados em background
+::
+:: Teste de Commit
 
 reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f
 
