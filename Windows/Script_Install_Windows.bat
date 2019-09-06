@@ -12,18 +12,14 @@ mkdir C:\Suporte
 
 :: copy "I:\Windows\Softwares\
 copy "I:\Windows\Softwares\AutoDesk\Maya_2017\Autodesk_Maya_2017_Update5_x64.exe" C:\Suporte
-copy "I:\Windows\Softwares\BlackMagic/Davinci/DaVinci_Resolve_15.2.3_Windows\DaVinci_Resolve_15.2.3_Windows.exe" C:\Suporte
-copy "I:\Windows\Softwares\BlackMagic/Fusion/Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Render Node v16.0.msi" C:\Suporte
-copy "I:\Windows\Softwares\BlackMagic/Fusion/Blackmagic_Fusion_Studio_16.0_Windows\ Install Fusion Studio v16.0.msi" C:\Suporte
+copy "I:\Windows\Softwares\BlackMagic\Davinci\DaVinci_Resolve_15.2.3_Windows\DaVinci_Resolve_15.2.3_Windows.exe" C:\Suporte
+copy "I:\Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Render Node v16.0.msi" C:\Suporte
+copy "I:\Windows\Softwares\BlackMagic\Fusion\Blackmagic_Fusion_Studio_16.0_Windows\Install Fusion Studio v16.0.msi" C:\Suporte
 copy "I:\Windows\Softwares\Neatvideo\WIN\NeatOFXSetup64.exe" C:\Suporte
 copy "I:\Windows\Padrao 3D\__O2 Installers\AutoMounter_install.exe" C:\Suporte
 copy "I:\Windows\Padrao 3D\__O2 Installers\o2Pauta_setup.exe" C:\Suporte
 copy "I:\Windows\Padrao 3D\Houdini\houdini-17.0.352-win64-vc141.exe" C:\Suporte
-:: copy "I:\Windows\Softwares\
-:: copy "I:\Windows\Softwares\
-:: copy "I:\Windows\Softwares\
-:: copy "I:\Windows\Softwares\
-:: copy "I:\Windows\Softwares\
+:: copy "I:\Windows\ C:\Suporte
 
 
 :: Instalação do Kit Basico 
