@@ -343,15 +343,3 @@ https://thefoundry.s3.amazonaws.com/products/nuke/.../11.../Hiero11.0v2_UserGuid
 https://thefoundry.s3.amazonaws.com/products/nuke/releases/11.0v2/Hiero11.0v2-mac-x86-release-64.dmg
 
 
-
-
-mkdir -p /mnt/slave
-chmod -R 777 /mnt/slave
-ln -ls /mnt/slave /mnt/raid
-ln -ls /mnt/slave /mnt/cache
-echo" #
-# Linha de montagem criado em 11/09/2019 por Raphael Maria
-# Montagem do RAID antigo
-# /dev/md127  /mnt/slave ext4 defaults 0 0" >> /etc/fstab
-mount -a
-
