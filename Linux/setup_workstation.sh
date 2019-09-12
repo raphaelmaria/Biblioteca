@@ -246,10 +246,10 @@ systemctl restart network
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli connection modify enp7s0 ipv4.method manual ipv4.addresses 192.168.8.193/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
+nmcli connection modify enp7s0 ipv4.method manual ipv4.addresses 192.168.8.193/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 # Linha para comando para o DNS FIXO APENAS
 nmcli connection modify "Interface" ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-nmcli connection up "Interface"
+nmcli connection up enp7s0
 
 sudo hostnamectl set-hostname camstorage
 
