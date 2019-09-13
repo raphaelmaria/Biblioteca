@@ -1,14 +1,16 @@
-#! /bin/bash
-#
+#!/bin/bash
+# 
+# Script de instalação automatizada em Linux
+# Validado com o CentOS 7 
 # Update O2 Comp-E
 #
 # By Uira Vilanova
+# coop Jhone Medeiros
+# UPDATE IN GIT HUB RAPHAEL MARIA
 #
+# Instalacao e atualizacao de sistemas e softwares para "3D O2"
 #
-#
-# Instalacao e atualizacao de sistemas e softwares para O2 Workstations
-#
-# v1.95
+# v1.99
 #
 ##################################################################################
 #
