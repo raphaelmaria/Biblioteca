@@ -17,6 +17,11 @@ yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
+# Instalar Python 3
+yum install centos-release-scl
+yum install rh-python36
+
+
 su - -c "yum install perl-version"
 su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 
