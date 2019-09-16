@@ -2,7 +2,7 @@
 # Instalar o CentOS 7 em versão "Minimal" sem interface de video, somente em modo terminal.
 # Rode os comandos na mesma ordem e adaptando a essa necessidade.
 
-hostnamectl set-hostname render025.o2pos.com.br
+hostnamectl set-hostname render010.o2pos.com.br
 yum upgrade -y
 yum update -y
 
@@ -22,7 +22,7 @@ firewall-cmd --reload
 reboot
 
 nmcli con show
-nmcli connection modify [nome da placa de rede] ipv4.method manual ipv4.address 192.168.x.x/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
+nmcli connection modify [nome da placa de rede] ipv4.method manual ipv4.address 192.168.9.10/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
 nmcli connection up [nome da placa de rede] 
 reboot
 
