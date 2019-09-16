@@ -18,4 +18,3 @@ apt-get install ovirt-guest-agent -y
 
 
 
-amd_iommu=on kvm-amd.nested=1 pci-stub.ids=10de:1f02,10de:10f9,10de:1ada,10de:1adb vfio_iommu_type1.allow_unsafe_interrupts=1
