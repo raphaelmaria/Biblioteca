@@ -23,9 +23,9 @@ if [ "$WHOAMI" == "root" ]
 ############ Variaveis ##############
 INSTALLDIR="/mnt/installers"
 SOURCEDIR="/mnt/RRender/Installers"
-LASTKERNEL="/usr/src/kernels/3.10.0-957.27.2.el7.x86_64"
-NUKEDIR="/usr/local/Nuke10.5v5/"
-NUKE11DIR="/usr/local/Nuke11.3v4/"
+#LASTKERNEL="/usr/src/kernels/3.10.0-957.27.2.el7.x86_64"
+#NUKEDIR="/usr/local/Nuke10.5v5/"
+#NUKE11DIR="/usr/local/Nuke11.3v4/"
 RESOLVEDIR="/opt/resolve/bin/resolve"
 FUSIONDIR="/opt/BlackmagicDesign/Fusion9/"
 FUSIONRENDER="/opt/BlackmagicDesign/FusionRenderNode9/"

@@ -2,7 +2,7 @@
 # Instalar o CentOS 7 em versão "Minimal" sem interface de video, somente em modo terminal.
 # Rode os comandos na mesma ordem e adaptando a essa necessidade.
 
-hostnamectl set-hostname [Nome da maquina]].o2pos.com.br
+hostnamectl set-hostname render025.o2pos.com.br
 yum upgrade -y
 yum update -y
 
