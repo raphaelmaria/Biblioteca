@@ -20,6 +20,7 @@ export FONTCONFIG_PATH=/etc/fonts
 # Instalar Python 3
 yum install centos-release-scl
 yum install rh-python36
+scl enable rh-python36 bash
 
 
 su - -c "yum install perl-version"
