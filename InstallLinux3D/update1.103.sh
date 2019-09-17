@@ -3,7 +3,7 @@
 # Update O2 Comp-E
 #
 # By Uira Vilanova
-# Colaboration jhone Medeiros and Rafael Maria
+# Colaboration jhone Medeiros and Raphael Maria
 #
 #
 # Instalacao e atualizacao de sistemas e softwares para O2 Workstations
