@@ -12,7 +12,8 @@ nmcli connection up eno2
 yum check-update
 yum update -y
 #Instalação ansible
-yum -y update && yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+yum -y update
+yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts

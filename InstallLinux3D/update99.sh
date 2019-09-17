@@ -1,16 +1,14 @@
-#!/bin/bash
-# 
-# Script de instalação automatizada em Linux
-# Validado com o CentOS 7 
+#! /bin/bash
+#
 # Update O2 Comp-E
 #
 # By Uira Vilanova
-# coop Jhone Medeiros
-# UPDATE IN GIT HUB RAPHAEL MARIA
+# Colaboration jhone Medeiros and Rafael Maria
 #
-# Instalacao e atualizacao de sistemas e softwares para "3D O2"
 #
-# v1.99
+# Instalacao e atualizacao de sistemas e softwares para O2 Workstations
+#
+# v1.103d
 #
 ##################################################################################
 #
@@ -23,9 +21,9 @@ if [ "$WHOAMI" == "root" ]
 ############ Variaveis ##############
 INSTALLDIR="/mnt/installers"
 SOURCEDIR="/mnt/RRender/Installers"
-#LASTKERNEL="/usr/src/kernels/3.10.0-957.27.2.el7.x86_64"
-#NUKEDIR="/usr/local/Nuke10.5v5/"
-#NUKE11DIR="/usr/local/Nuke11.3v4/"
+LASTKERNEL="/usr/src/kernels/3.10.0-957.27.2.el7.x86_64"
+NUKEDIR="/usr/local/Nuke10.5v5/"
+NUKE11DIR="/usr/local/Nuke11.3v4/"
 RESOLVEDIR="/opt/resolve/bin/resolve"
 FUSIONDIR="/opt/BlackmagicDesign/Fusion9/"
 FUSIONRENDER="/opt/BlackmagicDesign/FusionRenderNode9/"
@@ -50,7 +48,7 @@ VRAYMAYA19="/usr/ChaosGroup/V-Ray/Maya2019-x64"
 NUKELIC="/usr/local/foundry/RLM/foundry_client.lic"
 TVDIR="/opt/teamviewer/"
 WACOMPRESSURE="/etc/X11/xorg.conf.d/99-wacom-pressure2k.conf"
-WACOMBUTTONS=
+WACOMBUTTONS="/etc/init.d/Wacom_disable_touch_and_ring.sh"
 MOUNTS="192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults        0 0"
 MOUNTS2=` ( grep -F "Onix" /etc/fstab ) `
 NVINSTALLEDDIR="/usr/src/nvidia-410.93/"
@@ -296,6 +294,11 @@ if [ ! -d "/opt2" ]; then
 fi
 }
 {
+if [ ! -d "/Volumes" ]; then
+ mkdir /Volumes
+fi
+}
+{
 if [ ! -d "/mnt/Onix" ]; then
  mkdir /mnt/Onix
 fi
@@ -367,6 +370,7 @@ fi
 }
 chmod 777 /mnt/*
 chmod 777 /opt2
+chmod 777 /Volumes
 echo "192.168.8.33:/opt                       /opt2                   nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.2:/Storage/Library            /mnt/Library            nfs     defaults        0 0" >> /etc/fstab
@@ -382,6 +386,7 @@ echo "192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     de
 echo "192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.48:/Storage/Library2          /mnt/Library2           nfs     defaults        0 0" >> /etc/fstab
 echo "#192.168.8.7:/Storage/install            /mnt/install            nfs     defaults        0 0" >> /etc/fstab
+echo "/mnt                                    /Volumes                none	bind" >> /etc/fstab
 mount -a
 fi
 
@@ -399,7 +404,7 @@ fi
 if [ ! -d "$LASTKERNEL" ]; then
 echo "#######  Instalando Epel  #########" ##### 
 cd $INSTALLDIR
-sudo yum -y install wget
+yum -y install wget
 yum -y install epel-release
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -i epel-release-latest-7.noarch.rpm
@@ -485,37 +490,45 @@ fi
 #
 
 #if [ "$CINNAMON" != "Cinnamon" ]; then
- echo "#######  Instalando cinnamon  #########" ##### 
- yum -y -q install cinnamon
+# echo "#######  Instalando cinnamon  #########" ##### 
+# yum -y -q install cinnamon
 #fi
 
 #######  Pulse Audio / PAVU Control  #########
 if [ "$PAUDIO" != "pulseaudio" ]; then 
  echo "#######  Instalando Pulse Audio e Pavu Control #########" ##### 
- yum -y -q install pulseaudio pavucontrol
+ yum -y install pulseaudio pavucontrol
 fi
 
 #######  DKMS  #########
 #
-#if [ "$DKMS" != "dkms" ]; then
- echo "#######  Instalando DKMS  #########" ##### 
- yum -y -q install dkms
+##if [ "$DKMS" != "dkms" ]; then
+# echo "#######  Instalando DKMS  #########" ##### 
+# yum -y -q install dkms
 #fi
 
 #######  GBDM  #########
 if [ ! -e "$LIBGBDM"  ]; then
  echo "#######  Instalando GBDM  #########" ##### 
- yum -y -q install gdbm-devel
+ yum -y install gdbm-devel
 fi
  
+ ############   Vlc  ###############
+if [ ! -e "$VLC" ]; then
+ echo "#######  Instalando VLC  #########" #####
+ yum -y install http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
+ yum -y install vlc
+fi
+
+
  #######  NTFS3G  #########
 if [ ! -e "$NTFS3G" ]; then
- yum -y -q install ntfs-3g
+ yum -y install cinnamon ntfs-3g gcc mesa-libGL mesa-libGL-devel nss dkms git dnf ansible libselinux-python smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld libde265 x265
 fi
 
  #######  EXFAT  #########
 
-yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm
+yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 yum install -y exfat-utils fuse-exfat
 
 ################### YUM UPDATE ####################
@@ -530,13 +543,13 @@ CINNAMON=` (  grep -o '^[^[:space:]]\+' /tmp/cinnamon.txt ) `
 
 if [ "$CINNAMONVRSINST" != "$CINNAMONVRSNEW" ]; then
  echo "#######  Atualizando Cinnamon  #########" ##### 
- yum -y -q update cinnamon
+ yum -y update cinnamon
 fi
 
 #######  Pulse Audio / PAVU Control  #########
 if [ "$PAUDIOVRSINST" != "$PAUDIOVRSNEW" ]; then
  echo "#######  Atualizando Pulse Audio e Pavu Control #########" ##### 
- yum -y -q update pulseaudio pavucontrol
+ yum -y update pulseaudio pavucontrol
 fi
 
 #######  DKMS  #########
@@ -639,12 +652,6 @@ rpm -Uvh --replacefiles slack-4.0.1-0.1.fc21.x86_64.rpm
 fi
 
 
-############   Vlc  ###############
-if [ ! -e "$VLC" ]; then
- echo "#######  Instalando VLC  #########" #####
- yum -y install http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
- yum -y install vlc
-fi
 
 
 ############   krita  ###############
@@ -697,6 +704,17 @@ cp -f $SOURCEDIR/DaVinci_Resolve_15.3.1_Linux.run $INSTALLDIR/DaVinci_Resolve_15
 cd $INSTALLDIR
 chmod 777 DaVinci_Resolve_15.3.1_Linux.run
 sudo -u $USERNAME  -H sh -c "./DaVinci_Resolve_15.3.1_Linux.run -i -y"
+fi
+}
+
+#############   Resolve 15  ###############
+{
+if [ ! -e "$RESOLVEDIR" ]; then
+echo "#######  Instalando Resolve 15.3  #########" ##### 
+cp -f $SOURCEDIR/DaVinci_Resolve_Studio_15.3.1_Linux.run $INSTALLDIR/DaVinci_Resolve_Studio_15.3.1_Linux.run
+cd $INSTALLDIR
+chmod 777 DaVinci_Resolve_Studio_15.3.1_Linux.run
+sudo -u $USERNAME  -H sh -c "./DaVinci_Resolve_Studio_15.3.1_Linux.run -i -y"
 fi
 }
 
@@ -855,7 +873,7 @@ cp -f $SOURCEDIR/Autodesk_Maya_2017_Update5_EN_Linux_64bit.tgz $INSTALLDIR/maya2
 cd $INSTALLDIR/maya2017
 tar -xvf $INSTALLDIR/maya2017/Autodesk_Maya_2017_Update5_EN_Linux_64bit.tgz
 #./setup-bin --noui --force
-./setup-bin --noui --force --serial_number=561-74540031 --product_key=657I1 --license_type=kStandalone
+./setup --noui --force --serial_number=561-74540031 --product_key=657I1 --license_type=kStandalone
 fi
 
 ###################### Vray 3.6 - MAYA 17 ########################
@@ -955,7 +973,7 @@ rm -rf $INSTALLDIR
 
 else
 
- echo "Por favor,rodar como root!"
+ echo "Please,run as root!"
  echo "Workstation NOT updated"
 
 
