@@ -187,8 +187,3 @@ HOUDINI_PATH = "/usr/redshift/redshift4houdini/17.0.459;&
 HOUDINI_DSO_ERROR = 2
 PATH = "/usr/redshift/bin:$PATH"
 HOUDINI_PATH = "/usr/redshift/redshift4houdini/17.5.173;& " >> /home/$user/houdini17.0/houdini.env
-
-
-nmcli con mod “wired connection 1” ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-
-nmcli con mod O2-Pos ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br

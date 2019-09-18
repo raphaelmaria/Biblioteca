@@ -212,44 +212,13 @@ vncserver
 /etc/init.d/rrAutostart restart
 
 #Placa de rede
-#ip a  (pegar o Mac, Nome da Interface)
-#rodar o comando uuidgen (nome da placa de rede)
-#Copiar esses dados e alterar no escript abaixo 
-#Configuração antiga
-mkdir /root/backups
-mv /etc/sysconfig/network-scripts/ifcfg-ens3 /root/backups/ifcfg-ens3_bkp
-echo "
-# Configuracao gerada por script
-HWADDR="56:6f:d4:39:00:04"
-NAME="ens3"
-UUID="af3873f7-8a5e-4e08-8e53-b999720acb21"
-TYPE="Ethernet"
-BOOTPROTO="none"
-DNS1="192.168.8.15"
-DNS2="192.168.8.16"
-DNS3="8.8.8.8"
-DOMAIN="o2pos.com"
-DEFROUTE="yes"
-IPV4_FAILURE_FATAL="no"
-IPV6INIT="no"
-ONBOOT="yes"
-AUTOCONNECT_PRIORITY="-999"
-IPADDR="192.168.9.51"
-PREFIX="16"
-GATEWAY="192.168.8.1" ">> /etc/sysconfig/network-scripts/ifcfg-ens3
-ls /etc/sysconfig/network-scripts | grep "ifcfg-ens3"
-systemctl stop NetworkManager
-systemctl disable NetworkManager
-systemctl enable network
-systemctl restart network
-
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli con modify eno2 ipv4.method manual ipv4.addresses 192.168.8.24/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
+nmcli con modify $INTERFACE ipv4.method manual ipv4.addresses 192.168.8.24/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 # Linha para comando para o DNS FIXO APENAS
-nmcli connection modify "Interface" ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
-nmcli con up "System eth0"
+nmcli connection modify $INTERFACE ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
+nmcli con up $INTERFACE 
 
 sudo hostnamectl set-hostname render25.o2pos.com
 
