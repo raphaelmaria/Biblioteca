@@ -6,7 +6,7 @@
 ### VARIAVEIS
 IPADDRESS= '()'
 HOSTNAME = '()'
-INTERFACE = '(nmcli con show | awk 1)'
+INTERFACE = '(nmcli con show | awk 1git)'
 
 # Atualização de OS
 yum check-update
