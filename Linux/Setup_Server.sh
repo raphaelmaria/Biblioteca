@@ -1,18 +1,17 @@
-#/bin/bash!
+#!/bin/bash
 # Script para configuração Inicial de Servidores
 # Criado por Raphael Maria
 # Versão 1.0
 
-nmcli con show
-nmcli connection modify eno2 ipv4.method manual ipv4.addresses 192.168.8.24 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-nmcli connection up eno2
-
+### VARIAVEIS
+IPADDRESS= '()'
+HOSTNAME = '()'
+INTERFACE = '(nmcli con show | awk 1)'
 
 # Atualização de OS
 yum check-update
 yum update -y
 #Instalação ansible
-yum -y update
 yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
@@ -137,48 +136,11 @@ ipa-client-install --mkhomedir --force --fixed-primary
 
 /etc/init.d/rrAutostart restart
 
-exit
 
-
-
-
-
-#Placa de rede
-#ip a  (pegar o Mac, Nome da Interface)
-#rodar o comando uuidgen (nome da placa de rede)
-#Copiar esses dados e alterar no escript abaixo 
-
-mkdir /root/backups
-mv /etc/sysconfig/network-scripts/ifcfg-eth0 /root/backups/ifcfg-eth0.bkp
-echo "#Configuracao gerada por script
-HWADDR="56:6f:d4:39:00:15"
-NAME="eth0"
-UUID="64e43960-b9e4-4d99-bf8a-6e3116408224"
-TYPE="Ethernet"
-BOOTPROTO="none"
-DNS1="192.168.8.15"
-DNS2="192.168.8.16"
-DNS3="8.8.8.8"
-DOMAIN="o2pos.com"
-DEFROUTE="yes"
-IPV4_FAILURE_FATAL="no"
-IPV6INIT="no"
-ONBOOT="yes"
-AUTOCONNECT_PRIORITY="-999"
-IPADDR="192.168.8.55"
-PREFIX="16"
-GATEWAY="192.168.8.1" " >> /etc/sysconfig/network-scripts/ifcfg-eth0
-
-systemctl stop NetworkManager
-systemctl disable NetworkManager
-
-systemctl enable network
-systemctl restart network
-
-mv /etc/resolv.conf /etc/resolv.conf.old
-echo "search o2pos.com.br
-nameserver 192.168.8.100
-nameserver 192.168.8.110" >> /etc/resolv.conf
+### Configuracao de rede do CentOS / Fedora
+nmcli con show
+nmcli connection modify $INTERFACE ipv4.method manual ipv4.addresses $IPADDRESS/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli connection up $INTERFACE
 
 sed -i 's/^IPADDR=x.x.x.x/IPADDR=$ipaddress' /etc/sysconfig/network-scripts/$interface
 sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf

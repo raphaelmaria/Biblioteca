@@ -246,7 +246,7 @@ systemctl restart network
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli con modify "System eth0" ipv4.method manual ipv4.addresses 192.168.7.25/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
+nmcli con modify eno2 ipv4.method manual ipv4.addresses 192.168.8.24/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 # Linha para comando para o DNS FIXO APENAS
 nmcli connection modify "Interface" ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
 nmcli con up "System eth0"
