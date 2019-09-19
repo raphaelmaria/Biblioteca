@@ -44,7 +44,12 @@ make && sudo make install
 #rpm -Uvh rpmfusion-free-release*rpm
 #yum install x264-libs
 
-mdadm --create /dev/md0 --level=raid0 --raid-devices 2 /dev/sdb1 /dev/sdc1 
+mdadm -E /dev/sd[b-e]
+mdadm --create /dev/md127 --level=raid5 --raid-devices 4 /dev/sd[b-e]1 
+
+# RAID 5
+mdadm -C /dev/md0 -l=5 -n=4 /dev/sd[b-e]1
+
 mkfs.ext4 --force /dev/md0
 
 # Driver Video com RUN DA NVIDIA
