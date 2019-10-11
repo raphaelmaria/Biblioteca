@@ -23,8 +23,8 @@ firewall-cmd --reload
 reboot
 
 nmcli con show
-nmcli connection modify enp3s0f0 ipv4.method manual ipv4.address 192.168.9.1/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
-nmcli connection up enp3s0f0 
+nmcli connection modify ens3f1 ipv4.method manual ipv4.address 192.168.9.1/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
+nmcli connection up ens3f1 
 
 reboot
 
