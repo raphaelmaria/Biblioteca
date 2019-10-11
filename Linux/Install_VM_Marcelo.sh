@@ -1,4 +1,9 @@
-#
+#!/bin/sh
+# Script de instalacao das VMs do Marcelo.
+# Baseado em CentOS 7 (provaval que rode na versao 8)
+# Criado e documentado por Raphael Maria
+# Em 11 de Outubro de 2019 as 11h17m
+# 
 
 
 # Scripts maquina do marcelo
