@@ -2,7 +2,7 @@
 # Instalar o CentOS 7 em versão "Minimal" sem interface de video, somente em modo terminal.
 # Rode os comandos na mesma ordem e adaptando a essa necessidade.
 
-hostnamectl set-hostname o2vnode1.o2pos.com.br
+hostnamectl set-hostname o2node1.o2pos.com.br
 yum upgrade -y
 yum update -y
 yum install gcc wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps unzip mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld -y
@@ -13,8 +13,8 @@ yum -y install ipa-client chrony
 yum -y install http://resources.ovirt.org/pub/yum-repo/ovirt-release43.rpm
 yum clean all && yum update -y
 export FONTCONFIG_PATH=/etc/fonts
-su - -c "yum install perl-version"
-su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
+#su - -c "yum install perl-version"
+#su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 yum -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
@@ -23,8 +23,9 @@ firewall-cmd --reload
 reboot
 
 nmcli con show
-nmcli connection modify ens5f1 ipv4.method manual ipv4.address 192.168.9.1/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
-nmcli connection up ens5f1 
+nmcli connection modify enp3s0f0 ipv4.method manual ipv4.address 192.168.9.1/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
+nmcli connection up enp3s0f0 
+
 reboot
 
 # Verificar o DNS no resolve.conf se o DNS esta no 8.100 e 8.110
@@ -43,7 +44,7 @@ reboot
 # yum clean all && yum update -y
 # yum install -y vdsm-gluster
 
-ipa-client-install --mkhomedir --no-ntp
+ipa-client-install --mkhomedir --no-ntp --force-join
 # yes
 # admin
 # senha de admin do IPA no 1password
