@@ -26,10 +26,6 @@ scl enable rh-python36 bash
 su - -c "yum install perl-version"
 su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 
-
-
-
-
 hostnamectl set-hostname tableau
 
 # Install Cockpit
@@ -115,7 +111,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el
 yum -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/^Hostname=Zabbix server/Hostname=Athena/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=Zabbix server/Hostname=O2box01/' /etc/zabbix/zabbix_agentd.conf
 chkconfig zabbix on
 chkconfig zabbix-agent on
 mkdir /var/run/zabbix
@@ -131,7 +127,7 @@ exit
 
 #sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf
 
-ipa-client-install --mkhomedir --no-ntp
+ipa-client-install --mkhomedir --no-ntp --force-join
 ipa-client-install --mkhomedir --force --fixed-primary
 
 /etc/init.d/rrAutostart restart

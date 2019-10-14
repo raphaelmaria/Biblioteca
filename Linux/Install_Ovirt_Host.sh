@@ -2,7 +2,7 @@
 # Instalar o CentOS 7 em versão "Minimal" sem interface de video, somente em modo terminal.
 # Rode os comandos na mesma ordem e adaptando a essa necessidade.
 
-hostnamectl set-hostname o2node1.o2pos.com.br
+hostnamectl set-hostname o2box01.o2pos.com.br
 yum upgrade -y
 yum update -y
 yum install gcc wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps unzip mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld -y
@@ -23,8 +23,8 @@ firewall-cmd --reload
 reboot
 
 nmcli con show
-nmcli connection modify ens3f1 ipv4.method manual ipv4.address 192.168.9.1/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
-nmcli connection up ens3f1 
+nmcli connection modify ens1f0np0 ipv4.method manual ipv4.address 192.168.8.119/16 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br ipv4.gateway 192.168.8.1
+nmcli connection up ens1f0np0 
 
 reboot
 
