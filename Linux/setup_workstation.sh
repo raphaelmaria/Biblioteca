@@ -45,7 +45,7 @@ make && sudo make install
 #yum install x264-libs
 
 mdadm -E /dev/sd[b-e]
-mdadm --create /dev/md127 --level=raid5 --raid-devices 4 /dev/sd[b-e]1 
+mdadm --create /dev/md127 --level=raid0 --raid-devices 4 /dev/sd[b-e]1 
 
 # RAID 5
 mdadm -C /dev/md0 -l=5 -n=4 /dev/sd[b-e]1
