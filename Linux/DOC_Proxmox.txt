@@ -1,0 +1,8 @@
+Comandos Proxmox
+
+Para importar discos para Proxmox
+scp <nome>.ova root@192.168.8.8:/Storage/VMs
+mv <nome>.ova <nome>.tar
+tar -xvf <nome>.tar
+Criar um VM simples e remover o disco, depois rodar o processo de importação:
+qm importdisk <ID da VM Criada> <nome>.vmdk VMs
