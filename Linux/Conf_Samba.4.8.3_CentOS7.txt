@@ -1,7 +1,9 @@
-mkdir -p /mnt/[folder]
-chcon -Rt samba_share_t [diretorio]
-chmod -R 0770 [diretorio]
-chown -R [user]:[user] [diretorio]
+mkdir -p /mnt/storage
+chcon -Rt samba_share_t /mnt/storage
+chmod -R 0770 
+chown -R acesso:acesso /mnt/storage
+ulimit -n 16384
+echo "* - nofile 16384" >> /etc/security/limits.conf
 
 #### Script SAMBA FOR CENTOS 7 ####
 
@@ -11,12 +13,12 @@ chown -R [user]:[user] [diretorio]
 #####################################
 
     server role = standalone server
-    workgroup = [Grupo da sua maquina]]
-    netbios name = [Nome do servidor]
+    workgroup = WORKGROUP
+    netbios name = cinema
     server string = Samba Files
     os level = 100   
     wins support = yes
-    hosts allow = [Ranger IP/Mascara]
+    # hosts allow = [Ranger IP/Mascara]
     bind interfaces only = yes
     keepalive = 20
     dns proxy = no
@@ -30,19 +32,21 @@ chown -R [user]:[user] [diretorio]
 
     preserve case = yes
     default case = lower
-    veto files = /.thumbs/.thumbs/.DS [Arquivos que não podem entrar no servidor, metodo geral]
+    veto files = /.thumbs/.thumbs/.DS
     read raw = yes
     write raw = yes
     oplocks = yes
     getwd cache = yes
     unix charset = UTF-8
+    min protocol = SMB2
+    max protocol = SMB3
 
 ################################
 ##### configuracao Lixeira #####
 ################################
     vfs objects = full_audit, recycle
     recycle:versions = yes
-    recycle:repository = /mnt/dados/lixeira
+    recycle:repository = /mnt/storage/lixeira
     recycle:keeptree = yes
     recycle:exclude = *.mp3, *.iso, *.exe, *.mkv, *.mp4 
     recycle:exclude_dir = tmp, cache
@@ -60,7 +64,7 @@ chown -R [user]:[user] [diretorio]
 ###### configuracao Compartilhamentos ####
 ##########################################
     [lixeira]
-        path = /mnt/dados/lixeira
+        path = /mnt/storage/lixeira
         writable = yes
         create mask = 0700
         directory mask = 0700
@@ -71,43 +75,12 @@ chown -R [user]:[user] [diretorio]
 #####################################
     [midia]
         comment = Arquivos de Video Backup
-        path = /mnt/dados/raid0_media
+        path = /mnt/storage/dados
         browseable = yes
         writable = yes
-        write list = raphael
+        write list = acesso
         create mask = 0775
         directory mask = 0775
         guest ok = yes
-        valid users = raphael nobody guest
-        veto files = *.iso
-
-    [suporte]
-        path = /mnt/dados/hd_suporte
-        comment = programas
-        browseable = yes
-        writable = yes
-        guest ok = yes
-        valid users = raphael guest nobody
-        write list = raphael
-        create mask = 0775
-        directory mask = 0775
-
-    [produtora]
-        path = /mnt/dados/hd_produtora
-        comment = produtora de video e outros trabalhos
-        browseable = yes
-        writable = yes
-        guest ok = yes
-        valid users = raphael guest nobody
-        write list = raphael
-        create mask = 0775
-        directory mask = 0775
-        veto files = *.iso
-
-    [setup]
-        path = /mnt/dados/hd_suporte/setup
-        comment = Instalacao OS
-        browseable = yes
-        writable = yes
-        guest ok = yes
-        read only = no
+        valid users = acesso nobody guest
+        veto files = *.rar, *.zip, *.tar, *.bmp

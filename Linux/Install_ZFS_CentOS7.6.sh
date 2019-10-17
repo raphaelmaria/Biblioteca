@@ -8,3 +8,9 @@ yum install kernel-devel-$(uname -r)
 yum install kernel-devel-$(uname -r)
 yum install epel-release
 yum install python36 python36-devel python36-setuptools python36-cffi
+
+
+
+
+RAID 5 (RAIDZ)
+zpool create -f storage raidz /dev/sd[b-e]1
