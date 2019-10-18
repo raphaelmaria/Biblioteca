@@ -88,3 +88,8 @@ echo " # Criado por raphael maria
         guest ok = yes
         valid users = acesso nobody guest
         veto files = *.rar, *.zip, *.tar, *.bmp" >> /etc/samba/smb.conf
+
+
+adduser "USERNAME"
+passwd "USERNAME"
+smbpasswd -a "USERNAME"
