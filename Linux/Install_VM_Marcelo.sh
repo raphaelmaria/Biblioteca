@@ -38,7 +38,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el
 yum -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/^Hostname=Zabbix server/Hostname=Athena/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=Zabbix server/Hostname=phrasernet/' /etc/zabbix/zabbix_agentd.conf
 chkconfig zabbix on
 chkconfig zabbix-agent on
 mkdir /var/run/zabbix
@@ -78,12 +78,14 @@ firewall-cmd --list-all
 
 ### Configuracao de rede do CentOS / Fedora
 nmcli con show
-nmcli connection modify "System eth0" ipv4.method manual ipv4.addresses 192.168.7.29/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli connection modify "System eth0" ipv4.method manual ipv4.addresses 192.168.8.96/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 nmcli connection up "System eth0"
 
 # Atualização de OS
 yum check-update
 yum update -y
 
+hostnamectl set-hostname labappsrv.o2pos.com.br
+yum install ipa-client -y
 ipa-client-install --mkhomedir --no-ntp
 

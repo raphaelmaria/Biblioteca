@@ -91,7 +91,7 @@ chmod -R 777 /etc/skel/*
 #######################
 ## Set Name Hostname ##
 #######################
-hostnamectl set-hostname vmrender2
+hostnamectl set-hostname queues.o2pos.com.br
 sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf
 
 #############################################
@@ -220,7 +220,7 @@ vncserver
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli con modify "Wired connection 1" ipv4.method manual ipv4.addresses 192.168.10.11/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
+nmcli con modify ens3 ipv4.method manual ipv4.addresses 192.168.7.31/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
 # Linha para comando para o DNS FIXO APENAS
 nmcli connection modify $INTERFACE ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
 nmcli con up "Wired connection 1" 
@@ -235,10 +235,10 @@ echo "name server = 192.168.8.100
 name server = 192.168.8.110" >> /etc/resolv.conf
 
  
-yum install ipa-client
+yum install ipa-client -y
 ipa-client-install --mkhomedir --no-ntpd
 
-nmcli con mod "Wired connection 1" ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli con mod ens3 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 /opt/hfs17.5/bin/hkey
 
 reboot
