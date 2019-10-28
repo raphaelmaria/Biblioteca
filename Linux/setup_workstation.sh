@@ -155,7 +155,7 @@ echo '# Servidor Royal Render
 192.168.8.32:/Storage/RAW2              /mnt/RAW2               nfs     defaults        0 0
 192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     defaults        0 0
 192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults        0 0
-#192.168.8.14:/Storage/Publicidade       /mnt/Publicidade        nfs     defaults        0 0
+192.168.8.14:/Storage/Publicidade       /mnt/Publicidade        nfs     defaults        0 0
 192.168.8.31:/Storage/Entretenimento    /mnt/Entretenimento     nfs     defaults        0 0
 192.168.8.22:/Storage/Entretenimento2   /mnt/Entretenimento2    nfs     defaults        0 0
 192.168.8.25:/Storage/Entretenimento3   /mnt/Entretenimento3    nfs     defaults        0 0
