@@ -1,4 +1,4 @@
-yum install samba samba-client samba-common
+yum install samba samba-client samba-common nfs-utils.x86_64 centos-release-nfs-ganesha28.noarch 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 
 
