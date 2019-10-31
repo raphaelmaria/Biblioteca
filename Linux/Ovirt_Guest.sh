@@ -14,7 +14,7 @@ wget http://download.opensuse.org/repositories/home:/evilissimo:/ubuntu:/16.04/x
 apt-key add - < Release.key 
 apt-get update
 apt-get install ovirt-guest-agent -y
-
+yum remove cloud-init -y
 
 
 

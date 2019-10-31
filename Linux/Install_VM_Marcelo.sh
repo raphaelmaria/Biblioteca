@@ -14,6 +14,7 @@ yum -y install nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg
 yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
+yum remove cloud-init -y
 
 # Ovirt Guest Monitor
 yum -y install epel-release
