@@ -15,3 +15,15 @@ mv /etc/exports /etc/exports.bkp
 cp -f afp.conf /usr/local/etc/afp.conf
 cp -f smb.conf /etc/samba/smb.conf
 cp -f exports /etc/exports
+
+systemctl enable smb
+systemctl enable nmb
+systemctl enable netatalk
+systemctl enable nfs
+systemctl enable nslcd
+
+systemctl start smb
+systemctl start nmb
+systemctl start afp
+systemctl start nfs
+systemctl start nslcd

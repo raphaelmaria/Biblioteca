@@ -25,24 +25,24 @@ wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/n/netata
 chmod 777 *.rpm
 rpm -Uvh *.rpm
 
-mv /etc/netatalk/afp.conf /etc/netatalk/afp.conf.bkp
-touch /etc/netatalk/afp.conf
+#mv /etc/netatalk/afp.conf /etc/netatalk/afp.conf.bkp
+#touch /etc/netatalk/afp.conf
 
-echo "[Global]
+#echo "[Global]
 
-log file = /var/log/afpd.log
-log level = default:error
-uam list = uams_dhx.so,uams_dhx2.so
-afpstats = yes
-mimic model = RackMac
-map acls = mode
+#log file = /var/log/afpd.log
+#log level = default:error
+#uam list = uams_dhx.so,uams_dhx2.so
+#afpstats = yes
+#mimic model = RackMac
+#map acls = mode
 
-[Dados]
+#[Dados]
 
-path = /mnt/storage/dados
-valid users = acesso 
-file perm = 0664
-directory perm = 2775" >> /etc/netatalk/afp.conf
+#path = /mnt/storage/dados
+#valid users = acesso 
+#file perm = 0664
+#directory perm = 2775" >> /etc/netatalk/afp.conf
 
 firewall-cmd --zone=public --permanent --add-port=548/tcp
 firewall-cmd --zone=public --permanent --add-port=548/udp
