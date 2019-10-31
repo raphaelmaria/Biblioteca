@@ -6,21 +6,24 @@
 
 yum install -y rpm-build gcc make wget
 yum install -y avahi-devel cracklib-devel dbus-devel dbus-glib-devel libacl-devel libattr-devel libdb-devel libevent-devel libgcrypt-devel krb5-devel mysql-devel openldap-devel openssl-devel pam-devel quota-devel systemtap-sdt-devel tcp_wrappers-devel libtdb-devel tracker-devel
+yum install perl-IO-Socket-INET6.noarch -y
+
+# Codigo incompleto para instalação
+# wget http://192.168.8.7/linux/Softwares/server/netatalk-3.1.12.zip
+# yum install unzip -y
+# chmod 777 netatalk-3.1.12.zip
+# unzip netatalk-3.1.12.zip
+# rm -rf "__MACOSX"
+# cd netatalk-3.1.12
+# ./configure 
+# make
+# make install
 
 
-wget http://192.168.8.7/linux/Softwares/server/netatalk-3.1.12.zip
-yum install unzip -y
-chmod 777 netatalk-3.1.12.zip
-unzip netatalk-3.1.12.zip
-rm -rf "__MACOSX"
-cd netatalk-3.1.12
-./configure
-make install
-
-
-
-
-yum install netatalk -y
+wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/n/netatalk-3.1.12-4.el7.x86_64.rpm
+wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/n/netatalk-devel-3.1.12-4.el7.x86_64.rpm
+chmod 777 *.rpm
+rpm -Uvh *.rpm
 
 mv /etc/netatalk/afp.conf /etc/netatalk/afp.conf.bkp
 touch /etc/netatalk/afp.conf
