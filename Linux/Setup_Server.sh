@@ -111,7 +111,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el
 yum -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/^Hostname=Zabbix server/Hostname=poseidon/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=Zabbix server/Hostname=potential/' /etc/zabbix/zabbix_agentd.conf
 chkconfig zabbix on
 chkconfig zabbix-agent on
 mkdir /var/run/zabbix
@@ -183,3 +183,6 @@ HOUDINI_PATH = "/usr/redshift/redshift4houdini/17.0.459;&
 HOUDINI_DSO_ERROR = 2
 PATH = "/usr/redshift/bin:$PATH"
 HOUDINI_PATH = "/usr/redshift/redshift4houdini/17.5.173;& " >> /home/$user/houdini17.0/houdini.env
+
+
+parted mkpart gpt /dev/sd[b-x]

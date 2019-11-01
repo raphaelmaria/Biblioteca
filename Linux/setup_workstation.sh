@@ -46,12 +46,12 @@ make && sudo make install
 #yum install x264-libs
 
 mdadm -E /dev/sd[b-e]
-mdadm --create /dev/md127 --level=raid0 --raid-devices 4 /dev/sd[b-e]1 
+mdadm --create /dev/md127 --level=raid0 --raid-devices 2 /dev/sd[b-c]1 
 
 # RAID 5
 mdadm -C /dev/md0 -l=5 -n=4 /dev/sd[b-e]1
 
-mkfs.ext4 --force /dev/md0
+mkfs.ext4 --force /dev/md127
 
 # Driver Video com RUN DA NVIDIA
 init 2
@@ -179,9 +179,9 @@ vncserver
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli con modify ens3 ipv4.method manual ipv4.addresses 192.168.7.31/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
+nmcli con modify ens3 ipv4.method manual ipv4.addresses 192.168.8./16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
 # Linha para comando para o DNS FIXO APENAS
-nmcli connection modify p8p1 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.115 ipv4.dns-search o2pos.com.br
+nmcli connection modify p8p1 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 nmcli con up p8p1
 
 sudo hostnamectl set-hostname render25.o2pos.com
