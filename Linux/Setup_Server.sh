@@ -135,8 +135,8 @@ ipa-client-install --mkhomedir --force --fixed-primary
 
 ### Configuracao de rede do CentOS / Fedora
 nmcli con show
-nmcli connection modify enp3s0f1 ipv4.method manual ipv4.addresses 192.168.8.26/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
-nmcli connection up enp3s0f1
+nmcli connection modify enp3s0f0 ipv4.method manual ipv4.addresses 192.168.8.26/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
+nmcli connection up enp3s0f0
 
 sed -i 's/^IPADDR=x.x.x.x/IPADDR=$ipaddress' /etc/sysconfig/network-scripts/$interface
 sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf
