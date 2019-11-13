@@ -1,3 +1,5 @@
+
+
 mkdir /mnt/storage
 chmod -R 777 /mnt/storage
 
@@ -7,16 +9,14 @@ mdadm -E /dev/sd[b-d]
 
 Criando RAID com MADM 
 mdadm --create /dev/md127 --level=raid5 --raid-devices 4 /dev/sd[b-e]1 
+mdadm --create /dev/md1 -v --raid-devices=23 --level=5 /dev/sd[a-w]1
 
 Acompanhar a criação do RAID
 watch -n1 cat /proc/mdstat
 
-Destruindo RAID com MDADM
-mdadm --zero-superblock /dev/sd[b-e]1
-
-
-ZFS
-Criação de RAID
 zpool create -f files raidz /dev/sd[b-e]1
 
-Destruição de RAID
+
+# Destruição de RAID
+mdadm --stop /dev/md127
+mdadm --zero-superblock /dev/sdh1

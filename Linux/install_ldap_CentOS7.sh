@@ -6,11 +6,8 @@
 
 #######  nss-pam-ldap nscd  #########
 echo "#######  Instalando nss-pam-ldap nscd  #########" ##### 
-yum install -y nss-pam-ldap nscd 
+yum -y install nss-pam-ldap nscd openldap-clients nss-pam-ldapd
 
-#######  nss-pam-ldap nscd  #########
-echo "#######  Instalando openldap-clients nss-pam-ldapd  #########" ##### 
-yum -y install openldap-clients nss-pam-ldapd
 
 wget http://192.168.8.7/linux/Softwares/server/ldap.zip
 unzip ldap.zip

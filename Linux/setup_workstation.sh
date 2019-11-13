@@ -142,6 +142,27 @@ chmod -R 777 /mnt/raid
 chmod -R 777 /mnt/cache_nuke
 chmod -R 777 /mnt/Cache_Nuke
 
+echo "# Servidor Royal Render" >> /etc/fstab
+echo "192.168.8.200:/mnt/RRender /mnt/RRender nfs defaults 0 0" >> /etc/fstab
+
+echo "# Diretorios de servidores" >> /etc/fstab
+echo "192.168.8.2:/Storage/Library            /mnt/Library            nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.48:/Storage/Library2          /mnt/Library2           nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.19:/Storage/RAW1              /mnt/RAW1               nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.32:/Storage/RAW2              /mnt/RAW2               nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.14:/Storage/Publicidade       /mnt/Publicidade        nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.31:/Storage/Entretenimento    /mnt/Entretenimento     nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.22:/Storage/Entretenimento2   /mnt/Entretenimento2    nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.25:/Storage/Entretenimento3   /mnt/Entretenimento3    nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.39:/Storage/Entretenimento4   /mnt/Entretenimento4    nfs     defaults        0 0" >> /etc/fstab
+
+echo "# Servidores auxiliares" >> /etc/fstab
+echo "#192.168.8.33:/opt                       /opt                    nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults        0 0" >> /etc/fstab
+echo "#192.168.8.7:/Storage/Install            /mnt/Install            nfs     defaults        0 0" >> /etc/fstab
+echo "#192.168.8.11:/Storage/Homes             /mnt/oldhome                   nfs     defaults        0 0" >> /etc/fstab
 
 #####################
 #### PROGRAMAS ######

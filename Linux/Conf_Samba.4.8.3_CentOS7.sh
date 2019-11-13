@@ -1,11 +1,12 @@
+
+user=
+
 yum -y install samba samba-client samba-common nfs-utils.x86_64 centos-release-nfs-ganesha28.noarch 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
-
-
-mkdir -p /mnt/storage
-chcon -Rt samba_share_t /mnt/storage
+mkdir -p /storage/dados
+chcon -Rt samba_share_t /storage/dados
 chmod -R 0770 
-chown -R acesso:acesso /mnt/storage
+chown -R $user:$user /storage/dados
 ulimit -n 16384
 echo "* - nofile 16384" >> /etc/security/limits.conf
 

@@ -1,10 +1,10 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red246\green246\blue239;
-\red246\green246\blue239;}
+}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;\cssrgb\c97255\c97255\c94902;
-\cssrgb\c97255\c97255\c94902;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww14440\viewh12380\viewkind0
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh15600\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf2 \cb3 CentOS 7 - VM \
@@ -37,29 +37,22 @@ O arquivo gz vai sumir\
 # su - postgres\
 # psql -d <DB novo> < <DB desejado>.sql\
 Exemplo: # psql -d 2018_entretenimento_15 < 2018_entretenimento.sql\
-# exit\
-\
-> Editar os arquivos que permitem o acesso ao Postgres\
+# exit> Editar os arquivos que permitem o acesso ao Postgres\
 Localizar o arquivo postgresql.conf\
 \pard\pardeftab720\sl220\partightenfactor0
 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 # find / -name "postgresql.conf"\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 # vim \CocoaLigature0 /var/lib/pgsql/data/postgresql.conf\
-\
+# find / -name "postgresql.conf"\kerning1\expnd0\expndtw0 # vim \CocoaLigature0 /var/lib/pgsql/data/postgresql.conf\
 Localizar a linha (\expnd0\expndtw0\kerning0
-\CocoaLigature1 \outl0\strokewidth0 \strokec4 listen_addresses = 'localhost\'92) e alterar localhost para \'93*\'94\
+\CocoaLigature1 listen_addresses = 'localhost\'92) e alterar localhost para \'93*\'94\
 \'93esc+ :x\'94 para salvar\
-\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 Localizar o arquivo \'93\cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 pg_hba.conf\'94\
+\cf2 \kerning1\expnd0\expndtw0 Localizar o arquivo \'93\expnd0\expndtw0\kerning0
+pg_hba.conf\'94\
 \pard\pardeftab720\sl220\partightenfactor0
-\cf2 \outl0\strokewidth0 # find / -name pg_hba.conf\
+\cf2 # find / -name pg_hba.conf\
 \
-# vim \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 /var/lib/pgsql/data/pg_hba.conf\cf2 \expnd0\expndtw0\kerning0
-\CocoaLigature1 \
-Alterar as ultimas linhas com:\
+# vim \kerning1\expnd0\expndtw0 \CocoaLigature0 /var/lib/pgsql/data/pg_hba.conf\expnd0\expndtw0\kerning0
+\CocoaLigature1 Alterar as ultimas linhas com:\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 # TYPE  DATABASE        USER            ADDRESS                 METHOD\
@@ -79,13 +72,13 @@ host    all             all             ::1/128                 ident\
 #host    replication     postgres        ::1/128                 ident\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf2 \cb3 \expnd0\expndtw0\kerning0
-\CocoaLigature1 \'93esc+ :x\'94 para salvar\cf2 \cb3 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \'93esc+ :x\'94 para salvar\kerning1\expnd0\expndtw0 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf2 \
 \pard\pardeftab720\sl220\partightenfactor0
 \cf2 \expnd0\expndtw0\kerning0
-\CocoaLigature1 \outl0\strokewidth0 \strokec4 > Alterar a senha do user postgres\
+\CocoaLigature1 > Alterar a senha do user postgres\
 # psql\
 # ALTER USER postgres WITH PASSWORD \'91senha nova\'92;\
 \
