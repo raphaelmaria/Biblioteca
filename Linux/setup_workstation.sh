@@ -75,7 +75,7 @@ yum -y install kmod-nvidia
 
 # Interface Install
 yum grouplist
-yum groupremove "GNOME Desktop" -y
+yum groupinstall "GNOME Desktop" -y
 systemctl set-default graphical.target
 systemctl start graphical.target
 
