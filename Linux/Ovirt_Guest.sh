@@ -16,5 +16,5 @@ apt-get update
 apt-get install ovirt-guest-agent -y
 yum remove cloud-init -y
 
-
-
+# Instalando via Ubuntu ou Debian
+apt install ovirt-guest-agent -y

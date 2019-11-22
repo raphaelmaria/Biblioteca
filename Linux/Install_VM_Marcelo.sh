@@ -84,8 +84,8 @@ firewall-cmd --list-all
 
 ### Configuracao de rede do CentOS / Fedora
 nmcli con show
-nmcli connection modify eth0 ipv4.method manual ipv4.addresses 192.168.7.33/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-nmcli connection up eth0
+nmcli connection modify "System eth0" ipv4.method manual ipv4.addresses 192.168.7.29/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli connection up "System eth0"
 
 # Atualização de OS
 yum check-update
