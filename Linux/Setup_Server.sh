@@ -112,7 +112,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el
 yum -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/^Hostname=Zabbix server/Hostname=potential/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=Zabbix server/Hostname=videocopilotlicense/' /etc/zabbix/zabbix_agentd.conf
 chkconfig zabbix on
 chkconfig zabbix-agent on
 mkdir /var/run/zabbix
@@ -136,8 +136,8 @@ ipa-client-install --mkhomedir --force --fixed-primary
 
 ### Configuracao de rede do CentOS / Fedora
 nmcli con show
-nmcli connection modify enp3s0f1 ipv4.method manual ipv4.addresses 192.168.8.26/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
-nmcli connection up enp3s0f1
+nmcli connection modify ens1f1 ipv4.method manual ipv4.addresses 192.168.8.59/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli connection up ens1f1
 
 sed -i 's/^IPADDR=x.x.x.x/IPADDR=$ipaddress' /etc/sysconfig/network-scripts/$interface
 sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf

@@ -8,7 +8,7 @@ Analisar discos
 mdadm -E /dev/sd[b-d]
 
 Criando RAID com MADM 
-mdadm --create /dev/md127 --level=raid5 --raid-devices 4 /dev/sd[b-e]1 
+mdadm --create /dev/md127 -v --level=raid0 --raid-devices 5 /dev/sd[a-e]1 
 mdadm --create /dev/md1 -v --raid-devices=23 --level=5 /dev/sd[a-w]1
 
 Acompanhar a criação do RAID
@@ -19,4 +19,4 @@ zpool create -f files raidz /dev/sd[b-e]1
 
 # Destruição de RAID
 mdadm --stop /dev/md127
-mdadm --zero-superblock /dev/sdh1
+mdadm --zero-superblock /dev/sd[a-e]1
