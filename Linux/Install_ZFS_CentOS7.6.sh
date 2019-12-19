@@ -24,7 +24,10 @@ lsmod | grep zfs
 /sbin/modprobe zfs
 
 # Comando para criar o Pool de Disco em Raid 5
-zpool create storage raidz /dev/sd[a-w]1
+zpool create -f storage raidz /dev/sd[a-w]1
+zpool create storage/dados
+
+echo "@reboot         root    sleep 10; zpool import -a;" >> /etc/crontab
 
 #Instalar ZFS AUTO Snapshot
 # Guia e Repositorio para Download

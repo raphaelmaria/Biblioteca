@@ -10,6 +10,10 @@ chown -R acesso:acesso /mnt/storage
 ulimit -n 16384
 echo "* - nofile 16384" >> /etc/security/limits.conf
 
+
+useradd <user>
+smbpasswd -a <user>
+
 #### Script SAMBA FOR CENTOS 7 ####
 echo " # Criado por raphael maria
 [global]
