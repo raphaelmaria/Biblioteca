@@ -1,7 +1,7 @@
 #!/bin/sh
 # Instalado de ZFS em CentOS 7.7
 # Creado por Raphael Maria em 07/11/2019
-# Versão 1.2
+# Versão 1.5
 # For Red Hat / CentOS 7
 # 
 # Biografia de pesquisa para confeccao destas linhas:
@@ -26,6 +26,14 @@ lsmod | grep zfs
 # Comando para criar o Pool de Disco em Raid 5
 zpool create -f storage raidz /dev/sd[a-w]1
 zpool create storage/dados
+
+
+systemctl enable zfs.target
+systemctl start zfs.target
+systemctl enable zfs-import-cache.service
+systemctl enable zfs-mount.service
+systemctl enable zfs-import-cache.service
+systemctl enable zfs-share.service
 
 echo "@reboot         root    sleep 10; zpool import -a;" >> /etc/crontab
 
