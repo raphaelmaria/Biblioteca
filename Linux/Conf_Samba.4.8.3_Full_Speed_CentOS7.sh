@@ -83,6 +83,8 @@ echo "# See smb.conf.example for a more detailed config file or
 	public = yes
 	writable = yes" >> /etc/samba/smb.conf
 
+chcon -Rt samba_share_t /storage
+
 systemctl enable smb
 systemctl start smb
 systemctl enable nmb
