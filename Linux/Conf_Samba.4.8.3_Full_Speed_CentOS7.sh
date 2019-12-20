@@ -1,9 +1,11 @@
 #!/bin/sh
 
 # Pacotes para instalacao
+yum install samba samba-client samba-common
+
 
 # Script para substituicao de SMB.CONF
-
+mv /etc/samba/smb.conf /etc/samba/smb.bkp.conf
 
 
 
