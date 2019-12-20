@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+#
+#### Criando database Postgres em 
+
+
+PGPORT=5432
+PGHOST="my.database.domain.com"
+PGUSER="postgres"
+PGDB="mydb"
+createdb -h $PGHOST -p $PGPORT -U $PGUSER $PGDB
