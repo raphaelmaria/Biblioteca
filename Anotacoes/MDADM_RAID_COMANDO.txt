@@ -12,7 +12,7 @@ mdadm --create /dev/md127 -v --level=raid0 --raid-devices 5 /dev/sd[a-e]1
 mdadm --create /dev/md1 -v --raid-devices=23 --level=5 /dev/sd[a-w]1
 
 Criando RAID5 com mdadm
-mdadm --create /dev/md127 --level=5 --raid-devices=23 /dev/sd[a-x]1
+mdadm --create --symlink=yes -f /dev/raid5 --level=5 --raid-devices=24 --spare-devices=3 /dev/sd[a-x]1
 
 
 Acompanhar a criação do RAID
