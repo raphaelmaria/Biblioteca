@@ -3,12 +3,12 @@
 # Update O2 Comp-E
 #
 # By Uira Vilanova
-# Colaboration Jhone Medeiros and Raphaael Maria
+# Colaboration jhone Medeiros and Rafael Maria
 #
 #
 # Instalacao e atualizacao de sistemas e softwares para O2 Workstations
 #
-# version 117
+# version 118
 #
 ##################################################################################
 #
@@ -20,8 +20,9 @@ if [ "$WHOAMI" == "root" ]
   
 ############ Variaveis ##############
 INSTALLDIR="/mnt/installers"
-SOURCEDIR="/mnt/deploy"
+SOURCEDIR="/mnt/deploy/Installers"
 LASTKERNEL="/usr/src/kernels/3.10.0-1062.9.1.el7.x86_64"
+#LASTKERNEL="/usr/src/kernels/3.10.0-1062.4.3.el7.x86_64"
 #LASTKERNEL="/usr/src/kernels/3.10.0-1062.1.2.el7.x86_64"
 NUKEDIR="/usr/local/Nuke10.5v5/"
 NUKE11DIR="/usr/local/Nuke11.3v4/"
@@ -215,7 +216,6 @@ fi
 mv /etc/sysconfig/network-scripts/ifcfg-$ENID $BKPFILES/$DATE/$ENID
 echo "
 # By Uira Vilanova
-# update by Raphael Maria
 NAME="$ENID"
 DEVICE="$ENID"
 $NETUUIDUI
@@ -227,10 +227,10 @@ IPV6INIT="no"
 IPADDR="$IPADDED"
 GATEWAY="192.168.8.1"
 PREFIX="16"
-DNS1="192.168.8.100"
-DNS2="192.168.8.110"
-DNS3="192.168.8.15"
-DOMAIN="o2pos.com.br"
+DNS1="192.168.8.15"
+DNS2="192.168.8.16"
+DNS3="8.8.8.8"
+DOMAIN="o2pos.com"
 ONBOOT="yes" ">> $NETPATH/ifcfg-$ENID
 systemctl restart network
 sleep 12
@@ -287,7 +287,6 @@ fi
 #fi
 
 
-
 ##########  FSTAB  ##########
 
 if [ "$MOUNTS" != "$MOUNTS2" ]
@@ -297,6 +296,14 @@ if [ ! -d "/opt2" ]; then
  mkdir /opt2
 fi
 }
+
+{
+if [ ! -d "/mnt/deploy" ]; then
+ mkdir /mnt/deploy
+fi
+}
+
+
 {
 if [ ! -d "/Volumes" ]; then
  mkdir /Volumes
@@ -372,15 +379,11 @@ if [ ! -d "/mnt/install" ]; then
  mkdir /mnt/install 
 fi
 }
-{
-if [ ! -d "/mnt/deploy" ]; then
- mkdir /mnt/deploy 
-fi
-}
 chmod 777 /mnt/*
 chmod 777 /opt2
 chmod 777 /Volumes
 echo "192.168.8.33:/opt                       /opt2                   nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.24:/deploy                    /mnt/deploy             nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.2:/Storage/Library            /mnt/Library            nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.14:/Storage/Publicidade       /mnt/Publicidade        nfs     defaults        0 0" >> /etc/fstab
@@ -394,9 +397,8 @@ echo "192.168.8.32:/Storage/RAW2              /mnt/RAW2               nfs     de
 echo "192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults        0 0" >> /etc/fstab
 echo "192.168.8.48:/Storage/Library2          /mnt/Library2           nfs     defaults        0 0" >> /etc/fstab
-echo "#192.168.8.7:/Storage/install           /mnt/install            nfs     defaults        0 0" >> /etc/fstab
-echo "//192.168.8.24/deploy/Installers        /mnt/deploy             cifs    username=render,password=o22009render,user,dir_mode=0777,file_mode=0777  0 0" >> /etc/fstab
-echo "/mnt                                    /Volumes                none	  bind" >> /etc/fstab
+echo "#192.168.8.7:/Storage/install            /mnt/install            nfs     defaults        0 0" >> /etc/fstab
+echo "/mnt                                    /Volumes                none	bind" >> /etc/fstab
 mount -a
 fi
 
@@ -422,6 +424,7 @@ yum -y update
 yum install -y dolphin
 yum install -y htop
 yum install -y lshw
+yum install -y gparted
 reboot
 fi
 
@@ -447,7 +450,7 @@ cp -f $INSTALLDIR/nvinstall.service /etc/systemd/system/nvinstall.service
 ####### change Default Desktop #######
 # sed -i 's/XSession=/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
 sed -i 's/XSession=gnome/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
-#reboot
+reboot
 fi
 
 
@@ -489,8 +492,6 @@ systemctl enable nslcd
 systemctl restart nslcd
 reboot
 fi
-
-
 
 
 #####################  YUM INSTALL ####################
@@ -661,6 +662,9 @@ chmod 777 slack-4.0.1-0.1.fc21.x86_64.rpm
 rpm -Uvh --replacefiles slack-4.0.1-0.1.fc21.x86_64.rpm
 fi
 
+
+
+
 ############   krita  ###############
 {
 if [ ! -e "$KRITA" ]; then
@@ -718,14 +722,14 @@ fi
 }
 
 
-#############   Resolve 16  ###############
+#############   Resolve 15  ###############
 {
 if [ ! -e "$RESOLVEDIR" ]; then
-echo "#######  Instalando Resolve 16.1.1  #########" ##### 
-cp -f $SOURCEDIR/DaVinci_Resolve_16.1.1_Linux.run $INSTALLDIR/DaVinci_Resolve_16.1.1_Linux.run
+echo "#######  Instalando Resolve 15.3  #########" ##### 
+cp -f $SOURCEDIR/DaVinci_Resolve_15.3.1_Linux.run $INSTALLDIR/DaVinci_Resolve_15.3.1_Linux.run
 cd $INSTALLDIR
-chmod 777 DaVinci_Resolve_16.1.1_Linux.run
-sudo -u $USERNAME  -H sh -c "./DaVinci_Resolve_16.1.1_Linux.run -i -y"
+chmod 777 DaVinci_Resolve_15.3.1_Linux.run
+sudo -u $USERNAME  -H sh -c "./DaVinci_Resolve_15.3.1_Linux.run -i -y"
 fi
 }
 
