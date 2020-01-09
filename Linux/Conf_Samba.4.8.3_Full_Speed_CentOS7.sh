@@ -49,7 +49,7 @@ read GATEWAY
 nmcli connection modify $INTERFACE ipv4.method manual ipv4.addresses $IPADDRESS/$SUBNET ipv4.gateway $GATEWAY ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 nmcli connection up $INTERFACE
 
-systemctl start firewalld
+systemctl stop firewalld
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
 firewall-cmd --permanent --add-port=9090/tcp
@@ -83,7 +83,7 @@ echo "# See smb.conf.example for a more detailed config file or
 	public = yes
 	writable = yes" >> /etc/samba/smb.conf
 
-chcon -Rt samba_share_t /storage
+chcon -Rt samba_share_t /mnt/slave
 
 systemctl enable smb
 systemctl start smb

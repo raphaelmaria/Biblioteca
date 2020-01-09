@@ -26,3 +26,7 @@ zpool create -f files raidz /dev/sd[b-e]1
 # Destruição de RAID
 mdadm --stop /dev/md127
 mdadm --zero-superblock /dev/sd[a-e]1
+
+#Settings for FSTAB
+
+/dev/md127 /mnt/slave xfs rw,suid,dev,exec,auto,nouser,sync,nofail 0 0
