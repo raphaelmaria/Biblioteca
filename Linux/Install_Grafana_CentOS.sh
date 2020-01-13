@@ -53,9 +53,9 @@ mysql_secure_installation
 echo "Entre com a senha de usuario root do seu MySQL password!"
 echo "Note: password will be hidden when typing"
 read passwd
-mysql -u root -p $passwd -e "CREATE DATABASE teste2db;"
-mysql -u root -p $passwd -e "CREATE USER teste2@localhost IDENTIFIED BY 'teste1234';"
-mysql -u root -p $passwd -e "GRANT ALL PRIVILEGES ON teste2.* TO 'teste2db'@'localhost';"
+mysql -u root -p $passwd -e "CREATE DATABASE dash;"
+mysql -u root -p $passwd -e "CREATE USER grafana@localhost IDENTIFIED BY 'password';"
+mysql -u root -p $passwd -e "GRANT ALL PRIVILEGES ON grafana.* TO 'dash'@'localhost';"
 mysql -u root -p $passwd -e "FLUSH PRIVILEGES;"
 
 # COMANDO MANUAL
