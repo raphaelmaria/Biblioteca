@@ -20,13 +20,41 @@ sudo service grafana-server start
 systemctl start firewalld
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
+firewall-cmd --add-service=grafana-server --permanent
 firewall-cmd --permanent --add-port=3000/tcp
 firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --permanent --add-port=3001/tcp
 firewall-cmd --reload
 firewall-cmd --list-all
 
 sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server 
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+# INSTALAR BANCO DE DADOS LOCAIS
+yum -y install @mariadb
+cat <<EOF >> /etc/yum.repos.d/mariadb.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.4/centos8-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+
+yum install -y boost-program-options
+yum --disablerepo=AppStream install MariaDB-server MariaDB-client -y
+
+systemctl start mariadb
+systemctl enable mariadb
+systemctl status mariadb
+
+mysql_secure_installation
+
+mysql -u root -p mysql
+CREATE DATABASE grafanadb;
+GRANT ALL ON grafanadb.* TO grafana@localhost IDENTIFIED BY 'grafana';
+
+
+
 
 
 
@@ -37,4 +65,14 @@ grafana-cli plugins install raintank-worldping-app
 grafana-cli plugins install alexanderzobnin-zabbix-app
 grafana-cli plugins install grafana-clock-panel
 grafana-cli plugins install ntop-ntopng-datasource
+grafana-cli plugins install raintank-worldping-app
+grafana-cli plugins install grafana-piechart-panel
+grafana-cli plugins install praj-ams-datasource
+grafana-cli plugins install cognitedata-datasource
+grafana-cli plugins install larona-epict-panel
+grafana-cli plugins install agenty-flowcharting-panel
+grafana-cli plugins install ddurieux-glpi-app
+grafana-cli plugins install monitoringartist-monitoringart-datasource
+
+
 
