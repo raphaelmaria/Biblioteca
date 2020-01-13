@@ -6,10 +6,10 @@
 
 # INSTALANDO O GRAFANA
 yum update -y
-yum install https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.1.0-1.x86_64.rpm
+wget https://dl.grafana.com/oss/release/grafana-6.5.2-1.x86_64.rpm
 yum install wget -y
 yum -y install initscripts fontconfig
-rpm -Uvh grafana-5.1.0-1.x86_64.rpm
+sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
 yum -y install fontconfig.*
 yum -y install freetype.*
 yum -y install -y urw-fonts
