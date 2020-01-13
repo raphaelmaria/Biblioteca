@@ -1,0 +1,34 @@
+# comandos para configurar a controladora via terminal.
+/opt/arecca/cli64 sys mode p=0
+/opt/arecca/cli64 sys maxspeed p=3
+/opt/arecca/cli64 sys smartpoll p=1
+/opt/arecca/cli64 sys diskcache p=0
+/opt/arecca/cli64 sys truncation p=0
+/opt/arecca/cli64 sys autoact p=1
+/opt/arecca/cli64 sys hddled p=0
+/opt/arecca/cli64 sys writesame p=2
+/opt/arecca/cli64 sys hpdforrebuilding p=1
+/opt/arecca/cli64 sys pcigen3 p=0
+
+# Comando para criar o RAID 5 na controladora.
+/opt/arecca/cli64 rsf create drv=1~24 raid=1 name=myvol
+/opt/arecca/cli64 vsf create raid=1 level=5 cache=Y striper=4 raid=1
+
+# comando para criar disco no Linux
+fdisk /dev/sda
+d
+g
+n
+3x enter
+w
+
+mkfs.xfs /dev/sda1
+
+# Comando para mappear o disco no linux
+echo "/dev/sda1 /mnt/dados xfs default,nofail 0 0" >> /etc/fstab
+mkdir -p /mnt/dados
+chcon -Rt samba_share_t /mnt/dados
+chmod -R 0770 
+chown -R acesso:acesso /mnt/dados
+ulimit -n 16384
+echo "* - nofile 16384" >> /etc/security/limits.conf
