@@ -219,7 +219,7 @@ name server = 192.168.8.110" >> /etc/resolv.conf
 yum install ipa-client -y
 ipa-client-install --mkhomedir --no-ntpd
 
-nmcli con mod ens3 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+nmcli con mod eth0 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 /opt/hfs17.5/bin/hkey
 
 reboot

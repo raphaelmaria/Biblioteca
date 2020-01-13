@@ -13,8 +13,9 @@ sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
 yum -y install fontconfig.*
 yum -y install freetype.*
 yum -y install -y urw-fonts
-sudo /sbin/chkconfig --add grafana-server
-sudo service grafana-server start
+# sudo /sbin/chkconfig --add grafana-server
+# sudo service grafana-server start
+
 
 # ALTERANDO PORTA DO GRAFANA PARA 3000
 systemctl start firewalld
@@ -40,9 +41,6 @@ gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 EOF
 
-yum install -y boost-program-options
-yum --disablerepo=AppStream install MariaDB-server MariaDB-client -y
-
 systemctl start mariadb
 systemctl enable mariadb
 systemctl status mariadb
@@ -65,7 +63,8 @@ mysql -u root -p $passwd -e "FLUSH PRIVILEGES;"
 # REATE DATABASE grafanadb;
 # GRANT ALL ON grafanadb.* TO grafana@localhost IDENTIFIED BY 'grafana';
 
-
+systemctl enable grafana-server
+systemctl start grafana-server
 
 # INSTALANDO PLUGINS UTEIS
 grafana-cli plugins install raintank-worldping-app
