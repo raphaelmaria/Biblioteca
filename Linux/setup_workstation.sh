@@ -3,13 +3,14 @@
 # Versão 1.0
 
 
-# Atualização de OS
-#yum install epel-release -y
-#rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-#rpm -Uvh https://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-#yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-#yum check-update
-#yum update -y
+# INSTALACAO DE MULTIMIDIA CENTOS / FEDORA
+sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
+sudo dnf groupupdate core
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate sound-and-video
+sudo dnf install rpmfusion-free-release-tainted
+sudo dnf install libdvdcss
+
 
 # Pacotes iniciais
 yum remove cloud-init -y
