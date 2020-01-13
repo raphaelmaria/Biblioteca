@@ -1,0 +1,6 @@
+Abrir portas do Mysql ou MariaDB:
+vim /etc/mysql/mariadb.conf.d/50-server.cnf
+
+Alterar o ip da linha abaixo para 0.0.0.0
+bind-address		= 127.0.0.1
+

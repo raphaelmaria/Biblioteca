@@ -49,14 +49,21 @@ systemctl status mariadb
 
 mysql_secure_installation
 
-mysql -u root -p mysql
-CREATE DATABASE grafanadb;
-GRANT ALL ON grafanadb.* TO grafana@localhost IDENTIFIED BY 'grafana';
 
+#### CRIACAO INTERATIVA DE DB MARIADB ####
 
+echo "Entre com a senha de usuario root do seu MySQL password!"
+echo "Note: password will be hidden when typing"
+read passwd
+mysql -u root -p $passwd -e "CREATE DATABASE teste2db;"
+mysql -u root -p $passwd -e "CREATE USER teste2@localhost IDENTIFIED BY 'teste1234';"
+mysql -u root -p $passwd -e "GRANT ALL PRIVILEGES ON teste2.* TO 'teste2db'@'localhost';"
+mysql -u root -p $passwd -e "FLUSH PRIVILEGES;"
 
-
-
+# COMANDO MANUAL
+# mysql -u root -p mysql
+# REATE DATABASE grafanadb;
+# GRANT ALL ON grafanadb.* TO grafana@localhost IDENTIFIED BY 'grafana';
 
 
 
@@ -74,5 +81,5 @@ grafana-cli plugins install agenty-flowcharting-panel
 grafana-cli plugins install ddurieux-glpi-app
 grafana-cli plugins install monitoringartist-monitoringart-datasource
 
-
+systemctl restart grafana-server
 
