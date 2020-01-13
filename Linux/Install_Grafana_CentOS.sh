@@ -32,14 +32,15 @@ sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 
 # INSTALAR BANCO DE DADOS LOCAIS
-yum -y install @mariadb
-cat <<EOF >> /etc/yum.repos.d/mariadb.repo
+echo "# MariaDB 10.3 CentOS repository list - created 2018-05-25 19:02 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
 [mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.4/centos8-amd64
+baseurl = http://yum.mariadb.org/10.3/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1
-EOF
+gpgcheck=1" >> /etc/yum.repos.d/MariaDB.repo
+
+ yum install MariaDB-server MariaDB-client
 
 systemctl start mariadb
 systemctl enable mariadb
@@ -82,3 +83,10 @@ grafana-cli plugins install monitoringartist-monitoringart-datasource
 
 systemctl restart grafana-server
 
+# INSTALANDO NTOPNG
+git clone https://github.com/ntop/ntopng.git
+cd ntopng
+./autogen.sh
+./configure
+make
+make install
