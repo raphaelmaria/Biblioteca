@@ -31,7 +31,7 @@ yum -y install initscripts fontconfig
 sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
 yum -y install fontconfig.*
 yum -y install freetype.*
-yum -y install -y urw-fonts
+yum -y install urw-fonts
 # sudo /sbin/chkconfig --add grafana-server
 # sudo service grafana-server start
 
