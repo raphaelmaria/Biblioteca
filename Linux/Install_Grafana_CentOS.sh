@@ -4,6 +4,10 @@
 # CRIADO POR RAPHAEL MARIA
 # 13 DE JANEIRO DE 2020
 
+
+yum -y install wget nss dkms dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+
+
 # INSTALANDO O GRAFANA
 yum update -y
 wget https://dl.grafana.com/oss/release/grafana-6.5.2-1.x86_64.rpm
