@@ -11,9 +11,9 @@ yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
 # Instalar Python 3
-yum install centos-release-scl -y
-yum install rh-python36 -y
-scl enable rh-python36 bash
+#yum install centos-release-scl -y
+#yum install rh-python36 -y
+#scl enable rh-python36 bash
 
 # Install Cockpit
 yum -y install cockpit
