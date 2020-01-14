@@ -88,11 +88,9 @@ systemctl enable grafana-server
 systemctl start grafana-server
 
 # INSTALANDO PLUGINS UTEIS
-grafana-cli plugins install raintank-worldping-app
 grafana-cli plugins install alexanderzobnin-zabbix-app
 grafana-cli plugins install grafana-clock-panel
 grafana-cli plugins install ntop-ntopng-datasource
-grafana-cli plugins install raintank-worldping-app
 grafana-cli plugins install grafana-piechart-panel
 grafana-cli plugins install praj-ams-datasource
 grafana-cli plugins install cognitedata-datasource
