@@ -6,7 +6,23 @@
 
 
 yum -y install wget nss dkms dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+yum -y groupinstall "X Window System"
+yum -y groupinstall "Fonts"
+export FONTCONFIG_PATH=/etc/fonts
 
+# Instalar Python 3
+yum install centos-release-scl -y
+yum install rh-python36 -y
+scl enable rh-python36 bash
+
+# Install Cockpit
+yum -y install cockpit
+systemctl enable --now cockpit.socket
+firewall-cmd --permanent --zone=public --add-service=cockpit
+firewall-cmd --reload
+echo " Cockpit instalado com sucesso" /
+echo " Abra um navegador e digite https://<IP da maquina>:9090" /
 
 # INSTALANDO O GRAFANA
 yum update -y
@@ -29,6 +45,7 @@ firewall-cmd --add-service=grafana-server --permanent
 firewall-cmd --permanent --add-port=3000/tcp
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=3001/tcp
+firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd --reload
 firewall-cmd --list-all
 
