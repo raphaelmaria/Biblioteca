@@ -32,18 +32,19 @@ sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 
 # INSTALAR BANCO DE DADOS LOCAIS
-echo "# MariaDB 10.3 CentOS repository list - created 2018-05-25 19:02 UTC
-# http://downloads.mariadb.org/mariadb/repositories/
+cat <<EOF | sudo tee /etc/yum.repos.d/MariaDB.repo
 [mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.3/centos7-amd64
+baseurl = http://yum.mariadb.org/10.4/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1" >> /etc/yum.repos.d/MariaDB.repo
+gpgcheck=1
+EOF
 
- yum install MariaDB-server MariaDB-client
+yum makecache fast
+yum -y install MariaDB-server MariaDB-client
+yum -y install php-mysqlnd
 
-systemctl start mariadb
-systemctl enable mariadb
+systemctl enable --now mariadb
 systemctl status mariadb
 
 mysql_secure_installation
@@ -51,13 +52,12 @@ mysql_secure_installation
 
 #### CRIACAO INTERATIVA DE DB MARIADB ####
 
-echo "Entre com a senha de usuario root do seu MySQL password!"
-echo "Note: password will be hidden when typing"
-read passwd
-mysql -u root -p $passwd -e "CREATE DATABASE dash;"
-mysql -u root -p $passwd -e "CREATE USER grafana@localhost IDENTIFIED BY 'password';"
-mysql -u root -p $passwd -e "GRANT ALL PRIVILEGES ON grafana.* TO 'dash'@'localhost';"
-mysql -u root -p $passwd -e "FLUSH PRIVILEGES;"
+#echo "Entre com a senha de usuario root do seu MySQL password!"
+#echo "Note: password will be hidden when typing"
+#read passwd
+#mysql -u root -p $passwd -e "create database dashdb character set utf8 collate utf8_bin;"
+#mysql -u root -p $passwd -e "grant all privileges on local.* to dashdb@localhost identified by 'password';"
+#mysql -u root -p $passwd -e "quit;"
 
 # COMANDO MANUAL
 # mysql -u root -p mysql
@@ -84,9 +84,9 @@ grafana-cli plugins install monitoringartist-monitoringart-datasource
 systemctl restart grafana-server
 
 # INSTALANDO NTOPNG
-git clone https://github.com/ntop/ntopng.git
-cd ntopng
-./autogen.sh
-./configure
-make
-make install
+# git clone https://github.com/ntop/ntopng.git
+# cd ntopng
+#./autogen.sh
+#./configure
+#make
+#make install

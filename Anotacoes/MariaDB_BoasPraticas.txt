@@ -4,3 +4,16 @@ vim /etc/mysql/mariadb.conf.d/50-server.cnf
 Alterar o ip da linha abaixo para 0.0.0.0
 bind-address		= 127.0.0.1
 
+####
+Criar database:
+
+
+Criar usuário
+
+
+Remover usuário
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'connect'@'localhost';
+teste2db
+grafana
+dash
+connect
