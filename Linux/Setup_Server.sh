@@ -4,9 +4,9 @@
 # Versão 1.0
 
 ### VARIAVEIS
-IPADDRESS= '()'
-HOSTNAME = '()'
-INTERFACE = '(nmcli con show | awk 1git)'
+IPADDRESS= '(Digite o IP:)'
+HOSTNAME = '(Digite o Nome da Maquina:)'
+#INTERFACE = '(nmcli con show | awk 1git)'
 
 # Atualização de OS
 yum -y install epel-release
@@ -17,11 +17,6 @@ yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-uti
 yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
-
-# Instalar Python 3
-yum install centos-release-scl -y
-yum install rh-python36 -y
-scl enable rh-python36 bash
 
 
 su - -c "yum -y install perl-version"

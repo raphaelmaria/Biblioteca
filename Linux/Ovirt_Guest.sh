@@ -13,8 +13,7 @@ echo "deb http://download.opensuse.org/repositories/home:/evilissimo:/ubuntu:/16
 wget http://download.opensuse.org/repositories/home:/evilissimo:/ubuntu:/16.04/xUbuntu_16.04//Release.key
 apt-key add - < Release.key 
 apt-get update
-apt-get install ovirt-guest-agent -y
-yum remove cloud-init -y
+apt yum remove cloud-init -y
 
 # Instalando via Ubuntu ou Debian
 apt install ovirt-guest-agent -y
