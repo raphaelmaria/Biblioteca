@@ -1,5 +1,10 @@
+#!/bin/sh
+# Script Em Shell Bash para instalacao
+# do serviço de SAMBA na versao 4
+# Desenvolvido por Raphael Maria
+# Na data de 17 de Janeiro de 2020
+#
 
-user=
 
 # yum -y install samba samba-client samba-common nfs-utils.x86_64 centos-release-nfs-ganesha28.noarch 
 yum -y install samba.x86_64 samba-client.x86_64 samba-common.x86_64 samba-winbind.x86_64 samba-winbind-clients.x86_64 
@@ -8,7 +13,7 @@ mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 mkdir -p /storage/dados
 chcon -Rt samba_share_t /mnt/slave/dados
 chmod -R 0770 /mnt/slave/dados
-chown -R $user:$user /storage/dados
+chown -R acesso:acesso /storage/dados
 ulimit -n 16384
 echo "* - nofile 16384" >> /etc/security/limits.conf
 
@@ -80,7 +85,7 @@ echo " # Criado por raphael maria
 #####################################
 #### Compartilhamento de Arquivos ###
 #####################################
-    [midia]
+    [DADOS]
         comment = Arquivos de Video Backup
         path = /mnt/storage/dados
         browseable = yes
@@ -93,6 +98,9 @@ echo " # Criado por raphael maria
         veto files = *.rar, *.zip, *.tar, *.bmp" >> /etc/samba/smb.conf
 
 
-adduser "USERNAME"
-passwd "USERNAME"
-smbpasswd -a "USERNAME"
+USER = acesso
+read USER
+adduser $USER
+echo "Digite a senha:"
+read PWD
+smbpasswd -a $USER -p $PWD

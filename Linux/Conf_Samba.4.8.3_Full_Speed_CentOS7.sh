@@ -76,6 +76,16 @@ echo "# See smb.conf.example for a more detailed config file or
 	netbios name = infoscale
 	security = user
 
+# Alta velocidade
+strict locking = no
+read raw = yes
+write raw = yes
+oplocks = yes
+max xmit = 65535
+deadtime = 15
+getwd cache = yes
+socket options = TCP_NODELAY	
+
 [accounts]
 	comment = Accounts data directory
 	path = $SHARE
