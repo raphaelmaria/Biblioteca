@@ -3,6 +3,9 @@
 # Criado por Raphael Maria
 # Versão 1.0
 
+
+timedatectl set-timezone America/Sao_Paulo
+
 ### VARIAVEIS
 IPADDRESS= '(Digite o IP:)'
 HOSTNAME = '(Digite o Nome da Maquina:)'

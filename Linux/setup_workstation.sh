@@ -2,7 +2,7 @@
 # Criado por Raphael Maria
 # Versão 1.0
 
-
+timedatectl set-timezone America/Sao_Paulo
 # INSTALACAO DE MULTIMIDIA CENTOS / FEDORA
 sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
 sudo dnf groupupdate core
@@ -201,7 +201,7 @@ vncserver
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-  nmcli con modify ens3 ipv4.method manual ipv4.addresses 192.168.8./16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com.br
+nmcli con modify enp5s0f0 ipv4.method manual ipv4.addresses 192.168.10.39/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110,192.168.8.15 ipv4.dns-search o2pos.com.br
 # Linha para comando para o DNS FIXO APENAS
 nmcli connection modify p8p1 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 nmcli con up p8p1
