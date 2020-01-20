@@ -2,7 +2,7 @@
 # Instalacao do serviço de monitoramento
 # Zabbix 4, Grafana e agregados
 
-yum install mariadb-server mariadb
+yum -y install mariadb-server mariadb
 systemctl start mariadb
 mysql_secure_installation
 systemctl enable mariadb.service
