@@ -17,3 +17,7 @@ apt yum remove cloud-init -y
 
 # Instalando via Ubuntu ou Debian
 apt install ovirt-guest-agent -y
+
+
+export redshift_LICENSE=5053@192.168.8.5
+export redshift_LICENSE=5053@Atlas
