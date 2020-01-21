@@ -2,23 +2,18 @@
 # Instalacao do serviço de monitoramento
 # Zabbix 4, Grafana e agregados
 
-yum -y install mariadb-server mariadb
-systemctl start mariadb
-mysql_secure_installation
-# P@ssword2020!
-systemctl enable mariadb.service
+# http://192.168.8.7/app/linux/Softwares/server/monitor_install
 
-rpm -Uvh https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/zabbix-release-4.4-1.el7.noarch.rpm
-yum clean all
-yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-agent
-mysql -uroot -p
-# mysql> create database zabbix character set utf8 collate utf8_bin;
-# mysql> grant all privileges on zabbix.* to zabbix@localhost identified by 'password';
-# mysql> quit;
+rpm -ivh http://192.168.8.7/app/linux/Softwares/server/monitor_install/mariadb/MariaDB-client-10.5.0-1.el7.centos.x86_64.rpm
+rpm -ivh http://192.168.8.7/app/linux/Softwares/server/monitor_install/mariadb/MariaDB-common-10.5.0-1.el7.centos.x86_64.rpm
+rpm -ivh http://192.168.8.7/app/linux/Softwares/server/monitor_install/mariadb/MariaDB-server-10.5.0-1.el7.centos.x86_64.rpm
 
-zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
-
-echo "DBPassword=password" >> /etc/zabbix/zabbix_server.conf
-sed -i 's/^"# php_value date.timezone Europe/Riga"/"php_value date.timezone America/Sao_Paulo"/' /etc/httpd/conf.d/zabbix.conf
-systemctl restart zabbix-server zabbix-agent httpd
-systemctl enable zabbix-server zabbix-agent httpd
+yum -y install httpd
+systemctl status httpd.service
+systemctl start httpd.service
+systemctl enable httpd
+yum -y install epel-release
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --disable remi-php54
+yum-config-manager --enable remi-php72
+yum -y install php php-pear php-cgi php-common php-mbstring php-snmp php-gd php-pecl-mysql php-xml php-mysql php-gettext php-bcmath
