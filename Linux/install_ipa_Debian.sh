@@ -13,7 +13,7 @@ vim /etc/chrony/chrony.conf
 
 
 
-sudo apt install bind9utils certmonger freeipa-common libnss3-tools libnss-sss libpam-sss libsss-sudo libxmlrpc-core-c3 oddjob-mkhomedir python-dnspython python-ipaclient python-ldap python-sss sssd libbasicobjects0 libcollection4 libcom-err2 libini-config5 libnspr4 libnss3 libref-array1 libsasl2-2 -y
+apt install bind9utils certmonger freeipa-common libnss3-tools libnss-sss libpam-sss libsss-sudo libxmlrpc-core-c3 oddjob-mkhomedir python-dnspython python-ipaclient python-ldap python-sss sssd libbasicobjects0 libcollection4 libcom-err2 libini-config5 libnspr4 libnss3 libref-array1 libsasl2-2 -y
 wget http://ftp.br.debian.org/debian/pool/main/f/freeipa/freeipa-client_4.7.2-3_amd64.deb
 chmod 777 freeipa-client_4.7.2-3_amd64.deb
 dpkg -i freeipa-client_4.7.2-3_amd64.deb
