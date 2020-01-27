@@ -37,9 +37,10 @@ make install
 
 # Install 10 Gigabit Versão Rafael Fuzarri
 wget http://install.o2pos.com/app/tn40xx-0.3.6.17.zip
+wget http://192.168.8.7/app/linux/Drivers/Rede/Startech/tn40xx-0.3.6.17.zip
 unzip tn40xx-0.3.6.17.zip
 cd tn40xx-0.3.6.17.2
-make && sudo make install
+
 
 
 #wget http://download1.rpmfusion.org/free/el/updates/testing/7/x86_64/
