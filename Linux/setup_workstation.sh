@@ -40,7 +40,8 @@ wget http://install.o2pos.com/app/tn40xx-0.3.6.17.zip
 wget http://192.168.8.7/app/linux/Drivers/Rede/Startech/tn40xx-0.3.6.17.zip
 unzip tn40xx-0.3.6.17.zip
 cd tn40xx-0.3.6.17.2
-
+make
+make install
 
 
 #wget http://download1.rpmfusion.org/free/el/updates/testing/7/x86_64/
@@ -102,6 +103,7 @@ sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf
 #############################################
 cp -b /etc/fstab /root/backups/fstab.bkps
 ln -s /mnt /Volumes
+mkdir -p /mnt/cache
 ln -s /mnt/cache /mnt/Cache_Nuke
 ln -s /mnt/cache /mnt/cache_nuke
 umount -a
