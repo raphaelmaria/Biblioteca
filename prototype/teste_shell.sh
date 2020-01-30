@@ -1,4 +1,9 @@
 #!/bin/sh
+:<TERMINAL"
+SCRIPT DE SETUP BASICA EM VMS
+Configuracao inicial para VM's nova criadas no sistema Ovirt
+Rodando em sua versao 1 com data de 29 de Janeiro de 2020 pelo criador RAPHAEL MARIA"
+TERMINAL 
 
 HOSTNAME=""
 DOMAIN=""
