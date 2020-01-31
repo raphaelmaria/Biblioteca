@@ -20,7 +20,14 @@ chown zabbix.zabbix /var/run/zabbix/
 zabbix_agentd -c /etc/zabbix/zabbix_agentd.conf
 service zabbix-agent start
 systemctl enable zabbix-agent
-#firewall-cmd --add-service=zabbix-agent
-#firewall-cmd --add-service=zabbix-agent  --permanent
 service zabbix-agent restart
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
+iptables -t mangle -F
+iptables -t mangle -X
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
 exit
