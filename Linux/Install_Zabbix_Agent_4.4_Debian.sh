@@ -12,7 +12,7 @@
 apt install zabbix-agent
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/^Hostname=Athena/Hostname=SRVO2OVT01/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^Hostname=HOSTANE/Hostname=<Nome da maquina>/' /etc/zabbix/zabbix_agentd.conf
 chkconfig zabbix on
 chkconfig zabbix-agent on
 mkdir /var/run/zabbix
