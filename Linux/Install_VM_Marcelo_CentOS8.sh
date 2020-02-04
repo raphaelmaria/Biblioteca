@@ -24,10 +24,10 @@ yum remove cloud-init -y
 
 # Ovirt Guest Monitor
 yum -y install epel-release
-yum install ovirt-guest-agent-common
-systemctl enable ovirt-guest-agent.service
-systemctl start ovirt-guest-agent.service
-systemctl status ovirt-guest-agent.service
+yum -y install qemu-guest-agent
+systemctl enable --now qemu-guest-agent
+subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms
+systemctl start qemu-guest-agent
 
 # Instalacao Python 3
 yum -y install python36.x86_64 python3-py.noarch python3-qt5.x86_64 python3-libs.x86_64
