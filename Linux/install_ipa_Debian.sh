@@ -1,7 +1,15 @@
+hostnamectl set-hostname camstorage.o2pos.com.br
+# hostnamectl set-hostname camstorage.o2pos.com.br
+
+#Instalacao do Clock-Pit
+echo 'deb http://deb.debian.org/debian stretch-backports main' > \
+/etc/apt/sources.list.d/backports.list
+apt-get update
+
+apt-get install cockpit
+
 apt update -y && apt install gcc wget dkms git snapd vim ansible chrony -y
 apt upgrade -y
-apt install network-manager -y
-hostnamectl set-hostname camstorage.o2pos.com.br
 export PATH="$PATH:/sbin"
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -10,9 +18,6 @@ nmcli connection up "Wired connection 1"
 
 vim /etc/chrony/chrony.conf
 
-
-
-
 apt install bind9utils certmonger freeipa-common libnss3-tools libnss-sss libpam-sss libsss-sudo libxmlrpc-core-c3 oddjob-mkhomedir python-dnspython python-ipaclient python-ldap python-sss sssd libbasicobjects0 libcollection4 libcom-err2 libini-config5 libnspr4 libnss3 libref-array1 libsasl2-2 -y
 wget http://ftp.br.debian.org/debian/pool/main/f/freeipa/freeipa-client_4.7.2-3_amd64.deb
 chmod 777 freeipa-client_4.7.2-3_amd64.deb
@@ -20,12 +25,8 @@ dpkg -i freeipa-client_4.7.2-3_amd64.deb
 sed -i 's/^PATH="/usr/local/bin:/usr/bin:/bin:/usr/games" PATH="/usr/local/bin:/usr/bin:/bin:/usr/games/sbin"/' /etc/profile
 ipa-client-install --no-ntp --mkhomedir --force-join
 
-
-Este programa fica dentro da pasta /sbin, se vc reparar, o /sbin não está no seu PATH...
+''' Este programa fica dentro da pasta /sbin, se vc reparar, o /sbin não está no seu PATH...
 para resolver é simples, muito simples:
-
-
-
 
 1) entre no terminal e digite: nano /etc/profile
 vai aparecer algo do tipo
@@ -50,5 +51,5 @@ e pronto.
 
 salve e feche esse arquivo e digite o seguinte comando: source /etc/profile
 
-perfeito, é só utilizar que vai funcionar.
+perfeito, é só utilizar que vai funcionar.'''
 
