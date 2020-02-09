@@ -1,7 +1,9 @@
-Ao usar esses arquivos você concorda com este termo, no seguintes aspectos.
+Sejam bem vindos ao meu Git.
+Todo conteudo presente aqui foi testado e homologado para uso no ambiente da:
+.
 
-1. O Jhone é Foda
-2. 
-3. 
-4. 
-5. 
+Todos os aqui presentes são de minha autoria, mantendo assim conforme Constituição Federal de 1988 no inciso XXVII do Artigo 5º e a também pela Lei de Direitos Autorais nº 9.610/98. De forma geral, estabelece-se que é exclusivamente de quem criou a obra o direito de fazer usufruto da mesma, seja de maneira comercial ou apenas moral.
+
+Sendo assim o uso desta obra podendo ser usada apenas com meu consentimento ou autorização, qualquer utilização desta se faz proibida e passiveis de multa conforme descrito em lei citada acima.
+Todo o conteúdo aqui presente nesse Git, ao ser executado por terceiros, sem o breve estudo e adaptação conforme o caso, fica responsavel pela consequência a pessoa que executou.
+
