@@ -9,7 +9,7 @@ echo "#######  Instalando nss-pam-ldap nscd  #########" #####
 yum -y install nss-pam-ldap nscd openldap-clients nss-pam-ldapd
 
 
-wget http://192.168.8.7/linux/Softwares/server/ldap.zip
+wget http://192.168.8.7/app/linux/Softwares/server/ldap.zip
 unzip ldap.zip
 
 echo "#######  configurando LDAP  #########"
@@ -20,18 +20,14 @@ authconfig --enableldap \
 --enablemkhomedir \
 --updateall
 
-
-chmod 777 /root/ldap/ 
-
-#unzip -fo $INSTALLDIR/ldap/ldap.zip
-cp -f /root/ldap/idmapd.conf /etc/idmapd.conf
-cp -f /root/ldap/nslcd.conf /etc/nslcd.conf
-cp -f /root/ldap/nsswitch.conf /etc/nsswitch.conf
-cp -f /root/ldap/openldap/ldap.conf /etc/openldap/ldap.conf
-cp -f /root/ldap/pam.d/password-auth-ac /etc/pam.d/password-auth-ac
-cp -f /root/ldap/pam.d/system-auth-ac /etc/pam.d/system-auth-ac
+cp -fRu /root/ldap/idmapd.conf /etc
+cp -fRu /root/ldap/nslcd.conf /etc
+cp -fRu /root/ldap/nsswitch.conf /etc
+cp -fRu /root/ldap/openldap /etc
+cp -fRu /root/ldap/pam.d /etc
 systemctl enable nslcd
 systemctl restart nslcd
+
 reboot
 
 
