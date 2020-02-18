@@ -23,7 +23,7 @@ rpm -e teamviewer-*
 rm -rf /etc/teamviewer
 ## rpm --import http://download.teamviewer.com/download/TeamViewer_Linux_PubKey.asc
 yum install http://192.168.8.7/app/teamviewer_12.0.137452.i686.rpm -y
-#yum install http://download.teamviewer.com/download/teamviewer.i686.rpm -y
+yum install http://download.teamviewer.com/download/teamviewer.i686.rpm -y
 systemctl enable teamviewerd.service
 systemctl start teamviewerd.service
 
