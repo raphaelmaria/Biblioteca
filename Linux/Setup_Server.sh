@@ -161,8 +161,8 @@ systemctl disable firewalld
 systemctl start firewalld
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
-firewall-cmd --permanent --add-port=9090/tcp
-firewall-cmd --permanent --add-port=5432/tcp
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --permanent --add-port=8080/udp
 firewall-cmd --reload
 firewall-cmd --list-all
 
