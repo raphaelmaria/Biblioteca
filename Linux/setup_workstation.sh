@@ -211,6 +211,7 @@ nmcli con up p8p1
 
 sudo hostnamectl set-hostname render25.o2pos.com
 
+nmcli con modify enp5s0 ipv4.method manual ipv4.addresses 192.168.10.46/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 
 
 
