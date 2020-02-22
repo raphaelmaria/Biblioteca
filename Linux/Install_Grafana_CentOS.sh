@@ -70,11 +70,6 @@ mysql -u root -p << EOF
 "quit;"
 EOF
 
-# COMANDO MANUAL
-# mysql -u root -p mysql
-# REATE DATABASE grafanadb;
-# GRANT ALL ON grafanadb.* TO grafana@localhost IDENTIFIED BY 'grafana';
-
 systemctl enable grafana-server
 systemctl start grafana-server
 
@@ -91,11 +86,3 @@ grafana-cli plugins install ddurieux-glpi-app
 grafana-cli plugins install monitoringartist-monitoringart-datasource
 
 systemctl restart grafana-server
-
-# INSTALANDO NTOPNG
-# git clone https://github.com/ntop/ntopng.git
-# cd ntopng
-#./autogen.sh
-#./configure
-#make
-#make install
