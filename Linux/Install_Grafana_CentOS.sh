@@ -10,11 +10,6 @@ yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
-# Instalar Python 3
-#yum install centos-release-scl -y
-#yum install rh-python36 -y
-#scl enable rh-python36 bash
-
 # Install Cockpit
 yum -y install cockpit
 systemctl enable --now cockpit.socket
@@ -32,9 +27,6 @@ sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
 yum -y install fontconfig.*
 yum -y install freetype.*
 yum -y install urw-fonts
-# sudo /sbin/chkconfig --add grafana-server
-# sudo service grafana-server start
-
 
 # ALTERANDO PORTA DO GRAFANA PARA 3000
 systemctl start firewalld
@@ -52,7 +44,7 @@ sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 
 # INSTALAR BANCO DE DADOS LOCAIS
-cat <<EOF | sudo tee /etc/yum.repos.d/MariaDB.repo
+cat <<EOF | tee /etc/yum.repos.d/MariaDB.repo
 [mariadb]
 name = MariaDB
 baseurl = http://yum.mariadb.org/10.4/centos7-amd64
@@ -72,12 +64,11 @@ mysql_secure_installation
 
 #### CRIACAO INTERATIVA DE DB MARIADB ####
 
-#echo "Entre com a senha de usuario root do seu MySQL password!"
-#echo "Note: password will be hidden when typing"
-#read passwd
-#mysql -u root -p $passwd -e "create database dashdb character set utf8 collate utf8_bin;"
-#mysql -u root -p $passwd -e "grant all privileges on local.* to dashdb@localhost identified by 'password';"
-#mysql -u root -p $passwd -e "quit;"
+mysql -u root -p << EOF
+"create database dashdb character set utf8 collate utf8_bin;"
+"grant all privileges on local.* to dashdb@localhost identified by 'password';"
+"quit;"
+EOF
 
 # COMANDO MANUAL
 # mysql -u root -p mysql
