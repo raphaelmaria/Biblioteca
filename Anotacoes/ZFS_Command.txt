@@ -1,0 +1,12 @@
+GUIA DE COMANDO PARA ZFS NA O2 PRODUÇÔES
+
+--------------
+Trocar o Disco Danificado em um Pool ZFS
+# zpool replace -f "Pool" “HD DANIFICADO” “HD NOVO”
+
+Exemplo:
+zpool replace Storage ata-ST6000NM0004-1FT17Z_Z4D0CFS9 ata-ST6000VN0041-2EL11C_ZA1B0JSH
+--------------
+Para apagar o SNAPSHOT
+# for i in `zfs list -t snapshot | grep <Ano Corrente> | cut -d\  -f1`; do zfs destroy $i; done
+
