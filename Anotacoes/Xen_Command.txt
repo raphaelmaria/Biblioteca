@@ -1,0 +1,2 @@
+xe sr-create name-label=StorageHD shared=false device-config:device=/dev/md127 type=lvm content-type=user
+xe sr-create name-label=StorageSSD shared=false device-config:device=/dev/sdb1 type=lvm content-type=user
