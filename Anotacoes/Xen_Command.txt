@@ -1,2 +1,22 @@
 xe sr-create name-label=StorageHD shared=false device-config:device=/dev/md127 type=lvm content-type=user
 xe sr-create name-label=StorageSSD shared=false device-config:device=/dev/sdb1 type=lvm content-type=user
+
+
+High RAM Video for VM
+xe vm-list
+xe vm-param-remove uuid=<UUID> param-name=platform param-key=vga
+xe vm-param-remove uuid=<UUID> param-name=platform param-key=videoram
+
+
+xe vm-param-set other-config:pci=0/0000:02:00:0 uuid=cf05b0f7-65ab-8a4d-9e5f-0756a8085b0c
+xe vm-param-set other-config:pci=0/0000:81:00.0 uuid=116ab514-1c42-41f3-b708-d7936ceb3207
+
+
+2. Tell XCP-ng not to use this device ID for Dom0
+/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(02:00:0)"
+/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(81:00:0)"
+
+
+xe vm-param-set other-config:pci=0/0000:02:00:0 uuid=cf05b0f7-65ab-8a4d-9e5f-0756a8085b0c
+xe vm-param-set other-config:pci=0/0000:81:00:0 uuid=116ab514-1c42-41f3-b708-d7936ceb3207
+
