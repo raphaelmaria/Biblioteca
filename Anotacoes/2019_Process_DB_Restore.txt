@@ -26,21 +26,29 @@ O arquivo gz vai sumir
 
 > Para restaurar o DB desejado.
 # su - postgres
+psql
+CREATE DATABASE "name";
 # psql -d <DB novo> < <DB desejado>.sql
 Exemplo: # psql -d 2018_entretenimento_15 < 2018_entretenimento.sql
-# exit> Editar os arquivos que permitem o acesso ao Postgres
+# exit 
+
+Editar os arquivos que permitem o acesso ao Postgres
+
 Localizar o arquivo postgresql.conf
-# find / -name "postgresql.conf"# vim /var/lib/pgsql/data/postgresql.conf
+# find / -name "postgresql.conf"
+# vim /var/lib/pgsql/data/postgresql.conf
 
 Localizar a linha (listen_addresses = 'localhost’) e alterar localhost para “*”
-“esc+ :x” para salvar
+esc+ :x para salvar
+
 Localizar o arquivo “pg_hba.conf”
 # find / -name pg_hba.conf
+# vim /var/lib/pgsql/data/pg_hba.conf 
 
-# vim /var/lib/pgsql/data/pg_hba.confAlterar as ultimas linhas com:
+Alterar as ultimas linhas com:
 ———————————————————
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
-:q
+
 # "local" is for Unix domain socket connections only
 local   all             all                                     	peer
 local   all             postgres                               	 md5
