@@ -37,7 +37,7 @@ Localizar a linha (listen_addresses = 'localhost’) e alterar localhost para �
 Localizar o arquivo “pg_hba.conf”
 # find / -name pg_hba.conf
 
-# vim /var/lib/pgsql/data/pg_hba.confAlterar as ultimas linhas com:
+# vim /var/lib/pgsql/data/pg_hba.conf Alterar as ultimas linhas com:
 ———————————————————
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 :q
