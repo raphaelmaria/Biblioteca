@@ -20,3 +20,12 @@ xe vm-param-set other-config:pci=0/0000:81:00.0 uuid=116ab514-1c42-41f3-b708-d79
 xe vm-param-set other-config:pci=0/0000:02:00:0 uuid=cf05b0f7-65ab-8a4d-9e5f-0756a8085b0c
 xe vm-param-set other-config:pci=0/0000:81:00:0 uuid=116ab514-1c42-41f3-b708-d7936ceb3207
 
+
+Creater REPO Local
+df -f 
+UUID do Disco Local
+ls -s /var/run/sr-mount/UUID /ISOs
+ls /ISOs -ld 
+xe sr-create name-label=ISOs type=iso device-config:legacy_mode=true device-config:location=/ISOs content-type=iso
+
+

@@ -1,0 +1,19 @@
+----
+Install CentOS 8
+
+Pack basic for installation
+yum -y install ipa-client sssd-libwbclient samba samba-client
+
+Run in Server Samba (CIFS)
+ipa-client-install --mkhomedir
+authconfig --enablesssdauth --enablemkhomedir --update
+reboot
+ipa-getkeytab -s <domain> -p cifs/<hostnam server> -k /etc/samba/<name storage>.keytab
+
+Run in Server FreeIPA:
+ipa dnsrecord-add <Domain> <Hostaname Server> --a-rec=<Ip Address>
+ipa service-add cifs/<hostname.domain>
+
+
+
+
