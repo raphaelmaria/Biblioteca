@@ -10,10 +10,10 @@
 yum -y install samba.x86_64 samba-client.x86_64 samba-common.x86_64 samba-winbind.x86_64 samba-winbind-clients.x86_64 
 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
-mkdir -p /storage/dados
-chcon -Rt samba_share_t /mnt/slave/dados
-chmod -R 0770 /mnt/slave/dados
-chown -R acesso:acesso /storage/dados
+mkdir -p /mnt/storage
+chcon -Rt samba_share_t /mnt/storage
+chmod -R 0770 /mnt/storage
+chown -R root:root /mnt/storage
 ulimit -n 16384
 echo "* - nofile 16384" >> /etc/security/limits.conf
 
@@ -28,13 +28,9 @@ echo " # Criado por raphael maria
     workgroup = WORKGROUP
     netbios name = cinema
     server string = Samba Files
-    os level = 100   
-    wins support = yes
-    # hosts allow = [Ranger IP/Mascara]
-    bind interfaces only = yes
     keepalive = 20
     dns proxy = no
-    max connections = 10
+    max connections = 50
     max xmit = 65535
 
 
@@ -42,16 +38,11 @@ echo " # Criado por raphael maria
     encrypt passwords = true
     passdb backend = tdbsam
 
-    preserve case = yes
-    default case = lower
     veto files = /.thumbs/.thumbs/.DS
     read raw = yes
     write raw = yes
     oplocks = yes
     getwd cache = yes
-    unix charset = UTF-8
-    min protocol = SMB2
-    max protocol = SMB3
 
 ################################
 ##### configuracao Lixeira #####
@@ -87,14 +78,14 @@ echo " # Criado por raphael maria
 #####################################
     [DADOS]
         comment = Arquivos de Video Backup
-        path = /mnt/storage/dados
+        path = /mnt/storage/$varshare
         browseable = yes
         writable = yes
-        write list = acesso
+        write list = $varuser
         create mask = 0775
         directory mask = 0775
         guest ok = yes
-        valid users = acesso nobody guest
+        valid users = $varuser nobody guest
         veto files = *.rar, *.zip, *.tar, *.bmp" >> /etc/samba/smb.conf
 
 
