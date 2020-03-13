@@ -76,6 +76,13 @@ echo "# See smb.conf.example for a more detailed config file or
 	netbios name = infoscale
 	security = user
 
+##### >>>> CONFIGURACAO DE LOGS
+log file = /var/log/samba/%m.log
+# Tamanho de Log e igual a 200Mb
+max log size = 200000
+# Nivel de Coleta de Log
+log level = 1 auth:5
+
 # Alta velocidade
 strict locking = no
 read raw = yes
