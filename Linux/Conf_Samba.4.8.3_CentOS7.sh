@@ -44,6 +44,13 @@ echo " # Criado por raphael maria
     oplocks = yes
     getwd cache = yes
 
+##### >>>> CONFIGURACAO DE LOGS
+log file = /var/log/samba/%m.log
+# Tamanho de Log e igual a 200Mb
+max log size = 200000
+# Nivel de Coleta de Log
+log level = 1 auth:5
+
 ################################
 ##### configuracao Lixeira #####
 ################################

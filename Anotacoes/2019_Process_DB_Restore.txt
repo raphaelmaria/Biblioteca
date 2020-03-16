@@ -8,7 +8,7 @@ Diretorio dos arquivos de Dump:
 Comando que eu executei até agora:
 > Instalar o Postgres
 # yum search postgres
-# yum install postgresql-server.x86_64 vim net-tools
+# yum -y install postgresql-server.x86_64 vim net-tools
 # postgresql-setup initdb
 # systemctl start postgresql
 # systemctl status postgresql
