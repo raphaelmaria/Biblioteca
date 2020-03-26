@@ -93,7 +93,7 @@ log level = 1 auth:5
         directory mask = 0775
         guest ok = yes
         valid users = $varuser nobody guest
-        veto files = *.rar, *.zip, *.tar, *.bmp" >> /etc/samba/smb.conf
+        veto files = *.rar, *.zip, *.tar, *.bmp" > /etc/samba/smb.conf
 
 
 USER = acesso

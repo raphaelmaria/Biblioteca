@@ -98,7 +98,7 @@ socket options = TCP_NODELAY
 	path = $SHARE
 	valid users = o2
 	public = yes
-	writable = yes" >> /etc/samba/smb.conf
+	writable = yes" > /etc/samba/smb.conf
 
 chcon -Rt samba_share_t /mnt/slave
 

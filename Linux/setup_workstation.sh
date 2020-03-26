@@ -258,7 +258,7 @@ sudo echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
   <key>ServiceIPC</key>
   <false/>
 </dict>
-</plist>" >> /Library/LaunchAgents/setenv.Nuke.plist
+</plist>" > /Library/LaunchAgents/setenv.Nuke.plist
 
 sudo chown root  /Library/LaunchAgents/setenv.Nuke.plist
 
