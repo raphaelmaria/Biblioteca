@@ -98,12 +98,22 @@ deadtime = 15
 getwd cache = yes
 socket options = TCP_NODELAY	
 
-[accounts]
+[$SHARE]
 	comment = Accounts data directory
 	path = $SHARE
 	valid users = o2
 	public = yes
-	writable = yes" > /etc/samba/smb.conf
+	writable = yes
+	veto files = *.exe, *.tar, *.gz, *.sh
+
+	vfs objects = recycle
+	recycle:repository = Lixeira
+	recycle:keeptree = yes
+	recycle:versions = yes
+	
+	
+	
+	" > /etc/samba/smb.conf
 
 chcon -Rt samba_share_t /storage
 smbcontrol all reload-config
