@@ -24,19 +24,10 @@ echo " # Criado por raphael maria
 ####     Configuracao de REDE   #####
 #####################################
 
-    server role = standalone server
-    workgroup = WORKGROUP
-    netbios name = cinema
-    server string = Samba Files
-    keepalive = 20
-    dns proxy = no
-    max connections = 50
-    max xmit = 65535
-
-
-    security = user
-    encrypt passwords = true
-    passdb backend = tdbsam
+    [global]
+	workgroup = WORKGROUP
+	netbios name = $hostname
+	security = user
 
     veto files = /.thumbs/.thumbs/.DS
     read raw = yes
@@ -44,41 +35,40 @@ echo " # Criado por raphael maria
     oplocks = yes
     getwd cache = yes
 
-##### >>>> CONFIGURACAO DE LOGS
+#############################################
+########      LOGS DO SAMBA        ##########
+#############################################
+
 log file = /var/log/samba/%m.log
 # Tamanho de Log e igual a 200Mb
 max log size = 200000
 # Nivel de Coleta de Log
 log level = 1 auth:5
 
-################################
-##### configuracao Lixeira #####
-################################
+#############################################
+#########   Lixeira e da Auditoria  #########
+#############################################
     vfs objects = full_audit, recycle
     recycle:versions = yes
-    recycle:repository = /mnt/storage/lixeira
+    recycle:repository = /mnt/share/lixeira
     recycle:keeptree = yes
     recycle:exclude = *.mp3, *.iso, *.exe, *.mkv, *.mp4 
     recycle:exclude_dir = tmp, cache
 
-##################################
-###### configuracao Auditoria ####
-##################################
-    full_audit:success = write, unlink, rename, rmdir, chmod, chown
-    full_audit:prefix = %u|%S
-    full_audit:failure = none
-    full_audit:facility = local5
-    full_audit:priority = notice
+    full_audit:success = open, opendir, write, unlink, rename, mkdir, rmdir, chmod, chown
+    log file = /mnt/share/logs/%U.log
+    max log size = 100
+    vfs objects = full_audit
+    full_audit:prefix = %u|%I|%S|%
 
 ##########################################
 ###### configuracao Compartilhamentos ####
 ##########################################
-    [lixeira]
-        path = /mnt/storage/lixeira
-        writable = yes
-        create mask = 0700
-        directory mask = 0700
+    [LIXEIRA]
+        path = /mnt/share/lixeira
+        writeable = yes
         browseable = yes
+        valid users = $varuser
 
 #####################################
 #### Compartilhamento de Arquivos ###
@@ -89,11 +79,16 @@ log level = 1 auth:5
         browseable = yes
         writable = yes
         write list = $varuser
-        create mask = 0775
-        directory mask = 0775
         guest ok = yes
-        valid users = $varuser nobody guest
-        veto files = *.rar, *.zip, *.tar, *.bmp" > /etc/samba/smb.conf
+        valid users = $varuser
+        veto files = *.exe, *.rar, *.zip, *.tar, *.bmp
+    
+    [LOGS]
+        path=/mnt/share/logs
+        browseable = true
+        valid users = admin
+        admin users = admin" > /etc/samba/smb.conf
+
 
 
 USER = acesso

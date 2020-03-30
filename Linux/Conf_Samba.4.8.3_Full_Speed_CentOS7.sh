@@ -77,14 +77,18 @@ echo "# See smb.conf.example for a more detailed config file or
 	netbios name = infoscale
 	security = user
 
-##### >>>> CONFIGURACAO DE LOGS
+##################################
+#####     LOGS DO SAMBA    #######
+##################################
 log file = /var/log/samba/%m.log
 # Tamanho de Log e igual a 200Mb
 max log size = 200000
 # Nivel de Coleta de Log
 log level = 1 auth:5
 
-# Alta velocidade
+###################################
+####       TUNNING SAMBA     ######
+###################################
 strict locking = no
 read raw = yes
 write raw = yes
@@ -102,6 +106,7 @@ socket options = TCP_NODELAY
 	writable = yes" > /etc/samba/smb.conf
 
 chcon -Rt samba_share_t /storage
+smbcontrol all reload-config
 
 systemctl enable smb
 systemctl start smb
