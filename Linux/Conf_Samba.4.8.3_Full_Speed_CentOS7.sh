@@ -50,11 +50,12 @@ nmcli connection modify $INTERFACE ipv4.method manual ipv4.addresses $IPADDRESS/
 nmcli connection up $INTERFACE
 
 systemctl stop firewalld
-firewall-cmd --get-default-zone
-firewall-cmd --set-default-zone=public
-firewall-cmd --permanent --add-port=9090/tcp
-firewall-cmd --reload
-firewall-cmd --list-all
+systemctl disable firewalld
+#firewall-cmd --get-default-zone
+#firewall-cmd --set-default-zone=public
+#firewall-cmd --permanent --add-port=9090/tcp
+#firewall-cmd --reload
+#firewall-cmd --list-all
 
 # Script para substituicao de SMB.CONF
 mv /etc/samba/smb.conf /etc/samba/smb.bkp.conf
@@ -100,7 +101,7 @@ socket options = TCP_NODELAY
 	public = yes
 	writable = yes" > /etc/samba/smb.conf
 
-chcon -Rt samba_share_t /mnt/slave
+chcon -Rt samba_share_t /storage
 
 systemctl enable smb
 systemctl start smb
