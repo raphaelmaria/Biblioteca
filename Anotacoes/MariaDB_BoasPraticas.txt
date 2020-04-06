@@ -19,4 +19,4 @@ dash
 connect
 
 # Permissão para a maquina se conectar ao DB
-GRANT ALL ON *.* to root@'123.123.123.123' IDENTIFIED BY 'put-your-password';
+GRANT ALL ON *.* to root@'192.168.0.11' IDENTIFIED BY 'P@55w0rd!';

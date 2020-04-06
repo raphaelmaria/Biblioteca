@@ -10,6 +10,19 @@ yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
-wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-1.el7.x86_64.rpm-bundle.tar
-tar xvf mysql-8.0.19-1.el7.x86_64.rpm-bundle.tar
-cd mysql-8.0.19-1.el7.x86_64.rpm-bundle
+wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+rpm -Uvh mysql80-community-release-el7-1.noarch.rpm
+yum install mysql-server
+systemctl start mysqld
+systemctl status mysqld
+
+PASS=grep 'temporary password' /var/log/mysqld.log
+echo "A senha temporaria é: $PASS"
+
+
+
+
+firewall-cmd --get-default-zone
+firewall-cmd --set-default-zone=public
+firewall-cmd --permanent --add-port=3306/tcp
+firewall-cmd --permanent --add-service=mysql
