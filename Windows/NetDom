@@ -1,0 +1,5 @@
+netdom Trust 
+
+netdom trust /d:vivara.local /verify
+
+netdom query /server:vivara.local

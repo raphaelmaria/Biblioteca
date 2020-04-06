@@ -17,3 +17,6 @@ teste2db
 grafana
 dash
 connect
+
+# Permissão para a maquina se conectar ao DB
+GRANT ALL ON *.* to root@'123.123.123.123' IDENTIFIED BY 'put-your-password';
