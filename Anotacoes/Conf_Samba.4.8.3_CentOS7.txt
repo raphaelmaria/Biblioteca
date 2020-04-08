@@ -1,4 +1,4 @@
-yum install samba samba-client samba-common
+apt-get install samba samba-client samba-common
 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 

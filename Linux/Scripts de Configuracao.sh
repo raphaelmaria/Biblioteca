@@ -3,15 +3,15 @@
 # Versão 1.0
 
 # Instalando Interface Grafica
-#yum grouplist
-#sudo yum groups install "GNOME Desktop"
+#apt-get grouplist
+#sudo apt-get groups install "GNOME Desktop"
 #systemctl set-default graphical.target
 #systemctl start graphical.target
 cd
 
 # Codec Audio e Video
 #Libavcodec
-#yum install libvorbis  yasm freetype zlib bzip2 faac lame speex libvpx libogg  libtheora  x264 XviD openjpeg15 opencore-amr
+#apt-get install libvorbis  yasm freetype zlib bzip2 faac lame speex libvpx libogg  libtheora  x264 XviD openjpeg15 opencore-amr
 #wget https://libav.org/releases/libav-12.3.tar.gz
 #tar -xvf libav-12.3.tar.gz
 #cd libav-12.3
@@ -22,9 +22,9 @@ cd
 sed -i 's/^Domain = localdomain/Domain = o2pos.com/' /etc/idmapd.conf
 
 # Atualização de OS
-yum -y check-update
-yum -y update
-yum -y install vim net-tools
+apt-get -y check-update
+apt-get -y update
+apt-get -y install vim net-tools
 cd
 
 #abertura de portas Firewall
@@ -36,7 +36,7 @@ iptables -X
 cd
 
 # Instalando VNC SERVER 
-yum -y install tigervnc-server xorg-x11-fonts-Type1
+apt-get -y install tigervnc-server xorg-x11-fonts-Type1
 cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:3.service
 echo "Insira a senha para acesso"
 vncserver
@@ -49,7 +49,7 @@ echo "maquina115" > /proc/sys/kernel/hostname
 
 #Instalação Zabbix
 #rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-#yum -y install zabbix-agent.x86_64
+#apt-get -y install zabbix-agent.x86_64
 #service zabbix-agent stop
 #sed -i 's/^SERVER=*/SERVER=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
 

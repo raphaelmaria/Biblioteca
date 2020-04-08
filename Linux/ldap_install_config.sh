@@ -1,4 +1,4 @@
-yum install openldap-clients nss-pam-ldapd nscd dnf snapd vim ansible libselinux-python -y
+apt-get install openldap-clients nss-pam-ldapd nscd dnf snapd vim ansible libselinux-python -y
 
 
 # Iniciando configuração do Script para o Dominio.

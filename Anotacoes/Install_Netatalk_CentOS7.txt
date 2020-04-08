@@ -5,7 +5,7 @@
 # http://confoundedtech.blogspot.com/2011/07/draft-draft-ubuntu-as-apple-time.html
 
 
-yum install netatalk -y
+apt-get install netatalk -y
 
 echo" [Global]
 

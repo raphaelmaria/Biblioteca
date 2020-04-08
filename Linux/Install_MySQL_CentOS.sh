@@ -1,18 +1,18 @@
 #!/bin/bash
 
-yum -y update
-yum -y upgrade
-yum -y install gcc unzip wget nss dkms git dnf snapd vim ansible libselinux-python
-yum -y install nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum -y groupinstall "Development Tools"
-yum -y groupinstall "Legacy UNIX Compatibility"
-yum -y groupinstall "X Window System"
-yum -y groupinstall "Fonts"
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install gcc unzip wget nss dkms git dnf snapd vim ansible libselinux-python
+apt-get -y install nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+apt-get -y groupinstall "Development Tools"
+apt-get -y groupinstall "Legacy UNIX Compatibility"
+apt-get -y groupinstall "X Window System"
+apt-get -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
 wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
 rpm -Uvh mysql80-community-release-el7-1.noarch.rpm
-yum install mysql-server
+apt-get install mysql-server
 systemctl start mysqld
 systemctl status mysqld
 

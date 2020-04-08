@@ -3,17 +3,17 @@
 # Sistema operacional: CentOS 7
 
 # Update
-yum -y update
+apt-get -y update
 
 # Instalação Basica
-yum -y install gcc unzip wget mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld
-yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum -y install freeipa-client
-yum -y groupinstall "X Window System"
-yum -y groupinstall "Fonts"
+apt-get -y install gcc unzip wget mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld
+apt-get -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+apt-get -y install freeipa-client
+apt-get -y groupinstall "X Window System"
+apt-get -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 su -c 'rpm -Uvh https://download.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
-su -c 'yum install foo'
+su -c 'apt-get install foo'
 
 # Configuração de CentOS
 package-cleanup --oldkernels --count=2
@@ -22,13 +22,13 @@ hostnamectl set-hostname bigbrother.o2pos.com.br
 nmcli connection modify eno2 ipv4.method manual ipv4.addresses 192.168.8.24 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 nmcli connection up eno2
 
-yum -y install cockpit
+apt-get -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
 
-su - -c "yum install perl-version"
-su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
+su - -c "apt-get install perl-version"
+su - -c "apt-get --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 
 mv /etc/resolv.conf /etc/resolv.conf.old
 echo "search o2pos.com.br
@@ -36,7 +36,7 @@ nameserver 192.168.8.100
 nameserver 192.168.8.110" >> /etc/resolv.conf
 
 rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-yum -y install zabbix-agent.x86_64
+apt-get -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/^Hostname=Zabbix server/Hostname=BigBrother/' /etc/zabbix/zabbix_agentd.conf
@@ -60,9 +60,9 @@ df -h
 
 
 # Instalação do ZoneMinder Security System Cam
-yum install rpm-build
-yum install redhat-rpm-config
-yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm -y
+apt-get install rpm-build
+apt-get install redhat-rpm-config
+apt-get localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm -y
 dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
 dnf install rpmfusion-free-release-tainted -y
 dnf install libdvdcss -y

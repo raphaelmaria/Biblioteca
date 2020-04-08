@@ -12,23 +12,23 @@ HOSTNAME = '(Digite o Nome da Maquina:)'
 #INTERFACE = '(nmcli con show | awk 1git)'
 
 # Atualização de OS
-yum -y install epel-release
-yum check-update
-yum update -y
+apt-get -y install epel-release
+apt-get check-update
+apt-get update -y
 #Instalação ansible
-yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum -y groupinstall "X Window System"
-yum -y groupinstall "Fonts"
+apt-get -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+apt-get -y groupinstall "X Window System"
+apt-get -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
 
-su - -c "yum -y install perl-version"
-su - -c "yum -y --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
+su - -c "apt-get -y install perl-version"
+su - -c "apt-get -y --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 
 hostnamectl set-hostname bigbrother
 
 # Install Cockpit
-yum -y install cockpit
+apt-get -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
@@ -100,14 +100,14 @@ mount -a
 df -h
 
 # Instalando VNC SERVER 
-yum -y install tigervnc-server xorg-x11-fonts-Type1
+apt-get -y install tigervnc-server xorg-x11-fonts-Type1
 cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:3.service
 echo "Insira a senha para acesso"
 vncserver
 
 #Instalação Zabbix
 rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-yum -y install zabbix-agent.x86_64
+apt-get -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/^Hostname=Zabbix server/Hostname=videocopilotlicense/' /etc/zabbix/zabbix_agentd.conf

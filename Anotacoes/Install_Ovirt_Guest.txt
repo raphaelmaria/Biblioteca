@@ -1,7 +1,7 @@
-yum search ovirt
-yum search guest
-yum install epel-release -y
-yum install ovirt-guest-agent-common -y
+apt-get search ovirt
+apt-get search guest
+apt-get install epel-release -y
+apt-get install ovirt-guest-agent-common -y
 systemctl enable ovirt-guest-agent
 systemctl start ovirt-guest-agent
 systemctl status ovirt-guest-agent

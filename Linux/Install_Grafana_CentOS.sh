@@ -5,13 +5,13 @@
 # 13 DE JANEIRO DE 2020
 
 
-yum -y install wget nss dkms dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum -y groupinstall "X Window System"
-yum -y groupinstall "Fonts"
+apt-get -y install wget nss dkms dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+apt-get -y groupinstall "X Window System"
+apt-get -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
 # Install Cockpit
-yum -y install cockpit
+apt-get -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
@@ -19,14 +19,14 @@ echo " Cockpit instalado com sucesso" /
 echo " Abra um navegador e digite https://<IP da maquina>:9090" /
 
 # INSTALANDO O GRAFANA
-yum update -y
+apt-get update -y
 wget https://dl.grafana.com/oss/release/grafana-6.5.2-1.x86_64.rpm
-yum install wget -y
-yum -y install initscripts fontconfig
-sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
-yum -y install fontconfig.*
-yum -y install freetype.*
-yum -y install urw-fonts
+apt-get install wget -y
+apt-get -y install initscripts fontconfig
+sudo apt-get localinstall grafana-6.5.2-1.x86_64.rpm
+apt-get -y install fontconfig.*
+apt-get -y install freetype.*
+apt-get -y install urw-fonts
 
 # ALTERANDO PORTA DO GRAFANA PARA 3000
 systemctl start firewalld
@@ -44,17 +44,17 @@ sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 
 # INSTALAR BANCO DE DADOS LOCAIS
-cat <<EOF | tee /etc/yum.repos.d/MariaDB.repo
+cat <<EOF | tee /etc/apt-get.repos.d/MariaDB.repo
 [mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.4/centos7-amd64
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+baseurl = http://apt-get.mariadb.org/10.4/centos7-amd64
+gpgkey=https://apt-get.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 EOF
 
-yum makecache fast
-yum -y install MariaDB-server MariaDB-client
-yum -y install php-mysqlnd
+apt-get makecache fast
+apt-get -y install MariaDB-server MariaDB-client
+apt-get -y install php-mysqlnd
 
 systemctl enable --now mariadb
 systemctl status mariadb

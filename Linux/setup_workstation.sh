@@ -4,7 +4,7 @@
 
 timedatectl set-timezone America/Sao_Paulo
 # INSTALACAO DE MULTIMIDIA CENTOS / FEDORA
-sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
+sudo apt-get localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
 sudo dnf groupupdate core
 sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate sound-and-video
@@ -13,17 +13,17 @@ sudo dnf install libdvdcss
 
 
 # Pacotes iniciais
-yum remove cloud-init -y
-yum install http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm -y
-yum -y install gcc unzip wget mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld libde265 x265
-yum install -y exfat-utils fuse-exfat
+apt-get remove cloud-init -y
+apt-get install http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm -y
+apt-get -y install gcc unzip wget mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld libde265 x265
+apt-get install -y exfat-utils fuse-exfat
 
 rpm -aq | grep teamviewer
 rpm -e teamviewer-*
 rm -rf /etc/teamviewer
 ## rpm --import http://download.teamviewer.com/download/TeamViewer_Linux_PubKey.asc
-yum -y install http://192.168.8.7/app/linux/Softwares/Acesso_Remoto/teamviewer_12.0.137452.i686.rpm
-yum -y install http://download.teamviewer.com/download/teamviewer.i686.rpm
+apt-get -y install http://192.168.8.7/app/linux/Softwares/Acesso_Remoto/teamviewer_12.0.137452.i686.rpm
+apt-get -y install http://download.teamviewer.com/download/teamviewer.i686.rpm
 systemctl enable teamviewerd.service
 systemctl start teamviewerd.service
 
@@ -46,7 +46,7 @@ make install
 
 #wget http://download1.rpmfusion.org/free/el/updates/testing/7/x86_64/
 #rpm -Uvh rpmfusion-free-release*rpm
-#yum install x264-libs
+#apt-get install x264-libs
 
 mdadm -E /dev/sd[b-e]
 mdadm --create /dev/md127 --level=raid0 --raid-devices 2 /dev/sd[b-c]1 
@@ -58,8 +58,8 @@ mkfs.ext4 --force /dev/md127
 
 # Driver Video com RUN DA NVIDIA
 init 2
-yum remove xorg-x11-drivers xorg-x11-drv-nouveau -y
-yum remove kmod-nvidia
+apt-get remove xorg-x11-drivers xorg-x11-drv-nouveau -y
+apt-get remove kmod-nvidia
 rpm -e kmod-nvidia
 wget http://192.168.8.7/app/NVIDIA-Linux-390.87.zip
 OU
@@ -70,15 +70,15 @@ chmod 777 NVIDIA-*
 ./NVIDIA-Linux-*.*.run -a
 init 6
 
-# Driver de video com YUM Repositorys 
+# Driver de video com apt-get Repositorys 
 init 2
-yum -y install xorg-x11-drivers xorg-x11-drv-nouveau
-yum -y install kmod-nvidia
+apt-get -y install xorg-x11-drivers xorg-x11-drv-nouveau
+apt-get -y install kmod-nvidia
 
 
 # Interface Install
-yum grouplist
-yum groupinstall "GNOME Desktop" -y
+apt-get grouplist
+apt-get groupinstall "GNOME Desktop" -y
 systemctl set-default graphical.target
 systemctl start graphical.target
 
@@ -187,7 +187,7 @@ rm -rf pauta_bridge_install.sh
 echo "O servidor é 192.168.8.63"
 
 # Instalando VNC SERVER 
-yum install tigervnc-server xorg-x11-fonts-Type1 -y
+apt-get install tigervnc-server xorg-x11-fonts-Type1 -y
 cp /lib/systemd/system/vncserver@.service  /etc/systemd/system/vncserver@:1.service
 vi /etc/systemd/system/vncserver@\:1.service
 systemctl daemon-reload
@@ -220,7 +220,7 @@ echo "name server = 192.168.8.100
 name server = 192.168.8.110" >> /etc/resolv.conf
 
  
-yum install ipa-client -y
+apt-get install ipa-client -y
 ipa-client-install --mkhomedir --no-ntpd
 
 nmcli con mod eth0 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
@@ -268,10 +268,10 @@ na pasta /cron.hourly
 gcds
 
 # Install Cinnamon Desktop View
-yum -y install epel-release
-yum -y groupinstall "X Window system"
-yum -y install lightdm
-yum -y install cinnamon
+apt-get -y install epel-release
+apt-get -y groupinstall "X Window system"
+apt-get -y install lightdm
+apt-get -y install cinnamon
 
 
 # Download Nuke

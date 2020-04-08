@@ -1,6 +1,6 @@
-yum -y install qemu-kvm >> /var/log/applevm.log
-yum -y install git glib2-devel libfdt-devel pixman-devel zlib-devel >> /var/log/applevm.log
-yum -y install libaio-devel libcap-devel libiscsi-devel >> /var/log/applevm.log
+apt-get -y install qemu-kvm >> /var/log/applevm.log
+apt-get -y install git glib2-devel libfdt-devel pixman-devel zlib-devel >> /var/log/applevm.log
+apt-get -y install libaio-devel libcap-devel libiscsi-devel >> /var/log/applevm.log
 
 
 mkdir -p /applevm >> /var/log/applevm.log 
@@ -22,4 +22,4 @@ make -j4 >> /var/log/applevm.log
 
 
 
-yum -y install qemu uml-utilities libguestfs-tools virt-manager
+apt-get -y install qemu uml-utilities libguestfs-tools virt-manager
