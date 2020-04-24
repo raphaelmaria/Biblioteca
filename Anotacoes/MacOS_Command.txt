@@ -3,3 +3,5 @@ yes > /dev/null & yes > /dev/null & yes > /dev/null & yes > /dev/null &
 Fonte: http://osxdaily.com/2012/10/02/stress-test-mac-cpu/
 
 
+sudo spctl --master-disable
+
