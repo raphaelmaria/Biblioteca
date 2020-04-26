@@ -29,8 +29,8 @@ Source .bash_profile
 echo $JAVA_HOME
 
 # Instalando e configurando o NGINX
-sudo yum install epel-release
-sudo yum install nginx
+sudo yum -y install epel-release
+sudo yum -y install nginx
 sudo systemctl start nginx.service
 sudo firewall-cmd --permanent --zone=public --add-service=http
 sudo firewall-cmd --permanent --zone=public --add-service=https
@@ -49,14 +49,14 @@ enabled=1
 autorefresh=1
 type=rpm-md" > /etc/yum.repos.d/elasticsearch.repo
 
-sudo yum install elasticsearch
+sudo yum -y install elasticsearch
 sudo vi /etc/elasticsearch/elasticsearch.yml
 sudo systemctl start elasticsearch
 sudo systemctl enable elasticsearch
 curl -X GET "localhost:9200"
 
 # Instalando e configurando o Kibana
-sudo yum install kibana
+sudo yum -y install kibana
 sudo systemctl enable kibana
 sudo systemctl start kibana
 echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
@@ -139,7 +139,7 @@ sudo systemctl start logstash
 sudo systemctl enable logstash
 
 # Instalando e configurando o Filebeat
-sudo yum install filebeat
+sudo yum -y install filebeat
 echo "...
 #output.elasticsearch:
   # Array of hosts to connect to.
