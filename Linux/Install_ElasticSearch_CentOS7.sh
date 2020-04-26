@@ -11,30 +11,11 @@
 # 
 # https://brasilcloud.com.br/tutoriais/como-instalar-o-nginx-centos-7/
 # https://www.liquidweb.com/kb/install-java-8-on-centos-7/
-
-while getopts h{help}b: -c -- OPCAO; do 
-    case "${OPCAO}" in
-        h|help) opcao_h=1 ;;
-        b) parametro_b="${OPTARG}" ;;
-        c) recebi_c=1 ;;
-    esac
-done
-
-[ ${opcao_h} ] && sed -n '/^# /p' $0 | sed 's/# //g';;
-[ $parametro_b] && echo "O Parametro de -b é: ${parametro_b}";
-[ $parametro_c] && echo "A opção c existe e o valor é: ${parametro_c}";
-exit 0
-######################
-######################
+#####################################################################
 echo "NOME DA MAQUINA: "
 read NEWHOST
 #
 #
-
-
-
-
-
 ## INSTALANDO ##
 yum -y update
 yum -y install git gcc unzip wget dkms git dnf snapd vim ansible
