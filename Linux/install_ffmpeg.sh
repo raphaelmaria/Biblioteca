@@ -7,7 +7,7 @@
 #
 umount /opt
 cd /tmp
-apt-get install libvorbis  yasm freetype zlib bzip2 faac lame speex libvpx libogg  libtheora  x264 XviD openjpeg15 opencore-amr
+yum install libvorbis  yasm freetype zlib bzip2 faac lame speex libvpx libogg  libtheora  x264 XviD openjpeg15 opencore-amr
 wget http://libav.org/releases/libav-10.1.tar.gz
 tar -xvzf libav-10.1.tar.gz
 cd libav-10.1

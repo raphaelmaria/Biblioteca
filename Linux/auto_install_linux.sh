@@ -2,24 +2,24 @@
 # For Installation Script Render Farm VM
 
 #Instalação de pacotes
-apt-get -y update
-apt-get -y install ntfs-3g.x86_64  nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps nss-pam-ldapd nscd
-su - -c "apt-get install perl-version"
-su - -c "apt-get --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
+yum -y update
+yum -y install ntfs-3g.x86_64  nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps nss-pam-ldapd nscd
+su - -c "yum install perl-version"
+su - -c "yum --enablerepo=updates install libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel libX11-devel libXrender-devel libxkbcommon-devel libXi-devel"
 
 
-apt-get -y groupinstall "X Window System"
-apt-get -y groupinstall "Fonts"
+yum -y groupinstall "X Window System"
+yum -y groupinstall "Fonts"
 export FONTCONFIG_PATH=/etc/fonts
 
 # Install Cockpit
-apt-get -y install cockpit
+yum -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
 
 # Install Python 2.7
-apt-get -y install gcc openssl-devel bzip2-devel 
+yum -y install gcc openssl-devel bzip2-devel 
 cd /usr/src
 wget https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tgz
 tar xzf Python-2.7.16.tgz
@@ -57,7 +57,7 @@ cp /root/Downloads/ldap/system-auth-ac /etc/pam.d
 
 #Instalação Zabbix
 rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-apt-get -y install zabbix-agent.x86_64
+yum -y install zabbix-agent.x86_64
 service zabbix-agent stop
 sed -i 's/^Server=127.0.0.1/Server=192.168.8.4/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/^Hostname=Zabbix server/Hostname=Athena/' /etc/zabbix/zabbix_agentd.conf

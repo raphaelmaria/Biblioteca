@@ -9,15 +9,15 @@ echo "
 
 # Variaveis
 # INSTALACOES COMPLEMENTARES E UPDATES
-apt-get -y install epel-release
+yum -y install epel-release
 
-apt-get -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-apt-get install centos-release-scl -y
-apt-get install rh-python36 -y
+yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
+yum install centos-release-scl -y
+yum install rh-python36 -y
 scl enable rh-python36 bash
 
 # INSTALACAO DO PAINEL DE CONTROLE PARA SERVIDOR VIA WEB
-apt-get -y install cockpit
+yum -y install cockpit
 systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
@@ -27,7 +27,7 @@ echo " UTILIZE DIGITE IP:9090 EM UM NAVEGADOR "
 echo " PARA FAZER LOGIN USE OS DADOS DOS USUARIOS CRIADOS LOCALMENTES NA MAQUINA "    
 
 # Pacotes para instalacao
-apt-get -y install samba samba-client samba-common
+yum -y install samba samba-client samba-common
 
 # SETUP SERVIDOR
 echo "Nome do Servidor:"
@@ -57,7 +57,7 @@ echo "Digite o caminho completo da pasta que deseja compartilhar: "
 echo "Exemplo: /mnt/dados"
 read varpath
 
-apt-get -y install samba samba-client samba-common
+yum -y install samba samba-client samba-common
 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 mkdir -p /mnt/storage

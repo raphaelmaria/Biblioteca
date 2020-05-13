@@ -1,22 +1,22 @@
 #!/bin/bash
 
-apt-get update -y
-apt-get install epel-release -y
-apt-get install centos-release-scl -y
-apt-get install rh-python35 -y
-apt-get install git gcc wget nodejs-less libxslt-devel bzip2-devel openldap-devel libjpeg-devel freetype-devel -y
+yum update -y
+yum install epel-release -y
+yum install centos-release-scl -y
+yum install rh-python35 -y
+yum install git gcc wget nodejs-less libxslt-devel bzip2-devel openldap-devel libjpeg-devel freetype-devel -y
 
 
 useradd -m -U -r -d /opt/odoo -s /bin/bash odoo
-apt-get list postgresql*
-apt-get install https://download.postgresql.org/pub/repos/apt-get/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm -y
-apt-get install postgresql96 postgresql96-server postgresql96-contrib postgresql96-libs -y
+yum list postgresql*
+yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm -y
+yum install postgresql96 postgresql96-server postgresql96-contrib postgresql96-libs -y
 /usr/pgsql-9.6/bin/postgresql96-setup initdb
 systemctl start postgresql-9.6.service
 systemctl enable postgresql-9.6.service
 cd /opt
 wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.centos7.x86_64.rpm
-apt-get localinstall wkhtmltox-0.12.5-1.centos7.x86_64.rpm -y
+yum localinstall wkhtmltox-0.12.5-1.centos7.x86_64.rpm -y
 
 su - odoo
 git clone https://www.github.com/odoo/odoo --depth 1 --branch 12.0 /opt/odoo/odoo12
