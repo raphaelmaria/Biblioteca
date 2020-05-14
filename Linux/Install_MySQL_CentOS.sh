@@ -12,11 +12,12 @@ export FONTCONFIG_PATH=/etc/fonts
 
 wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
 rpm -Uvh mysql80-community-release-el7-1.noarch.rpm
-yum install mysql-server
+yum install mysql-server -y
 systemctl start mysqld
+systemctl enable mysqld
 systemctl status mysqld
 
-PASS=grep 'temporary password' /var/log/mysqld.log
+PASS = grep 'temporary password' /var/log/mysqld.log
 echo "A senha temporaria é: $PASS"
 
 
