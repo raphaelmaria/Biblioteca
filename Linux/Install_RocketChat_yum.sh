@@ -90,6 +90,7 @@ Environment=MONGO_URL=mongodb://localhost:27017/rocketchat?replicaSet=rs01 MONGO
 [Install]
 WantedBy=multi-user.target
 EOF
+cp /etc/mongod.conf /etc/mongod.conf.bkp
 sudo sed -i "s/^#  engine:/  engine: mmapv1/"  /etc/mongod.conf
 sudo sed -i "s/^#replication:/replication:\n  replSetName: rs01/" /etc/mongod.conf
 sudo systemctl enable mongod && sudo systemctl start mongod
@@ -127,9 +128,8 @@ firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
 firewall-cmd --permanent --add-port=3000/tcp
 firewall-cmd --permanent --add-port=4567/tcp
+firewall-cmd --permanent --add-port=27017/tcp
 firewall-cmd --add-service=zabbix-agent --permanent
-firewall-cmd --add-service=mongod --permanent
-firewall-cmd --add-service=rocketchat --permanent
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
 firewall-cmd --list-all
