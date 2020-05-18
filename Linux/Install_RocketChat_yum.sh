@@ -116,11 +116,6 @@ service zabbix-agent start
 systemctl enable zabbix-agent
 service zabbix-agent restart
 
-echo '#############################'
-echo '    CONFIGURANDO FIREWALL    '
-echo "#############################"
-
-
 echo "###############################"
 echo "### CONFIGURACAO CONCLUIDA ###"
 echo "###############################"
