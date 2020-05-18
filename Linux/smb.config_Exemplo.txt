@@ -1,0 +1,181 @@
+# Configuracao Global
+# Sessao Global
+[global]
+
+# Nome do Dominio
+workgroup = WORKGROUP
+# Nome Visivel na Rede
+netbios name = NAS
+# Comentario do Servidor na Rede
+server string = Servidor de Arquivos
+# Definicao de pdc
+domain master = yes
+# Login no dominio
+domain logons = yes
+# Script de logon
+logon script = %U.bat
+# Caminho do perfil do usuario (L= nome server / U= user que logou)
+logon home = \\%L\%U\.profiles
+# Mapeia o caminho do perfil do usuario
+logon path= \\%L\profiles\%U
+# Exige autenticacao
+security = user
+# criptografa as senhas
+encrypt passwords = true
+# Da permissao a usuarios administradores
+enable privileges = yes
+# Tipo de autenticacao
+passdb backend = tdbsam
+# Impede a gravacao de arquivos
+veto files = /.thumbs/.thumbs/.DS
+# Define dominio primario
+prefered master = yes
+# Define o dominio master local
+local master = yes
+# Nivel de conquista de pdc para rede
+os level = 100
+# Define suporte a wins
+wins support = yes
+# Usuario com poder de root
+admin users = raphael guest
+# Define acesso a redes definidas
+# hosts deny = ALL
+hosts allow = 192.168.0.0/24
+# Preserva o nome do arquivo enviado pela estacao
+preserve case = yes
+default case = lower
+# Usuario no minimo com 3 caracteres
+username level = 3
+# Senha no minimo com 6 caracteres
+password level = 6
+# Interface que vai ouvir
+# interfaces = eth0, lo
+# Permite restringir por interface
+# bind interfaces only = yes
+# Verifica a conexao a cada 20 seg
+keepalive = 20
+# Tentar resolver nomes netbios, atravas do nslookup do DNS
+dns proxy = no
+# Onde serio gravados os log de erro
+panic action = /usr/share/samba/panic-action %d
+# Melhora a performance da rede
+socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
+# Adiciona contas de maquina automaticamente
+add machine script = /usr/sbin/useradd -d /dev/null -g 100 -s /bin/false -M %u
+# As restricoes do PAM terao efeito
+obey pam restriction = yes
+# Servidor de horas
+time server = yes
+# Permite ler arquivos grandes em uma unica requisicao
+read raw = yes
+# Permite gravar arquivos grandes em uma unica requisicao
+write raw = yes
+# Permite ao cliente fazer cache de arquivos localmente
+oplocks = yes
+# Armazena em cache o caminho do diretrio corrente
+getwd cache = yes
+# Numero maximo de conexoes simultaneas
+max connections = 60
+
+max xmit = 65535
+# Nao aceita senhas nulas
+null passwords = no
+username map = /etc/smbusers
+# Padrao de codificacao
+unix charset = iso8859-1
+display charset = cp850
+# Arquivos de log
+log file = /var/log/samba/%m.log
+# Nivel de detalhes do log do samba
+log level = 1
+#debug level = 2
+# Tamanho Maximo do log
+max log size = 50
+
+# Configuracao Lixeira
+# Configura Lixeira de Rede
+vfs objects = full_audit, recycle
+recycle:versions = yes
+recycle:repository = /home/%U/trash
+recycle:keeptree = yes
+recycle:exclude = *.mp3 *.mkv *.mp4
+recycle:exclude_dir = tmp, cache
+
+# Configuracao Auditoria 
+# Define Auditoria de Acessos
+full_audit:success = write, unlink, rename, rmdir, chmod, chown
+full_audit:prefix = %u|%S
+full_audit:failure = none
+full_audit:facility = local5
+full_audit:priority = notice
+
+# Configuracao Netlogon
+# Compartilhamento de Logon
+[netlogon]
+# Comentario
+comment = servico de logon
+# Caminho do diretorio
+path = /var/samba/netlogon
+# Somente leitura
+read only = yes
+# Nao e visivel na rede
+browseable = no
+# Compartilhamento de Perfil
+[profiles]
+path = /var/profiles
+# Permite escrita
+writeable = yes
+browseable = no
+# Forca Seguranca
+create mask = 0600
+directory mask = 0700
+
+# Configuracao Homes
+# Compartilhamento da Pasta Pessoal
+[homes]
+path = /home/%u/profile.pds
+# Usuarios validos
+valid users = %S
+read only = no
+create mask = 0700
+directory mask = 0700
+browseable = no
+
+# Configuracao Compartilhamentos
+# Compartilhamento da Lixeira
+[lixeira]
+path = /var/samba/trash/%U
+# Permissao de escrita
+writable = yes
+create mask = 0700
+directory mask = 0700
+# visivel na rede
+browseable = yes
+
+# Compartilhamento de Arquivos
+[multimidia]
+path = /storage/multimidia
+browseable = yes
+# Permissao de Escrita
+writable = yes
+valid users = raphael guest
+# Usuarios com permissao para Escrever
+write list = raphael root
+
+[produtora]
+path = /storage/produtora
+browseable = yes
+# Permissao de Escrita
+writable = yes
+valid users = raphael guest
+# Usuarios com permissao para Escrever
+write list = raphael
+
+[suporte]
+path = /storage/suporte
+browseable = yes
+# Permissao de Escrita
+writable = yes
+valid users = raphael guest root
+# Usuarios com permissao para escrever
+write list = raphael root
