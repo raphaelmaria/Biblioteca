@@ -6,24 +6,19 @@
 ################################################################
 ##### VARIAVEIS ################################################
 HOST=$(hostname -f)
-
-echo "INSIRA O IP: "
-read IPADDRESS
 ################################################################
-
-
 echo "###########################################"
 echo "##  INSTALACAO DO PACOTE PADRAO INICIAL  ##"
 echo "###########################################"
-yum -y upgrade
-yum -y update 
-yum -y install gcc unzip wget dkms git dnf vim ansible libselinux-python
-yum -y groupinstall "X Window System"
+sudo yum -y upgrade
+sudo yum -y update 
+sudo yum -y install gcc unzip wget dkms git dnf vim ansible libselinux-python
+sudo yum -y groupinstall "X Window System"
 export FONTCONFIG_PATH=/etc/fonts
-yum remove cloud-init -y
+sudo yum remove cloud-init -y
 sudo sed -i "s/^SELINUX=enforcing/SELINUX=disable/"  /etc/selinux/config
-hostnamectl set-hostname rocket.o2pos.com.br
-nmcli connection modify "System eth0" ipv4.method manual ipv4.addresses $IPADDRESS/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
+sudo hostnamectl set-hostname rocket.o2pos.com.br
+nmcli connection modify "System eth0" ipv4.method manual ipv4.addresses 192.168.8.58/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 echo "A MAQUINA REINICIOU APÓS APLICAR O IP ESCOLHIDO"
 nmcli connection up "System eth0"
 reboot
@@ -80,7 +75,6 @@ Environment=MONGO_URL=mongodb://localhost:27017/rocketchat?replicaSet=rs01 MONGO
 [Install]
 WantedBy=multi-user.target
 EOF
-
 mv /usr/lib/systemd/system/rocketchat.service /usr/lib/systemd/system/rocketchat.service.bkp
 cat << EOF |sudo tee -a /usr/lib/systemd/system/rocketchat.service
 [Unit]
@@ -96,7 +90,6 @@ Environment=MONGO_URL=mongodb://localhost:27017/rocketchat?replicaSet=rs01 MONGO
 [Install]
 WantedBy=multi-user.target
 EOF
-
 sudo sed -i "s/^#  engine:/  engine: mmapv1/"  /etc/mongod.conf
 sudo sed -i "s/^#replication:/replication:\n  replSetName: rs01/" /etc/mongod.conf
 sudo systemctl enable mongod && sudo systemctl start mongod
