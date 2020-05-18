@@ -146,3 +146,6 @@ EOF
 echo "###############################"
 echo "### CONFIGURACAO CONCLUIDA ###"
 echo "###############################"
+
+systemctl status mongod
+systemctl status rocketchat
