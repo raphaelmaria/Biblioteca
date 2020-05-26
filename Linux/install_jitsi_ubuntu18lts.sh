@@ -7,6 +7,11 @@
 # AUTHOR: Raphael Maria <http://raphaelmaria.com.br>
 # VERSAO: 0.0.1
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
+# FONTE: 
+'''
+https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart
+https://jitsi.org/downloads/ubuntu-debian-installations-instructions/
+'''
 #################################################################
 # Variaveis
 DOMAIN=o2pos.com.br
@@ -15,6 +20,7 @@ VARIP=192.168.8.68
 GATEWAY=192.168.8.1
 DNS1=192.168.8.100
 DNS2=192.168.8.110
+VARWAN=
 #################################################################
 sudo hostnamectl set-hostname $HOSTNAME.$DOMAIN
 sudo echo "127.0.0.1 localhost $HOSTNAME.$DOMAIN" >> /etc/hosts
@@ -49,15 +55,28 @@ sudo ufw status verbose
 
 # Basic Jitsi Meet install
 echo "Basic Jitsi Meet install"
-#wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
-#sudo sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list"
-#sudo apt-get -y update
-#sudo apt-get -y install jitsi-meet
-#sudo apt-get -y install jitsi-videobridge
-#sudo apt-get -y install jicofo
-#sudo apt-get -y install jigasi
 sudo apt -y install jitsi-meet
 sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
+sudo mv /etc/jitsi/videobridge/sip-communicator.properties /etc/jitsi/videobridge/sip-communicator.properties.bkps
+sudo cat << EOF | see -t /etc/jitsi/videobridge/sip-communicator.properties
+org.ice4j.ice.harvest.NAT_HARVESTER_LOCAL_ADDRESS='$VARIP'
+org.ice4j.ice.harvest.NAT_HARVESTER_PUBLIC_ADDRESS="VARWAN"
+org.ice4j.ice.harvest.DISABLE_AWS_HARVESTER=true
+#org.ice4j.ice.harvest.STUN_MAPPING_HARVESTER_ADDRESSES=meet-jit-si-turnrelay.jitsi.net:443
+org.jitsi.videobridge.ENABLE_STATISTICS=true
+org.jitsi.videobridge.STATISTICS_TRANSPORT=muc
+org.jitsi.videobridge.xmpp.user.shard.HOSTNAME=localhost
+org.jitsi.videobridge.xmpp.user.shard.DOMAIN=auth.meet.o2pos.com.br
+org.jitsi.videobridge.xmpp.user.shard.USERNAME=jvb
+org.jitsi.videobridge.xmpp.user.shard.PASSWORD=QVCA2Np2
+org.jitsi.videobridge.xmpp.user.shard.MUC_JIDS=JvbBrewery@internal.auth.meet.o2pos.com.br
+org.jitsi.videobridge.xmpp.user.shard.MUC_NICKNAME=57380cc9-6346-4545-9bb4-e17a3a54e105
+EOF
+
+sed -i 's/^#DefaultLimitNOFILE=/#DefaultLimitNOFILE=65000' /etc/systemd/system.conf 
+sed -i 's/^#DefaultLimitNPROC=/#DefaultLimitNPROC=65000' /etc/systemd/system.conf
+sed -i 's/^#DefaultTasksMax=/#DefaultTasksMax=65000' /etc/systemd/system.conf
+ 
 sudo apt install jigasi
 
 systemctl show --property DefaultLimitNPROC
