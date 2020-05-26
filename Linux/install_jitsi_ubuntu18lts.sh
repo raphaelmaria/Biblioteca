@@ -43,6 +43,7 @@ echo "Basic Jitsi Meet install"
 #sudo apt-get -y install jigasi
 sudo apt install jitsi-meet
 sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
+sudo apt install jigasi
 
 systemctl show --property DefaultLimitNPROC
 systemctl show --property DefaultLimitNOFILE
