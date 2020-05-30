@@ -204,10 +204,10 @@ vncserver
 # Configuração de IP com Network Manager
 nmcli con show
 # Linha para comando de IP FIXO
-nmcli con modify ens3 ipv4.method manual ipv4.addresses 192.168.7.30/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110,192.168.8.15 ipv4.dns-search o2pos.com.br
+nmcli con modify eth0 ipv4.method manual ipv4.addresses 192.168.10.36/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110,192.168.8.15 ipv4.dns-search o2pos.com.br
 # Linha para comando para o DNS FIXO APENAS
 nmcli connection modify p8p1 ipv4.ignore-auto-dns yes ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
-nmcli con up ens3
+nmcli con up eth0
 
 sudo hostnamectl set-hostname render25.o2pos.com
 
