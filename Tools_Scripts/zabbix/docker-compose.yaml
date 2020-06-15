@@ -1,0 +1,47 @@
+version: "3.7"
+
+x-deploy: &template-deploy
+  replicas: 1
+  restart_policy:
+    condition: on-failure
+  update_config:
+    parallelism: 1
+    delay: 10s
+
+services:
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql:centos-5.0-latest
+    env_file: 
+      - ./envs/zabbix-server/common.env
+    networks:
+      - "monitoring-network"
+    volumes:
+        - ./data_internal/zabbix-server/externalscripts:/usr/lib/zabbix/externalscripts
+        - ./data_internal/zabbix-server/alertscripts:/usr/lib/zabbix/alertscripts
+    ports:
+      - "10051:10051"
+    deploy: *template-deploy
+  zabbix-frontend:
+    image: zabbix/zabbix-web-nginx-mysql:alpine-5.0.1
+    env_file: 
+      - ./envs/zabbix-frontend/common.env
+    ports:
+      - "80:8080"
+    networks:
+      - "monitoring-network"
+    deploy: *template-deploy
+  grafana:
+    image: grafana/grafana:7.0.3
+    environment: 
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+    volumes:
+      - /mnt/data-docker/grafana/data:/var/lib/grafana
+    networks:
+      - "monitoring-network"
+    ports:
+      - "3000:3000"
+    deploy: *template-deploy
+
+networks: 
+  monitoring-network:
+    external: true
