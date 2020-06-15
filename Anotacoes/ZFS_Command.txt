@@ -10,3 +10,9 @@ zpool replace Storage ata-ST6000NM0004-1FT17Z_Z4D0CFS9 ata-ST6000VN0041-2EL11C_Z
 Para apagar o SNAPSHOT
 # for i in `zfs list -t snapshot | grep <Ano Corrente> | cut -d\  -f1`; do zfs destroy $i; done
 
+zpool status
+zpool offline [zpool] [Disco Danificado]
+zpool remove [zpool] [Disco Danificado]
+
+
+zpool remove -f Storage scsi-200193c0d00000000

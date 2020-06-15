@@ -29,6 +29,6 @@ chmod -R 777 /scripts
 chmod +X /scripts/autocifs.sh
 
 #Cria a tarefa para ler o script de montagem sempre que reiniciar
-echo"@reboot /scripts/autocifs.sh" >> /etc/crontab
+echo"@reboot    *   /scripts/autocifs.sh" >> /etc/crontab
 #Roda o script na primeira instalação.
 bash /scripts/autocifs.sh
