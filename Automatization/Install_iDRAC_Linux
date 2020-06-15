@@ -1,6 +1,0 @@
-
-apt-get -y install usbutils net-tools wget
-cd /tmp
-wget http://192.168.8.7/linux/Softwares/server/OM-iSM-Dell-Web-LX-330-1290_A00.tar.gz
-tar -xvf OM-iSM-Dell-Web-LX-330-1290_A00.tar.gz
-./setup.sh
