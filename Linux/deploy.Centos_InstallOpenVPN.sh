@@ -7,14 +7,14 @@
 ##############################################
 #
 ############### VARIAVEIS ####################
-varhostname=
+varhostname=CONTOSOSRV
 
 ##### PACOTE BASICO ######
 hostnamectl set-hostname $varhostname
 yum -y install epel-release
 yum -y update
 yum -y upgrade
-yum -y install wget git dnf vim
+yum -y install wget vim
 yum -y install cockpit
 systemctl enable --now cockpit.socket
 
@@ -23,6 +23,16 @@ systemctl enable --now cockpit.socket
 '''
 https://www.hostinger.com.br/tutoriais/como-configurar-vpn-no-servidor-linux-com-openvpn/
 '''
+sudo yum install net-tools
+curl -O http://swupdate.openvpn.org/as/openvpn-as-2.7.3-CentOS7.x86_64.rpm
+sudo rpm --install openvpn-as-*.rpm
+passwd openvpn
+
+echo 'net.ipv4.ip_forward=1' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
+sudo sysctl -p
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
 ##### FIREWALL SETUP #####
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
