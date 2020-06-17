@@ -20,6 +20,8 @@ nmcli con up $VARINTERFACE
 
 # Instalação de softwares básicos.
 yum -y install wget tar unzip vim make gcc dnf autoconf automake epel-release 
+yum -y upgrade
+yum -y update
 
 # Instala o Dashboard WEB Red Hat Cockpit
 yum -y install cockpit
