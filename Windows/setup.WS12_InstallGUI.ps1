@@ -1,0 +1,1 @@
+Add-WindowsFeature Server-Gui-Shell

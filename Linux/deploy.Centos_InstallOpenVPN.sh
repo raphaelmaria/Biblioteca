@@ -14,7 +14,7 @@ hostnamectl set-hostname $varhostname
 yum -y install epel-release
 yum -y update
 yum -y upgrade
-yum -y install wget vim
+yum -y install wget vim tar unzip make
 yum -y install cockpit
 systemctl enable --now cockpit.socket
 
@@ -23,10 +23,19 @@ systemctl enable --now cockpit.socket
 '''
 https://www.hostinger.com.br/tutoriais/como-configurar-vpn-no-servidor-linux-com-openvpn/
 '''
-sudo yum install net-tools
+wget https://swupdate.openvpn.org/community/releases/openvpn-2.4.9.tar.gz
+
+
+
+
+
+sudo yum -y install net-tools
 curl -O http://swupdate.openvpn.org/as/openvpn-as-2.7.3-CentOS7.x86_64.rpm
 sudo rpm --install openvpn-as-*.rpm
-passwd openvpn
+passwd openvpn << EOF
+vpnpassword
+vpnpassword
+EOF
 
 echo 'net.ipv4.ip_forward=1' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
 sudo sysctl -p
@@ -52,7 +61,4 @@ firewall-cmd --permanent --zone=public --add-port=22/tcp
 firewall-cmd --reload
 firewall-cmd --list-all
 
-echo "###############################"
-echo "#### INSTALACAO FINALIZADA ####"
-echo "###############################"
-reboot
+Sua instalação foi efetuada com sucesso, agora para efetuar a configuração abra seu navegador e entre no endereço https://IP LOCAL:943/admin, com usuário: 
