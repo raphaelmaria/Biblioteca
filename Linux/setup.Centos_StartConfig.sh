@@ -31,4 +31,4 @@ systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
 
-dialog --msgbox "Acesse este dispositivo através do endereço \n https://$VARIPADDRESS:9090  \n usando o usuário de login desta sessão do shell" 5 10
+dialog --msgbox "Acesse este dispositivo através do endereço \n https://$VARIPADDRESS:9090  \n usando o usuário de login desta sessão do shell" 0 0
