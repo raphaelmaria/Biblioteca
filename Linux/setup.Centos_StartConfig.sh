@@ -9,12 +9,12 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 ##### VARIAVEIS
-dialog --inputbox 'Insira o nome  do hostname desta maquina: ' 10 50 >$VARHOSTNAME
-dialog --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 15 50 >$VARIPADDRESS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
 
 hostnamectl set-hotname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
-VARINTERFACE=${nmcli con show | tail -1 | awk '{print $1}'}
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
 nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24
 nmcli con up $VARINTERFACE
 
