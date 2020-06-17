@@ -14,11 +14,13 @@ yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-rel
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
 
-hostnamectl set-hotname $VARHOSTNAME
+
+hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
 VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
-nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY
 nmcli con up $VARINTERFACE
 
 # Fazendo update de todo os sistema operacional
