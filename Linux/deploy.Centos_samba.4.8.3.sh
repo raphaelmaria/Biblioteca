@@ -8,54 +8,30 @@ echo "
 #######        30 de Março de 2020                  ##########"
 
 # Variaveis
-# INSTALACOES COMPLEMENTARES E UPDATES
-yum -y install epel-release
 
-yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum install centos-release-scl -y
-yum install rh-python36 -y
-scl enable rh-python36 bash
+# Instalação de softwares básicos.
+yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+
+##### VARIAVEIS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
+varshare=$(dialog --stdout --inputbox 'Insira o nome do compartilhamento: ' 0 0)
+varpath=$(dialog --stdout --inputbox 'Insira o caminho da pasta compartilhada: ' 0 0)
+
+hostnamectl set-hostname $VARHOSTNAME
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY
+nmcli con up $VARINTERFACE
 
 # INSTALACAO DO PAINEL DE CONTROLE PARA SERVIDOR VIA WEB
 yum -y install cockpit
 systemctl enable --now cockpit.socket
-firewall-cmd --permanent --zone=public --add-service=cockpit
-firewall-cmd --reload
-
-echo " PAINEL DE GESTADO DO SERVIDOR INSTALADO COM SUCESSO PARA ACESSAR "
-echo " UTILIZE DIGITE IP:9090 EM UM NAVEGADOR "
-echo " PARA FAZER LOGIN USE OS DADOS DOS USUARIOS CRIADOS LOCALMENTES NA MAQUINA "    
-
-# Pacotes para instalacao
-yum -y install samba samba-client samba-common
 
 # SETUP SERVIDOR
-echo "Nome do Servidor:"
-read HOSTNAME
-hostnamectl set-hostname $HOSTNAME
-
-nmcli con show
-echo "DIGITE O NOME DA PLACA DE REDE CONECTADA: "
-read INTERFACE
-echo "IP DESTINADO AO SERVIDOR"
-read IPADDRESS
-echo "DIGITE O GATEWAY DA REDE:"
-read GATEWAY
-
-
-nmcli connection modify $INTERFACE ipv4.method manual ipv4.addresses $IPADDRESS/24 ipv4.gateway $GATEWAY ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search 
-nmcli connection up $INTERFACE
-
 systemctl stop firewalld
 systemctl disable firewalld
-
-echo "Nome do Compartilhamento: "
-echo "Exemplo: DADOS"
-read varshare
-
-echo "Digite o caminho completo da pasta que deseja compartilhar: "
-echo "Exemplo: /mnt/dados"
-read varpath
 
 yum -y install samba samba-client samba-common
 
@@ -104,7 +80,7 @@ echo " #
 
     [global]
 	workgroup = WORKGROUP
-	netbios name = $HOSTNAME
+	netbios name = $VARHOSTNAME
 	security = user
 
     
@@ -169,3 +145,6 @@ log level = 1 auth:5
         admin users = admin
         
  ####################################################################################################" > /etc/samba/smb.conf
+
+dialog --msgbox "SAMBA e PASTA configuradas com sucesso, para acessar use \\$VARHOSTNAME\\$varshare" 0 0
+dialog --msgbox "Sua configuração foi concluida \nAcesse a gerencia deste através do endereço \nhttps://$VARIPADDRESS:9090  \nusando o usuário de logado desta sessão do shell" 0 0

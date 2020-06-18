@@ -1,21 +1,20 @@
 #!/bin/sh
-# DESCRICAO: Efetua a configuração inicial do host CentOS 7 ou 8
-# SINOPSE: Efetua a configuração inicial do host CentOS 7 ou 8
+# DESCRICAO: Efetua a configuração inicial do host Debian/Ubuntu
+# SINOPSE: Efetua a configuração inicial do host Debian/Ubuntu
 # USO/EXEMPLO: ./setup.Centos_StartConfig.sh
 #
 # OPCOES: 
 # AUTHOR: Raphael Maria <http://raphaelmaria.com.br>
-# VERSAO: 1.0.1 in 17 de Junho de 2020
+# VERSAO: 0.0.1 em 17 de junho de 2020
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+sudo apt -y install dialog wget tar unzip vim make gcc dnf autoconf automake
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
 VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
-
 
 hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
@@ -24,13 +23,14 @@ nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/2
 nmcli con up $VARINTERFACE
 
 # Fazendo update de todo os sistema operacional
-yum -y upgrade
-yum -y update
+sudo apt -y upgrade
+sudo apt -y update
 
 # Instala o Dashboard WEB Red Hat Cockpit
-yum -y install cockpit
+echo 'deb http://deb.debian.org/debian stretch-backports main' > \
+ /etc/apt/sources.list.d/backports.list
+apt-get update
+sudo apt-get install cockpit
 systemctl enable --now cockpit.socket
-firewall-cmd --permanent --zone=public --add-service=cockpit
-firewall-cmd --reload
 
 dialog --msgbox "Sua configuração iniciar foi concluida \nAcesse este dispositivo através do endereço \nhttps://$VARIPADDRESS:9090  \nusando o usuário de logado desta sessão do shell" 0 0
