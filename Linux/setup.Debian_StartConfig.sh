@@ -18,7 +18,7 @@ VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede
 
 hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
-VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1\n$2\n$3}')
 nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY
 nmcli con up $VARINTERFACE
 
