@@ -1,4 +1,4 @@
-######### INSTALAÇÃO ZABBIX VIA DOCKER
+
 timedatectl set-timezone America/Sao_Paulo
 
 # Instalação de softwares básicos.
@@ -29,35 +29,36 @@ setenforce 0
 getenforce
 sestatus
 
-# 
-# https://download.docker.com/linux/centos/7/x86_64/stable/Packages/
-dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-dnf clean all
-dnf install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-dnf install -y docker-ce 
-systemctl enable -now docker-ce
+# Setup MariaDB
+dnf -y install mysql-server
+systemctl enable --now mysqld
+systemctl status mysqld
+mysql_secure_instalation << EOF
+yes
+1
+8!H58HefmPGU
+8!H58HefmPGU
+y
+y
+y
+y
+y
+EOF
+dialog --msgbox 'MySQL foi configurado com sucesso' 0 0
 
-docker swarm init
-docker container ls
-docker node ls
-docker node update --availability drain [host]
-docker network rm ingress
-docker network create \
---driver overlay \
---subnet=192.168.0.0/24 \
---gateway=192.168.8.1 \
---opt com.docker.network.driver.mtu=1500 \
-ingress
-
-docker node ls
-
-
-firewall-cmd --zone=public --add-masquerade --permanent
+'''
+mysql -u root -p << EOF
+8!H58HefmPGU
+create database zabbix character set utf8 collate utf8_bin;
+create user 'zabbix'@'localhost' identified by 'Z@bbix1989';
+grant all privileges on zabbix.* to 'zabbix'@'localhost';
+create user 'zabbix'@'[IP ADDRESS]' identified with mysql_native_password by 'Z@bbix1989';
+grant all privileges on zabbix.* to 'zabbix'@'[IP ADDRESS]';
+UPDATE mysql.user SET Super_Priv='Y' WHERE user='zabbix' AND host='[IP]';
+flush privileges
+'''
+# Setup Firewalld
+firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd reload
-
-zabbix-get -s [ip] -p 10050 -k "name"
-
-
-
 
 
