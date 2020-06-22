@@ -1,3 +1,14 @@
+#!/bin/sh
+# DESCRICAO: EFETUADO INSTALAÇÃO DO STORAGE EM SAMBA COM IPA
+# SINOPSE: 
+# USO/EXEMPLO: .\Install_SFZ.sh
+#
+# OPCOES: NÃO POSSUI OPÇÃO
+# AUTHOR: Raphael Maria <http://raphaelmaria.com.br>
+# VERSAO: 0.0.1
+# LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
+
+
 ######### INSTALAÇÃO ZABBIX VIA DOCKER
 timedatectl set-timezone America/Sao_Paulo
 
@@ -20,9 +31,9 @@ nmcli con up $VARINTERFACE
 yum -y install ansible  epel-release
 yum provides pip
 yum install python2-pip -y
-pip install pip --upgrade
-pip install ansible
-pip install ansible --upgrade
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
 
 # Setup SELINUX
 setenforce 0

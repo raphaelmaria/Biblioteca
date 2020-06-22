@@ -2,7 +2,7 @@
 timedatectl set-timezone America/Sao_Paulo
 
 # Instalação de softwares básicos.
-yum -y install dialog wget tar unzip vim make gcc dnf epel-release ipa-client
+yum -y install dialog wget tar unzip vim gcc dnf epel-release ipa-client
 yum -y install net-tools tcpdump nano curl 
 
 ##### VARIAVEIS
