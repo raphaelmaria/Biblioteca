@@ -2,12 +2,32 @@
 
 # Sistema operacional: CentOS 7
 
-# Update
-yum -y update
+# Instalação de softwares básicos.
+yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+
+##### VARIAVEIS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
+
+
+hostnamectl set-hostname $VARHOSTNAME
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
+nmcli con up $VARINTERFACE
+
+# INSTALACOES COMPLEMENTARES E UPDATES
+yum -y install ansible
+yum provides pip
+yum install python2-pip -y
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
+yum check-update
+yum update -y
 
 # Instalação Basica
-yum -y install gcc unzip wget mesa-libGL mesa-libGL-devel ntfs-3g.x86_64 nss dkms git dnf snapd vim ansible libselinux-python vlc smplayer ffmpeg HandBrake-{gui,cli} libdvdcss gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld
-yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 yum -y install freeipa-client
 yum -y groupinstall "X Window System"
 yum -y groupinstall "Fonts"
@@ -17,10 +37,6 @@ su -c 'yum install foo'
 
 # Configuração de CentOS
 package-cleanup --oldkernels --count=2
-hostnamectl set-hostname bigbrother.o2pos.com.br
-
-nmcli connection modify eno2 ipv4.method manual ipv4.addresses 192.168.8.24 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-nmcli connection up eno2
 
 yum -y install cockpit
 systemctl enable --now cockpit.socket

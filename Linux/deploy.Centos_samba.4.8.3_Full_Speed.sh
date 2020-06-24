@@ -7,16 +7,31 @@
 # Requisitos 
 # O Compartilhamento deve esta montando.
 
+# Instalação de softwares básicos.
+yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+
+##### VARIAVEIS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
+
+
+hostnamectl set-hostname $VARHOSTNAME
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
+nmcli con up $VARINTERFACE
 
 # INSTALACOES COMPLEMENTARES E UPDATES
-yum -y install epel-release
+yum -y install ansible
+yum provides pip
+yum install python2-pip -y
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
 yum check-update
 yum update -y
 
-yum -y install wget nss dkms git dnf snapd vim ansible libselinux-python nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
-yum install centos-release-scl -y
-yum install rh-python36 -y
-scl enable rh-python36 bash
 
 # INSTALACAO DO PAINEL DE CONTROLE PARA SERVIDOR VIA WEB
 yum -y install cockpit
@@ -34,20 +49,6 @@ yum -y install samba samba-client samba-common
 # SETUP SERVIDOR
 echo "Nome do Servidor:"
 read HOSTNAME
-hostnamectl set-hostname $HOSTNAME
-
-#INTERFACE = '(nmcli con show | awk 1git)'
-echo "DIGITE O NOME DA PLACA DE REDE:"
-read INTERFACE
-echo "IP DESTINADO AO SERVIDOR"
-read IPADDRESS
-echo "MASCARA:"
-read SUBNET
-echo "DIGITE O GATEWAY DA REDE:"
-read GATEWAY
-
-nmcli connection modify $INTERFACE ipv4.method manual ipv4.addresses $IPADDRESS/$SUBNET ipv4.gateway $GATEWAY ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
-nmcli connection up $INTERFACE
 
 systemctl stop firewalld
 systemctl disable firewalld

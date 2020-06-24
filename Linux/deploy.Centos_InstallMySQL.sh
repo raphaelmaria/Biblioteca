@@ -1,9 +1,31 @@
 #!/bin/bash
+# Instalação de softwares básicos.
+yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+
+##### VARIAVEIS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
+
+
+hostnamectl set-hostname $VARHOSTNAME
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
+nmcli con up $VARINTERFACE
+
+# INSTALACOES COMPLEMENTARES E UPDATES
+yum -y install ansible
+yum provides pip
+yum install python2-pip -y
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
+yum check-update
+yum update -y
 
 yum -y update
 yum -y upgrade
-yum -y install gcc unzip wget nss dkms git dnf snapd vim ansible libselinux-python
-yum -y install nfs-utils tcsh libXext libSM libXrender Xvfb xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 yum -y groupinstall "Development Tools"
 yum -y groupinstall "Legacy UNIX Compatibility"
 yum -y groupinstall "X Window System"
@@ -19,9 +41,6 @@ systemctl status mysqld
 
 PASS = grep 'temporary password' /var/log/mysqld.log
 echo "A senha temporaria é: $PASS"
-
-
-
 
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public

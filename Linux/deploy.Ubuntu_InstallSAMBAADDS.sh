@@ -8,18 +8,20 @@
 # VERSAO: 0.0.1
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
-echo "Digite o nome do Dominio: "
-read URLDOMAIN
+# Instalação de softwares básicos.
+yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
 
-echo "Digite o IP do servidor: "
-read IPADDRESS
+##### VARIAVEIS
+VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
 
-echo "Digite a mascara: "
-read IPMASK
 
-echo "Digite o GATEWAY: "
-read GATEWAY
-
+hostnamectl set-hostname $VARHOSTNAME
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
+nmcli con up $VARINTERFACE
 
 
 

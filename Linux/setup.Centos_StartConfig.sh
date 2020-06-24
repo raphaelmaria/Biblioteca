@@ -20,8 +20,18 @@ VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede
 hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
 VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
-nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
 nmcli con up $VARINTERFACE
+
+# INSTALACOES COMPLEMENTARES E UPDATES
+yum -y install ansible
+yum provides pip
+yum install python2-pip -y
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
+yum check-update
+yum update -y
 
 # Fazendo update de todo os sistema operacional
 yum -y upgrade

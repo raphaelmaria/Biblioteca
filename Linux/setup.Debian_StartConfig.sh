@@ -19,7 +19,7 @@ VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede
 hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
 VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1, $2, $3}')
-nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
 nmcli con up $VARINTERFACE
 
 # Instala o Dashboard WEB Red Hat Cockpit
