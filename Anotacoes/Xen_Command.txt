@@ -29,3 +29,7 @@ ls /ISOs -ld
 xe sr-create name-label=ISOs type=iso device-config:legacy_mode=true device-config:location=/ISOs content-type=iso
 
 
+/dev/sdb1: UUID="8e1d274d-46a5-44c5-b25d-717c938c8e6f" TYPE="ext4" PARTUUID="579590f4-63b4-4575-91cc-cc425f6a467b"
+
+
+xe sr-create content-type=user device-config:device=/dev/disk/by-id/ata-KINGSTON_SV300S37A240G_50026B7253011392 host-uuid="8e1d274d-46a5-44c5-b25d-717c938c8e6f" name-label=”Local Storage 2” shared=false type=lvm
