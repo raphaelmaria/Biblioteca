@@ -9,7 +9,7 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
+yum -y install dialog tree wget tar unzip vim make gcc dnf autoconf automake epel-release 
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)

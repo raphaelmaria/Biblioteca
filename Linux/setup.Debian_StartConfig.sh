@@ -9,7 +9,7 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-apt install dialog wget tar unzip vim make gcc autoconf automake -y
+apt install dialog tree wget tar unzip vim make gcc autoconf automake -y
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)

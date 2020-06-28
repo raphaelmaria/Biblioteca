@@ -25,12 +25,13 @@ wget
 mv /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg_original
 wget http://192.168.8.7/app/scripts/ansible/ansible.cfg
 mv ansible.cfg /etc/ansible
-mv /etc/ansible/hosts /etc/ansible/hosts_original
 
 # Setup de diretorios
-mkdir /AnsibleRepo/common/{tasks, handlers,files,templates,vars,defaults,meta} -p
+mkdir -p /ansible/{role,handlers,vars,meta,host_vars,group_vars,roles,templates,files}
+mkdir -p /ansible/role/defaults
+mkdir -p /ansible/roles/vars
 
 # Setup de hosts
-touch /AnsibleRepo/hosts
+touch /ansible/hosts
 cd /etc/ansible
-ln -s hosts /AnsibleRepo/hosts
+ln -s hosts /ansible/hosts
