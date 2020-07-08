@@ -5,10 +5,10 @@
 timedatectl set-timezone America/Sao_Paulo
 # INSTALACAO DE MULTIMIDIA CENTOS / FEDORA
 sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
-sudo dnf groupupdate core
-sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate sound-and-video
-sudo dnf install rpmfusion-free-release-tainted
+sudo dnf groupupdate core -y 
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y 
+sudo dnf groupupdate sound-and-video -y 
+sudo dnf install rpmfusion-free-release-tainted -y 
 sudo dnf install libdvdcss
 
 
