@@ -9,12 +9,7 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-WHOAMI=` ( whoami ) `
-echo "$WHOAMI"
-if [ "$WHOAMI" == "root" ]
-  then
-
-yum -y install dialog wget tar unzip vim make gcc dnf epel-release ipa-client
+yum -y install dialog wget tar unzip vim make gcc dnf epel-release 
 yum -y install net-tools tcpdump nano curl 
 yum -y install dolphin htop lshw gparted
 
@@ -65,8 +60,8 @@ KRITA="/usr/bin/krita"
 GNOMEBKP="/etc/gdm/custom.bkp"
 GNOMECONF=` ( cat /etc/gdm/custom.conf ) `
 SUDORES="/etc/sudores.bkp"
-AUTOSTARTFI="/home/$USERNAME/.config/autostart/update.desktop"
-AUTOSTARTFO="/home/$USERNAME/.config/autostart/"
+AUTOSTARTFI="/home/o2/.config/autostart/update.desktop"
+AUTOSTARTFO="/home/o2/.config/autostart/"
 LIBGBDM="/usr/lib64/libgbm.so.1.0.0"
 SNAPD="/var/lib/snapd/snap"
 SPOTIFY="Spotify version 1.1.10.546.ge08ef575, Copyright (c) 2019, Spotify Ltd"
@@ -76,15 +71,8 @@ rm -rf /tmp/paudio.txt
 echo $PAUDIOVRSINST >> /tmp/paudio.txt
 PAUDIO=` (  grep -o '^[^[:space:]]\+' /tmp/paudio.txt ) `
 
-USER1=` ( who -u ) `
-rm -rf /tmp/loggeduser.txt
-echo $USER1 >> /tmp/loggeduser.txt
-USER2=` (  sed -i 's/root//g' /tmp/loggeduser.txt ) `
-USER3=` (grep -o '^[^[:space:]]\+' /tmp/loggeduser.txt ) `
-USERNAME="$USER3"
-
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
-VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+VARINTERFACE=$(nmcli con show | grep "ethernet" | tail -1 | awk '{print $1}')
 nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
 nmcli con up $VARINTERFACE
 
@@ -92,8 +80,8 @@ hostnamectl set-hostname $VARHOSTNAME
 timedatectl set-timezone America/Sao_Paulo
 
 ##########  ADDUser Admin  ##########
-` usermod -a -G wheel $USERNAME `
-
+usermod -a -G wheel o2
+usermod -a -G wheel render
 #########  Adding User in sudores #####
 if [ ! -e "$SUDORES" ]; then
  cp -f /etc/sudores /etc/sudores.bkp
@@ -128,112 +116,31 @@ mv -f /etc/gdm/custom.conf /etc/gdm/custom.bkp
 fi
 
 ##########  FSTAB  ##########
-if [ "$MOUNTS" != "$MOUNTS2" ]
-then
-
-{
-if [ ! -d "/opt2" ]; then
- mkdir /opt2
-fi
-}
-{
-if [ ! -d "/mnt/deploy" ]; then
- mkdir /mnt/deploy
-fi
-}
-{
-if [ ! -d "/mnt/Onix" ]; then
- mkdir /mnt/Onix
-fi
-}
-{
-if [ ! -d "/mnt/Library" ]; then
- mkdir /mnt/Library
-fi
-}
-{
-if [ ! -d "/mnt/Publicidade" ]; then
- mkdir /mnt/Publicidade
-fi
-}
-{
-if [ ! -d "/mnt/Entretenimento" ]; then
- mkdir /mnt/Entretenimento
-fi
-}
-{
-if [ ! -d "/mnt/Entretenimento2" ]; then
- mkdir /mnt/Entretenimento2
-fi
-}
-{
-if [ ! -d "/mnt/Entretenimento3" ]; then
- mkdir /mnt/Entretenimento3
-fi
-}
-{
-if [ ! -d "/mnt/Entretenimento4" ]; then
- mkdir /mnt/Entretenimento4
-fi
-}
-{
-if [ ! -d "/mnt/RRender" ]; then
- mkdir /mnt/RRender 
-fi
-}
-{
-if [ ! -d "/mnt/RAW1" ]; then
- mkdir /mnt/RAW1 
-fi
-}
-{
-if [ ! -d "/mnt/RAW2" ]; then
- mkdir /mnt/RAW2 
-fi
-}
-{
-if [ ! -d "/mnt/RAW3" ]; then
- mkdir /mnt/RAW3 
-fi
-}
-if [ ! -d "/mnt/RAW4" ]; then
- mkdir /mnt/RAW4
-fi
-}
-{
-if [ ! -d "/mnt/RAWADV" ]; then
- mkdir /mnt/RAWADV 
-fi
-}
-{
-if [ ! -d "/mnt/Library2" ]; then
- mkdir /mnt/Library2/
-fi
-}
-{
-if [ ! -d "/mnt/install" ]; then
- mkdir /mnt/install 
-fi
-}
+umount -a
+mkdir -p /mnt/cache
+ln -s /mnt/cache /mnt/Cache_Nuke
+ln -s /mnt/cache /mnt/cache_nuke
+mkdir -p /opt2
+mkdir -p /mnt/{RAW1,RAW2,RAW3,RAW4,RAWADV,Publicidade,Onix,Entretenimento,Entretenimento2,Entretenimento3,Entretenimento4,RRender,deploy,Library,Library2,Install}
 chmod 777 /mnt/*
 chmod 777 /opt2
-echo "192.168.8.33:/opt                       /opt2                   nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.24:/deploy                    /mnt/deploy             nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.2:/Storage/Library            /mnt/Library            nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.14:/mnt/storage/Publicidade   /mnt/Publicidade        nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.31:/Storage/Entretenimento    /mnt/Entretenimento     nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.22:/Storage/Entretenimento2   /mnt/Entretenimento2    nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.25:/Storage/Entretenimento3   /mnt/Entretenimento3    nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.39:/Storage/Entretenimento4   /mnt/Entretenimento4    nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.200:/mnt/RRender              /mnt/RRender            nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.19:/Storage/RAW1              /mnt/RAW1               nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.32:/Storage/RAW2              /mnt/RAW2               nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.81:/mnt/storage/RAW4          /mnt/RAW3               nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults        0 0" >> /etc/fstab
-echo "192.168.8.48:/Storage/Library2          /mnt/Library2           nfs     defaults        0 0" >> /etc/fstab
-echo "#192.168.8.7:/Storage/install            /mnt/install            nfs     defaults        0 0" >> /etc/fstab
+echo "192.168.8.33:/opt                       /opt2                   nfs     defaults,nofail        0 0" >> /etc/fstab
+echo "192.168.8.24:/deploy                    /mnt/deploy             nfs     defaults,nofail        0 0" >> /etc/fstab
+echo "192.168.8.2:/Storage/Onix               /mnt/Onix               nfs     defaults,nofail        0 0" >> /etc/fstab
+echo "192.168.8.2:/Storage/Library            /mnt/Library            nfs     defaults,nofail        0 0" >> /etc/fstab
+echo "192.168.8.14:/mnt/storage/Publicidade   /mnt/Publicidade        nfs     defaults,nofail        0 0" >> /etc/fstab
+echo "192.168.8.31:/Storage/Entretenimento    /mnt/Entretenimento     nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.22:/Storage/Entretenimento2   /mnt/Entretenimento2    nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.25:/Storage/Entretenimento3   /mnt/Entretenimento3    nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.39:/Storage/Entretenimento4   /mnt/Entretenimento4    nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.200:/mnt/RRender              /mnt/RRender            nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.19:/Storage/RAW1              /mnt/RAW1               nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.32:/Storage/RAW2              /mnt/RAW2               nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.38:/Storage/RAW3              /mnt/RAW3               nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.81:/mnt/storage/RAW4          /mnt/RAW4               nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.86:/Storage/RAWADV            /mnt/RAWADV             nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.48:/Storage/Library2          /mnt/Library2           nfs     defaults,nofail         0 0" >> /etc/fstab
+echo "192.168.8.7:/Storage/install            /mnt/install            nfs     defaults,nofail         0 0" >> /etc/fstab
 mount -a
 fi
 
@@ -250,21 +157,19 @@ ln -s /var/lib/snapd/snap /snap
 fi
 
 ##############  NVidia   ###################
-`init 3`
-if [ ! -d "$NVINSTALLEDDIR" ]; then
-grubby --update-kernel=ALL   --args="rd.driver.blacklist=nouveau nouveau.modeset=0"
-cp -f $SOURCEDIR/NVIDIA.run $INSTALLDIR/NVIDIA.run
-cd $INSTALLDIR
-chmod 777 NVIDIA.run
-cp -f $SOURCEDIR/nvinstall.service $INSTALLDIR/nvinstall.service
-chmod 777 nvinstall.service
-cp -f $INSTALLDIR/nvinstall.service /etc/systemd/system/nvinstall.service
-/bin/systemctl enable nvinstall.service
+#if [ ! -d "$NVINSTALLEDDIR" ]; then
+##grubby --update-kernel=ALL   --args="rd.driver.blacklist=nouveau nouveau.modeset=0"
+#cp -f $SOURCEDIR/NVIDIA.run $INSTALLDIR/NVIDIA.run
+##cd $INSTALLDIR
+#chmod 777 NVIDIA.run
+#cp -f $SOURCEDIR/nvinstall.service $INSTALLDIR/nvinstall.service
+#chmod 777 nvinstall.service
+#cp -f $INSTALLDIR/nvinstall.service /etc/systemd/system/nvinstall.service
+#/bin/systemctl enable nvinstall.service
 ####### change Default Desktop #######
-sed -i 's/XSession=gnome/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
+#sed -i 's/XSession=gnome/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
 #reboot
-init 5
-fi
+#fi
 
 #############   Config LDAP  ###############
 if [ ! -e "$LDAPFILE" ]; then
