@@ -51,12 +51,11 @@ systemctl enable --now cockpit.socket
 firewall-cmd --permanent --zone=public --add-service=cockpit
 firewall-cmd --reload
 
-
-
-
+# Variaveis de Origem de Instalacao
 SOURCEINSTALL="/mnt/deploy/Installers"
 INSTALLDIR="/mnt/installers"
 
+# Variaveis de Destino de Instalacoes
 NUKEDIR="/usr/local/Nuke10.5v5/"
 NUKE11DIR="/usr/local/Nuke11.3v4/"
 RESOLVEDIR="/opt/resolve/bin/resolve"
@@ -75,7 +74,6 @@ NEATDIR="/usr/local/Neat Video v4 OFX/"
 ONIX="/etc/profile.d/onix.sh"
 OCIO="/etc/profile.d/ocio.sh"
 BLENDERDIR="/opt/blender-2.80/"
-#HOUDINIDIR="/opt/hfs17.5.173"
 HOUDINIDIR="/opt/hfs17.5.460"
 MAYA19DIR="/usr/autodesk/maya2019"
 MAYA17DIR="/usr/autodesk/maya2017"
@@ -109,17 +107,24 @@ rm -rf /tmp/paudio.txt
 echo $PAUDIOVRSINST >> /tmp/paudio.txt
 PAUDIO=` (  grep -o '^[^[:space:]]\+' /tmp/paudio.txt ) `
 
-# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
-VARINTERFACE=$(nmcli con show | grep "ethernet" | tail -1 | awk '{print $1}')
-nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.16 ipv4.dns-search o2pos.com
-nmcli con up $VARINTERFACE
-
-hostnamectl set-hostname $VARHOSTNAME
+# SET TIMEZONE 
 timedatectl set-timezone America/Sao_Paulo
 
-##########  ADDUser Admin  ##########
+# Criando User O2 Admin Local
+useradd o2
+passwd o2 << EOF
+o2
+o2
+EOF
 usermod -a -G wheel o2
+# Criando User Render Admin Local
+useradd render
+passwd render << EOF
+o22009render
+o22009render
+EOF
 usermod -a -G wheel render
+
 #########  Adding User in sudores #####
 if [ ! -e "$SUDORES" ]; then
  cp -f /etc/sudores /etc/sudores.bkp
@@ -194,26 +199,27 @@ systemctl enable --now snapd.socket
 ln -s /var/lib/snapd/snap /snap
 fi
 
-##############  NVidia   ###################
-#if [ ! -d "$NVINSTALLEDDIR" ]; then
-##grubby --update-kernel=ALL   --args="rd.driver.blacklist=nouveau nouveau.modeset=0"
-#cp -f $SOURCEDIR/NVIDIA.run $INSTALLDIR/NVIDIA.run
-##cd $INSTALLDIR
-#chmod 777 NVIDIA.run
-#cp -f $SOURCEDIR/nvinstall.service $INSTALLDIR/nvinstall.service
-#chmod 777 nvinstall.service
-#cp -f $INSTALLDIR/nvinstall.service /etc/systemd/system/nvinstall.service
-#/bin/systemctl enable nvinstall.service
-####### change Default Desktop #######
-#sed -i 's/XSession=gnome/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
-#reboot
-#fi
+# Instala o drive Atualizado da NVIDIA 
+if [ ! -d "$NVINSTALLEDDIR" ]; then
+grubby --update-kernel=ALL   --args="rd.driver.blacklist=nouveau nouveau.modeset=0"
+cp -f $SOURCEDIR/NVIDIA.run $INSTALLDIR/NVIDIA.run
+cd $INSTALLDIR
+chmod 777 NVIDIA.run
+cp -f $SOURCEDIR/nvinstall.service $INSTALLDIR/nvinstall.service
+chmod 777 nvinstall.service
+cp -f $INSTALLDIR/nvinstall.service /etc/systemd/system/nvinstall.service
+/bin/systemctl enable nvinstall.service
+
+###### change Default Desktop #######
+sed -i 's/XSession=gnome/XSession=kde/g' /var/lib/AccountsService/users/$USERNAME
+reboot
+fi
 
 #############   Config LDAP  ###############
 if [ ! -e "$LDAPFILE" ]; then
 
 #######  nss-pam-ldap nscd  #########
-echo "#######  Instalando nss-pam-ldap nscd  #########" ##### 
+echo "#######  Instalando nss-pam-ldap nscd  #########"  
 yum install -y nss-pam-ldap nscd 
 
 #######  nss-pam-ldap nscd  #########
