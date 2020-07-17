@@ -8,14 +8,52 @@
 # VERSAO: 0.0.1
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
+#!/bin/sh
+# DESCRICAO: Efetua a configuração inicial do host CentOS 7 ou 8
+# SINOPSE: Efetua a configuração inicial do host CentOS 7 ou 8
+# USO/EXEMPLO: ./setup.Centos_StartConfig.sh
+#
+# OPCOES: 
+# AUTHOR: Raphael Maria <http://raphaelmaria.com.br>
+# VERSAO: 1.0.1 in 17 de Junho de 2020
+# LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
+
 # Instalação de softwares básicos.
-yum -y install dialog wget tar unzip vim make gcc dnf epel-release 
-yum -y install net-tools tcpdump nano curl 
-yum -y install dolphin htop lshw gparted
+yum -y install dialog tree wget tar unzip tcsh vim make gcc dnf autoconf automake epel-release 
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+hostnamectl set-hostname $VARHOSTNAME
+
+# Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
+VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.15,192.168.8.100,8.8.8.8
+nmcli con up $VARINTERFACE
+
+# INSTALACOES COMPLEMENTARES E UPDATES
+yum -y install ansible
+yum provides pip
+yum install python2-pip -y
+pip2 install pip --upgrade
+pip2 install ansible
+pip2 install ansible --upgrade
+yum check-update
+yum update -y
+
+# Fazendo update de todo os sistema operacional
+yum -y upgrade
+yum -y update
+
+# Instala o Dashboard WEB Red Hat Cockpit
+yum -y install cockpit
+systemctl enable --now cockpit.socket
+firewall-cmd --permanent --zone=public --add-service=cockpit
+firewall-cmd --reload
+
+
+
+
 SOURCEINSTALL="/mnt/deploy/Installers"
 INSTALLDIR="/mnt/installers"
 
@@ -591,3 +629,6 @@ dialog --stdout --msgbox "Você precisa ser ROOT para executar esse script!" 0 0
 dialog --stdout --msgbox "Maquina não teve alterações" 0 0
 
 fi
+
+
+dialog --msgbox "Sua configuração iniciar foi concluida \nAcesse este dispositivo através do endereço \nhttps://$VARIPADDRESS:9090  \nusando o usuário de logado desta sessão do shell" 0 0
