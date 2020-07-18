@@ -5,3 +5,8 @@ Fonte: http://osxdaily.com/2012/10/02/stress-test-mac-cpu/
 
 sudo spctl --master-disable
 
+sudo defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+sudo echo "[default]" | sudo tee -a /etc/nsmb.conf
+sudo echo "[default]" | sudo tee -a /etc/nsmb.conf
+sudo sysctl -w net.inet.tcp.delayed_ack=0
+sudo echo "net.inet.tcp.delayed_ack=0" >> /etc/sysctl.conf
