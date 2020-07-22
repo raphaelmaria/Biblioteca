@@ -55,7 +55,7 @@ docker node update --availability drain [host]
 docker network rm ingress
 docker network create \
 --driver overlay \
---subnet=192.168.0.0/24 \
+--subnet=192.168.0.0/16 \
 --gateway=192.168.8.1 \
 --opt com.docker.network.driver.mtu=1500 \
 ingress

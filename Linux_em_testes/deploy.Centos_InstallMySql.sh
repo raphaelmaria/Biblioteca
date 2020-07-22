@@ -34,7 +34,7 @@ dnf -y install mysql-server
 systemctl enable --now mysqld
 systemctl status mysqld
 mysql_secure_instalation << EOF
-yes
+y
 1
 8!H58HefmPGU
 8!H58HefmPGU
@@ -52,8 +52,8 @@ mysql -u root -p << EOF
 create database zabbix character set utf8 collate utf8_bin;
 create user 'zabbix'@'localhost' identified by 'Z@bbix1989';
 grant all privileges on zabbix.* to 'zabbix'@'localhost';
-create user 'zabbix'@'[IP ADDRESS]' identified with mysql_native_password by 'Z@bbix1989';
-grant all privileges on zabbix.* to 'zabbix'@'[IP ADDRESS]';
+create user 'zabbix'@'192.168.8.4' identified with mysql_native_password by 'Z@bbix1989';
+grant all privileges on zabbix.* to 'zabbix'@'192.168.8.4';
 UPDATE mysql.user SET Super_Priv='Y' WHERE user='zabbix' AND host='[IP]';
 flush privileges
 '''
