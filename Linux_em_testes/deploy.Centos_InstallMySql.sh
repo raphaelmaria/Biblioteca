@@ -50,12 +50,12 @@ dialog --msgbox 'MySQL foi configurado com sucesso' 0 0
 mysql -u root -p << EOF
 8!H58HefmPGU
 create database zabbix character set utf8 collate utf8_bin;
-create user 'zabbix'@'localhost' identified by 'Z@bbix1989';
-grant all privileges on zabbix.* to 'zabbix'@'localhost';
-create user 'zabbix'@'[IP ADDRESS]' identified with mysql_native_password by 'Z@bbix1989';
-grant all privileges on zabbix.* to 'zabbix'@'[IP ADDRESS]';
-UPDATE mysql.user SET Super_Priv='Y' WHERE user='zabbix' AND host='[IP]';
-flush privileges
+create user 'auth'@'localhost' identified by 'O2@uth2020';
+grant all privileges on zabbix.* to 'auth'@'localhost';
+create user 'auth'@'192.168.8.30' identified with mysql_native_password by 'O2@uth2020';
+grant all privileges on zabbix.* to 'auth'@'192.168.8.30';
+UPDATE mysql.user SET Super_Priv='Y' WHERE user='auth' AND host='192.168.8.30';
+flush privileges;
 '''
 # Setup Firewalld
 firewall-cmd --permanent --add-port=3306/tcp
