@@ -12,6 +12,11 @@
 ######### INSTALAÇÃO ZABBIX VIA DOCKER
 timedatectl set-timezone America/Sao_Paulo
 
+# Install Cockpit
+yum -y install cockpit
+systemctl enable --now cockpit.socket
+firewall-cmd --permanent --zone=public --add-service=cockpit
+firewall-cmd --reload
 # Instalação de softwares básicos.
 yum -y install dialog wget tar unzip vim make gcc dnf epel-release ipa-client
 yum -y install net-tools tcpdump nano curl 
@@ -40,33 +45,32 @@ setenforce 0
 getenforce
 sestatus
 
-# 
-# https://download.docker.com/linux/centos/7/x86_64/stable/Packages/
-dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm
 dnf clean all
-dnf install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-dnf install -y docker-ce 
-systemctl enable -now docker-ce
+dnf install zabbix-server-mysql zabbix-web-mysql zabbix-nginx-conf zabbix-agent
+ '''
+Configure the database for Zabbix server
+Edit file /etc/zabbix/zabbix_server.conf
 
-docker swarm init
-docker container ls
-docker node ls
-docker node update --availability drain [host]
-docker network rm ingress
-docker network create \
---driver overlay \
---subnet=192.168.0.0/24 \
---gateway=192.168.8.1 \
---opt com.docker.network.driver.mtu=1500 \
-ingress
+DBPassword=password
+e. Configure PHP for Zabbix frontend
+Edit file /etc/nginx/conf.d/zabbix.conf, uncomment and set 'listen' and 'server_name' directives.
 
-docker node ls
+# listen 80;
+# server_name example.com;
+Edit file /etc/php-fpm.d/zabbix.conf, uncomment and set the right timezone for you.
+
+; php_value[date.timezone] = Europe/Riga
+ '''
+
+systemctl restart zabbix-server zabbix-agent nginx php-fpm
+systemctl enable zabbix-server zabbix-agent nginx php-fpm
 
 
 firewall-cmd --zone=public --add-masquerade --permanent
 firewall-cmd reload
 
-zabbix-get -s [ip] -p 10050 -k "name"
+
 
 
 
