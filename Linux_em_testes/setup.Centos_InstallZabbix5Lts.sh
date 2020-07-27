@@ -23,7 +23,6 @@ VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
 nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/16 ipv4.gateway 192.168.8.1 ipv4.dns 192.168.8.100,192.168.8.110 ipv4.dns-search o2pos.com.br
 nmcli con up $VARINTERFACE
 
-hostnamectl set-hostname $VARHOSTNAME.o2pos.com.br
 timedatectl set-timezone America/Sao_Paulo
 
 # Setup Zabbix 5 LTS

@@ -68,6 +68,15 @@ systemctl enable zabbix-server zabbix-agent nginx php-fpm
 
 
 firewall-cmd --zone=public --add-masquerade --permanent
+irewall-cmd --get-default-zone
+firewall-cmd --set-default-zone=public
+firewall-cmd --permanent --add-service=http
+firewall-cmd --permanent --add-service=zabbix-agent
+firewall-cmd --permanent --zone=public --add-port=10050/tcp
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --reload
+firewall-cmd --list-all
 firewall-cmd reload
 
 
