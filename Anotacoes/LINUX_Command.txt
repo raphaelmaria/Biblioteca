@@ -2,3 +2,6 @@ ps -aux - Verifica todas os serviços ativos em linux.
 dsmeg  - Para verificar o log de registro de hardware.
 hdparm -t /dev/sda - verificar leitura de Disco.
 netstat -t -l -p --numeric-ports = verificar portas que estão esperando conexão.
+
+
+sed -i 's/\r$//' *.sh
