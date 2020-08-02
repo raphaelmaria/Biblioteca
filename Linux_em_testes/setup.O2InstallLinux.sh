@@ -1,14 +1,4 @@
 #!/bin/sh
-# DESCRICAO: Script de Instalação e configuração de Softwares  Linux
-# SINOPSE: Efetua a instalação e configuração de softwares Linux
-# USO/EXEMPLO: ./setup.Centos_InstallZabbix5Lts.sh
-#
-# OPCOES: NÃO POSSUI OPÇÃO
-# AUTHOR: Raphael Maria <http://raphaelmaria.com.br>
-# VERSAO: 0.0.1
-# LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
-
-#!/bin/sh
 # DESCRICAO: Efetua a configuração inicial do host CentOS 7 ou 8
 # SINOPSE: Efetua a configuração inicial do host CentOS 7 ou 8
 # USO/EXEMPLO: ./setup.Centos_StartConfig.sh
