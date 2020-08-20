@@ -5,3 +5,6 @@ netstat -t -l -p --numeric-ports = verificar portas que estão esperando conexã
 
 
 sed -i 's/\r$//' *.sh
+
+#Comando para erro de Kernel Panic - Check
+mce=off
