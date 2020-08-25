@@ -9,18 +9,21 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-yum -y install dialog wget tree tar unzip vim make gcc dnf autoconf automake epel-release 
+yum -y install dialog wget tree tar unzip vim make gcc dnf autoconf automake
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 VARIPADDRESS=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
-VARGATEWAY=$(dialog --stdout --inputbox 'Insira o GATEWAY do hostname desta rede: ' 0 0)
+VARSUBMASK=$(dialog --stdout --inputbox 'Insira o IP ADDRESS do hostname desta maquina: ' 0 0)
+VARGATEWAY=$(dialog --stdout --inputbox 'Insira o SUBMASK desta rede: ' 0 0)
+VARDNS1=$(dialog --stdout --inputbox 'Insira o DNS 1 desta rede: ' 0 0)
+VARDNS2=$(dialog --stdout --inputbox 'Insira o DNS 2 desta rede: ' 0 0)
 
 
 hostnamectl set-hostname $VARHOSTNAME
 # Altera somente o IP Address de DHCP para FIXO com o ip designado anterimente.
 VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
-nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/24 ipv4.gateway $VARGATEWAY ipv4.dns 8.8.8.8,8.8.4.4,1.1.1.1
+nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/$VARSUBMASK ipv4.gateway $VARGATEWAY ipv4.dns $VARDNS1,$VARDNS2,8.8.8.8
 nmcli con up $VARINTERFACE
 
 

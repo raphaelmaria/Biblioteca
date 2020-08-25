@@ -10,6 +10,13 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 # Fonte: https://www.vultr.com/docs/how-to-install-snipe-it-on-centos-7
 
+
+# Variaveis
+DBNAME=snipedb
+DBUSER=snipe_user
+DBPASS=Sn1p31T2020!
+ROOTPASS=password
+
 # Step 1: System update
 sudo yum -y install epel-release
 sudo yum -y update
@@ -31,13 +38,28 @@ sudo yum -y install mariadb mariadb-server
 sudo systemctl start mariadb.service
 sudo systemctl enable mariadb.service
 
-sudo mysql_secure_installation
+sudo mysql_secure_installation << EOF
+
+n
+y
+n
+y
+y
+EOF
 
 # Step 5: Create database for Snipe-IT
-mysql -u root -e "CREATE DATABASE '$DBNAME'" -p "$ROOTPASS"
-mysql -u root -e "CREATE USER '$DBUSER'@'localhost' IDENTIFIED BY '$DBPASS'" -p "$ROOTPASS"
-mysql -u root -e "GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'localhost'" -p "$ROOTPASS"
-mysql -u root -e "FLUSH PRIVILEGES" -p "$ROOTPASS"
+mysql -u root -e "CREATE DATABASE '$DBNAME'" -p << EOF
+
+EOF
+mysql -u root -e "CREATE USER '$DBUSER'@'localhost' IDENTIFIED BY '$DBPASS'" -p << EOF
+
+EOF
+mysql -u root -e "GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'localhost'" -p << EOF
+
+EOF
+mysql -u root -e "FLUSH PRIVILEGES" -p << EOF
+
+EOF
 #mysql -u root -e "EXIT"
 
 # Step 6: Install Composer
@@ -54,7 +76,7 @@ sudo cp .env.example .env
 
 sudo vim .env
 sed -i 's/^APP_URL=null/APP_URL=snipe.o2pos.com.br/' .env
-sed -i 's/^APP_TIMEZONE=/APP_TIMEZONE=America/Sao_Paulo/' .env
+sed -i 's/^APP_TIMEZONE=/"APP_TIMEZONE=America/Sao_Paulo"/' .env
 sed -i 's/^DB_DATABASE=null/DB_DATABASE=snipeotdb/' .env
 sed -i 's/^DB_USERNAME=null/DB_USERNAME=snipeit_user/' .env
 sed -i 's/^DB_PASSWORD=null/DB_PASSWORD=Sn1p31T2020!/' .env
