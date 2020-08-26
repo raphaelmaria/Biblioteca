@@ -9,7 +9,7 @@
 # LICENCA: LICENSE GPL <http://gnu.org/licenses/gpl.html>
 
 # Instalação de softwares básicos.
-yum -y install dialog wget tree tar unzip vim make gcc dnf autoconf automake
+apt-get -y install dialog wget tree tar unzip vim make gcc autoconf automake
 
 ##### VARIAVEIS
 VARHOSTNAME=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
@@ -26,12 +26,9 @@ VARINTERFACE=$(nmcli con show | tail -1 | awk '{print $1}')
 nmcli con modify $VARINTERFACE ipv4.method manual ipv4.addresses $VARIPADDRESS/$VARSUBMASK ipv4.gateway $VARGATEWAY ipv4.dns $VARDNS1,$VARDNS2,8.8.8.8
 nmcli con up $VARINTERFACE
 
-
-
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
-sudo apt-get install vim -y
 
 #
 # Instalando o Samba 4 e o Kerberos 5
