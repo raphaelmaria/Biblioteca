@@ -40,7 +40,6 @@ echo " Abra um navegador e digite https://<IP da maquina>:9090" /
 # INSTALANDO O GRAFANA
 yum update -y
 wget https://dl.grafana.com/oss/release/grafana-6.5.2-1.x86_64.rpm
-yum install wget -y
 yum -y install initscripts fontconfig
 sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
 yum -y install fontconfig.*
