@@ -44,7 +44,7 @@ yum -y install samba samba-client samba-common
 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 mkdir -p /mnt/storage
-chcon -Rt samba_share_t /mnt/storage
+chcon -Rt samba_share_t /mnt/storage/*
 chmod -R 0770 /mnt/storage
 chown -R root:root /mnt/storage
 ulimit -n 16384
