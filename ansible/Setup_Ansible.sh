@@ -16,43 +16,43 @@ AnsibleDIR= "/etc/ansible"
 #####################################################################
 clear
 PS3="> Selecione o gerenciador de pacote do seu OS:"
-select OS APT YUM; do
+select OS in APT YUM; do
 echo "Instalacao e Configuracao de Ansible Server"
 case $OS in
     # Instalacao em Sistema Operacionais Debian/Ubuntu/apt
     APT)
-    sudo apt upgrade -y
-    sudo apt update -y
-    sudo apt -y install dialog wget vim ansible git htop dstat unzip tar gcc python
-    cd ~
-    git clone $GitRepo
-    sudo mv $AnsibleDIR/ansible.conf $AnsibleDIR/ansible.conf.bak
-    sudo mv $AnsibleDIR/hosts $AnsibleDIR/hosts.bak
-    sudo mv deploy/ansible/ansible.conf $AnsibleDIR
-    sudo apt-get install python-pip -y
-    sudo pip2 install pip --upgrade
-    sudo pip2 install ansible
-    sudo pip2 install ansible --upgrade
-    sudo touch $AnsibleDIR/hosts
+        sudo apt upgrade -y
+        sudo apt update -y
+        sudo apt -y install dialog wget vim ansible git htop dstat unzip tar gcc python
+        cd ~
+        git clone $GitRepo
+        sudo mv $AnsibleDIR/ansible.conf $AnsibleDIR/ansible.conf.bak
+        sudo mv $AnsibleDIR/hosts $AnsibleDIR/hosts.bak
+        sudo mv deploy/ansible/ansible.conf $AnsibleDIR
+        sudo apt-get install python-pip -y
+        sudo pip2 install pip --upgrade
+        sudo pip2 install ansible
+        sudo pip2 install ansible --upgrade
+        sudo touch $AnsibleDIR/hosts
 
     break ;;
 
     # Instalacao em Sistema Operacionais RedHat/Centos/yum
     YUM)
-    sudo yum update -y
-    sudo yum upgrade -y
-    sudo yum -y install dialog wget vim ansible git htop dstat unzip tar gcc epel-release python
-    cd ~
-    git clone $GitRepo
-    sudo mv $AnsibleDIR/ansible.conf $AnsibleDIR/ansible.conf.bak
-    sudo mv $AnsibleDIR/hosts $AnsibleDIR/hosts.bak
-    sudo mv deploy/ansible/ansible.conf $AnsibleDIR
-    sudo yum provides pip
-    sudo yum install python2-pip -y
-    sudo pip2 install pip --upgrade
-    sudo pip2 install ansible
-    sudo pip2 install ansible --upgrade
-    sudo touch $AnsibleDIR/hosts
+        sudo yum update -y
+        sudo yum upgrade -y
+        sudo yum -y install dialog wget vim ansible git htop dstat unzip tar gcc epel-release python
+        cd ~
+        git clone $GitRepo
+        sudo mv $AnsibleDIR/ansible.conf $AnsibleDIR/ansible.conf.bak
+        sudo mv $AnsibleDIR/hosts $AnsibleDIR/hosts.bak
+        sudo mv deploy/ansible/ansible.conf $AnsibleDIR
+        sudo yum provides pip
+        sudo yum install python2-pip -y
+        sudo pip2 install pip --upgrade
+        sudo pip2 install ansible
+        sudo pip2 install ansible --upgrade
+        sudo touch $AnsibleDIR/hosts
 
     
     break ;;
