@@ -5,6 +5,10 @@
 # 13 DE JANEIRO DE 2020
 
 # Instalação de softwares básicos.
+cd ~
+mkdir grafanatmp
+chmod -R 777 grafanatmp
+cd grafanatmp
 yum -y install dialog wget tar unzip vim make gcc dnf autoconf automake epel-release 
 
 ##### VARIAVEIS
@@ -42,6 +46,8 @@ yum update -y
 wget https://dl.grafana.com/oss/release/grafana-6.5.2-1.x86_64.rpm
 yum -y install initscripts fontconfig
 sudo yum localinstall grafana-6.5.2-1.x86_64.rpm
+wget https://dl.grafana.com/oss/release/grafana-7.2.0-1.x86_64.rpm
+sudo yum localinstall grafana-7.2.0-1.x86_64.rpm
 yum -y install fontconfig.*
 yum -y install freetype.*
 yum -y install urw-fonts
@@ -61,46 +67,19 @@ firewall-cmd --list-all
 sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server 
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 
-# INSTALAR BANCO DE DADOS LOCAIS
-cat <<EOF | tee /etc/yum.repos.d/MariaDB.repo
-[mariadb]
-name = MariaDB
-baseurl = http://yum.mariadb.org/10.4/centos7-amd64
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1
-EOF
-
-yum makecache fast
-yum -y install MariaDB-server MariaDB-client
-yum -y install php-mysqlnd
-
-systemctl enable --now mariadb
-systemctl status mariadb
-
-mysql_secure_installation
-
-
-#### CRIACAO INTERATIVA DE DB MARIADB ####
-
-mysql -u root -p << EOF
-"create database dashdb character set utf8 collate utf8_bin;"
-"grant all privileges on local.* to dashdb@localhost identified by 'password';"
-"quit;"
-EOF
-
 systemctl enable grafana-server
 systemctl start grafana-server
 
 # INSTALANDO PLUGINS UTEIS
 grafana-cli plugins install alexanderzobnin-zabbix-app
 grafana-cli plugins install grafana-clock-panel
-grafana-cli plugins install ntop-ntopng-datasource
 grafana-cli plugins install grafana-piechart-panel
 grafana-cli plugins install praj-ams-datasource
-grafana-cli plugins install cognitedata-datasource
 grafana-cli plugins install larona-epict-panel
 grafana-cli plugins install agenty-flowcharting-panel
 grafana-cli plugins install ddurieux-glpi-app
-grafana-cli plugins install monitoringartist-monitoringart-datasource
 
-systemctl restart grafana-server
+echo "allow_loading_unsigned_plugins = 'alexanderzobnin-zabbix-app'" >> /etc/grafana/grafana.ini
+service grafana-server restart
+cd ~
+rm -rf grafanatmp

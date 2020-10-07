@@ -1,0 +1,3 @@
+Entra no site do grafana no github, vai em releases, baixa o zip da versão antiga que você quer.
+Em seguida você remove a versão atual do plugin da pasta de plug-ins e descompacta essa versão que você baixou
+Reinicia o grafana-server e ele detecta o novo plug-in de versão antiga
