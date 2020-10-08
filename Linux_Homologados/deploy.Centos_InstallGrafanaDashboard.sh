@@ -56,11 +56,16 @@ yum -y install urw-fonts
 systemctl start firewalld
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
-firewall-cmd --add-service=grafana-server --permanent
 firewall-cmd --permanent --add-port=3000/tcp
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=3001/tcp
 firewall-cmd --permanent --add-port=3306/tcp
+
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --add-service=grafana-server
+
+
 firewall-cmd --reload
 firewall-cmd --list-all
 
@@ -80,6 +85,7 @@ grafana-cli plugins install agenty-flowcharting-panel
 grafana-cli plugins install ddurieux-glpi-app
 
 echo "allow_loading_unsigned_plugins = 'alexanderzobnin-zabbix-app'" >> /etc/grafana/grafana.ini
+echo "allow_loading_unsigned_plugins = alexanderzobnin-zabbix-datasource" >> /etc/grafana/grafana.ini
 service grafana-server restart
 cd ~
 rm -rf grafanatmp
