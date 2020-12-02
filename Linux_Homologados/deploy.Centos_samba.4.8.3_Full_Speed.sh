@@ -77,6 +77,8 @@ echo "# See smb.conf.example for a more detailed config file or
 	workgroup = WORKGROUP
 	netbios name = infoscale
 	security = user
+	map to guest = Bad User
+	guest ok = yes
 
 ##################################
 #####     LOGS DO SAMBA    #######
