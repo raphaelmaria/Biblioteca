@@ -1,16 +1,16 @@
 #Set-VpnConnection -Name "O2Pos_VPN_X3" -ServerAddress "179.191.69.146" -TunnelType L2TP -L2tpPsk "1DDBDA8CB14E7202" -Force -AuthenticationMethod MSChapv2 -SplitTunneling $True -EncryptionLevel "Optional"
 ################################
 # VARIABLES
-$Name = "O2Pos_VPN_X3"
-$ServerAddress = "o2filmes-sp.fxo-i.net" # IP Address or FQDN
-$TunnelType = "L2TP" # Values: PPTP | L2TP | SSTP | IKEv2 | Automatic
-$L2tpPsk = "1DDBDA8CB14E7202"
-$AuthenticationMethod = "MSCHAPv2" # Values: PAP | CHAP | MSCHAPv2 | EAP
-$EncryptionLevel = "Optional" # Values: NoEncryption | Optional | Required | Maximum
+$Name = "[NOME DA CONEXAO]"
+$ServerAddress = "[ENDERECO DO SERVIDOR]" # IP Address or FQDN
+$TunnelType = "[TIPO DE TUNEL]" # Values: PPTP | L2TP | SSTP | IKEv2 | Automatic
+$L2tpPsk = "{CHAVE L2TP}"
+$AuthenticationMethod = "[NIVEL DE AUTENTICACAO]" # Values: PAP | CHAP | MSCHAPv2 | EAP
+$EncryptionLevel = "[CRIPTOGRAFIA]" # Values: NoEncryption | Optional | Required | Maximum
 $UseWinlogonCredential = $false
 $RememberCredential = $true
 $SplitTunneling = $true
-$DnsSuffix = 'o2pos.com.br'
+$DnsSuffix = '[DNS LOCAL]'
 ################################
 
 Add-VpnConnection -Name $Name -AllUserConnection $true -ServerAddress $ServerAddress -TunnelType $TunnelType -EncryptionLevel $EncryptionLevel -AuthenticationMethod $AuthenticationMethod -DnsSuffix $DnsSuffix -L2tpPsk $L2tpPsk -Force

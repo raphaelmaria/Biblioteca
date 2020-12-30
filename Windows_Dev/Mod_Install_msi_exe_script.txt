@@ -1,6 +1,0 @@
-# Instalação em Windows Inicial
-# Criado por raphael maria
-
-msiexec /i "<programa.msi>" /qn /norestart
-start /wait "<programa.exe" /start
-<Programa.exe> /s /norestart
