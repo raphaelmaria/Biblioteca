@@ -11,7 +11,7 @@
 
 # Download do Drive de repositorio Interno (atualizado em 06/08/2020)
 cd /root
-wget http://192.168.8.7/app/linux/Drivers/NVIDIA/NVIDIA-Linux-x86_64-440.100.run
+wget http://[IP ADDRESS]/{Directory}/NVIDIA-Linux-x86_64-440.100.run
 # Aplicando permissoes
 chmod 777 NVIDIA-Linux-x86_64-*.*.run
 chmod +X NVIDIA-Linux-x86_64-*.*.run

@@ -7,7 +7,7 @@
 ::
 :: ################################################
 
-net use I: \\192.168.8.7\Install o22009render /user:render
+net use I: \\{IP ADDRESS}\{PATH} {PASSWORD} /user:{USER}
 mkdir %userprofile%\Documents\maya\animBot_enterprise
 copy "i:\Windows\Padrao 3D\animBot\animBot_1_1_16_Ongoing\animBot" %userprofile%\Documents\maya\animBot_enterprise /Y
 copy "i:\Windows\Padrao 3D\animBot\animBot_1_1_16_Ongoing\config.json" %userprofile%\Documents\maya\animBot_enterprise /Y
