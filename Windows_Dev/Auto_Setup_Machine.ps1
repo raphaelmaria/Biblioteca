@@ -67,7 +67,7 @@ do
              Write-Host "Iniciando Copia dos arquivos para o repositorio local"
              copy '\\0.0.0.0\PASTA COMPARTILHADA\PROGRAMA_1.exe' 'C:\Suporte'
              copy '\\0.0.0.0\PASTA COMPARTILHADA\PROGRAMA_2.msi' 'C:\Suporte'
-             copy '\\0.0.0.0\PASTA COMPARTILHADA\SCRIPT_AUXILIAR.bat' 'C:\Suporte'
+             copy '\\0.0.0.0\PASTA COMPARTILHADA\Auto_Setup_Machine.bat' 'C:\Suporte'
 
               #[FAZENDO DOWNLOAD DE ARQUIVOS DIRETO DA INTERNET (DEPENDENDO DO AMBIENTE)]
               cd 'C:\Suporte'
