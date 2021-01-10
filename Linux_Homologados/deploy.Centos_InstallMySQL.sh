@@ -42,6 +42,8 @@ systemctl status mysqld
 PASS = grep 'temporary password' /var/log/mysqld.log
 echo "A senha temporaria é: $PASS"
 
+
+
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=public
 firewall-cmd --permanent --add-port=3306/tcp
