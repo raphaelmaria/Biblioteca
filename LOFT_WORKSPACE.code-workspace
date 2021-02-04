@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "LoftIT",
+			"path": "..\\LoftIT"
+		},
+		{
+			"name": "prebuild",
+			"path": "..\\prebuild"
+		},
+		{
+			"name": "O2Filmes",
+			"path": "..\\O2Filmes"
+		},
+		{
+			"name": "bioritmo",
+			"path": "..\\bioritmo"
+		}
+	],
+	"settings": {}
+}
