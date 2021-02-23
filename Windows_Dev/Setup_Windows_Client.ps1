@@ -13,13 +13,13 @@ if ($RedeEXT -eq "true"){
     Write-Host "Instalando Chocolaty Apps Manager"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     Write-Host "Iniciando Instalacao de Aplicativos"
-    choco install adobereader -y
-    choco install googlechrome -y
-    choco install jre8 -y
-    choco install 7zip.install -y
-    choco install winrar -y
-    choco install spotify -y
-    choco install vlc -y
+    choco install adobereader -dvfy
+    choco install googlechrome -dvfy
+    choco install jre8 -dvfy
+    choco install 7zip.install -dvfy
+    choco install winrar -dvfy
+    choco install spotify -dvfy
+    choco install vlc -dvfy
 
 
 }else{
