@@ -13,15 +13,27 @@ if ($RedeEXT -eq "true"){
     Write-Host "Instalando Chocolaty Apps Manager"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     Write-Host "Iniciando Instalacao de Aplicativos"
-    choco install adobereader -dvfy
-    choco install googlechrome -dvfy
-    choco install jre8 -dvfy
-    choco install 7zip.install -dvfy
-    choco install winrar -dvfy
-    choco install spotify -dvfy
-    choco install vlc -dvfy
-
-
+                choco install anydesk.install -dvfy
+                choco install silverlight -dvfy
+                choco install dotnet4.7.2 -dvfy
+                choco install vcredist2005 -dvfy
+                choco install vcredist2008 -dvfy
+                choco install vcredist2012 -dvfy
+                choco install vcredist2013 -dvfy
+                choco install vcredist2015 -dvfy
+                choco install vcredist2017 -dvfy
+                choco install vcredist140 -dvfy
+                choco install spotify -dvfy
+                choco install googlechrome -dvfy 
+                choco install adobereader -dvfy
+                choco install 7zip.install -dvfy
+                choco install winrar -dvfy
+                choco install jre8 -dvfy
+                choco install lightshot.install -dvfy
+                choco install vlc -dvfy
+                choco install powershell4 -dvfy
+                choco install whatsapp -dvfy
+                choco install pswindowsupdate -dvfy
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
 }
