@@ -3,11 +3,6 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # [INSTALACAO DO ANTIVIRUS]
 Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
 
-#           [CHANGE PASSWORD IN LOFT USER ADMINISTRATOR]
-$Password = "P@ssw0rd2840" -AsSecureString
-$UserAccount = Get-LocalUser -Name "Loft User"
-$UserAccount | Set-LocalUser -Password $Password
-
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
 choco install vcredist2005 -dvfy
 choco install vcredist2008 -dvfy
@@ -31,6 +26,11 @@ if ($JCService.Status -eq "Running"){
     Write-Host "###############################################"
     Write-Host ">>> INSTALACAO EFETUADA COM SUCESSO! <<<" 
     start-sleep 5
+
+    # [REDEFINIR SENHA]
+    $LocalUser = Get-LocalUser -Name "Loft User"
+    $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
+    $LocalUser | Set-LocalUser -Password $Password
     Stop-Computer
     exit
 }else{
