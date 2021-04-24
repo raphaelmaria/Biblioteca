@@ -7,7 +7,6 @@ $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
     Write-Host "Maquina conectada com a Internet" -ForegroundColor Green
     Write-Host "Efetuando Download do Conteudo Atualizado!"
-    cd 'C:\Suporte'
 #               Instalacao usando o Chocolaty como Repositorio
     Write-Host "Instalando Chocolaty Apps Manager"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -22,7 +21,6 @@ if ($RedeEXT -eq "true"){
                 choco install vcredist2015 -dvfy
                 choco install vcredist2017 -dvfy
                 choco install vcredist140 -dvfy
-                choco install spotify -dvfy
                 choco install googlechrome -dvfy 
                 choco install adobereader -dvfy
                 choco install 7zip.install -dvfy
@@ -31,7 +29,6 @@ if ($RedeEXT -eq "true"){
                 choco install lightshot.install -dvfy
                 choco install vlc -dvfy
                 choco install powershell4 -dvfy
-                choco install whatsapp -dvfy
                 choco install pswindowsupdate -dvfy
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
