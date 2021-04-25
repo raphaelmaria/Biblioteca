@@ -2,6 +2,17 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 Set-ExecutionPolicy RemoteSigned -Force
 
+#Identificar a Versao do PowerShell
+Get-Date | Out-File ".\Log.txt"
+Write-Host "A versao do Seu POWERSHELL é:" | $PSVersionTable.PSVersion | Out-File ".\Log.txt"
+
+# Informacoes da Maquina
+Write-Host "As informacoes da Maquina que esta sendo executando é:" | Get-Host 2>> .\Log.txt
+Write-Host 'Ultimo reboot foi: '
+Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property CSName, LastBootUpTime
+
+#Update do HELP
+Write-Host "Fazendo Atualizacao do HELP do POWERSHELL" | Update-Help 2>> .\Log.txt
 
 $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
@@ -38,3 +49,10 @@ $DownloadOffice = 'https://mega.nz/file/JsIzlIaZ#y_73rzBceeD12ePfBxkLomWuZWVSSfA
 $DownloadAtivador = 'https://mega.nz/file/484AVaLC#ccIQT0rY1ckw6-7i7s5kLgRakp-PPwKw9BDAK-Oo4sM'
 Start-Process chrome.exe $DownloadOffice
 Start-Process chrome.exe $DownloadAtivador
+
+# Listar servicos em execusao durante a instalacao
+Start-Transcript .\Log.txt
+Write-Host "Servicos em Execucao:"
+Get-Service | Where-Object {$_.Status -eq "Running"}
+Write-Host "Servicos em Parada:"
+Get-Service | Where-Object {$_.Status -ne "Running"}
