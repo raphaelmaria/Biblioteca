@@ -1,7 +1,6 @@
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
 
 # [INSTALACAO DO ANTIVIRUS]
-Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
 
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
 choco install vcredist2005 -dvfy
@@ -31,6 +30,9 @@ if ($JCService.Status -eq "Running"){
     $LocalUser = Get-LocalUser -Name "Loft User"
     $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
     $LocalUser | Set-LocalUser -Password $Password
+
+    Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
+
     Stop-Computer
     exit
 }else{
