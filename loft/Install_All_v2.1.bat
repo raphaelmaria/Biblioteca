@@ -33,7 +33,7 @@ rem start /wait msiexec /package "C:\Suporte\Setup_FortiClient.msi" /passive
 @echo.
 @echo =====================================================
 echo "Removendo Pontos de Restauracao"
-vssadmin delete shadows /All
+REM vssadmin delete shadows /All
 
 @echo "SET WALLPAPER DEFAULT"
 reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d "" /f 
