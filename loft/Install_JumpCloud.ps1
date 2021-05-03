@@ -10,35 +10,38 @@ choco install vcredist2015 -dvfy
 choco install vcredist2017 -dvfy
 choco install vcredist140 -dvfy
 
-Write-Host ">>> INSTALANDO JUMP CLOUD AGENT <<<"
+# [REDEFINIR SENHA]
+$LocalUser = Get-LocalUser -Name "Loft User"
+$Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
+$LocalUser | Set-LocalUser -Password $Password
+Write-Host ">_ EFETUADO A TROCA DA SENHA ADMIN COM SUCESSO!..."
+Write-Host " "
+Write-Host " "
+
+Write-Host ">_ INSTALANDO JUMP CLOUD AGENT"
 cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "ef10c8ee36a34a414100d8c1eb2d93f26464acc5"
 Start-Sleep 15   
 
-# [INSTALACAO DO ANTIVIRUS CROWNSTRIKE]
-Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
-Write-Host ">>> ANTIVIRUS INSTALADO COM SUCESSO <<<"
-Start-Sleep 15
-
 #           [ELE AGUARDA 15 SEGUNDOS, PORQUE AINDA EM SEGUNDO PLANO, A INSTALACAO ESTA EM ANDAMENTO]              
-Write-Host "Iniciando Servicos do JumpCloud"
+Write-Host ">_ Iniciando Servicos do JumpCloud"
 
 #           [BUSCA O SERVICO E VERIFICA O STATUS]
 $JCService = Get-Service -Name "jumpcloud-agent"
 if ($JCService.Status -eq "Running"){                
     Write-Host "###############################################"
-    Write-Host ">>> SERVICO JUMP CLOUD ESTA EM EXECUCAO! <<<"
+    Write-Host ">_ SERVICO JUMP CLOUD ESTA EM EXECUCAO! <<<"
     Write-Host "###############################################"
-    Write-Host ">>> INSTALACAO EFETUADA COM SUCESSO! <<<" 
-    start-sleep 5
-
-    # [REDEFINIR SENHA]
-    $LocalUser = Get-LocalUser -Name "Loft User"
-    $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
-    $LocalUser | Set-LocalUser -Password $Password
-
+    Write-Host ">_ INSTALACAO EFETUADA COM SUCESSO! <<<" 
+    Write-Host "###############################################"
+    Write-Host " "
+    Write-Host " "
+    start-sleep 15
     
-    Stop-Computer
-    exit
+    # [INSTALACAO DO ANTIVIRUS CROWNSTRIKE]
+    Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
+    Write-Host ">_ Crowd Strike Falcon INSTALADO COM SUCESSO"
+    Start-Sleep 5
 }else{
     Write-Host "Servico nao iniciou, Reiniciando a maquina"
-    Restart-Computer}        
+    Restart-Computer}
+    
