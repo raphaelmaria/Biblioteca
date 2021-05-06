@@ -1,14 +1,15 @@
 @echo off
-@echo INVENTARIO EM ANDAMENTO
-Z:\Inventory\WinAudit\WinAudit.exe /r=goNtDabpmiG /f=Z:\Inventory\Hosts\LOFT-SPW-%patrimonio%.html /T=datetime
+REM @echo INVENTARIO EM ANDAMENTO
+REM Z:\Inventory\WinAudit\WinAudit.exe /r=goNtDabpmiG /f=Z:\Inventory\Hosts\LOFT-SPW-%patrimonio%.html /T=datetime
 @echo *****************************************************
 REM Script de Instalacao de Executaveis EXE e MSI
 @echo.
 @echo Empresa: Loft
 @echo Desenvolvedor: Raphael xxxxx xx xxxxxxxxx Maria
 REM "Cargo: Analista de Suporte"
-@echo Versaoo 2.1
+@echo Versaoo 2.6
 @echo Criado em 30 de Dezembro de 2020
+@echo Atualizado em 06/05/2021
 REM Ticket Origem:
 REM Solicitante:
 @echo Descricao: Automatiza a customizacao de novas maquinas.
