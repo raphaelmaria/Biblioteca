@@ -41,6 +41,7 @@ if ($JCService.Status -eq "Running"){
     Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
     Write-Host ">_ Crowd Strike Falcon INSTALADO COM SUCESSO"
     Start-Sleep 5
+    pause
 }else{
     Write-Host "Servico nao iniciou, Reiniciando a maquina"
     Restart-Computer}
