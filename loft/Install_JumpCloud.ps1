@@ -27,11 +27,13 @@ Write-Host "###############################################"
 cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "ef10c8ee36a34a414100d8c1eb2d93f26464acc5"
 Start-Sleep 30   
 
+Start-Process -Wait 'C:\Suporte\etapa5.bat'
+
 # [INSTALACAO DO ANTIVIRUS CROWNSTRIKE]
-Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
-Write-Host "###############################################"
-Write-Host ">_ Crowd Strike Falcon INSTALADO COM SUCESSO"
-Write-Host "###############################################"
+#Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
+#Write-Host "###############################################"
+#Write-Host ">_ Crowd Strike Falcon INSTALADO COM SUCESSO"
+#Write-Host "###############################################"
 
 #   [ELE AGUARDA 15 SEGUNDOS, PORQUE AINDA EM SEGUNDO PLANO, A INSTALACAO ESTA EM ANDAMENTO]              
 Write-Host ">_ Iniciando Servicos do JumpCloud"
@@ -44,7 +46,7 @@ if ($JCService.Status -eq "Running"){
     Write-Host ">_ INSTALACAO EFETUADA COM SUCESSO! <<<" 
     Write-Host "###############################################"
     start-sleep 20
-    pause
+    exit
 }else{
     Write-Host "Servico nao iniciou, Reiniciando a maquina"
     Restart-Computer}
