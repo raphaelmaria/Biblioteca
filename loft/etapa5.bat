@@ -1,5 +1,3 @@
-Powershell.exe -Command "& {Start-Process Powershell.exe -Verb RunAs C:\Suporte\Install_JumpCloud.ps1}"
-
 @echo ">_ SET WALLPAPER DEFAULT"
 reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d "" /f 
 reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d C:\Suporte\2021_04_Wallpaper_Project.jpg /f
@@ -15,4 +13,3 @@ REM INSTALACA DO NETSKOPE
 msiexec /I NSClient.msi token=30UcayRWz0vgImspSxOe host=loft-br.de.goskope.com autoupdate=on
 
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Start_PostInstall.bat"
-
