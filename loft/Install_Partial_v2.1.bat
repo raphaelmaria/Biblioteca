@@ -1,8 +1,8 @@
 @echo off
-@echo INVENTARIO EM ANDAMENTO
-set p/ patrimonio = Patrimonio da maquinas
-echo Fazendo Inventario do Patrimonio %patrimonio%
-Z:\Inventory\WinAudit\WinAudit.exe /r=goNtDabpmiG /f=Z:\Inventory\Hosts\LOFT-SPW-%patrimonio%.html /T=datetime
+REM @echo INVENTARIO EM ANDAMENTO
+REM set p/ patrimonio = Patrimonio da maquinas
+REM cho Fazendo Inventario do Patrimonio %patrimonio%
+REM :\Inventory\WinAudit\WinAudit.exe /r=goNtDabpmiG /f=Z:\Inventory\Hosts\LOFT-SPW-%patrimonio%.html /T=datetime
 @echo *****************************************************
 REM Script de Instalacao de Executaveis EXE e MSI
 @echo.
@@ -30,8 +30,8 @@ echo "Instalando Zoom (Para TODOS os usuarios)"
 @echo.
 @echo *****************************************************
 @echo *****************************************************
-echo "Removendo Pontos de Restauracao"
-vssadmin delete shadows /All
+REM cho "Removendo Pontos de Restauracao"
+REM vssadmin delete shadows /All
 @echo =====================================================
 
 @echo ">_ SET WALLPAPER DEFAULT"

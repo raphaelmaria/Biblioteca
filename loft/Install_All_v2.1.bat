@@ -1,6 +1,3 @@
-@echo off
-REM @echo INVENTARIO EM ANDAMENTO
-REM Z:\Inventory\WinAudit\WinAudit.exe /r=goNtDabpmiG /f=Z:\Inventory\Hosts\LOFT-SPW-%patrimonio%.html /T=datetime
 @echo *****************************************************
 REM Script de Instalacao de Executaveis EXE e MSI
 @echo.
@@ -16,35 +13,11 @@ REM Solicitante:
 REM Código com comentários:
 @echo *****************************************************
 @echo.
-@echo *****************************************************
-reg import C:\Suporte\TeamViewer_Settings.reg
-echo "Instalando Slack Legacy (Para TODOS os usuarios)"
-    start /wait msiexec /package "C:\Suporte\SlackSetup.msi" /passive
-@echo *****************************************************
-@echo.
-@echo *****************************************************
 echo "Instalando Zoom (Para TODOS os usuarios)"
-    start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive
+    start /wait 
 @echo *****************************************************
 @echo.
 @echo *****************************************************
-rem echo "Instalando Fortnet - Client Endpoint with VPN"
-rem start /wait msiexec /package "C:\Suporte\Setup_FortiClient.msi" /passive
-@echo *****************************************************
-@echo.
-@echo =====================================================
-echo "Removendo Pontos de Restauracao"
-REM vssadmin delete shadows /All
 
-@echo ">_ SET WALLPAPER DEFAULT"
-reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d "" /f 
-reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d C:\Suporte\2021_04_Wallpaper_Project.jpg /f
-reg add "HKEY_CURRENT_USER\control panel\desktop" /v WallpaperStyle /t REG_SZ /d 2 /f
-RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 
-
-@echo ">_ Registrando Team Viewer Padroes Loft"
-reg import C:\Suporte\TeamViewer_Settings.reg
-reg import C:\Suporte\TeamViewer_Settings.reg /reg:32
-reg import C:\Suporte\TeamViewer_Settings.reg /reg:64
 exit
 
