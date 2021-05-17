@@ -14,7 +14,7 @@ REM Código com comentários:
 @echo *****************************************************
 @echo.
 echo "Instalando Zoom (Para TODOS os usuarios)"
-    start /wait 
+    start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive /l*v C:\Suporte\ZoomSetup.log
 @echo *****************************************************
 @echo.
 @echo *****************************************************

@@ -1,5 +1,9 @@
 #if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
 #Set-ExecutionPolicy RemoteSigned
+
+Write-Host ">_ Efetuando Atualizacao" 
+choco upgrade all
+
 Write-Host "###############################################"
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
 Write-Host "###############################################"
@@ -27,7 +31,10 @@ Write-Host "###############################################"
 cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "ef10c8ee36a34a414100d8c1eb2d93f26464acc5"
 Start-Sleep 30   
 
-Start-Process -Wait 'C:\Suporte\etapa5.bat'
+Write-Host "#>_ Limpando Cache Chocolatey"
+Remove-Item C:\WINDOWS\TEMP\chocolatey\*
+Remove-Item C:\C:\Programdata\chocolatey\lib\zoom
+Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
 
 # [INSTALACAO DO ANTIVIRUS CROWNSTRIKE]
 #Start-Process -wait powershell -verb runas -ArgumentList "-file C:\Suporte\crowdstrike-facon-ps.ps1"
