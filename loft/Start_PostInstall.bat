@@ -14,7 +14,5 @@ reg import C:\Suporte\TeamViewer_Settings.reg /reg:64
 REM INSTALACA DO NETSKOPE
 start /wait msiexec /package "C:\Suporte\NSClient.msi" token="30UcayRWz0vgImspSxOe" host="loft-br.de.goskope.com" autoupdate="on" /qn /l*v C:\Suporte\nscinstall.log
 
-Powershell.exe -Command "& {Start-Process Powershell.exe -Verb RunAs C:\Suporte\crowdstrike-facon-ps.ps1}"
-
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Start_PostInstall.bat"
 

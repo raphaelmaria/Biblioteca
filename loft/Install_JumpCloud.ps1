@@ -1,5 +1,5 @@
-#if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
-#Set-ExecutionPolicy RemoteSigned
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
+Set-ExecutionPolicy RemoteSigned
 
 Write-Host "###############################################"
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
@@ -38,6 +38,7 @@ Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
 #Write-Host "###############################################"
 #Write-Host ">_ Crowd Strike Falcon INSTALADO COM SUCESSO"
 #Write-Host "###############################################"
+Powershell.exe -Command "& {Start-Process Powershell.exe -Verb RunAs C:\Suporte\crowdstrike-facon-ps.ps1}"S
 
 #   [ELE AGUARDA 15 SEGUNDOS, PORQUE AINDA EM SEGUNDO PLANO, A INSTALACAO ESTA EM ANDAMENTO]              
 Write-Host ">_ Iniciando Servicos do JumpCloud"
