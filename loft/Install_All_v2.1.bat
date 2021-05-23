@@ -23,11 +23,7 @@ REM    start /wait msiexec /package "C:\Suporte\SlackSetup.msi" /passive
 @echo.
 @echo *****************************************************
 echo "Instalando Zoom (Para TODOS os usuarios)"
-<<<<<<< Updated upstream
     start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive /l*v C:\Suporte\ZoomSetup.log
-=======
-start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive
->>>>>>> Stashed changes
 @echo *****************************************************
 @echo.
 @echo *****************************************************

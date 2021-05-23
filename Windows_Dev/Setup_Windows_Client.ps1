@@ -39,8 +39,6 @@ if ($RedeEXT -eq "true"){
                 choco install jre8 -dvfy
                 choco install lightshot.install -dvfy
                 choco install vlc -dvfy
-                choco install powershell4 -dvfy
-                choco install pswindowsupdate -dvfy
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
 }

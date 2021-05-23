@@ -1,0 +1,24 @@
+Unsupported benchmarks
+3DMark 11 - 3D11-ADV-DJ72-S63F-PNHK-LCUM-SSSX
+https://benchmarks.ul.com/downloads/3dmark11.zip
+
+3DMark Vantage - 3DMVA-S1R5T-HXXPD-PWFPT-LF3HV-TQ5AZ-K5T5J-W1UEC
+https://benchmarks.ul.com/downloads/3dmark-vantage.exe
+
+3DMark06 - 3DM06-YKL9-C7R6-73WW-AAPA-VHKW
+https://benchmarks.ul.com/downloads/3dmark06.exe
+
+3DMark05 - C1S0A-2VF80-D6RHW-UWZLU
+https://benchmarks.ul.com/downloads/3dmark05.exe
+
+3DMark03 - N4LWE-T6HUX-8U4JB-28YLV
+https://benchmarks.ul.com/downloads/3dmark03.exe
+
+
+Para Sistema Operacionais
+PCMark 8 - PCM8-ADV-2TPT7-TKFDA-3HXUD-TZC4L
+https://benchmarks.ul.com/downloads/pcmark8.zip
+
+PCMark 7 - PCM7-ADV-2W9R9-4U6RJ-X43A9-J3RE5
+https://benchmarks.ul.com/downloads/pcmark7.exe
+
