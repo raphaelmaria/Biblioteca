@@ -70,8 +70,10 @@ if ($RedeEXT -eq "true"){
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
         Invoke-WebRequest -Uri $ChocoInstallBat -OutFile Install_Choco.bat
         cmd /c C:\Suporte\Install_Choco.bat
-       
+# >_ Aplica a permissao de SIM em modo Global para o Chocolatey
         choco feature enable -n=allowGlobalConfirmation
+ 
+# >_ Instala Aplicações        
         choco install slack -dvfy
         choco install google-drive-file-stream -dvfy
         choco install googlechrome -dvfy 
