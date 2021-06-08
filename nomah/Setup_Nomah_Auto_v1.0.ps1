@@ -22,7 +22,7 @@ Set-ExecutionPolicy RemoteSigned
 # Apontamentos de URL's usadas nesse Script
 $TeamViewerHostEXE = "https://customdesign.teamviewer.com/download/version_14x/6n2mncz_windows/TeamViewer_Host_Setup.exe"
 $ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
-$
+
 #SET KEY
 $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHkey.txt"
 $NOTE = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHnote.txt"
@@ -37,6 +37,8 @@ $NewHost =  "$HostNameDefault$PATRIMONIO"
 
 Write-Host 'O nome atual da maquina:' $HostNameAtual.ToUpper()
 Write-Host 'Ao final desse Script sera alterado para:' $NewHost.ToUpper()
+$UserNMH = Read-Host -Prompt "Digite o Nome do Usuario Final"
+
 Start-Sleep 15
 # [CRIANDO A PASTA LOCAL PARA ARMAZENAR OS ARQUIVOS PARA A CONFIGURACAO DA MAQUINA]
             
@@ -97,10 +99,14 @@ if ($RedeEXT -eq "true"){
         Remove-Item C:\Programdata\chocolatey\lib\*
         Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
 
-        # ADD USER LOFT
+        # ADD ADMIN NOMAH
         New-LocalUser -Name "Nomah User" -Description "Conta Administradora Nomah" -NoPassword
         Add-LocalGroupMember -Group "Administradores" -Member "Nomah User"
         Disable-LocalUser -Name "User"
+
+        # ADD USER NOMAH
+        New-LocalUser -Name $UserNMH -Description "Conta de Usuario Final" -NoPassword
+        Add-LocalGroupMember -Group "Administradores" -Member $UserNMH
 
         # [ALTERANDO A SENHA DE ADMINISTRADOR]
         $LocalUser = Get-LocalUser -Name "Nomah User"
@@ -110,7 +116,7 @@ if ($RedeEXT -eq "true"){
 #  [RENOMEANDO UMA MAQUINA USANDO POWERSHELL]
         $info = Get-WmiObject -Class Win32_ComputerSystem
         $info.Rename("$NewHost")
-        #Restart-Computer
+        Restart-Computer
     }else{
         write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
         pause
