@@ -21,8 +21,8 @@ Set-ExecutionPolicy RemoteSigned
 # [CHAVES VARIAVEIS]
 # Apontamentos de URL's usadas nesse Script
 $ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
-$Step2 = ""
-$Start_PostInstall = ""
+$Step2 = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Step2.ps1"
+$Start_PostInstall = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/postinstall.bat"
 
 #SET KEY
 $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHkey.txt"
