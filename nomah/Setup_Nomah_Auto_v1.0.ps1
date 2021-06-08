@@ -22,7 +22,7 @@ Set-ExecutionPolicy RemoteSigned
 # Apontamentos de URL's usadas nesse Script
 $TeamViewerHostEXE = "https://customdesign.teamviewer.com/download/version_14x/6n2mncz_windows/TeamViewer_Host_Setup.exe"
 $ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
-
+$
 #SET KEY
 $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHkey.txt"
 $NOTE = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHnote.txt"
