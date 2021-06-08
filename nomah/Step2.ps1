@@ -3,6 +3,7 @@ Set-ExecutionPolicy RemoteSigned
 
 #>_ Install JumpCloud Nomah
 cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "9701f2871f4a475c1f14efbc1206d38a4a2fdf02"
+sleep 20
 
 # ADD ADMIN NOMAH
 New-LocalUser -Name "Nomah User" -Description "Conta Administradora Nomah" -NoPassword
@@ -18,4 +19,6 @@ $LocalUser = Get-LocalUser -Name "Nomah User"
 $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
 $LocalUser | Set-LocalUser -Password $Password
 
+Get-Service "jumpcloud-agent"
+Sleep 30
 Restart-Computer
