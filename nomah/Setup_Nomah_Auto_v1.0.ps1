@@ -21,7 +21,7 @@ Set-ExecutionPolicy RemoteSigned
 # [CHAVES VARIAVEIS]
 # Apontamentos de URL's usadas nesse Script
 $TeamViewerHostEXE = "https://customdesign.teamviewer.com/download/version_14x/6n2mncz_windows/TeamViewer_Host_Setup.exe"
-$ChocoInstallBat = ""
+$ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
 
 #SET KEY
 $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHkey.txt"
@@ -58,9 +58,17 @@ if ($RedeEXT -eq "true"){
 #  [DOWNLOAD TEAM VIEWER]
         Start-Process microsoftedge.exe "https://get.teamviewer.com/lofthost"
         sleep 20
+# >_ Fechando navegador Microsoft Edge utilizado para Download do Team Viewer Host.
+        Stop-Process -Name msedge
+# >_ INSTALANDO O TEAM VIEWER
+        Start-Process -Wait -FilePath "C:\Users\Loft User\Downloads\TeamViewer_Host_Setup.exe" -ArgumentList '/S','/v','/qn' -PassThru
+
 
 #  [Instalacao usando o Chocolaty como Repositorio]
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        Invoke-WebRequest -Uri $ChocoInstallBat -OutFile Install_Choco.bat
+        cmd /c C:\Suporte\Install_Choco.bat
+       
         choco feature enable -n=allowGlobalConfirmation
         choco install slack -dvfy
         choco install google-drive-file-stream -dvfy
@@ -71,17 +79,11 @@ if ($RedeEXT -eq "true"){
                 
 #  [DOWNLOAD DO GITHUB]
         Invoke-WebRequest -Uri https://www.zoom.us/client/latest/ZoomInstallerFull.msi -OutFile ZoomSetup.msi
-        Invoke-WebRequest -Uri $ScriptInstallCounterStrike -OutFile crowdstrike-facon-ps.ps1
         Invoke-WebRequest -Uri $KEY -OutFile key.txt
         Invoke-WebRequest -Uri $NOTE -OutFile note.txt
-        Invoke-WebRequest -Uri $ChocoInstallBat -OutFile Install_Choco.bat
               
-# >_ Fechando navegador Microsoft Edge utilizado para Download do Team Viewer Host.
-        Stop-Process -Name msedge
 
-# >_ INSTALANDO O TEAM VIEWER
-        Start-Process -Wait -FilePath "C:\Users\Loft User\Downloads\TeamViewer_Host_Setup.exe" -ArgumentList '/S','/v','/qn' -PassThru
-        cmd /c C:\Suporte\Install_Choco.bat
+
 #  [APLICANDO CONFIGURACOES]
         Write-Host "AGUARDE ESTAMOS CONFIGURANDO O DISPOSITIVO"
 
@@ -104,7 +106,7 @@ if ($RedeEXT -eq "true"){
 #  [RENOMEANDO UMA MAQUINA USANDO POWERSHELL]
         $info = Get-WmiObject -Class Win32_ComputerSystem
         $info.Rename("$NewHost")
-        Restart-Computer
+        #Restart-Computer
     }else{
         write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
         pause
