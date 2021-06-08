@@ -20,7 +20,6 @@ Set-ExecutionPolicy RemoteSigned
 
 # [CHAVES VARIAVEIS]
 # Apontamentos de URL's usadas nesse Script
-$TeamViewerHostEXE = "https://customdesign.teamviewer.com/download/version_14x/6n2mncz_windows/TeamViewer_Host_Setup.exe"
 $ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
 
 #SET KEY
@@ -56,20 +55,12 @@ if ($RedeEXT -eq "true"){
         Write-Host "Efetuando Download do Conteudo Atualizado!"
         cd 'C:\Suporte'
                 
-#  [DOWNLOAD TEAM VIEWER]
-        Start-Process microsoftedge.exe "https://get.teamviewer.com/lofthost"
-        sleep 20
-# >_ Fechando navegador Microsoft Edge utilizado para Download do Team Viewer Host.
-        Stop-Process -Name msedge
-# >_ INSTALANDO O TEAM VIEWER
-        cmd /c %userprofile%\Downloads\TeamViewer_Host_Setup.exe -ArgumentList /S /qn
-
-
 #  [Instalacao usando o Chocolaty como Repositorio]
         Remove-Item C:\Programdata\chocolatey -Recuse -Force
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
         Invoke-WebRequest -Uri $ChocoInstallBat -OutFile Install_Choco.bat
         cmd /c C:\Suporte\Install_Choco.bat
+
 # >_ Aplica a permissao de SIM em modo Global para o Chocolatey
         choco feature enable -n=allowGlobalConfirmation
  
@@ -87,7 +78,8 @@ if ($RedeEXT -eq "true"){
         Invoke-WebRequest -Uri $KEY -OutFile key.txt
         Invoke-WebRequest -Uri $NOTE -OutFile note.txt
               
-
+# >_ Instalar Zoom para Start Automatico
+        cmd /c msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive
 
 #  [APLICANDO CONFIGURACOES]
         Write-Host "AGUARDE ESTAMOS CONFIGURANDO O DISPOSITIVO"
