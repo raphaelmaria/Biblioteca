@@ -6,11 +6,11 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 Set-ExecutionPolicy RemoteSigned
 
 <#
-# Empresa: Loft Tecnologia
+# Empresa: Nomah
 # Desenvolvedor: Raphael xxxxx xx xxxxxxxxx Maria
 # Cargo: Analista de Suporte
 # Versão 1.0
-# Criado em 12 de Maio de 2021
+# Criado em 07 de Junho de 2021
 # Ticket Origem:
 # Solicitante:
 # Descrição: Automatiza a customização de novas maquinas Loft baseando em repositorio na Nuvem
@@ -21,6 +21,8 @@ Set-ExecutionPolicy RemoteSigned
 # [CHAVES VARIAVEIS]
 # Apontamentos de URL's usadas nesse Script
 $ChocoInstallBat = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/Install_Chocolatey.bat"
+$Step2 = ""
+$Start_PostInstall = ""
 
 #SET KEY
 $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHkey.txt"
@@ -77,6 +79,9 @@ if ($RedeEXT -eq "true"){
         Invoke-WebRequest -Uri https://www.zoom.us/client/latest/ZoomInstallerFull.msi -OutFile ZoomSetup.msi
         Invoke-WebRequest -Uri $KEY -OutFile key.txt
         Invoke-WebRequest -Uri $NOTE -OutFile note.txt
+        Invoke-WebRequest -Uri $Step2 -OutFile Step2.ps1
+        Invoke-WebRequest -Uri $Start_PostInstall -OutFile postinstall.bat
+        Copy-Item "C:\Suporte\postinstall.bat" del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
               
 # >_ Instalar Zoom para Start Automatico
         cmd /c msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive
@@ -94,19 +99,7 @@ if ($RedeEXT -eq "true"){
         Remove-Item C:\Programdata\chocolatey\lib\*
         Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
 
-        # ADD ADMIN NOMAH
-        New-LocalUser -Name "Nomah User" -Description "Conta Administradora Nomah" -NoPassword
-        Add-LocalGroupMember -Group "Administradores" -Member "Nomah User"
-        Disable-LocalUser -Name "User"
-
-        # ADD USER NOMAH
-        New-LocalUser -Name $UserNMH -Description "Conta de Usuario Final" -NoPassword
-        Add-LocalGroupMember -Group "Administradores" -Member $UserNMH
-
-        # [ALTERANDO A SENHA DE ADMINISTRADOR]
-        $LocalUser = Get-LocalUser -Name "Nomah User"
-        $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
-        $LocalUser | Set-LocalUser -Password $Password        
+                
 
 #  [RENOMEANDO UMA MAQUINA USANDO POWERSHELL]
         $info = Get-WmiObject -Class Win32_ComputerSystem
