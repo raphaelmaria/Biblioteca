@@ -28,7 +28,6 @@ $KEY = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHke
 $NOTE = "https://raw.githubusercontent.com/raphaelmaria/deploy/master/nomah/NMHnote.txt"
 
 $HostNameAtual = hostname
-$LocalUser = Get-LocalUser -Name "Nomah User"
 
 # [INSERINDO AS INFORMACOES PARA RENOMEAR A MAQUINA]
 $PATRIMONIO = Read-Host -Prompt "Entre com o Numero do Patrimonio"
@@ -61,10 +60,11 @@ if ($RedeEXT -eq "true"){
 # >_ Fechando navegador Microsoft Edge utilizado para Download do Team Viewer Host.
         Stop-Process -Name msedge
 # >_ INSTALANDO O TEAM VIEWER
-        Start-Process -Wait -FilePath "C:\Users\Loft User\Downloads\TeamViewer_Host_Setup.exe" -ArgumentList '/S','/v','/qn' -PassThru
+        cmd /c %userprofile%\Downloads\TeamViewer_Host_Setup.exe -ArgumentList /S /qn
 
 
 #  [Instalacao usando o Chocolaty como Repositorio]
+        Remove-Item C:\Programdata\chocolatey -Recuse -Force
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
         Invoke-WebRequest -Uri $ChocoInstallBat -OutFile Install_Choco.bat
         cmd /c C:\Suporte\Install_Choco.bat
@@ -94,11 +94,15 @@ if ($RedeEXT -eq "true"){
         Remove-Item c:\Suporte\*.msi -Recurse -Force
         Remove-Item "%UserProfile%\appdata\local\temp\*" -Recurse -Force
         Remove-Item C:\WINDOWS\TEMP\chocolatey\*
-        Remove-Item C:\C:\Programdata\chocolatey\lib\*
+        Remove-Item C:\Programdata\chocolatey\lib\*
         Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
 
+        # ADD USER LOFT
+        New-LocalUser -Name "Nomah User" -Description "Conta Administradora Nomah" -NoPassword
+        Add-LocalGroupMember -Group "Administradores" -Member "Nomah User"
+        Disable-LocalUser -Name "User"
 
-# [ALTERANDO A SENHA DE ADMINISTRADOR]
+        # [ALTERANDO A SENHA DE ADMINISTRADOR]
         $LocalUser = Get-LocalUser -Name "Nomah User"
         $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
         $LocalUser | Set-LocalUser -Password $Password        
