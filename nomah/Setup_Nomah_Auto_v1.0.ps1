@@ -78,6 +78,7 @@ if ($RedeEXT -eq "true"){
         choco install adobereader -dvfy
         choco install 7zip.install -dvfy
         choco install lightshot.install -dvfy
+        choco install anydesk.install -dvfy
                 
 #  [DOWNLOAD DO GITHUB]
         Invoke-WebRequest -Uri https://www.zoom.us/client/latest/ZoomInstallerFull.msi -OutFile ZoomSetup.msi
