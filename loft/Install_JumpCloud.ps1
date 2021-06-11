@@ -17,6 +17,10 @@ choco install vcredist140 -dvfy
 $LocalUser = Get-LocalUser -Name "Loft User"
 $Password = (Get-Content C:\Suporte\note.txt) | ConvertTo-SecureString -key (Get-Content C:\Suporte\key.txt)
 $LocalUser | Set-LocalUser -Password $Password
+
+#>_ Instalacao NetSkope
+cmd /c msiexec /package "C:\Suporte\NSClient.msi" token="30UcayRWz0vgImspSxOe" host="addon-loft-br.de.goskope.com" autoupdate="on" /qn /l*v C:\Suporte\nscinstall.log
+
 Write-Host "###############################################"
 Write-Host ">_ EFETUADO A TROCA DA SENHA COM SUCESSO!..."
 Write-Host "###############################################"
