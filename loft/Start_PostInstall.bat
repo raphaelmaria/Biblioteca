@@ -11,8 +11,5 @@ reg import C:\Suporte\TeamViewer_Settings.reg
 reg import C:\Suporte\TeamViewer_Settings.reg /reg:32
 reg import C:\Suporte\TeamViewer_Settings.reg /reg:64
 
-REM INSTALACA DO NETSKOPE
-REM start /wait msiexec /package "C:\Suporte\NSClient.msi" token="30UcayRWz0vgImspSxOe" host="addon-loft-br.de.goskope.com" autoupdate="on" /qn /l*v C:\Suporte\nscinstall.log
-
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Start_PostInstall.bat"
 
