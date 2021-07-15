@@ -1,6 +1,9 @@
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
 Set-ExecutionPolicy RemoteSigned
 
+
+$JCKEYADDMACHINE="ef10c8ee36a34a414100d8c1eb2d93f26464acc5"
+
 Write-Host "###############################################"
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
 Write-Host "###############################################"
@@ -26,7 +29,7 @@ Write-Host "###############################################"
 Write-Host ">_ INSTALANDO JUMP CLOUD AGENT"
 Write-Host "###############################################"
 
-cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "5c8f74b6bc5da2b8c9fd5b7ea07ef5173ed59151"
+cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey $JCKEYADDMACHINE
 Start-Sleep 30   
 
 Write-Host "#>_ Limpando Cache Chocolatey"
