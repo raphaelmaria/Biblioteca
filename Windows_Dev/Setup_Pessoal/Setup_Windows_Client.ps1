@@ -32,7 +32,7 @@ if ($RedeEXT -eq "true"){
                 choco install vlc -dvfy
 
                 #INSTALACAO JUMPCLOUD 
-                
+                cd $env:temp | Invoke-Expression; Invoke-RestMethod -Method Get -URI https://raw.githubusercontent.com/TheJumpCloud/support/master/scripts/windows/InstallWindowsAgent.ps1 -OutFile InstallWindowsAgent.ps1 | Invoke-Expression; ./InstallWindowsAgent.ps1 -JumpCloudConnectKey "251cff6c6c7ec83f6068fe3afc5d063d94855b61"
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
 }
