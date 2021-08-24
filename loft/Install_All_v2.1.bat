@@ -23,7 +23,8 @@ REM    start /wait msiexec /package "C:\Suporte\SlackSetup.msi" /passive
 @echo.
 @echo *****************************************************
 echo "Instalando Zoom (Para TODOS os usuarios)"
-    start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive /l*v C:\Suporte\ZoomSetup.log
+    REM start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi" ZoomAutoUpdate="true" ZoomAutoStart="true" /passive /l*v C:\Suporte\ZoomSetup.log
+    start /wait msiexec /package  "C:\Suporte\ZoomSetup.msi"  /passive /l*v C:\Suporte\ZoomSetup.log ZSILENTSTART="true" ZoomAutoStart="true" ZoomAutoUpdate="true" ZSSOHOST="loft-br" ZConfig="BandwidthLimitUp=4000" ZConfig="BandwidthLimitDown=4000"
 @echo *****************************************************
 @echo.
 @echo *****************************************************
