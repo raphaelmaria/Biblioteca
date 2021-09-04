@@ -1,0 +1,16 @@
+Video de Referencia: https://www.youtube.com/watch?v=ctpnk9GdCzA&t=0s
+
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/BIGSUR
+
+Baixar os arquivos para instalação: 
+Download ISO Catalina ou BigSur 👉 👉 https://www.olarila.com/topic/6278-ol...
+Etcher 👉 👉 https://www.balena.io/etcher/
+
+ISO Big Sur 11.2 👉 👉  https://bit.ly/ISOBigSur ou https://www.mediafire.com/file/ws7fpl...
+
+ProperTree 👉 👉 https://github.com/corpnewt/ProperTree
+GenSMBIOS 👉 👉 https://github.com/corpnewt/GenSMBIOS
+ESP Mounter Pro  👉 👉 https://www.olarila.com/files/Utils/E...
+Vídeos Auxiliares:
+Configurando ProperTree no Big Sur 👉 👉 https://youtu.be/d_KU4GUuT6g
+Instalando EFI Corretamente 👉 👉 https://youtu.be/_t23MaRccEM
