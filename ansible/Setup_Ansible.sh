@@ -12,7 +12,7 @@
 #####################################################################
 #VARIAVEIS
 GitRepo="https://github.com/raphaelmaria/deploy.git"
-AnsibleDIR= "/etc/ansible"
+AnsibleDIR="/etc/ansible"
 #####################################################################
 clear
 PS3="> Selecione o gerenciador de pacote do seu OS:"
