@@ -1,6 +1,6 @@
 Video de Referencia: https://www.youtube.com/watch?v=ctpnk9GdCzA&t=0s
 
-sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/BigSur_Install
 
 Baixar os arquivos para instalação: 
 Download ISO Catalina ou BigSur 👉 👉 https://www.olarila.com/topic/6278-ol...
