@@ -3,6 +3,7 @@
 Links usados para a pesquisa:
 Install Docker: https://www.smarthomebeginner.com/install-docker-on-ubuntu-1604/
 Install Sick Rage: https://www.smarthomebeginner.com/install-couchpotato-using-docker/
+Install Couch Potato: https://couchpota.to/#
 '''
 # REMOVE PYTHON VERSION
 $pythonversion = python3 --version
