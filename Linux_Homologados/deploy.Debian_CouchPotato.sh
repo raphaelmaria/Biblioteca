@@ -64,6 +64,16 @@ case "$OPTION" in
     cd sickrage
     python3 -m pip install -r requirements.txt
     python3 -m pip install -r requirements-dev.txt
+
+    #Instalacao Couch Potato
+    apt-get install git-core
+    git clone https://github.com/CouchPotato/CouchPotatoServer.git
+    python CouchPotatoServer/CouchPotato.py
+    sudo cp CouchPotatoServer/init/ubuntu /etc/init.d/couchpotato
+    sudo nano /etc/init.d/couchpotato
+    sudo chmod +x /etc/init.d/couchpotato
+    sudo update-rc.d couchpotato defaults
+
 ;;
     2)
     # Install DOCKER in Ubuntu
@@ -77,13 +87,13 @@ case "$OPTION" in
     sudo apt-get install docker-engine
     
     # sudo service docker start ---> Linha do site
-    sudo systemctl enable docker --now #Linhas adicionada por Raphael Maria
+     #Linhas adicionada por Raphael Maria
     
     # DEPLOY SICKRAGE
     sudo mkdir -p /mnt/dados/multimidia/{cache,movies,series,tv,anime}
     sudo chmod -R 777 /mnt/dados/multimidia
     docker pull sickrage/sickrage
-    docker run -d --name="sickrage" -v /path/to/sickrage/data:/config -v /path/to/downloads:/mnt/dados/multimidia -v /path/to/tv:/mnt/dados/multimidia/tv -v /path/to/anime:/mnt/dados/multimidia/anime -v /path/to/series:/mnt/dados/multimidia/series -v /path/to/movies:/mnt/dados/multimidia/movies -e TZ=Canada/Pacific -p 8081:8081 sickrage/sickrage:latest
+    docker run -d --name="sickrage" -v /path/to/sickrage/data:/config -v /path/to/downloads:/home/raphaelmaria/Downloads -v /path/to/tv:/home/raphaelmaria/Videos/tv -v /path/to/anime:/home/raphaelmaria/Videos/anime -v /path/to/series:/home/raphaelmaria/Videos/series -v /path/to/movies:/home/raphaelmaria/Videos/movies -e TZ=Canada/Pacific -p 8081:8081 sickrage/sickrage:latest
     sudo docker start sickrage
     echo "Basta abri o navegador com o endereço IP desta maquina seguido da porta 8081."
     echo "IPADDRESS:8091"
@@ -105,3 +115,13 @@ done
 
 }
 menu
+
+'''
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+'''
