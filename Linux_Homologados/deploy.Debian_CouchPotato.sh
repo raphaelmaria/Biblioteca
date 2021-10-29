@@ -93,7 +93,8 @@ case "$OPTION" in
     sudo mkdir -p /mnt/dados/multimidia/{cache,movies,series,tv,anime}
     sudo chmod -R 777 /mnt/dados/multimidia
     docker pull sickrage/sickrage
-    docker run -d --name="sickrage" -v /path/to/sickrage/data:/config -v /path/to/downloads:/home/raphaelmaria/Downloads -v /path/to/tv:/home/raphaelmaria/Videos/tv -v /path/to/anime:/home/raphaelmaria/Videos/anime -v /path/to/series:/home/raphaelmaria/Videos/series -v /path/to/movies:/home/raphaelmaria/Videos/movies -e TZ=Canada/Pacific -p 8081:8081 sickrage/sickrage:latest
+    docker run -d --name="sickrage" -v /path/to/sickrage/data:/config -v /path/to/downloads:/home/raphaelmaria/downloads -v /path/to/tv:/multimidia/series -v /path/to/anime:/multimidia/anime -e TZ=America/Sao_Paulo -p 8081:8081 sickrage/sickrage:latest
+
     sudo docker start sickrage
     echo "Basta abri o navegador com o endereço IP desta maquina seguido da porta 8081."
     echo "IPADDRESS:8091"

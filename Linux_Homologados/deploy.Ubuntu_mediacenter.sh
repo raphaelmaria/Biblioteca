@@ -40,6 +40,11 @@ git https://git.sickrage.ca/SiCKRAGE/sickrage.git
 '''
 Instalacao do Couch Potato
 '''
+docker pull couchpotato/couchpotato
+docker run --name couchpotato -v <datadir path>:/datadir -v <media path>:/multimidia/movies -p 5050:5050 couchpotato/couchpotato
+
+
+
 sudo apt-add-repository universe
 sudo apt update
 sudo apt install python2-minimal
