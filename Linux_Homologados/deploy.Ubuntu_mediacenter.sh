@@ -55,12 +55,30 @@ sudo git clone https://github.com/RuudBurger/CouchPotatoServer.git ./couchpotato
 cd couchpotato
 sudo cp ./init/ubuntu /etc/init.d/couchpotato
 sudo chmod +x /etc/init.d/couchpotato
-sudo nano /etc/default/couchpotato
-'''
-CP_USER=username
+sudo mv /etc/default/couchpotato /etc/default/couchpotato.bkp
+sudo cat<< EOF | sudo tee /etc/default/couchpotato > /dev/null
+# COPY THIS FILE TO /etc/default/couchpotato
+# Accepted variables with default values -if any- in parentheses:
+
+# username to run couchpotato under (couchpotato)
+#CP_USER=couchpotato
+CP_USER=raphaelmaria
+# directory of CouchPotato.py (/opt/couchpotato)
 CP_HOME=/opt/couchpotato/CouchPotatoServer
-CP_DATA=/home/username/couchpotato
-'''
+
+# directory of couchpotato's db, cache and logs (/var/opt/couchpotato)
+CP_DATA=/home/raphaelmaria/couchpotato
+# full path of couchpotato.pid (/var/run/couchpotato/couchpotato.pid)
+CP_PIDFILE=
+# full path of the python binary (/usr/bin/python)
+PYTHON_BIN=
+
+# extra cli options for couchpotato, see 'CouchPotato.py --help'
+CP_OPTS=
+# extra options for start-stop-daemon, see 'man start-stop-daemon'
+SSD_OPTS=
+EOF
+
 sudo update-rc.d couchpotato defaults
 sudo systemctl start couchpotato
 sudo systemctl enable couchpotato
