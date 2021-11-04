@@ -1,11 +1,15 @@
 #!/bin/sh
 '''
 Links usados para a pesquisa:
-Install Sickrage: https://www.smarthomebeginner.com/install-sickrage-on-ubuntu/
-Install CoachPotato: https://www.how2shout.com/linux/how-to-install-couchpotato-on-ubuntu-20-04-lts-linux/
-Install Sonarr: https://varhowto.com/install-sonarr-ubuntu-20-04/
-Install Jackett: https://varhowto.com/install-jackett-ubuntu-20-04/
-Install Radarr: https://varhowto.com/install-radarr-ubuntu-20-04/
+Install Momo: https://www.mono-project.com/download/stable/#download-lin
+#> Abandonado <# Install Sickrage: https://www.smarthomebeginner.com/install-sickrage-on-ubuntu/
+#> Abandonado <# Install CoachPotato: https://www.how2shout.com/linux/how-to-install-couchpotato-on-ubuntu-20-04-lts-linux/
+
+Install Jackett - Search Enginer for UseNet and Torrent: https://varhowto.com/install-jackett-ubuntu-20-04/
+
+Install Sonarr - Series Search and Download: https://varhowto.com/install-sonarr-ubuntu-20-04/
+Install Radarr - Movies Search and Download: https://varhowto.com/install-radarr-ubuntu-20-04/
+Install Radarr#2 - Movies Search and Download: https://wiki.servarr.com/radarr/installation#Debian_.2F_Ubuntu
 '''
 # Variaveis necessarias para instalacao
 $userLocal = ${whoime}
@@ -29,6 +33,31 @@ do-release-upgrade
 # Instalando app que sao requisitos
 sudo apt -y gcc ansible wget vim git-core
 
+# Instalando .NET Framework
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-5.0
+
+sudo apt-get install -y dotnet-runtime-5.0
+
+# Instalar o MOMO - Emulador de exe com C++
+sudo apt install gnupg ca-certificates -y
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+
+sudo apt install mono-devel -y
+
 # Instalando o gerenciador via Web Browser
 sudo apt install cockpit -y
 ##
@@ -42,8 +71,10 @@ sudo chmod -R 777 /home/$userLocal/multimidia/*
 sudo apt install samba samba-client
 sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 sudo touch /etc/samba/smb.conf
+sudo ulimit -n 16384
 
-sudo cat <<EOF > /etc/samba/smb.conf
+
+sudo cat <<EOF | sudo tee /etc/samba/smb.conf > /dev/null
 #CRIADO POR RAPHAEL MARIA
 
 [global]
@@ -157,9 +188,7 @@ sudo cat <<EOF > /etc/samba/smb.conf
 EOF
 
 # Instalando o Sonarr
-# Requisitos
-sudo apt install mono-devel -y
-sudo apt install gnupg ca-certificates -y
+
 # Instalando o repositorio official.
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0xA236C58F409091A18ACA53CBEBFF6B99D9B78493
 echo "deb http://apt.sonarr.tv/ master main" | sudo tee /etc/apt/sources.list.d/sonarr.list
@@ -216,7 +245,7 @@ ls Radarr*
 tar -xvzf Radarr.*.linux.tar.gz
 sudo mv Radarr /opt
 sudo mono /opt/Radarr/Radarr.exe
-sudo cat <<EOF > /etc/systemd/system/radarr.service
+sudo cat <<EOF | sudo tee /etc/systemd/system/radarr.service
 [Unit]
 Description=Radarr Daemon
 After=syslog.target network.target
@@ -229,7 +258,7 @@ Group=raphaelmaria
 Type=simple
 
 # Change the path to Radarr or mono here if it is in a different location for you.
-ExecStart=/usr/bin/mono --debug /home/vh/Radarr/Radarr.exe -nobrowser
+ExecStart=/usr/bin/mono --debug /opt/Radarr/Radarr -nobrowser
 TimeoutStopSec=20
 KillMode=process
 Restart=on-failure
@@ -246,7 +275,15 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl enable --now radarr.service
-
 ##
 ## AGORA SO ACESSAR O NAVEGADOR NO http://localhost:7878/
+##
+
+# Instalar Plex Media Server
+wget https://downloads.plex.tv/plex-media-server-new/1.24.5.5173-8dcc73a59/debian/plexmediaserver_1.24.5.5173-8dcc73a59_amd64.deb
+sudo chmod 777 plexmediaserver_1.24.5.5173-8dcc73a59_amd64.deb
+sudo dpkg -i plexmediaserver_1.24.5.5173-8dcc73a59_amd64.deb
+sudo systemctl enable plexmediaserver --now
+##
+## AGORA SO ACESSAR O NAVEGADOR NO http://localhost:32400/
 ##
