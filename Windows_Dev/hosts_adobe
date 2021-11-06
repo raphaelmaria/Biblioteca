@@ -1,0 +1,35 @@
+# copyright (c) 1993-2009 microsoft corp.
+#
+# this is a sample hosts file used by microsoft tcp/ip for windows.
+#
+# this file contains the mappings of ip addresses to host names. each
+# entry should be kept on an individual line. the ip address should
+# be placed in the first column followed by the corresponding host name.
+# the ip address and the host name should be separated by at least one
+# space.
+#
+# additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# for example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+# localhost name resolution is handled within dns itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+#
+#         adobe activation block v2. 
+#
+#         for updates to the hosts check here: http://thepiratebay.org/user/thethingy
+#
+127.0.0.1 3dns.adobe.com 3dns-1.adobe.com 3dns-2.adobe.com 3dns-3.adobe.com 3dns-4.adobe.com activate.adobe.com activate-sea.adobe.com activate-sjc0.adobe.com activate.wip.adobe.com
+127.0.0.1 activate.wip1.adobe.com activate.wip2.adobe.com activate.wip3.adobe.com activate.wip4.adobe.com adobe-dns.adobe.com adobe-dns-1.adobe.com adobe-dns-2.adobe.com adobe-dns-3.adobe.com adobe-dns-4.adobe.com
+127.0.0.1 adobeereg.com practivate.adobe practivate.adobe.com practivate.adobe.newoa practivate.adobe.ntp practivate.adobe.ipp ereg.adobe.com ereg.wip.adobe.com ereg.wip1.adobe.com
+127.0.0.1 ereg.wip2.adobe.com ereg.wip3.adobe.com ereg.wip4.adobe.com hl2rcv.adobe.com wip.adobe.com wip1.adobe.com wip2.adobe.com wip3.adobe.com wip4.adobe.com
+127.0.0.1 www.adobeereg.com wwis-dubc1-vip60.adobe.com www.wip.adobe.com www.wip1.adobe.com
+127.0.0.1 www.wip2.adobe.com www.wip3.adobe.com www.wip4.adobe.com wwis-dubc1-vip60.adobe.com crl.verisign.net crl.verisign.net ood.opsource.net
+#
+#         any other entries you had go here (new line no # no space);  
+
+127.0.0.1       localhost
