@@ -236,7 +236,7 @@ sudo ./install_service_systemd.sh
 
 # Instalando qBittorrent
 sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
-sudo apt-get update && sudo apt-get install qbittorrent
+sudo apt-get update && sudo apt-get install qbittorrent -y
 
 # Instalando o Radarr
 sudo apt install curl mediainfo -y
