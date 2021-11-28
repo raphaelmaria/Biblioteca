@@ -16,7 +16,7 @@ $userLocal = ${whoime}
 
 # Alterando algumas configuracoes
 # Mudando o nome da maquina:
-sudo hostnamectl set-hostname pyserver
+sudo hostnamectl set-hostname mediacenter
 # Mudanro o Time Zone para o horario ficar certo:
 sudo timedatectl set-timezone America/Sao_Paulo
 
@@ -24,39 +24,31 @@ sudo timedatectl set-timezone America/Sao_Paulo
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
-sudo apt --fix-broken -y
+sudo apt --fix-broken
 sudo apt autoremove -y
 sudo apt-get upgrade -y
-sudo apt-get install update-manager-core
+sudo apt-get install -y update-manager-core
 do-release-upgrade
 
 # Instalando app que sao requisitos
-sudo apt -y gcc ansible wget vim git-core
+sudo apt install -y gcc ansible wget vim git-core
 
 # Instalando .NET Framework
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-5.0
-
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y aspnetcore-runtime-5.0
-
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y dotnet-sdk-5.0
+sudo apt-get install -y aspnetcore-runtime-5.0
 sudo apt-get install -y dotnet-runtime-5.0
-
+sudo apt-get update
 # Instalar o MOMO - Emulador de exe com C++
-sudo apt install gnupg ca-certificates -y
+sudo apt install gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt update
-
-sudo apt install mono-devel -y
+sudo apt install -y mono-devel
 
 # Instalando o gerenciador via Web Browser
 sudo apt install cockpit -y
@@ -64,15 +56,14 @@ sudo apt install cockpit -y
 ## AGORA SO ACESSAR O NAVEGADOR NO http://localhost:9090/
 ##
 # Criando diretorios Necessarios.
-sudo mkdir -p /home/$userLocal/multimidia/{Series,Movies,Animes}
-sudo chmod -R 777 /home/$userLocal/multimidia/*
+sudo mkdir -p /multimidia
+sudo chmod -R 777 /multimidia/
 
 # Instalando e configurando o Samba para acesso pela REDE
-sudo apt install samba samba-client
+sudo apt install -y samba samba-client
 sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.original
 sudo touch /etc/samba/smb.conf
-sudo ulimit -n 16384
-
+ulimit -n 16384
 
 sudo cat <<EOF | sudo tee /etc/samba/smb.conf > /dev/null
 #CRIADO POR RAPHAEL MARIA
@@ -81,7 +72,7 @@ sudo cat <<EOF | sudo tee /etc/samba/smb.conf > /dev/null
    workgroup = WORKGROUP
 	server string = %h server (Samba, Ubuntu)
    dns proxy = no
-   netbios name = "$hostname"
+   netbios name = mediacenter
    
 # Configuracao de Checagem de Ativo na Rede
 	keepalive = 30
@@ -180,7 +171,7 @@ sudo cat <<EOF | sudo tee /etc/samba/smb.conf > /dev/null
 # Pasta que vai aparecer na REDE.
 ###################################
 [multimidia]  
-	path = /home/${whoime}/multimidia
+	path = /multimidia
 	browseable = yes
 	writable = yes
 	guest ok = yes
@@ -190,10 +181,12 @@ EOF
 # Instalando o Sonarr
 
 # Instalando o repositorio official.
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0xA236C58F409091A18ACA53CBEBFF6B99D9B78493
-echo "deb http://apt.sonarr.tv/ master main" | sudo tee /etc/apt/sources.list.d/sonarr.list
+wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-19_all.deb && dpkg -i repo-mediaarea_1.0-19_all.deb && apt-get update
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 2009837CBFFD68F45BC180471F4F90DE2A9B4BF8
+echo "deb https://apt.sonarr.tv/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/sonarr.list
 sudo apt update
-sudo apt install nzbdrone -y
+sudo apt install sonarr
+
 sudo cat <<EOF > /etc/systemd/system/sonarr.service
 [Unit]
 Description=Sonarr Daemon
@@ -235,8 +228,17 @@ sudo ./install_service_systemd.sh
 ##
 
 # Instalando qBittorrent
-sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
-sudo apt-get update && sudo apt-get install qbittorrent -y
+#sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
+#sudo apt-get update && sudo apt-get install qbittorrent -y
+
+# Instalando o Transmission
+sudo add-apt-repository ppa:transmissionbt/ppa
+sudo apt-get update
+sudo apt-get install -y transmission-cli transmission-common transmission-daemon
+sudo service transmission-daemon stop
+sudo nano /var/lib/transmission-daemon/info/settings.json
+sudo service transmission-daemon start
+sudo usermod -a -G debian-transmission ubuntu
 
 # Instalando o Radarr
 sudo apt install curl mediainfo -y
@@ -252,8 +254,8 @@ After=syslog.target network.target
 
 [Service]
 # Change and/or create the required user and group.
-User=raphaelmaria
-Group=raphaelmaria
+User=ubuntu
+Group=ubuntu
 
 Type=simple
 
@@ -287,3 +289,6 @@ sudo systemctl enable plexmediaserver --now
 ##
 ## AGORA SO ACESSAR O NAVEGADOR NO http://localhost:32400/
 ##
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing

@@ -21,6 +21,7 @@ aws configure set aws_access_key_id $accessKey; aws configure set aws_secret_acc
 if [ -d "$downloadPath"]; then
     echo "A pasta de Download existe, seguindo com a atualizacao!"
     sudo rm -rf /rmtech/EmbyUpdate
+    sudo aws s3 cp "Applications/EmbyUpdate" /rmtech/EmbyUpdate --recursive
     sudo aws s3 cp $urlAWSDownloadEmby /rmtech/EmbyUpdate --recursive
     sudo chmod -R 777 /rmtech/EmbyUpdate
     sudo systemctl stop embyserver
