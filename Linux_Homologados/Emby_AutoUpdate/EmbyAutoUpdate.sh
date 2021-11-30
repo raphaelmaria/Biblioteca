@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Credenciais AWS
-$accessKey = "AKIAQ2Z34DMBMJA6YAVW"
-$secretKey = "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"
-$region = "us-east-1"
-$bucket = "rmtechfiles"
+$accessKey = "K"
+$secretKey = "ATA"
+$region = "ads"
+$bucket = "Ada"
 
 
 # VARIAVEIS
