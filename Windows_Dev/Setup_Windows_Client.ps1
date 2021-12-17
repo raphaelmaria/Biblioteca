@@ -9,7 +9,7 @@ $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
     Write-Host "Maquina conectada com a Internet" -ForegroundColor Green
     Write-Host "Efetuando Download do Conteudo Atualizado!"
-#               Instalacao usando o Chocolaty como Repositorio
+<#               Instalacao usando o Chocolaty como Repositorio
     Write-Host "Instalando Chocolaty Apps Manager"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     Write-Host "Iniciando Instalacao de Aplicativos"
@@ -29,7 +29,14 @@ if ($RedeEXT -eq "true"){
                 choco install winrar -dvfy
                 choco install jre8 -dvfy
                 choco install lightshot.install -dvfy
-                choco install vlc -dvfy
+                choco install vlc -dvfy #>
+                winget install AnyDeskSoftwareGmbH.AnyDesk -h --accept-package-agreements
+                winget install BinaryMark.StreamingVideoDownloader -h --accept-package-agreements
+                winget install RARLab.WinRAR -h --accept-package-agreements
+                winget install Oracle.JavaRuntimeEnvironment -h --accept-package-agreements
+                winget install VideoLAN.VLC -h --accept-package-agreements
+                winget install Google.Chrome -h --accept-package-agreements
+                winget install 7zip.7zip -h --accept-package-agreements
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
 }
