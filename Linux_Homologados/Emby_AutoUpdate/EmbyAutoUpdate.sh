@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#TESTE
 # Credenciais AWS
 $accessKey = "K"
 $secretKey = "ATA"
