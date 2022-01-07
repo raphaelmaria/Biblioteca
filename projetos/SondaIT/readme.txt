@@ -28,7 +28,6 @@ EnterpriseArchitect
 Não são softwares, mas ferramentas de integracao que usam o navegador, ficando a responsabilidade do desenvolvedor fazer a configuração:
 Buddy
 
-
 Softwares abaixo ainda faltam informaçoes:
 DLP
 PROXY
