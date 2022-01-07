@@ -71,10 +71,15 @@ sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal mai
 sudo apt update
 sudo apt -y install --install-recommends winehq-stable
 
+# INSTALACAO DO SNAP SHOP (AGREGADOR INTELIGENTE DE APPS)
+sudo snap install snap-store
+
 
 # INSTALACAO DOS SOFTWARES SOLICITADOS
 cd /deploy
+
 # AndroidStudio;
+'''
 urlStudio="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.26/android-studio-2020.3.1.26-linux.tar.gz"
 urlSDKManager="https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip"
 sudo wget $urlStudio /deploy
@@ -83,6 +88,9 @@ sudo tar -xvf android-studio-*.tar.zip
 cd 
 sudo tar -xvf commandlinetools-linux-*_latest.zip
 cd 
+'''
+
+sudo snap -y install android-studio --classic
 
 #Cygwin;
 '''
@@ -104,10 +112,14 @@ sudo apt update
 sudo apt-get -y install docker-ce
 
 #Eclipse;
+'''
 urlEclipse="https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2021-12/R/eclipse-inst-jre-linux64.tar.gz"
 sudo wget $urlEclipse
 sudo tar -xvf eclipse-inst-jre-linux64.tar.gz
 cd 
+'''
+sudo snap install eclipse --classic
+
 
 #EnterpriseArchitect;
 '''
@@ -118,11 +130,13 @@ https://sparxsystems.com/products/ea/trial/request.html
 urlEnterpriseArch="https://www.sparxsystems.com/bin/easetup.msi"
 
 #IntelliJ; 
+'''
 urlIntellij="https://download.jetbrains.com/idea/ideaIC-2021.3.1.tar.gz"
 sudo wget $urlIntellij
 sudo tar -xvf ideaIC-*.tar.gz
 cd ideaIC-*
-
+'''
+sudo snap install intellij-idea-community --classic
 
 #Node.js;
 urlNodeJS="https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz"
@@ -131,13 +145,17 @@ sudo tar -xvf node-v*-linux-x64.tar.xz
 cd node-v*-linux-x64
 
 #Notepad++;
-Via Snap
+sudo snap install notepad-plus-plus
 
 #Postman;
+'''
 urlPostman="https://dl.pstmn.io/download/latest/linux64"
+'''
+sudo snap -y install postman
+
 
 #PyCharm;
-sudo snap install pycharm-community --classic
+sudo snap -y install pycharm-community --classic
 
 #Buddy;
 '''
