@@ -31,3 +31,6 @@ Buddy
 Softwares abaixo ainda faltam informaçoes:
 DLP
 PROXY
+
+Para criar imagem em wim:
+https://wimlib.net/

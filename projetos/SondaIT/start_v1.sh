@@ -20,17 +20,22 @@ sudo ./start.sh
 
 # VARIAVEIS - ITENS QUE PODEM MUDAR COM O TEMPO E NECESSIDADE
 
-# ATUALIZACAO DOS PACOTES PADROES DO OS
+##################################################################
+#####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
+##################################################################
+# ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 
-# INSTALACAO DOS PACOTES PADROES E ESSENCIAIS
+# INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
 sudo apt-get install -y update-manager-core
 sudo apt install -y gcc ansible wget vim git-core
 sudo apt install -y dialog tree tar unzip make autoconf automake
+sudo apt install -y net-tools
+sudo apt install -y openssh-server
 
-# INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK
+# INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
@@ -40,64 +45,76 @@ sudo apt-get install -y aspnetcore-runtime-5.0
 sudo apt-get install -y dotnet-runtime-5.0
 sudo apt-get update
 
-# INSTALACAO DO MOMO - BIBLIOTECA C++
+# INSTALACAO DO MOMO - BIBLIOTECA C++ (VALIDADO 10/01/22)
 sudo apt install gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+echo "deb [arm=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt update
 sudo apt install -y mono-devel
+sudo apt install -y mono-complete
 
-# CONFIGURACAO DO EQUIPAMENTO
+# CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
 # RENOMEANDO A MAQUINA
 varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 sudo hostnamectl set-hostname $varHostname
 sudo mkdir /deploy
 sudo chmod 777 /deploy
 
-# INSTALACAO DO JAVA
-urlJRE="https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245469_4d5417147a92418ea8b615e228bb6935"
-sudo mkdir /usr/java/
-cd /usr/java/
-sudo wget $urlJRE
-sudo tar zxvf jre-*u*-linux-x64.tar.gz
-cd jre-*u*-linux-x64
-sudo ./
+# INSTALACAO DO JAVA 
+sudo apt -y install default-jre            
+
+# INSTALACAO DO JAVA JDK ORACLE OFFICIAL
+sudo apt -y install default-jdk
+sudo apt -y install openjdk-11-jre-headless
+sudo apt -y install openjdk-8-jre-headless 
 
 # INSTALACAO DO WINE
+cd /deploy
 sudo dpkg --add-architecture i386 
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
 sudo apt-key add winehq.key
 sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
 sudo apt update
 sudo apt -y install --install-recommends winehq-stable
+sudo apt list --upgradable
 
+#Node.js;
+sudo apt -y install nodejs
+############################################################
+
+
+############################################################
+######          INSTALACAO USANDO SNAP STORE        ########
+############################################################
 # INSTALACAO DO SNAP SHOP (AGREGADOR INTELIGENTE DE APPS)
 sudo snap install snap-store
 
-
-# INSTALACAO DOS SOFTWARES SOLICITADOS
-cd /deploy
-
+# INSTALACAO VIA SNAP STORE
 # AndroidStudio;
-'''
-urlStudio="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.26/android-studio-2020.3.1.26-linux.tar.gz"
-urlSDKManager="https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip"
-sudo wget $urlStudio /deploy
-sudo wget $urlSDKManager /deploy
-sudo tar -xvf android-studio-*.tar.zip
-cd 
-sudo tar -xvf commandlinetools-linux-*_latest.zip
-cd 
-'''
+sudo snap install android-studio --classic
+# Eclipse;
+sudo snap install eclipse --classic
+# IntelliJ; 
+sudo snap install intellij-idea-community --classic
+# Notepad++;
+sudo snap install notepad-plus-plus
+# Postman;
+sudo snap install postman
+# PyCharm;
+sudo snap install pycharm-community --classic
+# Source Tree
+sudo snap install source-git
+# VS Code
+sudo snap install code --classic
+##############################################################
 
-sudo snap -y install android-studio --classic
-
-#Cygwin;
-'''
-Esse Aplicativo é desenvolvido para Windows SOMENTE
-https://cygwin.com/index.html
-'''
-
+##############################################################
+# INSTALACAO DOS SOFTWARES VIA DOWNLOAD
+##############################################################
+cd /deploy
+# Google Chrome
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
 #DBeaver;
 urlDBeaver="https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
 sudo wget $urlDBeaver
@@ -111,87 +128,37 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt update
 sudo apt-get -y install docker-ce
 
-#Eclipse;
-'''
-urlEclipse="https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2021-12/R/eclipse-inst-jre-linux64.tar.gz"
-sudo wget $urlEclipse
-sudo tar -xvf eclipse-inst-jre-linux64.tar.gz
-cd 
-'''
-sudo snap install eclipse --classic
-
-
-#EnterpriseArchitect;
-'''
-APP é PAGO (TRIAL PERMITIDO) e NATIVO PARA WINDOWS
-SEU USO É POSSIVEL PORQUE USA O EMULADOR WINE
-https://sparxsystems.com/products/ea/trial/request.html
-'''
-urlEnterpriseArch="https://www.sparxsystems.com/bin/easetup.msi"
-
-#IntelliJ; 
-'''
-urlIntellij="https://download.jetbrains.com/idea/ideaIC-2021.3.1.tar.gz"
-sudo wget $urlIntellij
-sudo tar -xvf ideaIC-*.tar.gz
-cd ideaIC-*
-'''
-sudo snap install intellij-idea-community --classic
-
-#Node.js;
-urlNodeJS="https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz"
-sudo wget $urlNodeJS
-sudo tar -xvf node-v*-linux-x64.tar.xz
-cd node-v*-linux-x64
-
-#Notepad++;
-sudo snap install notepad-plus-plus
-
-#Postman;
-'''
-urlPostman="https://dl.pstmn.io/download/latest/linux64"
-'''
-sudo snap -y install postman
-
-
-#PyCharm;
-sudo snap -y install pycharm-community --classic
-
-#Buddy;
-'''
-Plataforma de Pipelines, não é necessario fazer a instalação, isso é uma ferramenta de integração com o git do projeto.
-https://buddy.works/docs
-A responsabilidade do uso fica por conta do Desenvolvedor.
-'''
 #SoapUI;
-'''
-Link do site para download do sh de instalacao
-'''
 urlSoapUI="https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.1/SoapUI-x64-5.6.1.sh"
+wget $urlSoapUI
 sudo chmod +X SoapUI-x64-5.6.1.sh
 sudo chmod 777 SoapUI-x64-5.6.1.sh
 sudo ./SoapUI-x64-5.6.1.sh
 
-#SourceTree;
-'''
-O Source Tree é uma versão homologada para Windows e MacOSX.
-Em analise ao desenvolvedor foi pontuado em uma thread da community que eles não tem nenhum interesse em desenvolver esse app para Linux:
-https://community.atlassian.com/t5/Sourcetree-questions/SourceTree-for-Linux/qaq-p/255473
-'''
 #SQLDeveloper;
-urlSQLDeveloper="https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-21.4.0.348.1716.zip"
-urlJDK="https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/8u311-b11/4d5417147a92418ea8b615e228bb6935/jdk-8u311-linux-x64.tar.gz"
-sudo mkdir /usr/java/jdk-8u311
-cd /usr/java/jdk-8u311
-sudo wget $urlJDK
-sudo tar zxvf jdk-8u311-linux-x64.tar.gz
-cd jdk-8u311-x64
-cd ./
+urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
+wget -O jdk-17_linux-x64_bin.deb $urlJdk
+sudo dpkg -i jdk-17_linux-x64_bin.deb
 
-cd /deploy
-sudo wget $urlSQLDeveloper
-sudo unzip sqlcl-21.4.0.348.1716.zip slqcl-21
-sudo slqcl-21/sqldeveloper.sh
+urlSQLDeveloper="https://rmtechfiles.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
+wget $urlSQLDeveloper
+unzip sqlcl-21.4.*.zip
+sudo mv sqldeveloper /opt/
+sudo /opt/sqldeveloper/sqldeveloper.sh
+sudo chmod +x /opt/sqldeveloper/sqldeveloper.sh
+sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper
+cd /usr/share/applications
+ls -ltr *.desktop
+#sudo vi sqldeveloper.desktop
+sudo echo "[Desktop Entry]" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "Exec=sqldeveloper" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "Terminal=false" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "StartupNotify=true" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "Categories=GNOME;Oracle;" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "Type=Application" >> /usr/share/applications/sqldeveloper.desktop
+sudo echo "Icon=/opt/sqldeveloper/icon.png" >> /usr/share/applications/sqldeveloper.desktop
+
+
 
 #SublimeText;
 sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -200,11 +167,66 @@ sudo apt-get update
 sudo apt-get -y install sublime-text
 
 
-#Visual Studio Code;
-urlVSCode="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-sudo chmod 777 code_*_amd64.deb
-sudo dpkg -i code_*_amd64.deb
+###############################################################
+######      INSTALACAO USANDO ARQUIVOS DO WINDOWS    ##########
+###############################################################
+# INSTALACAO DE ARQUIVOS EXE
+# URL
+urlWinSCP="https://winscp.net/download/WinSCP-5.19.5-Setup.exe"
+urlWinmerge="https://github.com/WinMerge/winmerge/releases/download/v2.16.16/WinMerge-2.16.16-x64-Setup.exe"
+urlCygWin="https://www.cygwin.com/setup-x86_64.exe"
+urlEnterpriseArch="https://www.sparxsystems.com/bin/easetup.msi"
 
+
+# DOWNLOADS
+wget -O WinSCP-5.19.5-Setup.exe $urlWinSCP
+wget -O WinMerge-2.16.16-x64-Setup.exe $urlWinmerge
+wget -O CygWin.exe $urlCygWin
+wget -O EAsetup.msi $urlEnterpriseArch
+
+sudo chmod -R 777 /deploy/*
+
+sudo /bin/wine /deploy/WinSCP-5.19.5-Setup.exe
+sudo /bin/wine /deploy/WinMerge-2.16.16-x64-Setup.exe
+sudo /bin/wine /deploy/CygWin.exe
+sudo /bin/wine /deploy/EAsetup.msi
+
+################################################################
+
+################################################################
+######      TROCANDO INTERFACE GNOME P/ CINNAMON       #########
+# REMOVENDO GNOME (GDM3)
+sudo apt purge adwaita-icon-theme geogebra-gnome gir1.2-gtd-1.0 \
+gnome-accessibility-profiles gnome-applets-data gnome-audio gnome-backgrounds \
+gnome-cards-data gnome-common gnome-desktop-testing gnome-dvb-daemon \
+gnome-extra-icons gnome-flashback-common \
+gnome-humility-icon-theme gnome-hwp-support gnome-icon-theme \
+gnome-icon-theme-gartoon gnome-icon-theme-gartoon-redux \
+gnome-icon-theme-gperfection2 gnome-icon-theme-nuovo gnome-icon-theme-suede \
+gnome-icon-theme-yasis gnome-mime-data gnome-nds-thumbnailer \
+gnome-packagekit-data gnome-panel-control gnome-panel-data \
+gnome-pkg-tools gnome-recipes-data gnome-remote-desktop gnome-settings-daemon-dev \
+gnome-shell-pomodoro-data gnome-software-common gnome-software-doc \
+gnome-theme-gilouche gnome-video-effects-extra gnome-video-effects-frei0r \
+guile-gnome2-dev guile-gnome2-glib libgnome-autoar-doc libgnomecanvas2-common \
+libgnomecanvas2-doc libgnomecanvasmm-2.6-doc libgnome-panel-doc libgnome-todo-dev \
+libopenrawgnome7:amd64 libopenrawgnome-dev libreoffice-gnome libxine2-gnome:amd64 \
+nautilus-sendto pidgin-gnome-keyring plymouth-theme-ubuntu-gnome-logo \
+plymouth-theme-ubuntu-gnome-text ubuntu-gnome-wallpapers \
+ubuntu-gnome-wallpapers-trusty ubuntu-gnome-wallpapers-utopic \
+ubuntu-gnome-wallpapers-xenial ubuntu-gnome-wallpapers-yakkety
+sudo apt purge gnome-exe-thumbnailer
+sudo apt purge slim openbox geoclue-2.0
+
+sudo apt autopurge
+
+sudo apt install cinnamon-desktop-environment -y
+
+
+sudo apt update
+sudo apt install --fix-broken -y
+sudo apt upgrade -y
+'''
 # INSTALACAO DO CROWN-STRIKE
 sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/LOFT/linux/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
@@ -215,10 +237,10 @@ sudo systemctl enable falcon-sensor --now
 ps -e | grep falcon-sensor
 
 # INSTALACAO DO DLP (DATA LOSS PROVIDER)
-'''
+
 07/01/2022 - FATAL ESSA INFORMACAO
-'''
+
 # INSTALACAO FILTRO WEB (PROXY)
-'''
+
 07/01/2022 - FATAL ESSA INFORMACAO
 '''
