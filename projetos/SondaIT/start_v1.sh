@@ -35,7 +35,17 @@ sudo apt install -y dialog tree tar unzip make autoconf automake
 sudo apt install -y net-tools
 sudo apt install -y openssh-server
 
+<<<<<<< HEAD
 # INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
+=======
+# Troca da Dash GNOME para CINAMONN
+sudo apt -y purge gdm3 gdm*
+sudo apt autoremove
+sudo 
+sudo 
+
+# INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK
+>>>>>>> 41228d7bceba8c48c8113fea1db4bebf86d03a14
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
