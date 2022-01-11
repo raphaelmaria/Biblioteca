@@ -22,7 +22,7 @@ sudo ./start.sh
 ##################################################################
 # ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get upgrade -y
 sudo apt-get autoremove
 sudo apt distro-upgrade
 #
@@ -44,7 +44,7 @@ sudo apt-get install -y dotnet-runtime-5.0
 sudo apt-get update
 
 # INSTALACAO DO MOMO - BIBLIOTECA C++ (VALIDADO 10/01/22)
-sudo apt install gnupg ca-certificates
+sudo apt install -y gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb [arch=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt update
@@ -62,9 +62,9 @@ sudo chmod 777 /deploy
 sudo apt -y install default-jre            
 
 # INSTALACAO DO JAVA JDK ORACLE OFFICIAL
-sudo apt -y install default-jdk
-sudo apt -y install openjdk-11-jre-headless
-sudo apt -y install openjdk-8-jre-headless 
+sudo apt install -y default-jdk
+sudo apt install -y openjdk-11-jre-headless
+sudo apt install -y openjdk-8-jre-headless 
 
 # INSTALACAO DO WINE
 cd /deploy
@@ -73,11 +73,11 @@ wget -nc https://dl.winehq.org/wine-builds/winehq.key
 sudo apt-key add winehq.key
 sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
 sudo apt update
-sudo apt -y install --install-recommends winehq-stable
+sudo apt install --install-recommends winehq-stable -y
 sudo apt list --upgradable
 
 #Node.js;
-sudo apt -y install nodejs
+sudo apt install -y nodejs
 ############################################################
 
 
@@ -148,21 +148,21 @@ sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper
 cd /usr/share/applications
 ls -ltr *.desktop
 #sudo vi sqldeveloper.desktop
-sudo echo "[Desktop Entry]" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "Exec=sqldeveloper" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "Terminal=false" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "StartupNotify=true" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "Categories=GNOME;Oracle;" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "Type=Application" >> /usr/share/applications/sqldeveloper.desktop
-sudo echo "Icon=/opt/sqldeveloper/icon.png" >> /usr/share/applications/sqldeveloper.desktop
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-
+sudo echo "[Desktop Entry]
+Exec=sqldeveloper
+Terminal=false
+StartupNotify=true
+Categories=GNOME;Oracle;
+Type=Application
+Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper.desktop
 
 #SublimeText;
 sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
-sudo apt-get -y install sublime-text
+sudo apt-get install -y sublime-text
 
 
 ###############################################################
@@ -192,34 +192,6 @@ sudo /bin/wine /deploy/EAsetup.msi
 ################################################################
 
 ################################################################
-######      TROCANDO INTERFACE GNOME P/ CINNAMON       #########
-# REMOVENDO GNOME (GDM3)
-sudo apt purge adwaita-icon-theme geogebra-gnome gir1.2-gtd-1.0 \
-gnome-accessibility-profiles gnome-applets-data gnome-audio gnome-backgrounds \
-gnome-cards-data gnome-common gnome-desktop-testing gnome-dvb-daemon \
-gnome-extra-icons gnome-flashback-common \
-gnome-humility-icon-theme gnome-hwp-support gnome-icon-theme \
-gnome-icon-theme-gartoon gnome-icon-theme-gartoon-redux \
-gnome-icon-theme-gperfection2 gnome-icon-theme-nuovo gnome-icon-theme-suede \
-gnome-icon-theme-yasis gnome-mime-data gnome-nds-thumbnailer \
-gnome-packagekit-data gnome-panel-control gnome-panel-data \
-gnome-pkg-tools gnome-recipes-data gnome-remote-desktop gnome-settings-daemon-dev \
-gnome-shell-pomodoro-data gnome-software-common gnome-software-doc \
-gnome-theme-gilouche gnome-video-effects-extra gnome-video-effects-frei0r \
-guile-gnome2-dev guile-gnome2-glib libgnome-autoar-doc libgnomecanvas2-common \
-libgnomecanvas2-doc libgnomecanvasmm-2.6-doc libgnome-panel-doc libgnome-todo-dev \
-libopenrawgnome7:amd64 libopenrawgnome-dev libreoffice-gnome libxine2-gnome:amd64 \
-nautilus-sendto pidgin-gnome-keyring plymouth-theme-ubuntu-gnome-logo \
-plymouth-theme-ubuntu-gnome-text ubuntu-gnome-wallpapers \
-ubuntu-gnome-wallpapers-trusty ubuntu-gnome-wallpapers-utopic \
-ubuntu-gnome-wallpapers-xenial ubuntu-gnome-wallpapers-yakkety
-sudo apt purge gnome-exe-thumbnailer
-sudo apt purge slim openbox geoclue-2.0
-
-sudo apt autopurge
-
-sudo apt install cinnamon-desktop-environment -y
-
 sudo apt update
 sudo apt install --fix-broken -y
 sudo apt upgrade -y
@@ -253,12 +225,15 @@ ps -e | grep falcon-sensor
 ####################################################################################################
 varNome=$(dialog --stdout --inputbox 'Insira o primeiro nome do usuário: ' 0 0)
 varSobrenome=$(dialog --stdout --inputbox 'Insira o sobrenome do usuário: ' 0 0)
-varUsername=$varNome.$varSobrenome
+varUsername='$varNome'.$varSobrenome
 
 sudo adduser $varUsername
 sudo usermod -aG sudo $varUsername
 sudo passwd $varUsername
-echo -e "Mudar123" | sudo passwd --stdin $varUsername
+sudo passwd $varUsername << EOF
+Mudar123
+Mudar123
+EOF
 
 dialog \
     --title "Configuração Finalizada!"  \
