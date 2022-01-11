@@ -1,5 +1,4 @@
 #!/bin/sh
-
 '''
 Script de Instalação de Apps para o time de desenvolvimento
 EMPRESA: x
@@ -17,18 +16,16 @@ sudo chmod 777 start.sh
 sudo ./start.sh
 
 '''
-
 # VARIAVEIS - ITENS QUE PODEM MUDAR COM O TEMPO E NECESSIDADE
-
 ##################################################################
 #####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
 ##################################################################
 # ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
 sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get autoremove -y
-sudo apt distro-upgrade -y
-
+sudo apt-get upgrade
+sudo apt-get autoremove
+sudo apt distro-upgrade
+#
 # INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
 sudo apt-get install -y update-manager-core
 sudo apt install -y gcc ansible wget vim git-core
@@ -49,7 +46,7 @@ sudo apt-get update
 # INSTALACAO DO MOMO - BIBLIOTECA C++ (VALIDADO 10/01/22)
 sudo apt install gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo "deb [arm=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+echo "deb [arch=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt update
 sudo apt install -y mono-devel
 sudo apt install -y mono-complete
