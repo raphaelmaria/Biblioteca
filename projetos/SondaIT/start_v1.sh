@@ -162,7 +162,7 @@ Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper
 sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
-sudo apt-get install -y sublime-text
+sudo apt-get -y install sublime-text
 
 
 ###############################################################
@@ -177,10 +177,10 @@ urlEnterpriseArch="https://www.sparxsystems.com/bin/easetup.msi"
 
 
 # DOWNLOADS
-wget -O WinSCP-5.19.5-Setup.exe $urlWinSCP
-wget -O WinMerge-2.16.16-x64-Setup.exe $urlWinmerge
-wget -O CygWin.exe $urlCygWin
-wget -O EAsetup.msi $urlEnterpriseArch
+wget -O "WinSCP-5.19.5-Setup.exe" $urlWinSCP
+wget -O "WinMerge-2.16.16-x64-Setup.exe" $urlWinmerge
+wget -O "CygWin.exe" $urlCygWin
+wget -O "EAsetup.msi" $urlEnterpriseArch
 
 sudo chmod -R 777 /deploy/*
 
@@ -223,10 +223,7 @@ ps -e | grep falcon-sensor
 ####################################################################################################
 ########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
 ####################################################################################################
-varNome=$(dialog --stdout --inputbox 'Insira o primeiro nome do usuário: ' 0 0)
-varSobrenome=$(dialog --stdout --inputbox 'Insira o sobrenome do usuário: ' 0 0)
-varUsername='$varNome'.$varSobrenome
-
+varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
 sudo adduser $varUsername
 sudo usermod -aG sudo $varUsername
 sudo passwd $varUsername
