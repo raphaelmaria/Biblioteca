@@ -27,6 +27,7 @@ sudo ./start.sh
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get autoremove -y
+sudo apt distro-upgrade -y
 
 # INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
 sudo apt-get install -y update-manager-core
@@ -35,17 +36,7 @@ sudo apt install -y dialog tree tar unzip make autoconf automake
 sudo apt install -y net-tools
 sudo apt install -y openssh-server
 
-<<<<<<< HEAD
 # INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
-=======
-# Troca da Dash GNOME para CINAMONN
-sudo apt -y purge gdm3 gdm*
-sudo apt autoremove
-sudo 
-sudo 
-
-# INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK
->>>>>>> 41228d7bceba8c48c8113fea1db4bebf86d03a14
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
@@ -232,20 +223,25 @@ sudo apt autopurge
 
 sudo apt install cinnamon-desktop-environment -y
 
-
 sudo apt update
 sudo apt install --fix-broken -y
 sudo apt upgrade -y
-'''
+sudo apt distro-upgrade -y
+#########################################################################################
+#########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
+#########################################################################################
+varFalconKey=$(dialog --stdout --inputbox 'Insira a chave do CrownStrike Falcon: ' 0 0)
+
 # INSTALACAO DO CROWN-STRIKE
 sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/LOFT/linux/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo dpkg -i /tmp/falcon-sensor_6.14.0-11110_amd64.deb
-sudo /opt/CrowdStrike/falconctl -s --cid=[INSIRIR A CHAVE DE ATIVACAO DO FALCON]
+sudo /opt/CrowdStrike/falconctl -s --cid= $varFalconKey
 sudo service falcon-sensor start
 sudo systemctl enable falcon-sensor --now
 ps -e | grep falcon-sensor
 
+'''
 # INSTALACAO DO DLP (DATA LOSS PROVIDER)
 
 07/01/2022 - FATAL ESSA INFORMACAO
@@ -254,3 +250,24 @@ ps -e | grep falcon-sensor
 
 07/01/2022 - FATAL ESSA INFORMACAO
 '''
+
+####################################################################################################
+########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
+####################################################################################################
+varNome=$(dialog --stdout --inputbox 'Insira o primeiro nome do usuário: ' 0 0)
+varSobrenome=$(dialog --stdout --inputbox 'Insira o sobrenome do usuário: ' 0 0)
+varUsername=$varNome.$varSobrenome
+
+sudo adduser $varUsername
+sudo usermod -aG sudo $varUsername
+sudo passwd $varUsername
+echo -e "Mudar123" | sudo passwd --stdin $varUsername
+
+dialog \
+    --title "Configuração Finalizada!"  \
+    --msgbox "Instalação foi efetuada com sucesso, \nA maquina será reiniciada em 10 segundos." \
+    0 0
+
+sleep 15
+
+sudo reboot
