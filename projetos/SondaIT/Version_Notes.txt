@@ -24,4 +24,4 @@
     -Efetuado instalação da Interface Cinnamon
     -Aplicado campo interativo para instalação do Crown Strike Falcon, onde ele vai solicitar a chave do
     tenant do cliente.
-    -
+    -Criado sessão para criação de usuário local.
