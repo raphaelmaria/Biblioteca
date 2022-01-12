@@ -222,7 +222,7 @@ ps -e | grep falcon-sensor
 ########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
 ####################################################################################################
 varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
-sudo adduser $varUsername
+sudo adduser '$varUsername'
 sudo usermod -aG sudo $varUsername
 sudo passwd $varUsername << EOF
 Mudar123
