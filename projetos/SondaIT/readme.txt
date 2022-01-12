@@ -34,3 +34,13 @@ PROXY
 
 Para criar imagem em wim:
 https://wimlib.net/
+
+
+Criptografia
+
+É possivel efetuar a criptografia após a instalação, mas isso só é possivel fazer em uma unica pasta, alocada em uma partição a parte.
+Em detalhes, se a partição /home estiver em um disco diferente ou partição a parte do "/", basta instalar o CryptSetup e seguir esse [artigo](https://linuxdicasesuporte.blogspot.com/2019/11/criptografar-sua-particao-home-no.html).
+Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito manual exigindo um conhecimento mais amplo do sistema operacional linux e sua linha de comando em Bash.
+
+Tela de Criptografia que é executada na inicialização do sistema Linux
+
