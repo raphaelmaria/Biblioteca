@@ -58,7 +58,31 @@ Motivo: Ferramenta não é compativel com Ubuntu 20.04 LTS
 Pinguy Builder - Em Teste
 Motivo: versão 5.2.1 suporta o Ubuntu 20.04 LTS
 
+Instalação dentro da VM:
+Pinguy Builder para Ubuntu 19 ou acima - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)
 
+Linhas de comando estruturadas para Script de download:
+urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"
+wget $urlPinguyBuild -O pinguybuilder.deb
+sudo dpkg -i pinguybuilder.deb
+sudo apt-get install -f
+
+Após instalado use a opções na seguinte ordem:
+1. Opção "3.Clean working directory" para remover cache.
+2. Opção "2b.Backup(dist-mode) ou 2c.Backup (cdfs-only)"
+3. Os arquivos será armazenados no seguinte diretorio "/home/pinguybuilder/pinguybuilder/ISOTMP"
+
+## Criando o arquivo .ISO
+Comandos usados do proprio Linux:
+$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>
+
+** Linha de Exemplo: **
+$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP
+
+$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>
+
+** Linha de Exemplo: **
+$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP
 
 ------------------------------------------------------
 ## Referencias usadas para desenvolvimento do Projeto e atualização pessoal
