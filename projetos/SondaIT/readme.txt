@@ -39,54 +39,54 @@ PROXY
 Em detalhes, se a partição /home estiver em um disco diferente ou partição a parte do "/", basta instalar o CryptSetup e seguir esse [artigo](https://linuxdicasesuporte.blogspot.com/2019/11/criptografar-sua-particao-home-no.html).
 Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito manual exigindo um conhecimento mais amplo do sistema operacional linux e sua linha de comando em Bash.
 
-** Tela de Criptografia que é executada na inicialização do sistema Linux **
+**Tela de Criptografia que é executada na inicialização do sistema Linux**
 ![Linux Boot](https://imgur.com/a/7CKO3sL)
 
 
 ## Criação de Imagem ISO customizada
 
-** Ferramenta Pesquisadas: **
+**Ferramenta Pesquisadas:**
 Wimlib - Descartada
 Motivo: não funciona para Linux
-
+--
 Constructor - Descartada
 Motivo: Ferramenta descontinuada
-
+--
 Remastersys - Descartada
 Motivo: Ferramenta descontinuada
-
+--
 Remastersys-gtk - Descartada
 Motivo: Ferramenta não é compativel com Ubuntu 20.04 LTS
-
-Pinguy Builder - Em Teste
-Motivo: versão 5.2.1 suporta o Ubuntu 20.04 LTS
+--
+Pinguy Builder - Descartada
+Motivo: versão 5.2.1 ferramenta não é compativel com Ubuntu 20.04 LTS
 
 Instalação dentro da VM:
-Pinguy Builder para Ubuntu 19 ou acima - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)
+~~Pinguy Builder para Ubuntu 19 ou acima - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)~~
 
 Linhas de comando estruturadas para Script de download:
-urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"
-wget $urlPinguyBuild -O pinguybuilder.deb
-sudo dpkg -i pinguybuilder.deb
-sudo apt-get install -f
+~~urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"~~
+~~wget $urlPinguyBuild -O pinguybuilder.deb~~
+~~sudo dpkg -i pinguybuilder.deb~~
+~~sudo apt-get install -f~~
 
-Após instalado use a opções na seguinte ordem:
-1. Opção "3.Clean working directory" para remover cache.
-2. Opção "2b.Backup(dist-mode) ou 2c.Backup (cdfs-only)"
-3. Os arquivos será armazenados no seguinte diretorio "/home/pinguybuilder/pinguybuilder/ISOTMP"
+~~Após instalado use a opções na seguinte ordem:~~
+~~1. Opção "3.Clean working directory" para remover cache.~~
+~~2. Opção "2b.Backup(dist-mode) ou 2c.Backup (cdfs-only)"~~
+~~3. Os arquivos será armazenados no seguinte diretorio "/home/pinguybuilder/pinguybuilder/ISOTMP"~~
 
 ## Criando o arquivo .ISO
-Comandos usados do proprio Linux:
-$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>
+~~Comandos usados do proprio Linux:~~
+~~$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>~~
 
-** Linha de Exemplo: **
-$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP
+**Linha de Exemplo:**
+~~$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP~~
 
-$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>
+~~$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>~~
 
-** Linha de Exemplo: **
-$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP
-
+**Linha de Exemplo:**
+~~$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP~~
+--
 ------------------------------------------------------
 ## Referencias usadas para desenvolvimento do Projeto e atualização pessoal
 -------------------------------------------------------
@@ -95,11 +95,4 @@ Para criar imagem em wim:
 Nao funciona para Linux
 https://wimlib.net/
 -------------------------------------------------------
-Pinguy Builder para Ubuntu 19 ou acima - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)
-download:
-urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"
-wget $urlPinguyBuild -O pinguybuilder.deb
-sudo dpkg -i pinguybuilder.deb
-sudo apt-get install -f
----------------------------------------------------------
 
