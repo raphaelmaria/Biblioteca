@@ -205,7 +205,7 @@ varFalconKey=$(dialog --stdout --inputbox 'Insira a chave do CrownStrike Falcon:
 sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo dpkg -i /tmp/falcon-sensor_6.14.0-11110_amd64.deb
-sudo /opt/CrowdStrike/falconctl -s --cid= $varFalconKey
+sudo /opt/CrowdStrike/falconctl -s --cid='$varFalconKey'
 sudo service falcon-sensor start
 sudo systemctl enable falcon-sensor --now
 ps -e | grep falcon-sensor
@@ -223,13 +223,13 @@ ps -e | grep falcon-sensor
 ####################################################################################################
 ########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
 ####################################################################################################
-varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
-sudo adduser '$varUsername'
-sudo usermod -aG sudo $varUsername
-sudo passwd $varUsername << EOF
-Mudar123
-Mudar123
-EOF
+#varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
+#sudo adduser '$varUsername'
+#sudo usermod -aG sudo $varUsername
+#sudo passwd $varUsername << EOF
+#Mudar123
+#Mudar123
+#EOF
 
 ############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
 # REMOVE A LINHA QUE ACIONA O SCRIPT DE CUSTOMIZACAO
