@@ -11,11 +11,14 @@ SSD: 60 GB SATA #3 Generation
 
 ## Como instalar rodar o script:
 
+Instalar o comando CURL antes de rodar a linha abaixo:
+$ sudo apt install curl -y
+
 Via download do GitHub
-sudo curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/script_instalacao_sondait.sh | sudo bash
+$ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/script_instalacao_sondait.sh | sudo bash
 
 Via download do AWS S3 Bucket
-sudo curl -s https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/script_instalacao_sondait.sh | sudo bash
+$ curl -s https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/script_instalacao_sondait.sh | sudo bash
 
 ## Observações
 Os Softwares abaixo são exclusivos para uso em Windows.
