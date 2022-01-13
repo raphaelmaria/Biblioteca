@@ -1,21 +1,21 @@
 #!/bin/sh
 '''
 Script de Instalação de Apps para o time de desenvolvimento
-EMPRESA: ALELO
-CRIADOR: Raphael A O Maria
+EMPRESA: Sonda IT para uso dentro da ALELO
+CRIADOR: Raphael * * Maria
 SITE: www.raphaelmaria.com.br
 WHATSAPP: +55 11 9 6061-1839
-MAIL: raphaelmaria@outlook.com
-VERSION: 1.0
-CREATE: 7 de Janeiro de 2022
-CHANGE: Read the document Version_Notes.txt
-
-COMMAND FOR USE SCRIPT: 
-sed -i 's/\r$//' start.sh
-sudo chmod +X start.sh
-sudo chmod 777 start.sh
-sudo ./start.sh
+E-MAIL: raphaelmaria@outlook.com
+VERSÃO: 1.5
+CRIAÇÃO: 7 de Janeiro de 2022
+CONTROLE DE ALTERAÇÕES: https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/Version_Notes.txt 
 '''
+#COMMAND FOR USE SCRIPT: 
+#sed -i 's/\r$//' start.sh
+#sudo chmod +X start.sh
+#sudo chmod 777 start.sh
+#sudo ./start.sh
+
 # VARIAVEIS - ITENS QUE PODEM MUDAR COM O TEMPO E NECESSIDADE
 ##################################################################
 #####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
@@ -59,6 +59,14 @@ varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maqui
 sudo hostnamectl set-hostname $varHostname
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
+
+############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
+urlUpdates="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/Check_Update.sh"
+cd /root
+sudo wget -O 'Check_Updates.sh' $urlUpdates
+sudo chmod -R 777 /root
+sudo chmod +X /root/*.sh
+sudo ln -s /root/Check_Updates.sh /etc/cron.weekly/Check_Updates.sh
 #
 # INSTALACAO DO JAVA 
 sudo apt -y install default-jre            
@@ -67,6 +75,9 @@ sudo apt -y install default-jre
 sudo apt -y install default-jdk
 sudo apt -y install openjdk-11-jre-headless
 sudo apt -y install openjdk-8-jre-headless 
+urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
+wget -O jdk-17_linux-x64_bin.deb $urlJdk
+sudo dpkg -i jdk-17_linux-x64_bin.deb
 #
 # INSTALACAO DO WINE
 cd /windowsApps
@@ -78,11 +89,16 @@ sudo apt update
 sudo apt install --install-recommends winehq-stable -y
 sudo apt list --upgradable
 #
+#SublimeText;
+sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt-get update
+sudo apt-get -y install sublime-text
+#
 #Node.js;
 sudo apt -y install nodejs
-############################################################
-#
-#
+
+
 ############################################################
 ######          INSTALACAO USANDO SNAP STORE        ########
 ############################################################
@@ -106,8 +122,7 @@ sudo snap install pycharm-community --classic
 sudo snap install source-git
 # VS Code
 sudo snap install code --classic
-##############################################################
-#
+
 ##############################################################
 # INSTALACAO DOS SOFTWARES VIA DOWNLOAD
 ##############################################################
@@ -128,6 +143,8 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt update
 sudo apt-get -y install docker-ce
 #
+#######################################################################
+#############        INSTALACAO INTERATIVAS     #######################
 #SoapUI;
 urlSoapUI="https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.1/SoapUI-x64-5.6.1.sh"
 wget $urlSoapUI
@@ -136,10 +153,6 @@ sudo chmod 777 SoapUI-x64-5.6.1.sh
 sudo ./SoapUI-x64-5.6.1.sh
 #
 #SQLDeveloper;
-urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
-wget -O jdk-17_linux-x64_bin.deb $urlJdk
-sudo dpkg -i jdk-17_linux-x64_bin.deb
-#
 urlSQLDeveloper="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
 wget $urlSQLDeveloper
 sudo unzip sqldeveloper*.zip -d /opt/
@@ -148,7 +161,6 @@ sudo chmod +x /opt/sqldeveloper/sqldeveloper.sh
 sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper
 cd /usr/share/applications
 ls -ltr *.desktop
-#sudo vi sqldeveloper.desktop
 sudo echo "[Desktop Entry]
 Name=SQL Developer
 Exec=sqldeveloper
@@ -158,18 +170,7 @@ Categories=GNOME;Oracle;
 Type=Application
 Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper.desktop
 #
-#SublimeText;
-sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get -y install sublime-text
-#
-#
-###############################################################
 ######      INSTALACAO USANDO ARQUIVOS DO WINDOWS    ##########
-###############################################################
-# INSTALACAO DE ARQUIVOS EXE
-# URL
 cd /windowsApps
 urlWinSCP="https://winscp.net/download/WinSCP-5.19.5-Setup.exe"
 urlWinmerge="https://github.com/WinMerge/winmerge/releases/download/v2.16.16/WinMerge-2.16.16-x64-Setup.exe"
@@ -188,14 +189,7 @@ sudo /bin/wine /windowsApps/WinSCP-5.19.5-Setup.exe
 sudo /bin/wine /windowsApps/WinMerge-2.16.16-x64-Setup.exe
 sudo /bin/wine /windowsApps/CygWin.exe
 sudo /bin/wine /windowsApps/EAsetup.msi
-#
-################################################################
-#
-################################################################
-sudo apt update
-sudo apt install --fix-broken -y
-sudo apt upgrade -y
-sudo apt distro-upgrade -y
+
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
 #########################################################################################
@@ -231,17 +225,10 @@ ps -e | grep falcon-sensor
 #Mudar123
 #EOF
 
-############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
-# REMOVE A LINHA QUE ACIONA O SCRIPT DE CUSTOMIZACAO
-sudo sed -i '$ d' /etc/crontab
-
-urlUpdates="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/Check_Update.sh"
-cd /root
-sudo wget -O 'Check_Updates.sh' $urlUpdates
-sudo chmod -R 777 /root
-sudo chmod +X /root/*.sh
-sudo ln -s /root/Check_Updates.sh /etc/cron.weekly/Check_Updates.sh
-
+sudo apt-get upgrade -y
+sudo apt-get autoremove
+sudo apt distro-upgrade
+sudo apt -f install
 #
 dialog \
     --title "Configuração Finalizada!"  \
