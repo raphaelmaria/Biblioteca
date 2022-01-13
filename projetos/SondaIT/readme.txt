@@ -32,8 +32,6 @@ Softwares abaixo ainda faltam informaçoes:
 DLP
 PROXY
 
-Para criar imagem em wim:
-https://wimlib.net/
 
 
 Criptografia
@@ -44,3 +42,40 @@ Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito man
 
 Tela de Criptografia que é executada na inicialização do sistema Linux
 ![Linux Boot](https://imgur.com/a/7CKO3sL)
+
+Criação de Imagem ISO customizada:
+
+Ferramenta Pesquisadas:
+Wimlib - Descartada
+Motivo: não funciona para Linux
+
+Constructor - Descartada
+Motivo: Ferramenta descontinuada
+
+Remastersys - Descartada
+Motivo: Ferramenta descontinuada
+
+Remastersys-gtk - Descartada
+Motivo: Ferramenta não é compativel com Ubuntu 20.04 LTS
+
+Pinguy Builder - Em Teste
+Motivo: versão 5.2.1 suporta o Ubuntu 20.04 LTS
+
+
+
+------------------------------------------------------
+
+-------------------------------------------------------
+WIMLIB
+Para criar imagem em wim:
+Nao funciona para Linux
+https://wimlib.net/
+-------------------------------------------------------
+Pinguy Builder - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)
+download:
+urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"
+wget $urlPinguyBuild -O pinguybuilder.deb
+sudo dpkg -i pinguybuilder.deb
+sudo apt-get install -f
+---------------------------------------------------------
+

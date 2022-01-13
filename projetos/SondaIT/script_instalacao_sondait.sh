@@ -11,6 +11,7 @@ CREATE: 7 de Janeiro de 2022
 CHANGE: Read the document Version_Notes.txt
 
 COMMAND FOR USE SCRIPT: 
+sed -i 's/\r$//' start.sh
 sudo chmod +X start.sh
 sudo chmod 777 start.sh
 sudo ./start.sh
@@ -31,6 +32,8 @@ sudo apt -y install gcc ansible wget vim git-core
 sudo apt -y install dialog tree tar unzip make autoconf automake
 sudo apt -y install net-tools
 sudo apt -y install openssh-server
+sudo apt -y install libxml2* ntfs* libfuse* 
+sudo apt -y install synaptic
 #
 # INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -137,10 +140,9 @@ urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
 wget -O jdk-17_linux-x64_bin.deb $urlJdk
 sudo dpkg -i jdk-17_linux-x64_bin.deb
 #
-urlSQLDeveloper="https://rmtechfiles.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
+urlSQLDeveloper="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
 wget $urlSQLDeveloper
-unzip sqlcl-21.4.*.zip
-sudo mv sqldeveloper /opt/
+sudo unzip sqldeveloper*.zip -d /opt/
 sudo /opt/sqldeveloper/sqldeveloper.sh
 sudo chmod +x /opt/sqldeveloper/sqldeveloper.sh
 sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper
@@ -200,7 +202,7 @@ sudo apt distro-upgrade -y
 varFalconKey=$(dialog --stdout --inputbox 'Insira a chave do CrownStrike Falcon: ' 0 0)
 #
 # INSTALACAO DO CROWN-STRIKE
-sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/LOFT/linux/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
+sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo dpkg -i /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo /opt/CrowdStrike/falconctl -s --cid= $varFalconKey
@@ -228,10 +230,23 @@ sudo passwd $varUsername << EOF
 Mudar123
 Mudar123
 EOF
+
+############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
+# REMOVE A LINHA QUE ACIONA O SCRIPT DE CUSTOMIZACAO
+sudo sed -i '$ d' /etc/crontab
+
+urlUpdates="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/Check_Update.sh"
+cd /root
+sudo wget -O 'Check_Updates.sh' $urlUpdates
+sudo chmod -R 777 /root
+sudo chmod +X /root/*.sh
+sudo ln -s /root/Check_Updates.sh /etc/cron.weekly/Check_Updates.sh
+
 #
 dialog \
     --title "Configuração Finalizada!"  \
     --msgbox "Instalação foi efetuada com sucesso, \nA maquina será reiniciada em 10 segundos." \
     0 0
 #
-sleep 60
+sleep 30
+sudo reboot

@@ -25,3 +25,13 @@
     -Aplicado campo interativo para instalação do Crown Strike Falcon, onde ele vai solicitar a chave do
     tenant do cliente.
     -Criado sessão para criação de usuário local.
+
+> Release Version 1.4:
+    -Adicionado pacotes Libxml2 e ntfs-3g
+    -Corrigido instalação do SQL Developer com apontamento do arquivo alocado no meu AWS S3 Bucket.
+    Tomei essa medida, pq para baixar da Oracle, agora é necessário sempre logar com uma conta autenticada.
+    -Alterado nome da pasta que recebe os EXEs e MSIs de "deploy" para "windowsApps"
+    -Criado rotina de atualizacao via AWS S3 Bucket, sera efetuado download e instalacao de alguns apps a parte deste repositorio.
+    -Criado rotina semanal para analise de atualizacao de apps nativos do Ubuntu.
+    -Acressentado a instalacao do Synaptic, gerenciado de facil uso para instalacao em Distro Debian/Ubuntu
+    
