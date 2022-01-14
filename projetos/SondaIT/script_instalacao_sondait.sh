@@ -27,6 +27,7 @@ sudo apt-get autoremove
 sudo apt distro-upgrade
 #
 # INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
+sudo apt-get ubuntu-drivers autoinstall -y
 sudo apt-get -y install update-manager-core
 sudo apt -y install gcc ansible wget vim git-core
 sudo apt -y install dialog tree tar unzip make autoconf automake
