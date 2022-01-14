@@ -1,0 +1,2 @@
+# [Thank You!](https://github.com/raphaelmaria/deploy/blob/master/CONTRIBUTING.md)
+Your contributions to open source, large or small, make great projects like this possible. Thank you for taking the time to contribute.
