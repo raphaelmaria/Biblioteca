@@ -1,17 +1,17 @@
-> Release Version 1.0:
-    -Date 07/01/2022
-    -Confeccionado o script inicial e organizado estrutura de processos para instalacao
+1.0 Release Version:
+ -Date 07/01/2022
+ -Confeccionado o script inicial e organizado estrutura de processos para instalacao
 
-> Release Version 1.1:
-    -Data 07/01/2022
-    -Adicionei algumas simplificações de instalacao usando a SNAP Store.
-    -Que agregar boa parte das ferramentas e simplifica a instalação
+1.1 Release Version:
+ -Data 07/01/2022
+ -Adicionei algumas simplificações de instalacao usando a SNAP Store.
+ -Que agregar boa parte das ferramentas e simplifica a instalação
 
-> Release Version 1.2:
-    -Date 10/01/2022
-    -Simplificado instalação do Java versões JRE e JDK.
-    -Instalacao do Wine e da Biblioteca Mono C++
-    -Refeito algumas linhas de informacoes.
+Release Version 1.2:
+ -Date 10/01/2022
+ -Simplificado instalação do Java versões JRE e JDK.
+ -Instalacao do Wine e da Biblioteca Mono C++
+ -Refeito algumas linhas de informacoes.
 
     -Teste de aplicativos em EXE e MSI usando Wine.
     -Efetuados com sucesso e suas particulariedades de erros, mas em sua maioria estão todos rodando.
