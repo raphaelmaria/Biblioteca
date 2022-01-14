@@ -1,8 +1,10 @@
-1.0. Release Version:
+Release Version 1.0:
+     
      -Date 07/01/2022
      -Confeccionado o script inicial e organizado estrutura de processos para instalacao
 
-1.1. Release Version:
+Release Version 1.1:
+     
      -Data 07/01/2022
      -Adicionei algumas simplificações de instalacao usando a SNAP Store.
      -Que agregar boa parte das ferramentas e simplifica a instalação
