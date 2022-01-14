@@ -35,3 +35,8 @@
     -Criado rotina semanal para analise de atualizacao de apps nativos do Ubuntu.
     -Acressentado a instalacao do Synaptic, gerenciado de facil uso para instalacao em Distro Debian/Ubuntu
     
+> Release Version 1.5:
+    -Efetuado comentários em linhas para teste.
+    -Efetuado organização para otimização do código.
+    -Adicionado complementos que acressentam melhorias ao emulador Wine e criam os atalhos do apps EXE e MSI na dashboard do Gnome.
+    

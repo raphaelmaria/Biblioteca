@@ -87,6 +87,7 @@ sudo apt-key add winehq.key
 sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
 sudo apt update
 sudo apt install --install-recommends winehq-stable -y
+sudo apt -y install libwine winetricks
 sudo apt list --upgradable
 #
 #SublimeText;
@@ -190,6 +191,10 @@ sudo /bin/wine /windowsApps/WinMerge-2.16.16-x64-Setup.exe
 sudo /bin/wine /windowsApps/CygWin.exe
 sudo /bin/wine /windowsApps/EAsetup.msi
 
+sudo
+sudo mv "Área de Trabalho"/*.desktop /usr/share/applications/
+sudo mv Desktop/*.desktop 
+#
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
 #########################################################################################
