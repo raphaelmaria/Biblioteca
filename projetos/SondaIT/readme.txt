@@ -17,9 +17,14 @@ $ sudo apt install curl -y
 Via download do GitHub
 $ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/script_instalacao_sondait.sh | sudo bash
 
+Teste - Link Curto
+$ curl -s https://bityli.com/bOeWz | sudo bash
+
 Via download do AWS S3 Bucket
 $ curl -s https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/script_instalacao_sondait.sh | sudo bash
 
+Teste - Link Curto 
+$ curl -s https://bityli.com/CMpPd | sudo bash
 ## Observações
 Os Softwares abaixo são exclusivos para uso em Windows.
 Existe um meio de rodar usando um emulação chamada Wine, mas não recomendo pois da muitos crashs nas aplicações.
