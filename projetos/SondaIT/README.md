@@ -45,7 +45,7 @@ Em detalhes, se a partição /home estiver em um disco diferente ou partição a
 Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito manual exigindo um conhecimento mais amplo do sistema operacional linux e sua linha de comando em Bash.
 
 **Tela de Criptografia que é executada na inicialização do sistema Linux**
-![Linux Boot](https://imgur.com/a/7CKO3sL)
+[Linux Boot](https://imgur.com/a/7CKO3sL)
 
 
 ## Criação de Imagem ISO customizada
