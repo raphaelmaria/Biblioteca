@@ -1,7 +1,7 @@
 Release Version 1.0:
      
- -Date 07/01/2022
- -Confeccionado o script inicial e organizado estrutura de processos para instalacao
+    -Date 07/01/2022
+    -Confeccionado o script inicial e organizado estrutura de processos para instalacao
 
 Release Version 1.1:
      
