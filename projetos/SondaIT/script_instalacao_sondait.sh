@@ -1,15 +1,14 @@
 #!/bin/sh
-'''
-Script de Instalação de Apps para o time de desenvolvimento
-EMPRESA: Sonda IT para uso dentro da ALELO
-CRIADOR: Raphael * * Maria
-SITE: www.raphaelmaria.com.br
-WHATSAPP: +55 11 9 6061-1839
-E-MAIL: raphaelmaria@outlook.com
-VERSÃO: 1.5
-CRIAÇÃO: 7 de Janeiro de 2022
-CONTROLE DE ALTERAÇÕES: https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/Version_Notes.txt 
-'''
+#Script de Instalação de Apps para o time de desenvolvimento
+#EMPRESA: Sonda IT para uso dentro da ALELO
+#CRIADOR: Raphael * * Maria
+#SITE: www.raphaelmaria.com.br
+#WHATSAPP: +55 11 9 6061-1839
+#E-MAIL: raphaelmaria@outlook.com
+#VERSÃO: 1.5
+#CRIAÇÃO: 7 de Janeiro de 2022
+#CONTROLE DE ALTERAÇÕES: https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/Version_Notes.txt 
+
 #COMMAND FOR USE SCRIPT: 
 #sed -i 's/\r$//' start.sh
 #sudo chmod +X start.sh
@@ -207,15 +206,14 @@ sudo service falcon-sensor start
 sudo systemctl enable falcon-sensor --now
 ps -e | grep falcon-sensor
 
-'''
 # INSTALACAO DO DLP (DATA LOSS PROVIDER)
 #
-07/01/2022 - FATAL ESSA INFORMACAO
+#07/01/2022 - FATAL ESSA INFORMACAO
 #
 # INSTALACAO FILTRO WEB (PROXY)
 #
-07/01/2022 - FATAL ESSA INFORMACAO
-'''
+#07/01/2022 - FATAL ESSA INFORMACAO
+
 #
 ####################################################################################################
 ########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
