@@ -175,20 +175,17 @@ Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper
 cd /windowsApps
 urlWinSCP="https://winscp.net/download/WinSCP-5.19.5-Setup.exe"
 urlWinmerge="https://github.com/WinMerge/winmerge/releases/download/v2.16.16/WinMerge-2.16.16-x64-Setup.exe"
-urlCygWin="https://www.cygwin.com/setup-x86_64.exe"
 urlEnterpriseArch="https://www.sparxsystems.com/bin/easetup.msi"
 #
 # DOWNLOADS
 wget -O "WinSCP-5.19.5-Setup.exe" $urlWinSCP
 wget -O "WinMerge-2.16.16-x64-Setup.exe" $urlWinmerge
-wget -O "CygWin.exe" $urlCygWin
 wget -O "EAsetup.msi" $urlEnterpriseArch
 #
 sudo chmod -R 777 /windowsApps/*
 #
 sudo /bin/wine /windowsApps/WinSCP-5.19.5-Setup.exe
 sudo /bin/wine /windowsApps/WinMerge-2.16.16-x64-Setup.exe
-sudo /bin/wine /windowsApps/CygWin.exe
 sudo /bin/wine /windowsApps/EAsetup.msi
 
 sudo
