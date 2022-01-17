@@ -67,6 +67,7 @@ Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito man
 Obs.: Pode ser que em algumas maquinas fisicas, a senha seja armazenada dentro da BIOS da placa-mão como uma forma de check-in, validando a chave entre disco e máquina.
 
 Criação de Imagem ISO customizada
+
 Não existe mais essa possibilidade para o Ubuntu 20.04 ou superior.
 Devido a grande parte das ferramentas terem sido descontinuadas e não ter um outro meio de copilar.
 
