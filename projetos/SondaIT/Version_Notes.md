@@ -45,3 +45,4 @@ Release Version 1.5:
     -Adicionado complementos que acressentam melhorias ao emulador Wine e criam os atalhos do apps EXE e MSI na dashboard do Gnome.
     -Removido CygWin por ser um emulador de terminar Bashrc, o usuário pode usar o nativo através do terminal.
     -Adicionado Link Curto para download e instalacao
+
