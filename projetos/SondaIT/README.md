@@ -48,56 +48,20 @@ Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito man
 [Linux Boot](https://imgur.com/a/7CKO3sL)
 
 
-## Criação de Imagem ISO customizada
+Criação de Imagem ISO customizada
+Não existe mais essa possibilidade para o Ubuntu 20.04 ou superior.
+Devido a grande parte das ferramentas terem sido descontinuadas e não ter um outro meio de copilar.
 
 **Ferramenta Pesquisadas:**
-Wimlib - Descartada
-Motivo: não funciona para Linux
---
-Constructor - Descartada
-Motivo: Ferramenta descontinuada
---
-Remastersys - Descartada
-Motivo: Ferramenta descontinuada
---
-Remastersys-gtk - Descartada
-Motivo: Ferramenta não é compativel com Ubuntu 20.04 LTS
---
-Pinguy Builder - Descartada
-Motivo: versão 5.2.1 ferramenta não é compativel com Ubuntu 20.04 LTS
+Wimlib - Descontinuada
+Constructor - Descontinuada
+Remastersys - Descontinuada
+Remastersys-gtk - Descontinuada
+Pinguy Builder - Descontinuada
 
-Instalação dentro da VM:
-~~Pinguy Builder para Ubuntu 19 ou acima - ![Fonte](https://www.edivaldobrito.com.br/iso-personalizada-do-ubuntu/)~~
-
-Linhas de comando estruturadas para Script de download:
-~~urlPinguyBuild="https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/pinguybuilder_5.2-1_all.deb/download"~~
-~~wget $urlPinguyBuild -O pinguybuilder.deb~~
-~~sudo dpkg -i pinguybuilder.deb~~
-~~sudo apt-get install -f~~
-
-~~Após instalado use a opções na seguinte ordem:~~
-~~1. Opção "3.Clean working directory" para remover cache.~~
-~~2. Opção "2b.Backup(dist-mode) ou 2c.Backup (cdfs-only)"~~
-~~3. Os arquivos será armazenados no seguinte diretorio "/home/pinguybuilder/pinguybuilder/ISOTMP"~~
-
-## Criando o arquivo .ISO
-~~Comandos usados do proprio Linux:~~
-~~$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>~~
-
-**Linha de Exemplo:**
-~~$ genisoimage -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP~~
-
-~~$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o <output.iso> <source file or directory>~~
-
-**Linha de Exemplo:**
-~~$ mkisofs -allow-limited-size -l -J -r -iso-level 3 -o /tmp/[Nome desejado].iso> /home/pinguybuilder/pinguybuilder/ISOTMP~~
---
 ------------------------------------------------------
 ## Referencias usadas para desenvolvimento do Projeto e atualização pessoal
--------------------------------------------------------
-WIMLIB
-Para criar imagem em wim:
-Nao funciona para Linux
-https://wimlib.net/
+WIMLIB: [Para criar imagem em wim](https://wimlib.net/)
+[Copiar para .ISO](https://docs.google.com/document/d/1d33KWBf2NsFJdFqPR3-h6HuL9dqY4s5ZNlRyfes9p8g/edit?usp=sharing)
 -------------------------------------------------------
 
