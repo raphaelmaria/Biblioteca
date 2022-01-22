@@ -1,0 +1,22 @@
+/dev/sda5: UUID="abd6204c-b338-42e0-b573-1072c05e28db" TYPE="ext4" PARTUUID="cf6db79e-05"
+/dev/sda1: UUID="EF24-A8D5" TYPE="vfat" PARTUUID="cf6db79e-01"
+/dev/sdc1: UUID="b445ff31-ee5c-4395-b047-e0fe7023a396" TYPE="ext4" PARTUUID="d0db187e-2e1d-fe45-bc87-5d0dc6632b47"
+
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 931,5G  0 disk 
+├─sda1   8:1    0   512M  0 part /boot/efi
+├─sda2   8:2    0     1K  0 part 
+└─sda5   8:5    0   931G  0 part /
+sdc      8:32   0 931,5G  0 disk 
+└─sdc1   8:33   0 931,5G  0 part /mnt/ext
+
+
+proc                                            /proc       proc    defaults                    0   0
+#Mapeamento Unidade /boot/efi
+UUID="EF24-A8D5"                                /boot/efi   vfat    defaults                    0   0
+# Mapeamento da Unidade root
+UUID="abd6204c-b338-42e0-b573-1072c05e28db"     /           ext4    defaults                    0   1
+# Mapeamento da Unidade de Disco Externo
+UUID="b445ff31-ee5c-4395-b047-e0fe7023a396"     /mnt/ext    ext4    defaults,nofail             0   0
+# Mapeameto de SWAP - Memoria Virtual
+/swapfile                                       swap        swap    defaults                    0   0
