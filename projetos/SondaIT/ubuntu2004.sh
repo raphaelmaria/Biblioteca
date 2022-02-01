@@ -59,7 +59,9 @@ sudo apt -y install gnupg ca-certificates
 #varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
 stag=$(sudo dmidecode -s system-serial-number)
 sudo hostnamectl set-hostname ALELODEV$stag-N
-sudo hostname ALELODEV$stag-N
+sudo mv /etc/hostname /etc/hostname.bkp
+sudo $hostname | sudo tee /etc/hostname
+
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
 

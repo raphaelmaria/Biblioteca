@@ -55,5 +55,6 @@ Release Version 1.6:
     -Adicionado instalador do Qualys - Analise de Vulnerabilidade.
     -Criado novo repositorio na AWS S3 - alelodev
     -Removido softwares criados para Windows para evitar problemas e pela maior parte já possuir recursos nativos dentro do Linux.
+    -Alterado mudanca de nome padrao do host.
 
 
