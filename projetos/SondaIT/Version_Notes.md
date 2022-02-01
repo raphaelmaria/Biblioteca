@@ -46,3 +46,14 @@ Release Version 1.5:
     -Removido CygWin por ser um emulador de terminar Bashrc, o usuário pode usar o nativo através do terminal.
     -Adicionado Link Curto para download e instalacao
 
+Release Version 1.6:
+
+    -Adicionado chave de ativação do Crown Strike Falcon
+    -Adicionado instalador do Microsoft Teams
+    -Adicionado instalador do CheckPoint SSL VPN
+    -Desativado instalação do Force Point, porque não tem compatibilidade com Linux.
+    -Adicionado instalador do Qualys - Analise de Vulnerabilidade.
+    -Criado novo repositorio na AWS S3 - alelodev
+    -Removido softwares criados para Windows para evitar problemas e pela maior parte já possuir recursos nativos dentro do Linux.
+
+

@@ -21,12 +21,14 @@ $ sudo apt install curl -y
 Via download do GitHub
 $ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/config_ubuntu2004.sh | sudo bash
 
+$ curl -s https://alelodev.s3.amazonaws.com/pre_ubuntu2004.sh | sudo bash
+$ curl -s https://alelodev.s3.amazonaws.com/ubuntu2004.sh | sudo bash
 ## Instalar usando o [Ubuntu 21.10](https://ubuntu.com/download/desktop/thank-you/?version=21.10&architecture=amd64)
 Via download do GitHub
 $ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/config_ubuntu2110.sh | sudo bash
 
-Teste - Link Curto
-$ curl -s [URL] | sudo bash
+Via download do S3 AWS - Link Curto
+$ curl -s https://alelodev.s3.amazonaws.com/ubuntu2004.sh | sudo bash
 
 ## Observações
 Os Softwares abaixo são exclusivos para uso em Windows.

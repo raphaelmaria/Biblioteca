@@ -9,12 +9,6 @@
 #CRIAÇÃO: 7 de Janeiro de 2022
 #CONTROLE DE ALTERAÇÕES: https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/Version_Notes.txt 
 
-#COMMAND FOR USE SCRIPT: 
-#sed -i 's/\r$//' start.sh
-#sudo chmod +X start.sh
-#sudo chmod 777 start.sh
-#sudo ./start.sh
-
 # VARIAVEIS - ITENS QUE PODEM MUDAR COM O TEMPO E NECESSIDADE
 ##################################################################
 #####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
@@ -55,13 +49,16 @@ sudo apt update
 #
 # CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
 # RENOMEANDO A MAQUINA
-varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
-sudo hostnamectl set-hostname $varHostname
+#varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
+varHostname=${dmidecode -s system-serial-number}
+sudo hostnamectl set-hostname ELODEV-$varHostname-N
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
 
+# Verificar captura de serial via Shell.
+
 ############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
-urlUpdates="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/scripts/Check_Update.sh"
+urlUpdates="https://alelodev.s3.amazonaws.com/Check_Update.sh"
 cd /root
 sudo wget -O 'Check_Updates.sh' $urlUpdates
 sudo chmod -R 777 /root
@@ -99,6 +96,12 @@ sudo apt-get -y install sublime-text
 #Node.js;
 sudo apt -y install nodejs
 
+# Microsoft TEAMS
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+sudo apt update
+sudo apt -y install teams
+sudo apt --fix-broken install
 
 ############################################################
 ######          INSTALACAO USANDO SNAP STORE        ########
@@ -143,9 +146,9 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"
 sudo apt update
 sudo apt-get -y install docker-ce
-#
+
 #######################################################################
-#############        INSTALACAO INTERATIVAS     #######################
+#############        INSTALACAO INTERATIVAS         ###################
 #SoapUI;
 urlSoapUI="https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.1/SoapUI-x64-5.6.1.sh"
 wget $urlSoapUI
@@ -154,7 +157,7 @@ sudo chmod 777 SoapUI-x64-5.6.1.sh
 sudo ./SoapUI-x64-5.6.1.sh
 #
 #SQLDeveloper;
-urlSQLDeveloper="https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
+urlSQLDeveloper="https://alelodev.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
 wget $urlSQLDeveloper
 sudo unzip sqldeveloper*.zip -d /opt/
 sudo /opt/sqldeveloper/sqldeveloper.sh
@@ -172,6 +175,7 @@ Type=Application
 Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper.desktop
 #
 ######      INSTALACAO USANDO ARQUIVOS DO WINDOWS    ##########
+'''
 cd /windowsApps
 urlWinSCP="https://winscp.net/download/WinSCP-5.19.5-Setup.exe"
 urlWinmerge="https://github.com/WinMerge/winmerge/releases/download/v2.16.16/WinMerge-2.16.16-x64-Setup.exe"
@@ -192,13 +196,14 @@ sudo
 sudo mv "Área de Trabalho"/*.desktop /usr/share/applications/
 sudo mv Desktop/*.desktop 
 #
+'''
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
 #########################################################################################
 varFalconKey=$(dialog --stdout --inputbox 'Insira a chave do CrownStrike Falcon: ' 0 0)
 #
 # INSTALACAO DO CROWN-STRIKE
-sudo wget 'https://rmtechfiles.s3.amazonaws.com/ScriptFiles/SONDAIT/applications/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
+sudo wget 'https://alelodev.s3.amazonaws.com/Applications/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo dpkg -i /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo /opt/CrowdStrike/falconctl -s --cid='$varFalconKey'
@@ -207,12 +212,37 @@ sudo systemctl enable falcon-sensor --now
 ps -e | grep falcon-sensor
 
 # INSTALACAO DO DLP (DATA LOSS PROVIDER)
-#
+# 
 #07/01/2022 - FATAL ESSA INFORMACAO
 #
 # INSTALACAO FILTRO WEB (PROXY)
-#
-#07/01/2022 - FATAL ESSA INFORMACAO
+# FORCE POINT - Não existe compatibilidade para o Linux (https://www.forcepoint.com/pt-br/product/dlp-data-loss-prevention)
+
+# Checkup de Vulnerabilidade
+# Qualys - Ferramenta de Vulnerabilidade
+wget "[LINK]" | -O qualys-cloud-agent.x86_64.deb
+sudo dpkg --install qualys-cloud-agent.x86_64.deb
+sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh
+ActivationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+CustomerId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+# Instalação CHECKPOINT SSL-VPN
+'''
+FONTE DE PESQUISA: 
+http://www.pr.gov.br/vpn/cp_linux/
+https://pedroeml.github.io/checkpoint-mobile-access-vpn/
+''' 
+# Requisitos:
+sudo apt-get -y install build-essential
+sudo apt-get update
+sudo apt-get -y install libnss3-tools openssl xterm libpam0g:i386 libx11-6:i386 libstdc++6:i386 libstdc++5:i386
+
+
+
+
+
+
+
 
 #
 ####################################################################################################
