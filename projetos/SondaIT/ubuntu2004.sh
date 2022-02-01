@@ -13,21 +13,28 @@
 ##################################################################
 #####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
 ##################################################################
+#>_ Alterando DNSs padroes do equipamento:
+sudo mv /etc/resolv.conf /root/resolv.conf.bkp
+echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
+
+#>_ REMOVER JOGOS
+sudo apt -y purge kdegames-*
 # ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get autoremove
 sudo apt distro-upgrade
+
 #
 # INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
 sudo apt-get ubuntu-drivers autoinstall -y
-sudo apt-get -y install update-manager-core
-sudo apt -y install gcc ansible wget vim git-core
+sudo apt -y install update-manager-core
+sudo apt -y install gcc ansible wget vim git-core build-essential dmidecode
+sudo apt -y install libnss3-tools openssl xterm libpam0g:i386 libx11-6:i386 libstdc++6:i386 libstdc++5:i386
 sudo apt -y install dialog tree tar unzip make autoconf automake
-sudo apt -y install net-tools
-sudo apt -y install openssh-server
-sudo apt -y install libxml2* ntfs* libfuse* 
-sudo apt -y install synaptic
+sudo apt -y install net-tools openssh-server libxml2* ntfs* libfuse* synaptic
+sudo apt-get update
 #
 # INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -43,21 +50,20 @@ sudo apt-get update
 sudo apt -y install gnupg ca-certificates
 #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 #echo "deb [arch=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-sudo apt update
+#sudo apt update
 #sudo apt -y install mono-devel
 #sudo apt -y install mono-complete
-#
-# CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
-# RENOMEANDO A MAQUINA
+
+#  CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
+## RENOMEANDO A MAQUINA
 #varHostname=$(dialog --stdout --inputbox 'Insira o nome  do hostname desta maquina: ' 0 0)
-varHostname=${dmidecode -s system-serial-number}
-sudo hostnamectl set-hostname ELODEV-$varHostname-N
+stag=$(sudo dmidecode -s system-serial-number)
+sudo hostnamectl set-hostname ALELODEV$stag-N
+sudo hostname ALELODEV$stag-N
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
 
-# Verificar captura de serial via Shell.
-
-############### CRIANDO ATUALIZAÇÃO PERIODICA ######################
+## CRIANDO ATUALIZAÇÃO PERIODICA ######################
 urlUpdates="https://alelodev.s3.amazonaws.com/Check_Update.sh"
 cd /root
 sudo wget -O 'Check_Updates.sh' $urlUpdates
@@ -66,15 +72,18 @@ sudo chmod +X /root/*.sh
 sudo ln -s /root/Check_Updates.sh /etc/cron.weekly/Check_Updates.sh
 #
 # INSTALACAO DO JAVA 
-sudo apt -y install default-jre            
+sudo apt-get -y install default-jre
+sudo apt --fix-broken install           
+
 #
 # INSTALACAO DO JAVA JDK ORACLE OFFICIAL
-sudo apt -y install default-jdk
-sudo apt -y install openjdk-11-jre-headless
-sudo apt -y install openjdk-8-jre-headless 
-urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
-wget -O jdk-17_linux-x64_bin.deb $urlJdk
-sudo dpkg -i jdk-17_linux-x64_bin.deb
+sudo apt-get -y install default-jdk
+sudo apt-get -y install openjdk-11-jre-headless
+sudo apt-get -y install openjdk-8-jre-headless 
+#urlJdk="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb"
+#wget "https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb" -O jdk-17_linux-x64_bin.deb
+#sudo dpkg -i jdk-17_linux-x64_bin.deb
+sudo apt --fix-broken install
 #
 # INSTALACAO DO WINE
 cd /windowsApps
@@ -86,19 +95,22 @@ sudo apt update
 sudo apt install --install-recommends winehq-stable -y
 sudo apt -y install libwine winetricks
 sudo apt list --upgradable
+sudo apt --fix-broken install
 #
 #SublimeText;
 sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
 sudo apt-get -y install sublime-text
+sudo apt --fix-broken install
 #
 #Node.js;
 sudo apt -y install nodejs
+sudo apt --fix-broken install
 
 # Microsoft TEAMS
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
 sudo apt update
 sudo apt -y install teams
 sudo apt --fix-broken install
@@ -106,57 +118,58 @@ sudo apt --fix-broken install
 ############################################################
 ######          INSTALACAO USANDO SNAP STORE        ########
 ############################################################
-# INSTALACAO DO SNAP SHOP (AGREGADOR INTELIGENTE DE APPS)
-sudo snap install snap-store
-#
+
 # INSTALACAO VIA SNAP STORE
-# AndroidStudio;
+sudo apt -y install snapd
+# AndroidStudio
 sudo snap install android-studio --classic
-# Eclipse;
+# Eclipse
 sudo snap install eclipse --classic
-# IntelliJ; 
+# IntelliJ 
 sudo snap install intellij-idea-community --classic
-# Notepad++;
+# Notepad++
 sudo snap install notepad-plus-plus
-# Postman;
+# Postman
 sudo snap install postman
-# PyCharm;
+# PyCharm
 sudo snap install pycharm-community --classic
 # Source Tree
 sudo snap install source-git
-# VS Code
+# Microsoft VS Code
 sudo snap install code --classic
 
 ##############################################################
 # INSTALACAO DOS SOFTWARES VIA DOWNLOAD
 ##############################################################
-cd /windowsApps
-# Google Chrome
+# Instalação do Navegador Google Chrome
 sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb -y
-#DBeaver;
+sudo apt -y install google-chrome-stable_current_amd64.deb
+
+#Instalação do DBeaver
 urlDBeaver="https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
 sudo wget $urlDBeaver
 sudo chmod 777 dbeaver-ce_latest_amd64.deb
 sudo dpkg -i dbeaver-ce_latest_amd64.deb
-#
-#Docker;
-sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+sudo apt --fix-broken install
+
+#Instalação do Docker
+sudo apt-get -y install apt-transport-https ca-certificates software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"
 sudo apt update
 sudo apt-get -y install docker-ce
-
+sudo apt --fix-broken install
 #######################################################################
 #############        INSTALACAO INTERATIVAS         ###################
-#SoapUI;
+# SoapUI
 urlSoapUI="https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.1/SoapUI-x64-5.6.1.sh"
 wget $urlSoapUI
 sudo chmod +X SoapUI-x64-5.6.1.sh
 sudo chmod 777 SoapUI-x64-5.6.1.sh
 sudo ./SoapUI-x64-5.6.1.sh
-#
-#SQLDeveloper;
+sudo apt --fix-broken install
+
+# SQLDeveloper
 urlSQLDeveloper="https://alelodev.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
 wget $urlSQLDeveloper
 sudo unzip sqldeveloper*.zip -d /opt/
@@ -173,8 +186,9 @@ StartupNotify=true
 Categories=GNOME;Oracle;
 Type=Application
 Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper.desktop
-#
-######      INSTALACAO USANDO ARQUIVOS DO WINDOWS    ##########
+sudo apt --fix-broken install
+
+# INSTALACAO USANDO ARQUIVOS DO WINDOWS    ##########
 '''
 cd /windowsApps
 urlWinSCP="https://winscp.net/download/WinSCP-5.19.5-Setup.exe"
@@ -200,66 +214,54 @@ sudo mv Desktop/*.desktop
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
 #########################################################################################
-varFalconKey=$(dialog --stdout --inputbox 'Insira a chave do CrownStrike Falcon: ' 0 0)
-#
 # INSTALACAO DO CROWN-STRIKE
 sudo wget 'https://alelodev.s3.amazonaws.com/Applications/falcon-sensor_6.14.0-11110_amd64.deb' -O /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo chmod 777 /tmp/falcon-sensor_6.14.0-11110_amd64.deb
 sudo dpkg -i /tmp/falcon-sensor_6.14.0-11110_amd64.deb
-sudo /opt/CrowdStrike/falconctl -s --cid='$varFalconKey'
-sudo service falcon-sensor start
+sudo /opt/CrowdStrike/falconctl -s --cid=690AD86682CD4A50AD931B6CF7C61943-86
 sudo systemctl enable falcon-sensor --now
-ps -e | grep falcon-sensor
+ps -aux | grep "falcon"
 
 # INSTALACAO DO DLP (DATA LOSS PROVIDER)
-# 
+# Symantic DLP - Não existe compatibilidade para o Linux
 #07/01/2022 - FATAL ESSA INFORMACAO
 #
 # INSTALACAO FILTRO WEB (PROXY)
 # FORCE POINT - Não existe compatibilidade para o Linux (https://www.forcepoint.com/pt-br/product/dlp-data-loss-prevention)
 
+
 # Checkup de Vulnerabilidade
 # Qualys - Ferramenta de Vulnerabilidade
-wget "[LINK]" | -O qualys-cloud-agent.x86_64.deb
-sudo dpkg --install qualys-cloud-agent.x86_64.deb
-sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh
-ActivationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-CustomerId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+#wget "[LINK]" | -O qualys-cloud-agent.x86_64.deb
+#sudo dpkg --install qualys-cloud-agent.x86_64.deb
+#sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh
+#ActivationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+#CustomerId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+wget https://alelodev.s3.amazonaws.com/Applications/QualysCloudAgent.deb
+sudo dpkg -i QualysCloudAgent.deb
+sudo apt --fix-broken install
 
 # Instalação CHECKPOINT SSL-VPN
-'''
-FONTE DE PESQUISA: 
-http://www.pr.gov.br/vpn/cp_linux/
-https://pedroeml.github.io/checkpoint-mobile-access-vpn/
-''' 
-# Requisitos:
-sudo apt-get -y install build-essential
-sudo apt-get update
-sudo apt-get -y install libnss3-tools openssl xterm libpam0g:i386 libx11-6:i386 libstdc++6:i386 libstdc++5:i386
-
-
-
-
-
-
-
+#FONTE DE PESQUISA: 
+#http://www.pr.gov.br/vpn/cp_linux/
+#https://pedroeml.github.io/checkpoint-mobile-access-vpn/
+sudo curl -s "https://alelodev.s3.amazonaws.com/snx_install.sh" | tee ~/snx_install.sh
+sudo chmod +X snx_install.sh
+sudo chmod 777 snx_install.sh
+sudo ./snx_install.sh
 
 #
 ####################################################################################################
 ########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
 ####################################################################################################
-#varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
-#sudo adduser '$varUsername'
-#sudo usermod -aG sudo $varUsername
-#sudo passwd $varUsername << EOF
-#Mudar123
-#Mudar123
-#EOF
+varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
+sudo adduser --force-badname $varUsername << EOF
+password
+password
+EOF
+sudo usermod -aG sudo $varUsername
 
-sudo apt-get upgrade -y
-sudo apt-get autoremove
-sudo apt distro-upgrade
-sudo apt -f install
 #
 dialog \
     --title "Configuração Finalizada!"  \

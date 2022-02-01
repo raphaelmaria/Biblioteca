@@ -1,0 +1,4 @@
+sudo yum install falcon-sensor-6.29.0-12606.el8.x86_64.rpm
+sudo /opt/CrowdStrike/falconctl -s --cid=690AD86682CD4A50AD931B6CF7C61943-86
+service falcon-sensor start
+systemctl start falcon-sensor
