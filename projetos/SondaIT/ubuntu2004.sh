@@ -65,6 +65,10 @@ sudo $hostname | sudo tee /etc/hostname
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
 
+# Otimizando a vida Util da Bateria
+sudo apt -y install tlp tlp-rdw
+systemctl enable tlp && tlp start
+
 ## CRIANDO ATUALIZAÇÃO PERIODICA ######################
 urlUpdates="https://alelodev.s3.amazonaws.com/Check_Update.sh"
 cd /root
