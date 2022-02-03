@@ -219,7 +219,7 @@ sudo usermod -aG sudo $varUsername
 
 dialog \
     --title "Configuração Finalizada!"  \
-    --msgbox "Instalação foi efetuada com sucesso, \nA maquina será reiniciada em 10 segundos." \
+    --msgbox "Instalação foi efetuada com sucesso, \nA maquina será reiniciada em 10 segundos.\nUsuario local $varUsername foi criado.\nA senha para acesso é "password"." \
     0 0
 
 sleep 30
