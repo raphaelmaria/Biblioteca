@@ -39,8 +39,15 @@ CynWin
 EnterpriseArchitect
 
 ## Softwares abaixo ainda faltam informaçoes:
-DLP
-PROXY
+# Symantic DLP - Não existe compatibilidade para o Linux
+
+# INSTALACAO FILTRO WEB (PROXY)
+# FORCE POINT - Não existe compatibilidade para o Linux (https://www.forcepoint.com/pt-br/product/dlp-data-loss-prevention)
+
+# Instalação CHECKPOINT SSL-VPN
+#FONTE DE PESQUISA: 
+#http://www.pr.gov.br/vpn/cp_linux/
+#https://pedroeml.github.io/checkpoint-mobile-access-vpn/
 
 
 ## Criptografia
