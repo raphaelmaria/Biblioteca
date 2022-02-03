@@ -19,7 +19,8 @@ echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
 echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
 
 #>_ REMOVER JOGOS
-sudo apt -y purge kdegames-*
+sudo apt purge gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex -y & sudo apt autoremove -y
+
 # ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -168,6 +169,8 @@ sudo apt --fix-broken install
 # SQLDeveloper
 urlSQLDeveloper="https://alelodev.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
 wget $urlSQLDeveloper
+sudo rm -rf /usr/local/bin/sqldeveloper
+sudo rm -rf /opt/sqldeveloper
 sudo unzip sqldeveloper*.zip -d /opt/
 sudo /opt/sqldeveloper/sqldeveloper.sh
 sudo chmod +x /opt/sqldeveloper/sqldeveloper.sh
@@ -219,7 +222,7 @@ sudo usermod -aG sudo $varUsername
 
 dialog \
     --title "Configuração Finalizada!"  \
-    --msgbox "Instalação foi efetuada com sucesso, \nA maquina será reiniciada em 10 segundos.\nUsuario local $varUsername foi criado.\nA senha para acesso é "password"." \
+    --msgbox "Instalação foi efetuada com sucesso.\nA maquina será reiniciada em 10 segundos para aplicar atualizações.\n\nUsuário local: $varUsername foi criado.\nA senha para acesso é "'password'"." \
     0 0
 
 sleep 30
