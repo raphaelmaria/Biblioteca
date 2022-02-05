@@ -11,24 +11,24 @@
 
 # VARIAVEIS - ITENS QUE PODEM MUDAR COM O TEMPO E NECESSIDADE
 ##################################################################
-#####        USANDO REPOSITORIO CANONICAL UBUNTU           #######
+echo "USANDO REPOSITORIO CANONICAL UBUNTU"
 ##################################################################
 #>_ Alterando DNSs padroes do equipamento:
 sudo mv /etc/resolv.conf /root/resolv.conf.bkp
 echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
 echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
 
-#>_ REMOVER JOGOS
+echo ">_ REMOVER JOGOS"
 sudo apt purge gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex -y
 sudo apt autoremove -y
 
-# ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)
+echo ">_ ATUALIZACAO DOS PACOTES PADROES DO OS (VALIDADO 10/01/22)"
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get autoremove
 sudo apt distro-upgrade
 
-# INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)
+echo ">_ INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)"
 sudo apt -y install arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar unrar unace unzip xz-utils zip
 sudo apt -y install intel-microcode sudo
 sudo apt -y install faad ffmpeg gstreamer1.0-fdkaac gstreamer1.0-libav gstreamer1.0-vaapi gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly lame libavcodec-extra libavcodec-extra58 libavdevice58 libgstreamer1.0-0 sox twolame vorbis-tools
@@ -40,18 +40,8 @@ sudo apt -y install dialog tree tar unzip make autoconf automake
 sudo apt -y install net-tools openssh-server libxml2* ntfs* libfuse* synaptic
 sudo apt-get update
 
-# INSTALACAO DE PACOTE MICROSOFT DONT NET-FRAMEWORK (VALIDADO 10/01/22)
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-sudo apt-get -y install apt-transport-https
-sudo apt-get -y install dotnet-sdk-5.0
-sudo apt-get -y install aspnetcore-runtime-5.0
-sudo apt-get -y install dotnet-runtime-5.0
-sudo apt-get update
-
 #  CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
-## RENOMEANDO A MAQUINA
+echo ">_ RENOMEANDO A MAQUINA"
 stag=$(sudo dmidecode -s system-serial-number)
 sudo hostnamectl set-hostname ALELODEV$stag-N
 sudo mv /etc/hostname /etc/hostname.bkp
@@ -60,11 +50,11 @@ sudo $hostname | sudo tee /etc/hostname
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
 
-# Otimizando a vida Util da Bateria
+echo ">_ OTIMIZANDO VIDA UTIL DA BATERIA"
 sudo apt -y install tlp tlp-rdw
 systemctl enable tlp && tlp start
 
-## CRIANDO ATUALIZAÇÃO PERIODICA ######################
+echo ">_ CRIANDO ATUALIZAÇÃO PERIODICA"
 urlUpdates="https://alelodev.s3.amazonaws.com/Check_Update.sh"
 cd /root
 sudo wget -O 'Check_Updates.sh' $urlUpdates
@@ -72,17 +62,11 @@ sudo chmod -R 777 /root
 sudo chmod +X /root/*.sh
 sudo ln -s /root/Check_Updates.sh /etc/cron.weekly/Check_Updates.sh
 
-# INSTALACAO DO JAVA 
+echo ">_ INSTALACAO DO JAVA"
 sudo apt-get -y install default-jre
 sudo apt --fix-broken install           
 
-# INSTALACAO DO JAVA JDK ORACLE OFFICIAL
-sudo apt-get -y install default-jdk
-sudo apt-get -y install openjdk-11-jre-headless
-sudo apt-get -y install openjdk-8-jre-headless 
-sudo apt --fix-broken install
-
-# INSTALACAO DO WINE
+echo ">_ INSTALACAO DO WINE"
 cd /windowsApps
 sudo dpkg --add-architecture i386 
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
@@ -96,100 +80,32 @@ sudo apt -y install libwine winetricks
 sudo apt list --upgradable
 sudo apt --fix-broken install
 
-#SublimeText;
-sudo wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get -y install sublime-text
-sudo apt --fix-broken install
-
-#Node.js;
+echo ">_ INSTALADO O Node.js"
 sudo apt -y install nodejs
-sudo apt --fix-broken install
-
-# Microsoft TEAMS
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
-sudo apt update
-sudo apt -y install teams
 sudo apt --fix-broken install
 
 ############################################################
 ######          INSTALACAO USANDO SNAP STORE        ########
 ############################################################
 
-# INSTALACAO VIA SNAP STORE
+echo ">_ INSTALACAO VIA SNAP STORE"
 sudo apt -y install snapd
-# AndroidStudio
+echo ">_ Instalação do Android Studio"
 sudo snap install android-studio --classic
-# Eclipse
+echo ">_ Instalação do Eclipse"
 sudo snap install eclipse --classic
-# IntelliJ 
+echo ">_ Instalação do IntelliJ" 
 sudo snap install intellij-idea-community --classic
-# Notepad++
+echo ">_ Instalação do Notepad++"
 sudo snap install notepad-plus-plus
-# Postman
+echo ">_ Instalação do Postman"
 sudo snap install postman
-# PyCharm
+echo ">_ Instalação do PyCharm"
 sudo snap install pycharm-community --classic
-# Source Tree
-sudo snap install source-git
-# Microsoft VS Code
+echo ">_ Instalação do Source Tree"
+sudo snap install source-app
+echo ">_ Instalação do Microsoft VS Code"
 sudo snap install code --classic
-
-##############################################################
-# INSTALACAO DOS SOFTWARES VIA DOWNLOAD
-##############################################################
-# Instalação do Navegador Google Chrome
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-sudo apt-get update
-sudo apt -y install google-chrome-stable
-
-#Instalação do DBeaver
-urlDBeaver="https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
-sudo wget $urlDBeaver
-sudo chmod 777 dbeaver-ce_latest_amd64.deb
-sudo dpkg -i dbeaver-ce_latest_amd64.deb
-sudo apt --fix-broken install
-
-#Instalação do Docker
-sudo apt-get -y install apt-transport-https ca-certificates software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"
-sudo apt update
-sudo apt-get -y install docker-ce
-sudo apt --fix-broken install
-
-#######################################################################
-#############        INSTALACAO INTERATIVAS         ###################
-# SoapUI >>> ADICIONADO A IMAGEM
-urlSoapUI="https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.1/SoapUI-x64-5.6.1.sh"
-wget $urlSoapUI
-sudo chmod +X SoapUI-x64-5.6.1.sh
-sudo chmod 777 SoapUI-x64-5.6.1.sh
-sudo ./SoapUI-x64-5.6.1.sh
-sudo apt --fix-broken install
-
-# SQLDeveloper   >>> ADICIONADO A IMAGEM
-urlSQLDeveloper="https://alelodev.s3.amazonaws.com/Applications/sqldeveloper-21.4.1.349.1822-no-jre.zip"
-wget $urlSQLDeveloper
-sudo rm -rf /usr/local/bin/sqldeveloper
-sudo rm -rf /opt/sqldeveloper
-sudo unzip sqldeveloper*.zip -d /opt/
-sudo chmod +x /opt/sqldeveloper/sqldeveloper.sh
-sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper
-cd /usr/share/applications
-ls -ltr *.desktop
-echo "[Desktop Entry]
-#Name=SQL Developer
-#Exec=sqldeveloper
-#Terminal=false
-#StartupNotify=true
-#Categories=GNOME;Oracle;
-#Type=Application
-#Icon=/opt/sqldeveloper/icon.png" | sudo tee /usr/share/applications/sqldeveloper.desktop
-sudo apt --fix-broken install
 
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################

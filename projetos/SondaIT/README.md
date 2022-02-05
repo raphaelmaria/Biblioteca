@@ -75,10 +75,35 @@ Com analise no contéudo, se torna inviavel, pq o processo precisa ser feito man
 1. Essa tela será exibida todas as vezes que o sistema reiniciar.
 Obs.: Pode ser que em algumas maquinas fisicas, a senha seja armazenada dentro da BIOS da placa-mão como uma forma de check-in, validando a chave entre disco e máquina.
 
-Criação de Imagem ISO customizada
+## Criação de Imagem ISO customizada
+[Usando CUBIC](https://www.edivaldobrito.com.br/custom-ubuntu-iso-creator-no-ubuntu/)
 
-Não existe mais essa possibilidade para o Ubuntu 20.04 ou superior.
-Devido a grande parte das ferramentas terem sido descontinuadas e não ter um outro meio de copilar.
+Para instalar o Custom Ubuntu ISO Creator e ainda poder receber automaticamente as futuras atualizações dele, você deve fazer o seguinte:
+
+        Passo 1. Abra um terminal (use as teclas CTRL + ALT + T);
+
+        Passo 2. Se ainda não tiver, adicione o repositório do programa com este comando ou use esse tutorial;
+        sudo apt-add-repository ppa:cubic-wizard/release
+
+        Passo 3. Baixe a chave do repositório com o comando:
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6494C6D6997C215E
+        
+        Passo 4. Atualize o gerenciador de pacotes com o comando:
+        sudo apt-get update
+
+        Passo 5. Agora use o comando abaixo para instalar o programa;
+        sudo apt-get install cubic
+
+Como instalar o Custom Ubuntu ISO Creator manualmente ou em outras distros
+Para aqueles que não conseguiram instalar com o procedimento acima, não querem adicionar o repositório ou querem tentar instalar em outra distribuição baseada em Debian, você pode pegar o arquivo DEB do programa na página de download do repositório e instalar ele manualmente (clicando duas vezes nele).
+
+Mas lembre-se! Ao optar por esse tipo de instalação, você não receberá nenhuma atualização do programa.
+
+Pronto! Agora, quando quiser iniciar o programa, digite cubic em um terminal (seguido da tecla TAB), ou clicando no ícone dele ou menu de aplicativos do sistema.
+
+Leia atentamente as informações do aplicativo e responda as perguntas que em pouco tempo você terá uma imagem ISO do jeito que você quer.
+
+
 
 **Ferramenta Pesquisadas:**
 Wimlib - Descontinuada
