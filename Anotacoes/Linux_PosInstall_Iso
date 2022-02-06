@@ -1,0 +1,15 @@
+# Learning with activate script pos-install ISO Linux
+
+Use: Ubuntu 20.04.3 - Focal/Fossa
+
+Unatented Install
+https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/automate-windows-setup?view=windows-11
+
+Kickstart
+https://github.com/bunguang/Kickstart-Tutorial
+
+Preseed
+https://help.ubuntu.com/lts/installation-guide/s390x/apbs02.html
+
+Partman
+https://wiki.debian.org/DebianInstaller/Partman
