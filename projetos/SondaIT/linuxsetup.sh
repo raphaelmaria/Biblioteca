@@ -30,14 +30,13 @@ sudo apt distro-upgrade
 
 echo ">_ INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)"
 sudo apt -y install arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar unrar unace unzip xz-utils zip
-sudo apt -y install intel-microcode sudo
+sudo apt -y install intel-microcode htop
 sudo apt -y install faad ffmpeg gstreamer1.0-fdkaac gstreamer1.0-libav gstreamer1.0-vaapi gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly lame libavcodec-extra libavcodec-extra58 libavdevice58 libgstreamer1.0-0 sox twolame vorbis-tools
-sudo apt -y install ubuntu-drivers autoinstall
 sudo apt -y install update-manager-core gnupg ca-certificates
 sudo apt -y install gcc wget vim git git-core build-essential dmidecode
 sudo apt -y install libnss3-tools openssl xterm libpam0g:i386 libx11-6:i386 libstdc++6:i386 libstdc++5:i386
 sudo apt -y install dialog tree tar unzip make autoconf automake
-sudo apt -y install net-tools openssh-server libxml2* ntfs* libfuse* synaptic
+sudo apt -y install net-tools openssh-server libxml2* ntfs* libfuse* synaptic libgtk3-nocsd0
 sudo apt-get update
 
 #  CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
@@ -45,7 +44,12 @@ echo ">_ RENOMEANDO A MAQUINA"
 stag=$(sudo dmidecode -s system-serial-number)
 sudo hostnamectl set-hostname ALELODEV$stag-N
 sudo mv /etc/hostname /etc/hostname.bkp
-sudo $hostname | sudo tee /etc/hostname
+#sudo $hostname | sudo tee /etc/hostname
+host=$(sudo hostname)
+echo "127.0.0.1     localhost" | sudo tee /etc/hosts
+echo "127.0.0.1     $host" | sudo tee -a /etc/hosts      
+echo "$host" | sudo tee /etc/hostname
+sudo apt update
 
 sudo mkdir /windowsApps
 sudo chmod 777 /windowsApps
@@ -80,16 +84,12 @@ sudo apt -y install libwine winetricks
 sudo apt list --upgradable
 sudo apt --fix-broken install
 
-echo ">_ INSTALADO O Node.js"
-sudo apt -y install nodejs
-sudo apt --fix-broken install
-
 ############################################################
 ######          INSTALACAO USANDO SNAP STORE        ########
 ############################################################
-
-echo ">_ INSTALACAO VIA SNAP STORE"
+echo ">_ ATIVAÇÃO E ATUALIZAÇÃO DA SNAP STORE"
 sudo apt -y install snapd
+sudo snap refresh snapd --stable
 echo ">_ Instalação do Android Studio"
 sudo snap install android-studio --classic
 echo ">_ Instalação do Eclipse"

@@ -57,4 +57,9 @@ Release Version 1.6:
     -Removido softwares criados para Windows para evitar problemas e pela maior parte já possuir recursos nativos dentro do Linux.
     -Alterado mudanca de nome padrao do host.
 
-
+Release Version 1.7:
+    -Criado ISO do Ubuntu 20.04.3 com programas estipulados da Alelopar.
+    -Alterado arquivo que configura as maquinas: URL "curl -s https://alelodev.s3.amazonaws.com/linuxconfig.sh | sudo bash""
+    -Aplicado correção de nomenclatura de equipamento nos arquivos hosts e hostname.
+    -Aplicado correção de Instalação do Snapd.
+    

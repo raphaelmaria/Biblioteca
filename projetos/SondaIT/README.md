@@ -13,23 +13,11 @@ SSD 60 GB SATA #3 Generation
 ## Como instalar rodar o script:
 
 Instalar o comando CURL antes de rodar a linha abaixo:
-$ sudo apt install curl -y
-
-
+$ sudo apt install curl -y (Não mais necessario por esta embutido na imagem ISO)
 ## Instalar usando o [Ubuntu 20.04](https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64)
 
 Via download do GitHub
-$ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/config_ubuntu2004.sh | sudo bash
-
-$ curl -s https://alelodev.s3.amazonaws.com/pre_ubuntu2004.sh | sudo bash
-$ curl -s https://alelodev.s3.amazonaws.com/ubuntu2004.sh | sudo bash
-## Instalar usando o [Ubuntu 21.10](https://ubuntu.com/download/desktop/thank-you/?version=21.10&architecture=amd64)
-Via download do GitHub
-$ curl -s https://raw.githubusercontent.com/raphaelmaria/deploy/master/projetos/SondaIT/config_ubuntu2110.sh | sudo bash
-
-Via download do S3 AWS - Link Curto
-$ curl -s https://alelodev.s3.amazonaws.com/ubuntu2004.sh | sudo bash
-
+$ curl -s https://alelodev.s3.amazonaws.com/linuxconfig.sh | sudo bash
 ## Observações
 Os Softwares abaixo são exclusivos para uso em Windows.
 Existe um meio de rodar usando um emulação chamada Wine, mas não recomendo pois da muitos crashs nas aplicações.
@@ -102,8 +90,6 @@ Mas lembre-se! Ao optar por esse tipo de instalação, você não receberá nenh
 Pronto! Agora, quando quiser iniciar o programa, digite cubic em um terminal (seguido da tecla TAB), ou clicando no ícone dele ou menu de aplicativos do sistema.
 
 Leia atentamente as informações do aplicativo e responda as perguntas que em pouco tempo você terá uma imagem ISO do jeito que você quer.
-
-
 
 **Ferramenta Pesquisadas:**
 Wimlib - Descontinuada
