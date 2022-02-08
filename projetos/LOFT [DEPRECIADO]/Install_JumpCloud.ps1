@@ -2,7 +2,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Set-ExecutionPolicy RemoteSigned
 
 
-$JCKEYADDMACHINE="ef10c8ee36a34a414100d8c1eb2d93f26464acc5"
+$JCKEYADDMACHINE="   "
 
 Write-Host "###############################################"
 Write-Host "INSTALANDO COMPONENTES .NET FRAMEWORK ESSENCIAIS"
