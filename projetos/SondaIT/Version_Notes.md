@@ -62,4 +62,6 @@ Release Version 1.7:
     -Alterado arquivo que configura as maquinas: URL "curl -s https://alelodev.s3.amazonaws.com/linuxconfig.sh | sudo bash""
     -Aplicado correção de nomenclatura de equipamento nos arquivos hosts e hostname.
     -Aplicado correção de Instalação do Snapd.
+    -Realocado Sessão de criação de usuário para o inicio do Script.
+    -Retirado Contdown de 30 segundos de espera para reiniciar a máquina.
     

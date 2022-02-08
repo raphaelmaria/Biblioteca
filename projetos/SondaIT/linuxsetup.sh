@@ -39,6 +39,16 @@ sudo apt -y install dialog tree tar unzip make autoconf automake
 sudo apt -y install net-tools openssh-server libxml2* ntfs* libfuse* synaptic libgtk3-nocsd0
 sudo apt-get update
 
+####################################################################################################
+########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
+####################################################################################################
+varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
+sudo adduser --force-badname $varUsername << EOF
+password
+password
+EOF
+sudo usermod -aG sudo $varUsername
+
 #  CONFIGURACAO DO EQUIPAMENTO (VALIDADO 10/01/22)
 echo ">_ RENOMEANDO A MAQUINA"
 stag=$(sudo dmidecode -s system-serial-number)
@@ -144,6 +154,5 @@ dialog \
     --title "Configuração Finalizada!"  \
     --msgbox "Instalação foi efetuada com sucesso.\nA maquina será reiniciada em 10 segundos para aplicar atualizações.\n\nUsuário local: $varUsername foi criado.\nA senha para acesso é "'password'"." \
     0 0
-
-sleep 30
+    
 sudo reboot

@@ -12,7 +12,6 @@ http://dl.google.com/linux/chrome/deb/
 https://dbeaver.io/
 https://download.docker.com/
 
-
 > Snap.IO Stores - Lista de Dominios que precisam ser liberados
 http://snapcraft.io
 api.snapcraft.io:443
