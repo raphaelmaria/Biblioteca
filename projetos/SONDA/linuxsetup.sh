@@ -18,6 +18,9 @@ sudo mv /etc/resolv.conf /root/resolv.conf.bkp
 echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
 echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
 
+# [Mudanca de TIMEZONE] 
+timedatectl set-timezone America/Sao_Paulo
+
 echo ">_ REMOVER JOGOS"
 sudo apt purge gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex -y
 sudo apt autoremove -y
@@ -30,9 +33,8 @@ sudo apt distro-upgrade
 
 echo ">_ INSTALACAO DOS PACOTES PADROES E ESSENCIAIS (VALIDADO 10/01/22)"
 sudo apt -y install arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar unrar unace unzip xz-utils zip
-sudo apt -y install intel-microcode htop
 sudo apt -y install faad ffmpeg gstreamer1.0-fdkaac gstreamer1.0-libav gstreamer1.0-vaapi gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly lame libavcodec-extra libavcodec-extra58 libavdevice58 libgstreamer1.0-0 sox twolame vorbis-tools
-sudo apt -y install update-manager-core gnupg ca-certificates
+sudo apt -y install update-manager-core gnupg ca-certificates intel-microcode htop
 sudo apt -y install gcc wget vim git git-core build-essential dmidecode
 sudo apt -y install libnss3-tools openssl xterm libpam0g:i386 libx11-6:i386 libstdc++6:i386 libstdc++5:i386
 sudo apt -y install dialog tree tar unzip make autoconf automake
@@ -94,29 +96,6 @@ sudo apt -y install libwine winetricks
 sudo apt list --upgradable
 sudo apt --fix-broken install
 
-############################################################
-######          INSTALACAO USANDO SNAP STORE        ########
-############################################################
-echo ">_ ATIVAÇÃO E ATUALIZAÇÃO DA SNAP STORE"
-sudo apt -y install snapd
-sudo snap refresh snapd --stable
-echo ">_ Instalação do Android Studio"
-sudo snap install android-studio --classic
-echo ">_ Instalação do Eclipse"
-sudo snap install eclipse --classic
-echo ">_ Instalação do IntelliJ" 
-sudo snap install intellij-idea-community --classic
-echo ">_ Instalação do Notepad++"
-sudo snap install notepad-plus-plus
-echo ">_ Instalação do Postman"
-sudo snap install postman
-echo ">_ Instalação do PyCharm"
-sudo snap install pycharm-community --classic
-echo ">_ Instalação do Source Tree"
-sudo snap install source-app
-echo ">_ Instalação do Microsoft VS Code"
-sudo snap install code --classic
-
 #########################################################################################
 #########         INSTALACAO DE COMPONENTES DE SEGURANCA               ##################
 #########################################################################################
@@ -140,15 +119,36 @@ sudo chmod +X snx_install.sh
 sudo chmod 777 snx_install.sh
 sudo ./snx_install.sh
 
-####################################################################################################
-########       CRIANDO USUARIO LOCAL COM PERMISSOES SUDO (CLIENTE FINAL/USER)               ########
-####################################################################################################
-varUsername=$(dialog --stdout --inputbox 'Insira o nome.sobrenome do usuário: ' 0 0)
-sudo adduser --force-badname $varUsername << EOF
-password
-password
-EOF
-sudo usermod -aG sudo $varUsername
+############################################################
+######          INSTALACAO USANDO SNAP STORE        ########
+############################################################
+echo ">_ ATIVAÇÃO E ATUALIZAÇÃO DA SNAP STORE"
+sudo apt -y install snapd
+sudo snap refresh snapd --stable
+sudo apt update
+sudo apt autoremove -y
+sudo apt upgrade -y
+
+echo ">_ Instalação do Android Studio"
+sudo snap install android-studio --classic
+echo ">_ Instalação do IntelliJ" 
+sudo snap install intellij-idea-community --classic
+echo ">_ Instalação do PyCharm"
+sudo snap install pycharm-community --classic
+echo ">_ Instalação do Eclipse"
+sudo snap install eclipse --classic
+echo ">_ Instalação do Notepad++"
+sudo snap install notepad-plus-plus
+echo ">_ Instalação do Postman"
+sudo snap install postman
+echo ">_ Instalação do Source Tree"
+sudo snap install source-app
+echo ">_ Instalação do Microsoft VS Code"
+sudo snap install code --classic
+
+echo ">_ REMOVER JOGOS"
+sudo apt purge gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex -y
+sudo apt autoremove -y
 
 dialog \
     --title "Configuração Finalizada!"  \
