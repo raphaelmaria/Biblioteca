@@ -1,3 +1,7 @@
 https://github.com/sansaoipb/Telegram-Graph-authenticated_Python
 
+PXE Server 
 https://erpxe.org/index.php?title=Main_Page
+
+Operando o SED
+https://www.gnulinuxbrasil.com.br/2018/12/14/sed-004-substituindo-linhas/
