@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Documentação: https://www.vultr.com/docs/install-sonarqube-on-ubuntu-20-04-lts/
 
+strongPass="ASenhaeforte!1206"
+
 #1. Install OpenJDK 11
 sudo apt-get install openjdk-11-jdk -y
 
@@ -27,10 +29,9 @@ GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
 \q
 exit
 
-
 #3. Download and Install SonarQube
 sudo apt-get install zip -y
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-<VERSION_NUMBER>.zip
+sudo wget https://binaries.sonarsource.com/sonarqube/sonarqube-5.1.zip
 sudo unzip sonarqube-<VERSION_NUMBER>.zip
 sudo mv sonarqube-<VERSION_NUMBER> /opt/sonarqube
 
@@ -40,17 +41,10 @@ sudo useradd -d /opt/sonarqube -g sonar sonar
 sudo chown sonar:sonar /opt/sonarqube -R
 
 #5. Configure sonarqube
-sudo nano /opt/sonarqube/conf/sonar.properties
-#sonar.jdbc.username= > sonar.jdbc.username=sonar
-#sonar.jdbc.password= > sonar.jdbc.password=my_strong_password
-
-sonar.jdbc.username=sonar
-sonar.jdbc.password=my_strong_password
-
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
-
-sudo nano /opt/sonarqube/bin/linux-x86-64/sonar.sh
-#RUN_AS_USER= > RUN_AS_USER=sonar
+sudo sed -i '18c\sonar.jdbc.username=sonar' /opt/sonarqube/conf/sonar.properties
+sudo sed -i "19c\sonar.jdbc.password=$strongPass" /opt/sonarqube/conf/sonar.properties
+sudo sed -i '47c\sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube' /opt/sonarqube/conf/sonar.properties
+sudo sed -i '48c\RUN_AS_USER=sonar' /opt/sonarqube/bin/linux-x86-64/sonar.sh
 
 #6. Setup Systemd service
 echo "[Unit]
