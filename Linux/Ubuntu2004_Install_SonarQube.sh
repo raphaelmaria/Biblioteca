@@ -1,80 +1,39 @@
 #!/usr/bin/env bash
 # Documentação: https://www.vultr.com/docs/install-sonarqube-on-ubuntu-20-04-lts/
 
-strongPass="ASenhaeforte!1206"
-
+VarPass="ASenhaeforte1206"
+SONAR_HOME="/opt/sonarqube"
+VARDB="sonardb"
 #1. Install OpenJDK 11
-sudo apt-get install openjdk-11-jdk -y
+sudo add-apt-repository ppa:webupd8team/java
 
-#2. Install and Configure PostgreSQL
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-sudo apt install postgresql postgresql-contrib -y
-sudo systemctl enable postgresql
-sudo systemctl start postgresql
-sudo passwd postgres << EOF
-password
-password
-EOF
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt install oracle-java8-installer
+sudo apt install mysql-server mysql-client
+sudo apt-get install unzip software-properties-common wget default-jdk -y
+sudo apt install fontconfig-config libfreetype6 -y
 
-su - postgres << EOF
-password
-EOF
+mysql -e "CREATE DATABASE $VARDB"
+create database sonar;
 
-createuser sonar
-psql
-ALTER USER sonar WITH ENCRYPTED password 'ASenhaeforte!1206';
-CREATE DATABASE sonarqube OWNER sonar;
-GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
-\q
-exit
 
-#3. Download and Install SonarQube
-sudo apt-get install zip -y
-sudo wget https://binaries.sonarsource.com/sonarqube/sonarqube-5.1.zip
-sudo unzip sonarqube-<VERSION_NUMBER>.zip
-sudo mv sonarqube-<VERSION_NUMBER> /opt/sonarqube
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-7.1.zip
+sudo unzip sonarqube-7.1.zip -d /opt
+cd /opt
+sudo mv sonarqube-7.1 sonar
 
-#4. Add SonarQube Group and User
+
+sudo mv /opt/sonar/conf/sonar.properties sonar.properties.bkp
+echo "sonar.jdbc.username=sonarqube" | sudo tee -a /opt/sonar/conf/sonar.properties
+echo "sonar.jdbc.password=your_password
+echo "sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false" | sudo tee -a /opt/sonar/conf/sonar.properties
+
 sudo groupadd sonar
-sudo useradd -d /opt/sonarqube -g sonar sonar
-sudo chown sonar:sonar /opt/sonarqube -R
+sudo useradd -c sonarqube -d /opt/sonar -g sonar sonar
+sudo chown sonar:sonar /opt/sonar -R
+sudo sed -i '49c\RUN_AS_USER=sonar' /opt/sonar/bin/linux-x86-64/sonar.sh
+sudo su sonar
+cd /opt/sonar/bin/linux-x86-64/
+./sonar.sh start
 
-#5. Configure sonarqube
-sudo sed -i '18c\sonar.jdbc.username=sonar' /opt/sonarqube/conf/sonar.properties
-sudo sed -i "19c\sonar.jdbc.password=$strongPass" /opt/sonarqube/conf/sonar.properties
-sudo sed -i '47c\sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube' /opt/sonarqube/conf/sonar.properties
-sudo sed -i '48c\RUN_AS_USER=sonar' /opt/sonarqube/bin/linux-x86-64/sonar.sh
-
-#6. Setup Systemd service
-echo "[Unit]
-Description=SonarQube service
-After=syslog.target network.target
-
-[Service]
-Type=forking
-
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-
-User=sonar
-Group=sonar
-Restart=always
-
-LimitNOFILE=65536
-LimitNPROC=4096
-
-[Install]
-WantedBy=multi-user.target" | sudo tee /etc/systemd/system/sonar.service
-
-sudo systemctl enable sonar
-sudo systemctl start sonar
-sudo systemctl status sonar
-
-#7. Modify Kernel System Limits
-echo "vm.max_map_count=262144
-fs.file-max=65536
-ulimit -n 65536
-ulimit -u 4096" | sudo tee -a /etc/sysctl.conf
-
-sudo reboot
