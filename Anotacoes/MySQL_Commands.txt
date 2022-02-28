@@ -1,0 +1,15 @@
+-Criar um database:
+mysql > CREATE DATABASE <DATABASE>;
+mysql > CREATE USER '<USER>'@'%' IDENTIFIED BY '<SENHA>';
+mysql > GRANT ALL ON <DATABASE>.* to '<USER>'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+mysql > CREATE DATABASE IF NOT EXISTS `<DATABASE>` ;"
+mysql > GRANT ALL PRIVILEGES ON <DATABASE>.* TO '<USER>'@'%';"
+mysql > FLUSH PRIVILEGES;"
+
+-Usar ou Selecionar um database:
+mysql > USE <Nome Definido>
+
+-Conexão direto com o database com um comando:
+mysql -h <IP ADDRESS> -u <USER> -p <DATABASE>
+
+
