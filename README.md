@@ -6,3 +6,8 @@ Tenho mantido ele de forma aberta e free para auxiliar e incentivar nossos coleg
 Sinta-se a vontade em fazer parte da nossas discussões e apresentar melhorias aos meus commits.
 
 90% dos códigos foram testados em máquinas fisicas através de GPOs e da ferramenta JumpCloud.
+
+
+Peço que apenas respeite os termos de uso dos códigos, usando ele para desenvolvimento e semear a cultura de compartilhamento.
+
+
