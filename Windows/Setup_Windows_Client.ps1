@@ -13,13 +13,13 @@ $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
     Write-Host "Maquina conectada com a Internet" -ForegroundColor Green
     Write-Host "Efetuando Download do Conteudo Atualizado!"
-                winget install AnyDeskSoftwareGmbH.AnyDesk -h --accept-package-agreements
-                winget install BinaryMark.StreamingVideoDownloader -h --accept-package-agreements
-                winget install RARLab.WinRAR -h --accept-package-agreements
-                winget install Oracle.JavaRuntimeEnvironment -h --accept-package-agreements
-                winget install VideoLAN.VLC -h --accept-package-agreements
-                winget install Google.Chrome -h --accept-package-agreements
-                winget install 7zip.7zip -h --accept-package-agreements
+                winget install AnyDeskSoftwareGmbH.AnyDesk -e --silent --accept-source-agreements --accept-package-agreements
+                winget install BinaryMark.StreamingVideoDownloader -e --silent --accept-source-agreements --accept-package-agreements
+                winget install RARLab.WinRAR -e --silent --accept-source-agreements --accept-package-agreements
+                winget install Oracle.JavaRuntimeEnvironment -e --silent --accept-source-agreements --accept-package-agreements
+                winget install VideoLAN.VLC -e --silent --accept-source-agreements --accept-package-agreements
+                winget install Google.Chrome -e --silent --accept-source-agreements --accept-package-agreements
+                winget install 7zip.7zip -e --silent --accept-source-agreements --accept-package-agreements
 }else{
     Write-Host "Maquina sem acesso a internet!" -ForegroundColor Red
 }
