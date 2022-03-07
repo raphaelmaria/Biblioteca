@@ -5,6 +5,10 @@ Set-ExecutionPolicy RemoteSigned -Force
 #Update do HELP
 Write-Host "Fazendo Atualizacao do HELP do POWERSHELL" | Update-Help 2>> .\Log.txt
 
+Invoke-WebRequest https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $Env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller.msixbundle
+Add-AppxPackage $env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller.msixbundle
+
+
 $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
     Write-Host "Maquina conectada com a Internet" -ForegroundColor Green
