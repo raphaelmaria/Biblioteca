@@ -1,3 +1,5 @@
+![https://i.imgur.com/4fln0jF.png](https://i.imgur.com/4fln0jF.png)
+
 # Seja Bem Vindo!
 
 Espero que aqui nesse repositório você encontre a forma que vai te auxiliar em sua tarefa.
