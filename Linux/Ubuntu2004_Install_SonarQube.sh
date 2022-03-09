@@ -9,13 +9,14 @@ sudo add-apt-repository ppa:webupd8team/java
 
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt install oracle-java8-installer
-sudo apt install mysql-server mysql-client
-sudo apt-get install unzip software-properties-common wget default-jdk -y
-sudo apt install fontconfig-config libfreetype6 -y
+sudo apt -y install oracle-java8-installer
+sudo apt -y install mysql-server mysql-client
+sudo apt-get -y install unzip software-properties-common wget default-jdk -y
+sudo apt -y install fontconfig-config libfreetype6 -y
 
-mysql -e "CREATE DATABASE $VARDB"
-create database sonar;
+# Instalando Database em Postgres
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ lsb_release -cs-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 
 
 wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-7.1.zip

@@ -1,8 +1,0 @@
-5 pilares da segurança
-    Confidencialidade
-    Integridade
-    Autenticidade
-    Não Repudio ou Irretratabilidade
-    Disponibilidade
-
-Teste de Sync
