@@ -1,5 +1,24 @@
 {
     "recommendations": [
-        "amazonwebservices.aws-toolkit-vscode"
+        "amazonwebservices.aws-toolkit-vscode",
+        "lizebang.bash-extension-pack",
+        "jeff-hykin.better-shellscript-syntax",
+        "rogalmic.bash-debug",
+        "ivangabriele.vscode-git-add-and-commit",
+        "donjayamanne.git-extension-pack",
+        "shaharkazaz.git-merger",
+        "github.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "davidanson.vscode-markdownlint",
+        "ms-vscode.powershell",
+        "ms-python.python",
+        "donjayamanne.python-extension-pack",
+        "tht13.python",
+        "kevinrose.vsc-python-indent",
+        "bbenoist.shell",
+        "bmalehorn.shell-syntax",
+        "timonwong.shellcheck",
+        "formulahendry.terminal",
+        "DotJoshJohnson.xml"
     ]
 }
