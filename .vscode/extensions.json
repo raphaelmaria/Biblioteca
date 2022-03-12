@@ -10,8 +10,6 @@
         "github.vscode-pull-request-github",
         "eamodio.gitlens",
         "davidanson.vscode-markdownlint",
-        "ms-vscode.powershell",
-        "ms-python.python",
         "donjayamanne.python-extension-pack",
         "tht13.python",
         "kevinrose.vsc-python-indent",
@@ -19,6 +17,7 @@
         "bmalehorn.shell-syntax",
         "timonwong.shellcheck",
         "formulahendry.terminal",
-        "DotJoshJohnson.xml"
+        "dotjoshjohnson.xml",
+        "mads-hartmann.bash-ide-vscode"
     ]
 }
