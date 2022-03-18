@@ -1,0 +1,19 @@
+Nome:
+Descrição:
+Link de Download:
+
+Nome: Disk Inventory X
+Descrição: Mostra em detalhes as pastas e a quantidade de espaço consumido por elas.
+Link de Download: https://www.bleepingcomputer.com/download/disk-inventory-x/
+
+Nome: OmniDiskSweeper
+Descrição: Quickly find large, unwanted files and sweep them into the trash
+Link de Download: https://www.omnigroup.com/more/
+
+Nome:
+Descrição:
+Link de Download:
+
+Nome:
+Descrição:
+Link de Download:
