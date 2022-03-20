@@ -7,26 +7,23 @@ sudo apt-get -y install samba samba-client samba-tools
 # Variaveis Configuracao do Samba
 varServerName = $(dialog )
 
-echo "Qual a quantidade de pastas compatilhadas você precisa?"
-PS3='Escolha uma opção: '
-options=("Para 1 pasta" "Para 2 pastas" "Para 3 pastas" "Sair" )
-do
-    case $opt in
-        "Para 1 pasta")
+echo "Selecione quantas pasta deseja compartilhar: "
+echo "  1) 1 pasta"
+echo "  2) 2 pastas"
+echo "  3) 3 pastas" 
 
-            ;;
-        "Para 2 pastas")
+read n
+case $n in
+  1) 
+    sudo mv /etc/samba/smb.conf /home/$WHOAMI/
+    ;;
+  2) 
+    ;;
+  3) 
+    ;;
 
-            ;;
-        "Para 3 pastas")
-
-            ;;
-        "Sair")
-            break
-            ;;
-        *) echo "A opção inserida é invalida";;
-    esac
-done
+  *) echo "invalid option";;
+esac
 
 # Teste das configuraçoes do Samba
 testparm
