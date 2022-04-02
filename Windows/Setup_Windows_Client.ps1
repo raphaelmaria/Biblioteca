@@ -5,8 +5,18 @@ Set-ExecutionPolicy RemoteSigned -Force
 #Update do HELP
 Write-Host "Fazendo Atualizacao do HELP do POWERSHELL" | Update-Help 2>> .\Log.txt
 
-Invoke-WebRequest https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $Env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller.msixbundle
-Add-AppxPackage $env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller.msixbundle
+Set-Location $env:USERPROFILE\Downloads
+#Instala dependencia do Winget 
+$sourceVCLibs = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+Invoke-WebRequest -Uri $sourceVCLibs -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+Add-AppPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
+
+
+#Instala Winget
+
+$sourceAppInstaller = "https://rmtechfiles.s3.amazonaws.com/ScriptFiles/LOFT/workstation/Apps/Microsoft.DesktopAppInstaller.msixbundle"
+Invoke-WebRequest -Uri $sourceAppInstaller -OutFile Microsoft.DesktopAppInstaller.msixbundle
+Add-AppxPackage Microsoft.DesktopAppInstaller.msixbundle
 
 
 $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
