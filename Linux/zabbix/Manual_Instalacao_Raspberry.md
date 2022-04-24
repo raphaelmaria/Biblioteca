@@ -15,7 +15,6 @@ Em uma maquina com sistema operacional Windows, MacOS ou Linux.
 Com acesso a internet, faça o download do [Raspberry Pi Image](https://www.raspberrypi.com/software/), ao termino faça a instalação e abre o programa.
 Ao abrir, faça a seleçã0 da imagem do Raspberry PI OS, seguindo a recomendação do raspberry que a imagem se aplica.
 
-
 ## COMANDOS:
 cd ~
 cd Downloads
