@@ -29,7 +29,26 @@
 127.0.0.1 ereg.wip2.adobe.com ereg.wip3.adobe.com ereg.wip4.adobe.com hl2rcv.adobe.com wip.adobe.com wip1.adobe.com wip2.adobe.com wip3.adobe.com wip4.adobe.com
 127.0.0.1 www.adobeereg.com wwis-dubc1-vip60.adobe.com www.wip.adobe.com www.wip1.adobe.com
 127.0.0.1 www.wip2.adobe.com www.wip3.adobe.com www.wip4.adobe.com wwis-dubc1-vip60.adobe.com crl.verisign.net crl.verisign.net ood.opsource.net
-#
+
+127.0.0.1 p13n.adobe.io *.adobesc.com *.licenses.adobe.com *.adobelogin.com *.ftcdn.net *.behance.net *.adobedtm.com *.demdex.net *.demandbase.com *.adobeoobe.com *.macromedia.com adbemdigitalmediarebootprod2.112.2o7.net
+127.0.0.1 *.adobejanus.com *.adobeccstatic.com *.adobess.com *.photoshop.com *.adobeexchange.com *.adobecce.com *.adobe.com *.adobe.io *.adobecc.com fonts.adobe.com *.adobetag.com *.acrobat.com *.adobesign.com *.adobesigncdn.com
+127.0.0.1 *.adbephotos.com *.adbecrsl.com *.creativecloud.com adobe.ly *.adobeku.com cc-api-cp.adobe.io indd.adobe.com api.account.adobe.com account.adobe.com account.adobe.com ccext.adobe.io/** ccext-public.adobe.io/**
+127.0.0.1 ccext-cdn.adobecces.com/** cc-ext-prod-pkgs.s3.amazonaws.com/ cc-collab.adobe.io comments.adobe.io sharedcloud-production*.s3.amazonaws.com platform-cs*.adobe.io acp-ss-*.adobe.io ccext.adobecces.com cc-api-storage*.adobe.io
+127.0.0.1 assets.adobe.com assets2.adobe.com helpx.adobe.com use.typekit.net adobeexchange.com polka.typekit.com wwwimages2.adobe.com sstats.adobe.com assets.adobedtm.com cdn.tt.omtrdc.net api.demandbase.com dpm.demdex.net cc-api-image.adobe.io/createagc
+127.0.0.1 cc-api-image-x.adobe.io/agctosvg invitations.adobe.io public.adobecc.com libraries.adobe.io stock.adobe.com *.astockcdn.net ims-na1.adobelogin.com adobeid-na1.services.adobe.com cc-api-assets.adobe.io a3.behance.net a5.behance.net
+127.0.0.1 api.behance.net adobe.demdex.net adobe.tt.omtrdc.net as.ftcdn.net as1.ftcdn.net as2.ftcdn.net p.typekit.net store1.adobe.com adobe.com bam.nr-data.net c.betrad.com c.evidon.com googleads.g.doubleclick.net js-agent.newrelic.com
+127.0.0.1 snap.licdn.com match.prod.bidr.io scripts.demandbase.com cdn.inpwrd.net api.typekit.com adobetag.com ans.oobesas.adobe.com api.adobe.io adobeexchange.com/api api-cna01.adobe-services.com supportanyware.adobe.io www.adobe.com lcs-cops.adobe.io
+127.0.0.1 genuine.adobe.com prod.adobegenuine.com gocart-web-prod-*.elb.amazonaws.com na1e.services.adobe.com ims-prod06.adobelogin.com ims-prod07.adobelogin.com na1e-acc.services.adobe.com na1r.services.adobe.com ams.adobe.com oobe.adobe.com
+127.0.0.1 federatedid-na1.services.adobe.com awcm177.awmdm.com adobelogin.prod.ims.adobejanus.com services.prod.ims.adobejanus.com www-prod.adobesunbreak.com auth.services.adobe.com ccmdls.adobe.com ccmdl.adobe.com *.oobesaas.adobe.com mir-s3-cdn-cf.behance.net
+127.0.0.1 swupmf.adobe.com swupdl.adobe.com prod.acp.adobeoobe.com lm.licenses.adobe.com exception.licenses.adobe.com cs.licenses.adobe.com pubcerts.licenses.adobe.com *.productrouter.adobe.com workflow.licenses.adobe.com resources.licenses.adobe.com
+127.0.0.1 ffc-icons.oobesaas.adobe.com cdn-ffc.oobesaas.adobe.com/* acc.adobeoobe.com armmf.adobe.com ardownload.adobe.com ardownload2.adobe.com agsupdate.adobe.com adobe.io cc-api-sharedproductions-prerelease.adobe.io cc-api-teamprojects.adobe.io
+127.0.0.1 cc-api-teamprojects-ue1.adobe.io cc-api-teamprojects-ew1.adobe.io cc-api-teamprojects-an1.adobe.io docs.aws.amazon.com/general/latest/gr/ adobe-voice.adobe.io adobe-voice-va7.adobe.io adobe-voice-nld2.adobe.io cai.adobe.io cai-identity.adobe.io
+127.0.0.1 oz-prod*.s3*.amazonaws.com creative.adobe.com express.adobe.com myportfolio.com Behance.net. prosite.com story.adobe.com build.phonegap.com typekit.com use.typekit.com data.typekit.net state.typekit.net polka.typekit.net dnzuu5synxxfk.cloudfront.net
+127.0.0.1 businesscatalyst.com digitalpublishing.acrobat.com color.adobe.com Acrobat.com acrobat.com echosign.adobe.com s3-us-west-2.amazonaws.com app.frame.io api.frame.io socket.frame.io accelerate.amazonaws.com d24n15hnbwhuhn.cloudfront.net
+127.0.0.1 checkout.stripe.com js.stripe.com m.stripe.network js.intercomcdn.com widget.intercom.io static.intercomassets.com nexus-websocket-a.intercom.io nexus-websocket-b.intercom.io cdn.segment.io api.segment.io fast.appcues.com api.appcues.net
+127.0.0.1 my.appcues.com sentry.io adminconsole.adobe.com *.services.adobe.com lcs-entitlement.adobe.io/v1/user lcs-entitlement.adobe.io/v1/trial lcs-robs.adobe.io lcs-entitlement.adobe.io lcs-ulecs.adobe.io licensing.adobe.com wwwimages.adobe.com
+127.0.0.1 store.adobe.com store2.adobe.com store3.adobe.com photoshop.com access.imageclub.com developer.apple.com subversion.tigris.org www.ietf.org framework.zend.com ftp.yourdomain.com www.mp3licensing.com jquerymobile.com www.color.org www.rulesforuse.org
+
 #         any other entries you had go here (new line no # no space);  
 
 127.0.0.1       localhost
