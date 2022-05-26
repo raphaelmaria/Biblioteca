@@ -1,3 +1,6 @@
 sudo spctl --master-disable
+sudo spctl --enable
+sudo spctl --add
+
 
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
