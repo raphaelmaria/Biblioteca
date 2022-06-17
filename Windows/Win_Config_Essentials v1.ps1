@@ -1,10 +1,8 @@
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit}
-Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
-Set-ExecutionPolicy RemoteSigned -Force
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -Confirm:$false
+Set-ExecutionPolicy RemoteSigned -Force -Confirm:$false
 
 # VARIEAVEIS EXTERNOS
-$DownloadOffice = 'https://mega.nz/file/JsIzlIaZ#y_73rzBceeD12ePfBxkLomWuZWVSSfAuVOSrsAIKBTQ'
-$DownloadAtivador = 'https://mega.nz/file/484AVaLC#ccIQT0rY1ckw6-7i7s5kLgRakp-PPwKw9BDAK-Oo4sM'
 
 # VARIAVEIS INTERNAS
 $DATA = date
@@ -20,13 +18,13 @@ $WinGraphics = wmic path win32_VideoController get name
 
 Start-Transcript -Path C:\StartAutoDeploy.txt -Append
 Write-Host "Inventario do Computador" 
-Write-Host "O nome do computador � " $HostName
-Write-Host "O Sistema Operacional instalado �: " $WinInfo
-Write-Host "A Vers�o: " $WinVersion
-Write-Host "Na Linguagem padr�o "$WinLanguage
-Write-Host "Com base no processador: " $WinProcessador
+Write-Host "O nome do computador:" $HostName
+Write-Host "O Sistema Operacional instalado:" $WinInfo
+Write-Host "A Versao:" $WinVersion
+Write-Host "Na Linguagem padrao:" $WinLanguage
+Write-Host "Com base no processador:" $WinProcessador
 #$WinMemoria
-Write-Host "Com a placa de Video: " $WinGraphics
+Write-Host "Com a placa de Video:" $WinGraphics
 
 $RedeEXT = (Test-Connection 8.8.8.8 -Count 3 -Quiet)
 if ($RedeEXT -eq "true"){
@@ -36,38 +34,29 @@ if ($RedeEXT -eq "true"){
     Write-Host "Instalando Chocolaty Apps Manager"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     Write-Host "Iniciando Instalacao de Aplicativos"
-# SET  ACCEPT PERMISSION IN CHOCO
-    choco feature enable -n=allowGlobalConfirmation
-# INSTALL CLEAN CACHE
-    choco install choco-cleaner
-    choco upgrade choco-cleaner
 
-# INSTALL APP DEFAULTS
-    choco install anydesk.install -dvfy
-    choco install silverlight -dvfy
-    choco install dotnet4.7.2 -dvfy
-    choco install vcredist2005 -dvfy
-    choco install vcredist2008 -dvfy
-    choco install vcredist2012 -dvfy
-    choco install vcredist2013 -dvfy
-    choco install vcredist2015 -dvfy
-    choco install vcredist2017 -dvfy
-    choco install vcredist140 -dvfy
-    choco install googlechrome -dvfy 
-    choco install adobereader -dvfy
-    choco install 7zip.install -dvfy
-    choco install winrar -dvfy
-    choco install jre8 -dvfy
-    choco install lightshot.install -dvfy
-    choco install vlc -dvfy
+    # Install Winget Package
+    $sourceAppInstaller = "https://github.com/microsoft/winget-cli/releases/download/v1.2.10271/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+    $sourceVCLibs = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+    Invoke-WebRequest -Uri $sourceVCLibs -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+    Invoke-WebRequest -Uri $sourceAppInstaller -OutFile Microsoft.DesktopAppInstaller.msixbundle
+    Add-appPackage -path "C:\Suporte\Microsoft.VCLibs.x64.14.00.Desktop.appx"
+    Add-appPackage -path "C:\Suporte\Microsoft.DesktopAppInstaller.msixbundle"
 
-    Start-Process microsoftedge $DownloadOffice
-    Start-Process microsoftedge $DownloadAtivador
-    choco install choco-cleaner
+    # INSTALACAO DE APLICATIVOS PADRONIZADOS E HOMOLOGADOS DENTRO DA LOFT
+    winget install Google.Chrome -h --accept-package-agreements --accept-source-agreements
+    winget install 7zip.7zip -h --accept-package-agreements --accept-source-agreements
+    winget install Flameshot.Flameshot -h --accept-package-agreements --accept-source-agreements
+    winget install pdfforge.PDFCreator -h --accept-package-agreements --accept-source-agreements
+    winget install anydesk -h --accept-package-agreements --accept-source-agreements
     
-    Remove-Item C:\WINDOWS\TEMP\chocolatey\*
-    Remove-Item C:\C:\Programdata\chocolatey\lib\*
-    Remove-Item C:\Users\%UserProfile%\AppData\Local\Temp\chocolatey
+
+    # LIMPEZA DE PASTAS - TEMPORARIAS
+    Remove-Item c:\Suporte\*.exe -Recurse -Force -ErrorAction:SilentlyContinue
+    Remove-Item c:\Suporte\*.msi -Recurse -Force -ErrorAction:SilentlyContinue
+    Remove-Item "%UserProfile%\appdata\local\temp\*" -Recurse -Force
+    cmd /c "dism /online /Enable-Feature /FeatureName:Internet-Explorer-Optional-amd64"
+
     Stop-Transcript
     exit
 }else{
