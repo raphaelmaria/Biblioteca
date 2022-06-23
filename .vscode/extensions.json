@@ -18,6 +18,12 @@
         "timonwong.shellcheck",
         "formulahendry.terminal",
         "dotjoshjohnson.xml",
-        "mads-hartmann.bash-ide-vscode"
+        "mads-hartmann.bash-ide-vscode",
+        "ms-vscode.powershell",
+        "formulahendry.code-runner",
+        "rpinski.shebang-snippets",
+        "foxundermoon.shell-format",
+        "remisa.shellman",
+        "ms-vscode.powershell-preview"
     ]
 }
