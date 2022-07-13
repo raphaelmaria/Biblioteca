@@ -1,3 +1,5 @@
+https://www.macrumors.com/how-to/update-macos-terminal-command/
+
 softwareupdate -l
 
 softwareupdate ---install "Nome da atualização"
