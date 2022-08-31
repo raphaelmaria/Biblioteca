@@ -24,6 +24,7 @@
         "rpinski.shebang-snippets",
         "foxundermoon.shell-format",
         "remisa.shellman",
-        "ms-vscode.powershell-preview"
+        "ms-vscode.powershell-preview",
+        "redhat.ansible"
     ]
 }
