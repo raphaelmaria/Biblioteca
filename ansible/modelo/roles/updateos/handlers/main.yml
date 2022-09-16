@@ -1,0 +1,4 @@
+---
+- name: reiniciar cockpit
+  systemd: state=restart enabled=yes daemon_reload=yes name=cockpit
+...

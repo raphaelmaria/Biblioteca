@@ -1,0 +1,33 @@
+#Simple Ansible Playbook to Get information from host
+---
+    - name: Getting information from host
+      hosts: all
+      gather_facts: true
+      tasks:
+        - name: Getting information
+          debug:
+            msg:
+             - Date: "{{ansible_date_time.time}}"
+             - Hostname: "{{ansible_nodename}}"
+             - Ip Address: "{{ansible_all_ipv4_addresses}}"
+             - OS Family: "{{ansible_os_family}}"
+             - Distro: "{{ansible_distribution}}" 
+             - Os Major Version: "{{ansible_distribution_major_version}}"
+             - Os Release: "{{ansible_distribution_release}}" 
+             - Os Version: "{{ansible_distribution_version}}"
+             - CPU: "{{ansible_processor}}"
+             - CPU COre: "{{ansible_processor_cores}}"
+             - VCPUS: "{{ansible_processor_vcpus}}"
+             - Product Name: "{{ansible_product_name}}"        
+             - "Total Memory: '{{ansible_memtotal_mb}}' MB"
+             - Disk: "{{ ansible_lvm.pvs }}"
+
+        - name: test for available disk space
+          assert:
+            that: 
+              - not {{ item.mount == '/Storage' and ( item.size_available < item.size_total - ( item.size_total|float * 0.8 ) ) }}
+              - not {{ item.mount == '/mnt/storage' and ( item.size_available < item.size_total - ( item.size_total|float * 0.8 ) ) }}
+          with_items: ansible_mounts
+          ignore_errors: yes
+          register: disk_free
+    ...

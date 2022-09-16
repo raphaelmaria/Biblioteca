@@ -1,0 +1,12 @@
+-----------------------------------------------------
+                O2 Pos - File Server
+
+Hostname.: "{{ ansible_fqdn }}"
+Endereco IP.: "{{ ansible_all_ipv4_addresses }}"
+
+Acesso WEB: https://"{{ ansible_all_ipv4_addresses }}":9090
+Criado por Raphael Maria em Julho de 2020
+
+Processador: "{{}}"
+Memoria: "{{}}"
+----------------------------------------------------

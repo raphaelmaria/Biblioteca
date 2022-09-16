@@ -6,3 +6,7 @@ sudo spctl --add
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 
 systemextensionsctl list  
+
+Para forçar a ativação do SSH em MacOS X
+sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/ssh.plist
