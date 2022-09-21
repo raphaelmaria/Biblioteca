@@ -197,3 +197,4 @@ fi
 # Modulos Ansible
 # Para Powershell em Windows
 ansible-galaxy collection install ansible.windows
+ansible-galaxy collection install ansible.windows
