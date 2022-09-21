@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#Emissor NFe no macOS Catalina
+#Como resolver o erro do emissor NFe do Sebrae no mac OS Catalina
+#https://www.blogdainformatica.com.br/emissor-nfe-no-macos-catalina/#google_vignette
+#Por Marcos Carvalho
+#Atualizado 28/02/2022
+
+
+O arquivo trata-se do: synthetic.conf
+sudo mkdir /System/Volumes/Data/database
+sudo chmod -R 777 /System/Volumes/Data/database
+curl -L -o /tmp/synthetic.conf "https://arquivos.blogdainformatica.com.br/mac/nfe/synthetic.conf"
+sudo mv /tmp/synthetic.conf /etc/
+sudo reboot
+
