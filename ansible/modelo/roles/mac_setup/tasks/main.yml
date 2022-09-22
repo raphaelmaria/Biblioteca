@@ -1,0 +1,7 @@
+---
+# tasks file for mac_setup
+- name: Script Google Chrome
+  file: src=mac_install_googlechrome.sh dest=/tmp force=yes
+
+- name: Instalando Google Chrome
+  shell: sudo bash /tmp/mac_install_googlechrome.sh
