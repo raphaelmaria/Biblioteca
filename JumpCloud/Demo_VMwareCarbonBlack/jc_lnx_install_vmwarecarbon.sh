@@ -12,7 +12,7 @@ sudo apt -y install linux-headers-$(uname -r)
 # FAZENDO DOWNLOAD DO CLIENT ATUALIZADO ATE 09/05/2022 as 11h59
 sudo mkdir -p /tmp/vmwareCarbon
 cd /tmp/vmwareCarbon/
-sudo wget "[ URL DE DOWNLOAD ]"
+sudo wget "[ URL ]"
 
 # PREPARANDO A INSTALACAO
 sudo tar -xvf cb-psc-sensor-ubuntu-2.13.1.933911.tar

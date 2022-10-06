@@ -18,7 +18,7 @@ else
     # Inicia o download, nao esqueça de trocar o CONTOSO-BR usado como exemplo para o seu tenant
 	curl https://download-contoso-br.goskope.com/dlr/mac/get --output /tmp/NSClient.pkg
     # Inicia o download do script necessário da JAMF
-    curl "https://raw.githubusercontent.com/raphaelmaria/Biblioteca/master/JumpCloud/IDPmode_Install.sh" --output /tmp/IDPmode_install.sh
+    curl "https://raw.githubusercontent.com/raphaelmaria/Biblioteca/master/JumpCloud/IDPmode_Install.sh" | sudo bash
     # Aplica a permissao para instalação, caso ocorra erro use o 775
 	sudo chmod 755 /tmp/IDPmode_install.sh
     # faz a configuração iniciar para que ao instalar o client seja reconhecido.
