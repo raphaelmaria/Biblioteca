@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@raphaelmaria 
-raphaelmaria
-/
-Zabbix
-Public
-forked from alexandremjcastro/Zabbix
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Zabbix/Zabbix 4.0.X/Zabbix_Install_Debian9.sh
-@alexandremjcastro
-alexandremjcastro Create Zabbix_Install_Debian9.sh
-Latest commit d5a72eb on Nov 21, 2019
- History
- 1 contributor
-229 lines (213 sloc)  7.88 KB
-   
 #!/usr/bin/env bash
 #
 # Zabbix_Install_Debian9.sh - Inicia Preparação e instalação do sistema zabbix
@@ -256,16 +227,3 @@ if [[ ($ID = "debian") && ($VERSION_ID -eq "9") ]]; then
 else
   echo "Desculpe! O script foi desenvolvido para o sistema Debian 9"
 fi
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
