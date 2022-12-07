@@ -25,6 +25,7 @@
         "foxundermoon.shell-format",
         "remisa.shellman",
         "ms-vscode.powershell-preview",
-        "redhat.ansible"
+        "redhat.ansible",
+        "ritwickdey.liveserver"
     ]
 }
