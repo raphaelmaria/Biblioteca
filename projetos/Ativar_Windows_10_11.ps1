@@ -5,7 +5,7 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -Confirm:$false | Out
 Set-ExecutionPolicy RemoteSigned -Confirm:$false | Out-Null
 
 # SERIAIS VALIDOS (fonte: https://www.youtube.com/watch?v=Xvy9WtOnQl4)
-$Home="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
+$homeAll="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
 #Home/Core (Country Specific)   PVMJN-6DFY6-9CCP6-7BKTT-D3WVR
 $homeSL="7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH"
 #Home/Core N                    3KHY7-WNT83-DGQKR-F7HPR-844BM
@@ -42,9 +42,38 @@ function Show-Menu {
     switch ($selection)
     {
         '1'{
-            cmd /c cscript slmgr.vbs /ipk $
-            cmd /c cscript slmgr.vbs /skms kms.lotro.cc
-            cmd /c cscript slmgr.vbs /ato
-        }
+            cmd /c "cscript slmgr.vbs /ipk $homeAll"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '2' {
+            cmd /c "cscript slmgr.vbs /ipk $homeSL"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '3' {
+            cmd /c "cscript slmgr.vbs /ipk $professional"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '4' {
+            cmd /c "cscript slmgr.vbs /ipk $enterprise"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '5' {
+            cmd /c "cscript slmgr.vbs /ipk $education"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '6' {
+            cmd /c "cscript slmgr.vbs /ipk $enterprise2015LTSB"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } '7' {
+            cmd /c "cscript slmgr.vbs /ipk $Enterprise2016LTSB"
+            cmd /c "cscript slmgr.vbs /skms kms.lotro.cc"
+            cmd /c "cscript slmgr.vbs /ato"
+        } 'R' {
+            cmd /c "slmgr /dlv"
+            cmd /c "slmgr /upk"
+        } 
+    
     }
 }
+until ( $selection -eq 'q' )
