@@ -10,6 +10,6 @@ Sinta-se a vontade em fazer parte da nossas discussões e apresentar melhorias a
 90% dos códigos foram testados em máquinas fisicas através de GPOs e da ferramenta JumpCloud.
 
 
-Peço que apenas respeite os ![termos de uso](https://github.com/raphaelmaria/Biblioteca/blob/c9c6ee69255db988248cd7b5279adc1d3308df4c/Termo_de_Uso_v1.txt) dos códigos, usando ele para desenvolvimento e semear a cultura de compartilhamento.
+Peço que apenas respeite os [termos de uso](https://github.com/raphaelmaria/Biblioteca/blob/c9c6ee69255db988248cd7b5279adc1d3308df4c/Termo_de_Uso_v1.txt) dos códigos, usando ele para desenvolvimento e semear a cultura de compartilhamento.
 
 
