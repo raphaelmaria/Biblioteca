@@ -6,7 +6,7 @@ Pensa em uma senha e quando vc estiver pronto, me mande um "Vamos nessa!",
 1. abra o site console.jumpcloud.com
 2. Vai em fazer "Login" ou "Sing In"
 3. Digite seu e-mail
-4. Se você já tem uma senha temporaria fonecida pelo time de Suporte, insira ela.
+4. Se você já tem uma senha temporaria fornecida pelo time de Suporte, insira ela.
     -Se você não tem, clique em *Reset de Senha* que está abaixo do campo senha e digite a última senha que foi utilizada para fazer o login no laptop ou na sua conta GOOGLE.
 5. Ignore a orientação que ele pede para que use o computador, desce a página para ver a opção para usar o recurso pelo portal.
 
