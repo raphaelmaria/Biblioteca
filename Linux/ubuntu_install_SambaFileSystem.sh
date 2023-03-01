@@ -1,17 +1,23 @@
     #!/usr/bin/env bash
+VARSHARE=$(dialog --stdout --inputbox 'Insira o nome  do compartilhamento: ' 0 0)
+VARPATH=$(dialog --stdout --inputbox 'Insira o diretorio: ' 0 0)
 
-    sudo apt -y install vlc-plugin-samba vlc smbclient samba-vfs-modules samba samba-dev samba-dsdb-modules samba-libs
-    sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bkp
+sudo mkdir $VARPATH/$VARSHARE
+sudo chmod -R 775 $VARPATH/$VARSHARE
+
+sudo apt -y install vlc-plugin-samba vlc smbclient samba-vfs-modules samba samba-dev samba-dsdb-modules samba-libs
+sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bkp
 
 
-    echo" # See smb.conf.example for a more detailed config file or
+cat <<EOF >
+ # See smb.conf.example for a more detailed config file or
 # read the smb.conf manpage.
 # Run 'testparm' to verify the config is correct after
 # you modified it.
 
 [global]
 	workgroup = WORKGROUP
-	netbios name = infoscale
+	netbios name = $VARSHARE
 	security = user
 	map to guest = Bad User
 	guest ok = yes
@@ -37,10 +43,9 @@ deadtime = 15
 getwd cache = yes
 socket options = TCP_NODELAY	
 
-[Externo]
-	comment = Data in Externo Device
-	path = /mnt/ext
-	#valid users = o2
+[$VARSHARE]
+	comment = Data in Device
+	path = $VARPATH/$VARSHARE
 	public = yes
 	writable = yes
 	veto files = 
@@ -48,7 +53,8 @@ socket options = TCP_NODELAY
 	vfs objects = recycle
 	recycle:repository = Lixeira
 	recycle:keeptree = yes
-	recycle:versions = yes" | sudo tee -a /etc/samba/smb.conf
+	recycle:versions = yes
+	EOF
 
     sudo testparm
     sudo systemctl enable --now smbd.service
