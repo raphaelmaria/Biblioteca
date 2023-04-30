@@ -7,7 +7,6 @@ sudo cp -r /usr/share/plymouth/themes/ubuntu-logo ~/backup_ubuntu_splash
 
 Escolha um novo tema de splash boot: Existem muitos temas de splash boot disponíveis na internet. Você pode baixar um tema de sua escolha e salvá-lo em uma pasta, por exemplo:
 
-
 mkdir ~/new_splash_theme
 
 Extrair o novo tema: Extrair o tema baixado para a pasta criada. Dependendo do formato do tema, você pode precisar usar o comando tar ou unzip para extrair o tema. Por exemplo:
