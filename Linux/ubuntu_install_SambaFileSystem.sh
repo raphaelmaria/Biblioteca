@@ -9,7 +9,7 @@ VARPATH=$(dialog --stdout --inputbox 'Insira o diretorio: ' 0 0)
 sudo mkdir $VARPATH/$VARSHARE
 sudo chmod -R 775 $VARPATH/$VARSHARE
 
-cat <<EOF >
+cat <<EOF > /etc/samba/smb.conf
  # See smb.conf.example for a more detailed config file or
 # read the smb.conf manpage.
 # Run 'testparm' to verify the config is correct after
