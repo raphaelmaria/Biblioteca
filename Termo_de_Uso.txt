@@ -1,0 +1,31 @@
+# Termos de Serviço do Aplicativo
+versão 2.0 
+Revisada em 08 de Maio de 2023
+
+O uso deste aplicativo está sujeito aos seguintes termos e condições. Ao utilizar o aplicativo, você concorda com estes termos e condições:
+
+1. Propriedade Intelectual
+Todo o conteúdo do aplicativo, incluindo textos, imagens, gráficos, design, layout, código fonte e outros materiais são de propriedade exclusiva do desenvolvedor do aplicativo ou de seus parceiros licenciadores e estão protegidos por leis de propriedade intelectual. Você não pode reproduzir, modificar, distribuir ou utilizar o conteúdo do aplicativo sem autorização prévia por escrito do desenvolvedor do aplicativo.
+
+2. Uso do Conteudo
+Você é responsável pelo uso do aplicativo e deve cumprir com todas as leis e regulamentações aplicáveis. Você não pode usar o aplicativo para fins ilegais ou para violar os direitos de terceiros.
+
+3. Modificações do Aplicativo
+O desenvolvedor do aplicativo reserva-se o direito de modificar, interromper ou encerrar o aplicativo a qualquer momento, sem aviso prévio.
+
+4. Limitação de Responsabilidade
+O desenvolvedor do aplicativo não se responsabiliza por quaisquer danos ou prejuízos decorrentes do uso ou incapacidade de uso do aplicativo. O desenvolvedor do aplicativo não é responsável por quaisquer problemas de conexão ou falhas no dispositivo que possam afetar o uso do aplicativo.
+
+5. Links para Terceiros
+O aplicativo pode conter links para sites de terceiros. O desenvolvedor do aplicativo não é responsável pelo conteúdo ou políticas de privacidade desses sites. Ao acessar esses sites, você é responsável por ler e concordar com seus termos de serviço e políticas de privacidade.
+
+6. Política de Privacidade
+Ao utilizar o aplicativo, você concorda com a política de privacidade do aplicativo. A política de privacidade pode ser encontrada em uma seção separada no aplicativo.
+
+7. Alterações aos Termos de Serviço
+O desenvolvedor do aplicativo reserva-se o direito de modificar estes termos de serviço a qualquer momento, sem aviso prévio. Se as alterações afetarem significativamente os direitos e obrigações dos usuários, o desenvolvedor do aplicativo notificará os usuários através do aplicativo ou por outros meios apropriados.
+
+8. Lei Aplicável
+Estes termos de serviço serão regidos e interpretados de acordo com as leis do país de origem do desenvolvedor do aplicativo.
+
+Ao utilizar o aplicativo, você reconhece ter lido e concordado com estes termos de serviço. Se você não concorda com estes termos, não utilize o aplicativo.
