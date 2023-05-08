@@ -7,8 +7,8 @@
 ## Linhas que precisa ter no arquivo
 [Unit]
 Description={Descriçao do que faz ou identificacao}
-After=[ Inicia o serviço depois dos gatilhos presentes na pasta [] ter iniciado com sucesso ]
-Os gatilhos você vai encontrar no diretorio: */usr/lib/systemd/system/*
+After=[ Inicia o serviço depois dos gatilhos presentes na pasta [*/usr/lib/systemd/system/*] ter iniciado com sucesso ]
+
 
 # After=syslog.target network.target sonarr.service radarr.service
 
