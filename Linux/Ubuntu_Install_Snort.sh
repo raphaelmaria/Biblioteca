@@ -14,11 +14,13 @@ cd daq-2.0.7
 ./configure && make && sudo make install
 cd ..
 
-wget https://www.snort.org/downloads/snort/snort-2.9.18.1.tar.gz
-tar -xvf snort-2.9.18.1.tar.gz
-cd snort-2.9.18.1
+wget https://www.snort.org/downloads/snort/snort-2.9.20.tar.gz
+tar -xvf snort-2.9.*.tar.gz
+cd snort-2.9.20
 ./configure --enable-sourcefire && make && sudo make install
 cd ..
+
+sudo apt -y install snort
 
 # Crie o diretório de configuração do Snort
 sudo mkdir /etc/snort
@@ -33,7 +35,7 @@ sudo mkdir /var/log/snort
 sudo touch /etc/snort/snort.conf
 
 # Copie as regras de exemplo
-sudo cp snort-2.9.18.1/etc/* /etc/snort/
+sudo cp snort-2.9.20/etc/* /etc/snort/
 
 # Atualize as permissões
 sudo chmod -R 5775 /etc/snort/
