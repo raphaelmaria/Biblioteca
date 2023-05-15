@@ -1,20 +1,53 @@
 #!/bin/bash
 
-
-
+# Atualize o sistema
 sudo apt update
 sudo apt upgrade -y
-sudo apt -y install snort
 
-# Install Guardian
-cd /opt
-sudo wget https://www.chaotic.org/guardian/guardian-1.7.tar.gz
-sudo tar -zxvf guardian-1.7.tar.gz
+# Instale as dependências do Snort
+sudo apt install -y build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev openssl libssl-dev
 
-# colocar o endereço de rede
+# Baixe e descompacte o código-fonte do Snort
+wget https://www.snort.org/downloads/snort/daq-2.0.7.tar.gz
+tar -xvf daq-2.0.7.tar.gz
+cd daq-2.0.7
+./configure && make && sudo make install
+cd ..
 
-# pasta de instalacao
-# /etc/snort
+wget https://www.snort.org/downloads/snort/snort-2.9.18.1.tar.gz
+tar -xvf snort-2.9.18.1.tar.gz
+cd snort-2.9.18.1
+./configure --enable-sourcefire && make && sudo make install
+cd ..
+
+# Crie o diretório de configuração do Snort
+sudo mkdir /etc/snort
+
+# Crie o diretório de regras do Snort
+sudo mkdir /etc/snort/rules
+
+# Crie o diretório de logs do Snort
+sudo mkdir /var/log/snort
+
+# Crie um arquivo de configuração básico
+sudo touch /etc/snort/snort.conf
+
+# Copie as regras de exemplo
+sudo cp snort-2.9.18.1/etc/* /etc/snort/
+
+# Atualize as permissões
+sudo chmod -R 5775 /etc/snort/
+sudo chmod -R 5775 /var/log/snort/
+sudo chmod -R 5775 /usr/local/lib/snort_dynamicrules
+
+# Configure as variáveis de ambiente
+sudo echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
+source ~/.bashrc
+
+# Reinicie o serviço do Snort
+sudo ldconfig
+sudo snort -V
+
 
 cat snort.conf.orig | grep -v ^# | grep . | sudo tee -a snort.conf 
 case local in {
