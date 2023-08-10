@@ -7,3 +7,5 @@ mensagem="Sua mensagem aqui"
 
 # Envio da mensagem
 curl -s -X POST "https://api.telegram.org/bot$bot_token/sendMessage" -d "chat_id=$chat_id" -d "text=$mensagem"
+
+
