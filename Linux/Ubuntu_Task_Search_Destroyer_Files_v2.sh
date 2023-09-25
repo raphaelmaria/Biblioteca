@@ -5,3 +5,4 @@ done
 
 # Apagar todos os arquivos .nfo
 find /caminho/para/a/pasta/x -type f -name "*.nfo" -exec rm {} \;
+exit
