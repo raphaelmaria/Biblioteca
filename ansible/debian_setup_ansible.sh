@@ -32,9 +32,9 @@ sudo systemctl enable --now cockpit
 
 # INSTALACAO PYTHON PIP
 sudo apt-get install python3 python3-pip -y
-python -m ensurepip --upgrade
-curl -s "https://bootstrap.pypa.io/pip/2.7/get-pip.py" | sudo python
-python -m pip install --upgrade pip
+python3 -m ensurepip --upgrade
+curl -s "https://bootstrap.pypa.io/pip/2.7/get-pip.py" | sudo python3
+python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade pip
 
 
