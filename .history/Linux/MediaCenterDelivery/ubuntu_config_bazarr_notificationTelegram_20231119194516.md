@@ -7,4 +7,4 @@ https://api.telegram.org/bot5033167939:AAHVgROdPw4kPJoXFYEGtiR2smI6tKMDP_Q/-1001
 
 
 
-: https://api.telegram.org/bot<5033167939:AAHVgROdPw4kPJoXFYEGtiR2smI6tKMDP_Q>/getUpdates
+: https://api.telegram.org/bot<BotTokenGoesHere>/getUpdates
