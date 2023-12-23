@@ -6,24 +6,15 @@ sudo pro attach C12wuWBwsaqFpf636EhNB61H9wkmQy
 # Aplicativos Essenciais
 sudo apt-add-repository universe
 sudo apt update
+sudp apt upgrade -y
+
+sudo apt install python2-minimal
 sudo apt -y install vim git terminator glances gcc unzip wget dkms git vim ansible curl openssh-server make
-sudo apt -y install arqiver tar unzip dialog vim wget curl gcc sshpass xz-utils
+sudo apt -y install arqiver tar unzip dialog vim wget git gcc sshpass xz-utils
 sudo apt -y install gpg curl dnsutils net-tools software-properties-common python-minimal
 sudo apt-get -y install build-essential debhelper bison check cmake flex groff libbsd-dev \
       libcurl4-openssl-dev libmaxminddb-dev libgtk-3-dev libltdl-dev libluajit-5.1-dev \
       libncurses5-dev libnet1-dev libpcap-dev libpcre2-dev libssl-dev
-sudp apt upgrade -y
-
-sudo apt -y install python2-minimal
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
-sudo update-alternatives --config python
-
-sudo apt update 
-curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
-sudo python2 get-pip.py
-
-
 
 sudo apt autoremove -y
 sudo apt clean
@@ -33,13 +24,7 @@ export FONTCONFIG_PATH=/etc/fonts
 wget -q -O - archive.kali.org/archive-key.asc | sudo  apt-key add
 sudo apt update
 cd ~/Downloads
-sudo git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
+sudo git clone https://github.com/LionSec/katoolin.git
+sudo cp katoolin/katoolin.py /usr/bin/katoolin
 sudo chmod +x /usr/bin/katoolin
-sudo katoolin 
-
-
-
-#sudo git clone https://github.com/LionSec/katoolin.git
-#sudo cp katoolin/katoolin.py /usr/bin/katoolin
-#sudo chmod +x /usr/bin/katoolin
-#sudo katoolin
+sudo katoolin

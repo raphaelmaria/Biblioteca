@@ -20,6 +20,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
 sudo update-alternatives --config python
 
 sudo apt update 
+sudo apt install curl 
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 sudo python2 get-pip.py
 
@@ -33,13 +34,7 @@ export FONTCONFIG_PATH=/etc/fonts
 wget -q -O - archive.kali.org/archive-key.asc | sudo  apt-key add
 sudo apt update
 cd ~/Downloads
-sudo git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
+sudo git clone https://github.com/LionSec/katoolin.git
+sudo cp katoolin/katoolin.py /usr/bin/katoolin
 sudo chmod +x /usr/bin/katoolin
-sudo katoolin 
-
-
-
-#sudo git clone https://github.com/LionSec/katoolin.git
-#sudo cp katoolin/katoolin.py /usr/bin/katoolin
-#sudo chmod +x /usr/bin/katoolin
-#sudo katoolin
+sudo katoolin

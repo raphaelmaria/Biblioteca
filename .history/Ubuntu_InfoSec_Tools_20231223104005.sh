@@ -33,13 +33,7 @@ export FONTCONFIG_PATH=/etc/fonts
 wget -q -O - archive.kali.org/archive-key.asc | sudo  apt-key add
 sudo apt update
 cd ~/Downloads
-sudo git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
+sudo git clone https://github.com/LionSec/katoolin.git
+sudo cp katoolin/katoolin.py /usr/bin/katoolin
 sudo chmod +x /usr/bin/katoolin
-sudo katoolin 
-
-
-
-#sudo git clone https://github.com/LionSec/katoolin.git
-#sudo cp katoolin/katoolin.py /usr/bin/katoolin
-#sudo chmod +x /usr/bin/katoolin
-#sudo katoolin
+sudo katoolin
