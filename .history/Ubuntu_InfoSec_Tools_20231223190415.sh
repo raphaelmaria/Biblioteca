@@ -44,7 +44,7 @@ sudo apt -y install sqlmap aircrack-ng airgraph-ng ettercap-common ettercap-grap
 sudo apt -y install firewalk netcat dnswalk dnsenum arpwatch whatweb spiderfoot impacket-scripts gophish bettercap airgeddon zenmap-kbx medusa ghidra apktool subfinder dirbuster dsniff
 sudo apt -y install nbtscan shellter uniscan wifiphisher wifipumpkin3 libyara-dev libyara10 yara yara-doc arp-scan crackmapexec dnsrecon masscan pdf-parser recon-ng theharvester
 sudo apt -y install kismet kismet-capture-common kismet-capture-hak5-wifi-coconut kismet-capture-linux-bluetooth kismet-capture-linux-wifi kismet-capture-nrf-51822 kismet-capture-nrf-52840
-sudo apt -y install kismet-capture-nrf-mousejack kismet-capture-nxp-kw41z kismet-capture-rz-killerbee kismet-capture-ti-cc-2531 kismet-capture-ti-cc-2540 kismet-capture-ubertooth-one kismet-core ismet-logtools
+sudo apt -y install       kismet-capture-nrf-mousejack kismet-capture-nxp-kw41z kismet-capture-rz-killerbee kismet-capture-ti-cc-2531 kismet-capture-ti-cc-2540 kismet-capture-ubertooth-one kismet-core ismet-logtools
 sudo apt -y install kismet-plugins python3-kismetcapturebtgeiger python3-kismetcapturefreaklabszigbee python3-kismetcapturertl433 python3-kismetcapturertladsb python3-kismetcapturertlamr
       
 sudo apt -y install crackle dirb dhcpig dirsearch dnsmap ethtool exploitdb exploitdb-bin-sploits exploitdb-papers ext3grep extundelete forensic-artifacts forensics-colorize fping fragrouter getallurls ghidra
