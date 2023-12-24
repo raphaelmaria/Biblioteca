@@ -23,8 +23,7 @@ sudo apt update
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 sudo python2 get-pip.py
 
-sudo apt -y remove snapd
-sudo apt autoremove -y
+sudo apt -y remove 
 
  sudo add-apt-repository ppa:flatpak/stable
  sudo apt update
