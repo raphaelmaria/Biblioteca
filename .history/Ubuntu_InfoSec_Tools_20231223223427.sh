@@ -26,8 +26,8 @@ sudo python2 get-pip.py
  sudo add-apt-repository ppa:flatpak/stable
  sudo apt update
  sudo apt -y install flatpak
- sudo apt -y install gnome-software-plugin-flatpak
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  sudo apt install gnome-software-plugin-flatpak
+
 
 
 sudo apt autoremove -y
