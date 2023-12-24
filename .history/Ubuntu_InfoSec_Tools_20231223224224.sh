@@ -25,7 +25,6 @@ sudo python2 get-pip.py
 
 sudo apt -y remove snapd
 sudo apt autoremove -y
-
 # https://flatpak.org/setup/Ubuntu
  sudo add-apt-repository ppa:flatpak/stable
  sudo apt update
