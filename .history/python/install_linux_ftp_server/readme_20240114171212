@@ -1,0 +1,69 @@
+# Instalar FTP Server usando Python
+
+## Manual
+
+Comando do Manual: python -m pyftpdlib -h
+
+Start a stand alone anonymous FTP server.
+
+Options:
+  -h, --help
+     show this help message and exit
+
+  -i ADDRESS, --interface=ADDRESS
+     specify the interface to run on (default all interfaces)
+
+  -p PORT, --port=PORT
+     specify port number to run on (default 2121)
+
+  -w, --write
+     grants write access for the anonymous user (default read-only)
+
+  -d FOLDER, --directory=FOLDER
+     specify the directory to share (default current directory)
+
+  -n ADDRESS, --nat-address=ADDRESS
+     the NAT address to use for passive connections
+
+  -r FROM-TO, --range=FROM-TO
+     the range of TCP ports to use for passive connections (e.g. -r 8000-9000)
+
+  -v, --version
+     print pyftpdlib version and exit
+
+  -V, --verbose
+     activate a more verbose logging
+
+## Requisitos:
+
+### Opção 1:
+sudo apt-get install python-pyftpdlib
+
+Observação: Essa versão é desatualizada, para versão mais recente use a opção 2.
+
+### Opção 2:
+Com o "pip" já instalado:
+sudo pip install pyftpdlib
+
+Instalando o "pip" e o "pyftpdlib"
+sudo apt-get install python-setuptools
+sudo easy_install pip
+sudo pip install pyftpdlib
+
+## Modo Standalone 
+Rodar o servidor de forma limpa, sem customização:
+
+python -m pyftpdlib
+
+O endereço externo de acesso é: ftp://127.0.0.1:2121
+Abrindo a pasta em que o comando foi executado.
+
+Mudando porta:
+Comando : python -m pyftpdlib -p 8080 ou sudo python -m pyftpdlib -p 21
+
+## Modo Customizado
+
+Usando os usuarios dentro do Shadow do Linux
+
+@ftpserver
+

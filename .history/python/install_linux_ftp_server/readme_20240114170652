@@ -1,0 +1,16 @@
+# Instalar FTP Server usando Python
+
+
+## Requisitos:
+
+### Opção 1:
+sudo apt-get install python-pyftpdlib
+
+Observação: Essa versão é desatualizada, para versão mais recente use o 
+
+### Opção 2:
+sudo pip install pyftpdlib
+
+sudo apt-get install python-setuptools
+sudo easy_install pip
+sudo pip install pyftpdlib
