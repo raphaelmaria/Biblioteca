@@ -1,0 +1,15 @@
+winget Uninstall Clipchamp.Clipchamp_yxz26nhyzhsrt
+winget Uninstall Microsoft.BingNews_8wekyb3d8bbwe
+winget Uninstall Microsoft.BingWeather_8wekyb3d8bbwe
+winget Uninstall Microsoft.GamingApp_8wekyb3d8bbwe
+winget Uninstall Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe
+winget Uninstall Microsoft.WindowsMaps_8wekyb3d8bbwe
+winget Uninstall Microsoft.Xbox.TCUI_8wekyb3d8bbwe
+winget Uninstall Microsoft.XboxGameOverlay_8wekyb3d8bbwe
+winget Uninstall Microsoft.XboxGamingOverlay_8wekyb3d8bbwe
+winget Uninstall Microsoft.XboxIdentityProvider_8wekyb3d8bbwe
+winget Uninstall Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe
+winget Uninstall Microsoft.YourPhone_8wekyb3d8bbwe
+winget Uninstall Microsoft.Office
+winget Uninstall O365ProPlusRetail - es-es
+
