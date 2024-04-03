@@ -68,4 +68,33 @@ sudo systemctl enable node-exporter.service
 
 
 
+wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.12.0/blackbox_exporter-0.12.0.linux-amd64.tar.gz
+tar -xzf blackbox_exporter-*.linux-amd64.tar.gz
+cd blackbox_exporter-*
+sudo cp blackbox_exporter /usr/local/bin/
+cat > blackbox.yml << EOF
+modules:
+  dns_rp_mx:
+    prober: dns
+    dns:
+      query_name: "robustperception.io"
+      query_type: "MX"
+      validate_answer_rrs:
+        fail_if_not_matches_regexp:
+         - "robustperception.io.\t.*\tIN\tMX\t.*google.*"
+EOF
 
+
+echo"[Init]
+Description=blackbox_exporter
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/blackbox_exporter
+
+[Install]
+WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/blackbox_exporter.service
+sudo systemctl   daemon-reload
+sudo systemctl start blackbox_exporter.service
+sudo systemctl enable blackbox_exporter.service
