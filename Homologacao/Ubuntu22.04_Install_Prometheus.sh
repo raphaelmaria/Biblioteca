@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# REFERENCIA: https://www.youtube.com/watch?v=7gW5pSM6dlU
 # Install Prometheus ( https://vegastack.com/tutorials/how-to-install-prometheus-on-ubuntu-22-04/)
 sudo apt update
 
@@ -50,4 +51,21 @@ echo "ACESSE http://[IP ADDRESS]:9090"
 wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
 tar xvfz node_exporter-*.*-amd64.tar.gz
 cd node_exporter-*.*-amd64
-./node_exporter
+sudo cp node_exporter /usr/local/bin/
+echo"[Init]
+Description=Prometheus Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/node-exporter.service
+sudo systemctl   daemon-reload
+sudo systemctl start node-exporter.service
+sudo systemctl enable node-exporter.service
+
+
+
+
