@@ -4,7 +4,7 @@
 # Install Prometheus ( https://vegastack.com/tutorials/how-to-install-prometheus-on-ubuntu-22-04/)
 sudo apt update
 
-sudo apt -y install wget vim curl tar unzip gzip
+sudo apt -y install wget vim curl tar unzip gzip apache2
 
 
 sudo groupadd --system prometheus
@@ -21,7 +21,8 @@ sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 sudo mv consoles/ console_libraries/ /etc/prometheus/
 cd $HOME
 #sudo vim /etc/prometheus/prometheus.yml
-echo "[Unit]
+cat > /etc/systemd/system/prometheus.service << EOF
+[Unit]
 Description=Prometheus
 Documentation=https://prometheus.io/docs/introduction/overview/
 Wants=network-online.target
@@ -37,7 +38,8 @@ ExecStart=/usr/local/bin/prometheus \
 --web.console.libraries=/etc/prometheus/console_libraries
 
 [Install]
-WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/prometheus.service
+WantedBy=multi-user.target
+EOF
 
 sudo chmod -R 777 /var/lib/prometheus/
 sudo systemctl daemon-reload
@@ -72,7 +74,7 @@ wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.12.0/b
 tar -xzf blackbox_exporter-*.linux-amd64.tar.gz
 cd blackbox_exporter-*
 sudo cp blackbox_exporter /usr/local/bin/
-cat > blackbox.yml << EOF
+cat << 'EOF' >  /usr/local/bin/blackbox/blackbox.yml
 modules:
   dns_rp_mx:
     prober: dns
@@ -85,16 +87,40 @@ modules:
 EOF
 
 
-echo"[Init]
+cat << 'EOF'> /etc/systemd/system/blackbox_exporter.service
+[Init]
 Description=blackbox_exporter
 After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/blackbox_exporter
+ExecStart=/usr/local/bin/blackbox/blackbox_exporter
 
 [Install]
-WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/blackbox_exporter.service
+WantedBy=multi-user.target
+EOF
 sudo systemctl   daemon-reload
 sudo systemctl start blackbox_exporter.service
 sudo systemctl enable blackbox_exporter.service
+
+# Alert_Manager
+wget https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.linux-amd64.tar.gz
+tar xvf alertmanager-0.27.0.linux-amd64.tar.gz
+cd alertmanager-*/
+cp -r . /usr/local/bin/alertmanager/
+cat > /etc/systemd/system/alertmanager.service << EOF
+[Init]
+Description=Prometheus Alert Manager
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/alertmanager/alertmanager --config.file=/usr/local/bin/alertmanager/alertmanager.yml
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl start alertmanager.service
+sudo systemctl enable alertmanager.service
