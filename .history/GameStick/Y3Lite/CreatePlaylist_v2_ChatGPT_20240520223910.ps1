@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿#MUDE A LETRA DA UNIDADE AQUI:
+=======
+#MUDE A LETRA DA UNIDADE AQUI:
+>>>>>>> 9b4964a21b90343669960fb04836537c02ad8a91
 #$unidUSB="f:"
 
 # Função para listar todas as unidades USB
