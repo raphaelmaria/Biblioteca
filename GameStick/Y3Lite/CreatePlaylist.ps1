@@ -82,7 +82,7 @@ function Show-Menu {
             exit
             }
 
-            $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+            $arquivos = Get-ChildItem $pathATARI | Where-Object { $_.Extension -ne ".png" }
             $listaArquivos = @()
 
             foreach ($arquivo in $arquivos) {
@@ -108,7 +108,7 @@ function Show-Menu {
             exit
             }
 
-            $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+            $arquivos = Get-ChildItem $pathCPS | Where-Object { $_.Extension -ne ".png" }
             $listaArquivos = @()
 
             foreach ($arquivo in $arquivos) {
@@ -134,7 +134,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathFC | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -160,7 +160,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathGB | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -185,7 +185,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathGBC | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -211,7 +211,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathGBA | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -238,7 +238,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathMD | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -265,7 +265,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathPS1 | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -292,7 +292,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathSFC | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -318,7 +318,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathSMS | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
@@ -344,7 +344,7 @@ function Show-Menu {
         exit
         }
 
-        $arquivos = Get-ChildItem $caminho | Where-Object { $_.Extension -ne ".png" }
+        $arquivos = Get-ChildItem $pathSMS | Where-Object { $_.Extension -ne ".png" }
         $listaArquivos = @()
 
         foreach ($arquivo in $arquivos) {
