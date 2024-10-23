@@ -1,0 +1,207 @@
+// Aula 3 - Instalação via pacotes no Ubuntu Server
+
+Nessa aula, vamos usar o Ubuntu Server na instalção via sources com o Zabbix 4 LTS. Nosso ambiente está assim:
+
+➔ VM no Oracle VirtualBox 5.x
+➔ Zabbix 4.0.x
+➔ Sistema Ubuntu Server 18.04.x LTS
+➔ MySQL 8.x
+➔ 2 CPU
+➔ 1,5 GB RAM
+
+Atualize o seu sistema:
+
+# apt-get update
+# apt-get dist-upgrade
+
+Primeira coisa, é instalar o MySQL 8 e criar a nossa base de dados:
+
+# add-apt-repository multiverse
+# apt update
+# apt install libmecab2
+
+# wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.11-1_all.deb
+
+# dpkg -i mysql-apt-config_0.8.10-1_all.deb 
+
+# apt update
+
+# sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
+
+# apt update
+
+# sudo apt install mysql-server mysql-client
+
+password: Senha123!
+
+# systemctl start mysql ; systemctl enable mysql ; systemctl status mysql
+
+mysql> create user 'zabbix'@'localhost' identified by
+'Z@bbix123';
+
+mysql> create database zabbix character set utf8 collate utf8_bin;
+
+mysql> ALTER USER "zabbix"@"localhost" IDENTIFIED WITH mysql_native_password BY "Z@bbix123";
+
+mysql> grant all privileges on `zabbix`.* to 'zabbix'@'localhost';
+
+mysql> flush privileges;
+
+mysql> quit;
+
+# Agora, vamos instalar as nossas dependencias:
+
+# apt-get -y install build-essential libevent-dev libmysqlclient-dev libcurl4-openssl-dev libxml2-dev libopenipmi-dev libssl-dev libsnmp-dev libssh-dev libevent-dev
+
+Vamos baixar o pacote e instalar:
+
+# cd /usr/src
+
+# VERSAO=4.0.11 (ou 4.2 Troque para a versão que quer! veja mais em: https://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/)
+
+# export VERSAO
+
+# wget http://downloads.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSAO/zabbix-$VERSAO.tar.gz
+
+# tar xzfv zabbix-*
+ 
+# cd zabbix-$VERSAO/
+
+Vamos escolher as features que serão habilitadas na
+compilação:
+
+# ./configure --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2 --with-openipmi --with-openssl --prefix=/usr/local
+
+# make install
+
+Agora, vamos fazer a carga da base de dados:
+
+# cd database/mysql
+# mysql -u root -p zabbix < schema.sql
+# mysql -u root -p zabbix < images.sql
+# mysql -u root -p zabbix < data.sql
+
+# vim /usr/local/etc/zabbix_server.conf
+
+DBHost=localhost
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
+
+Agora, copie os iniciáveis do zabbix_agentd e zabbix_server para o /etc/init.d/, com as permissões de execução do script:
+
+# cd /usr/src/zabbix*/misc/init.d/debian/
+# cp zabbix-agent /etc/init.d
+# cp zabbix-server /etc/init.d/
+# chmod +x /etc/init.d/zabbix-server /etc/init.d/zabbix-agent
+
+Agora, vamos colocar o usuário e grupo Zabbix:
+
+# useradd -r -M zabbix
+
+Agora, vamos recarregar as configurações e iniciar os
+serviços:
+
+# systemctl daemon-reload
+
+# systemctl start zabbix-server.service zabbix-agent.service
+
+# systemctl status zabbix-server.service zabbix-agent.service 
+
+Em primeiro lugar, instale o NGINX, PHP e vários módulos do PHP que precisamos para executar a interface web:
+
+# apt-get -y install nginx php php-bcmath php-mbstring php-gd php-xmlwriter php-xmlreader php-mysqli php-curl php-fpm php-ldap
+
+Agora precisamos criar um diretório para os arquivos serem
+servidos e copiar os arquivos do front-end para ele:
+
+# mkdir /usr/local/www
+# cd ../../../frontends/php/
+# cp -r * /usr/local/www/
+# chown -R www-data:www-data /usr/local/www/*
+
+Agora vamos configurar o servidor web. 
+
+Abra o arquivo:
+
+# vim /etc/nginx/sites-enabled/default 
+
+Exclua todos os conteúdos existentes e substitua-os para que fiquem assim:
+
+server {
+		listen 80 default_server;
+		listen [::]:80 default_server;
+		root /usr/local/www;
+		index index.php;
+		server_name _;
+		location / {
+			try_files $uri $uri/ =404;
+	}
+		location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+	}
+}
+
+Em seguida, vamos mudar algumas opções na configuração
+do PHP. Abra o arquivo /etc/php/7.0/fpm/php.ini com seu
+editor de texto. E deixe as linhas a seguir igual a essas:
+
+# vim /etc/php/7*/fpm/php.ini
+
+max_execution_time = 300
+max_input_time = 300
+post_max_size = 60M
+date.timezone = America/Sao_Paulo
+
+# apt-get remove apache2
+
+Salve e saia do arquivo e reinicie o NGINX e o PHP FPM:
+
+# service nginx restart
+# service php7.*-fpm restart
+
+Acessar interface Web:
+
+http://<IP_do_host>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
