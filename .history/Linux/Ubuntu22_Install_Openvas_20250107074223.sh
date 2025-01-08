@@ -15,10 +15,7 @@ sudo chown gvm:gvm /var/lib/notus
 sudo -u gvm -g gvm greenbone-nvt-sync
 sudo -u gvm -g gvm greenbone-feed-sync-legacy --type CERT
 sudo -u gvm -g gvm greenbone-feed-sync-legacy --type GVMD_DATA
-sudo vim /etc/default/gsad
-
-
- # alterar o IP para 0.0.0.0 e muda o Options para  em branco
+sudo vim /etc/default/gsad # alterar o IP para 0.0.0.0 e muda o Options para  em branco
 #
 sudo systemctl restart gsad
 sudo systemctl enable gvmd
