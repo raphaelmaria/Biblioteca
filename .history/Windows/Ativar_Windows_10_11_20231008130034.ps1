@@ -9,7 +9,7 @@ $homeAll="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
 #Home/Core (Country Specific)   PVMJN-6DFY6-9CCP6-7BKTT-D3WVR
 $homeSL="7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH"
 #Home/Core N                    3KHY7-WNT83-DGQKR-F7HPR-844BM
-$professional="gi"
+$professional="W269N-WFGWX-YVC9B-4J6C9-T83GX"
 #Professional N                 MH37W-N47XK-V7XM9-C7227-GCQG9
 $enterprise="NPPR9-FWDCX-D2C8J-H872K-2YT43"
 #Enterprise N                   DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4
