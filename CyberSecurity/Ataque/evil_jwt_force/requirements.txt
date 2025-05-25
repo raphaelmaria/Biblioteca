@@ -1,0 +1,5 @@
+pyjwt
+requests
+beautifulsoup4
+python-nmap
+tk
