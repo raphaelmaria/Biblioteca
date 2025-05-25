@@ -1,4 +1,6 @@
 # EVIL_JWT_FORCE
+# Criado por RAPHAEL A. DE O. MARIA
+
 
 Ferramenta avançada para análise, fuzzing, brute force e exploração de JWT (JSON Web Token), com suporte a múltiplos algoritmos, ataques de força bruta, fuzzing de payloads, injeção SQL, OSINT e geração de relatórios.
 Consulte `cli.py` para execução via linha de comando.
