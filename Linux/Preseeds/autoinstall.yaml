@@ -9,7 +9,7 @@ autoinstall:
   identity:
     hostname: ubuntu-bionexo
     username: mbionexo
-    password: "$6$rJmYXoxnEctEZI1X$nF2bWyAaPlgTT7HUq0Xtuw9wGz0z58MYnKeYFWhLY4zZbQLz1epMOjZ.bz5Am6TQYxkLidD2AwEYr6WQK6QVr/"
+    password: "$6InkajMvIATo"
   packages:
     - git
     - curl
